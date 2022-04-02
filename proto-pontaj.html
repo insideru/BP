@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"></script>
+    <script src="scripts/wNumb.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style href="styles/styles.css"></style>
+    </head>
+  <body>
+    <nav>
+        <div class="nav-wrapper">
+          <ul id="nav-mobile" class="left">
+            <li><a href="#">Adauga pontaj</a></li>
+            <li><a href="#">Vezi pontaje</a></li>
+            <li><a href="#">Adauga concediu</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row">
+          <div class="input-field">
+            <input id="data-pontaj" type="text" class="datepicker">
+            <label for="data-pontaj">Ziua</label>
+            <span class="helper-text" data-error="Alege o data corecta" data-success="">Alege ziua pentru care vrei sa pontezi</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="ora-venire" type="text" class="timepicker">
+            <label for="ora-venire">Ora venire</label>
+            <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incepere a programului</span>
+          </div>
+          <div class="input-field col s6">
+            <input id="ora-plecare" type="text" class="timepicker">
+            <label for="ora-plecare">Ora plecare</label>
+            <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incheiere a programului</span>
+          </div>
+        </div>
+        <div class="row">
+        <ul id="projTimesheet" class="collapsible">
+        </ul>
+        </div>
+        <!-- <div class="row">
+            <a class='dropdown-trigger btn' href='#' data-target='addProjDD'>Adauga Proiect</a>
+                <ul id='addProjDD' class='dropdown-content'>
+                </ul>
+        </div> -->
+        <div class="input-field col s6">
+          <select id="addProjDD" class="browser-default" onchange="addNewProjTimesheet(value);">
+            <option value="" disabled selected>Adauga proiect</option>
+          </select>
+        </div>
+        <div class="row">
+          <a class="waves-effect waves-light btn" onclick="ponteaza();">Ponteaza</a>
+        </div>
+                
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script>
+      function ponteaza() {
+        $("#data-pontaj").removeClass("valid invalid");
+        $("#ora-venire").removeClass("valid invalid");
+        $("#ora-plecare").removeClass("valid invalid");
+        if (validatePontaj()) {
+          var formData = {
+                'action'            : 'addTimesheet',
+                'collab_id'         : 0, //trebuie luat din cookie sau cumva
+                'ziua'              : getSelectedDate($("#data-pontaj").val()),
+                'oraVenire'         : $("#ora-venire").val(),
+                'oraPlecare'        : $("#ora-plecare").val(),
+                'timesheet'         : timesheetsObject
+            };
+            $.ajax({
+                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url         : 'handler.php', // the url where we want to POST
+                data        : formData, // our data object
+                //dataType    : 'json', // what type of data do we expect back from the server
+                encode      : true,
+                success     : function(data) {
+                  if (data.substring(0,8)=="Failure:") {
+                    M.toast({html: data.substring(8)});
+                  }
+                  if (data.substring(0,8)=="Success:") {
+                    //e corecta ma
+                  }
+                },
+                error: function(){
+                    //
+                }
+            });
+
+        }
+      }
+        
+      $(document).ready(function(){
+            //$('.datepicker').datepicker();
+            //$('.timepicker').timepicker();
+            //$('.collapsible').collapsible();
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, {
+            defaultDate: new Date(),    
+            setDefaultDate: true,
+            format: 'dd mmmm yyyy',
+            onClose: changeSelectedDate,
+            firstDay: 1,
+            i18n: {
+                weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
+                weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
+                weekdaysAbbrev: ['D','L','M','M','J','V','S'],
+                months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+                monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
+            }
+        });
+        var elems = document.querySelectorAll('.timepicker');
+        var instances = M.Timepicker.init(elems, {
+          twelveHour: false
+        });
+        $('.collapsible').collapsible();
+
+            $.get("handler.php?r=init", function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
+          collabCatsObject = initData.collabCats;
+          projCatsObject = initData.projCats;
+          collabsObject = initData.collabs;
+          projectsObject = initData.projects;
+          activitiesObject = initData.activities;
+
+          //initializare categorii proiect
+          //populateActiveProjects();
+          populateActiveDropdown();
+          $('select').formSelect();
+        });
+      });    
+    </script>
+  </body>
+</html>
+      

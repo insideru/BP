@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+</head>
+<body>
+  <div id="corp"></div>
+  <button type="button" onclick="addSlider();">Click Me!</button> 
+</body>
+<script>
+  var i=0;
+
+  function addSlider() {
+    $("#corp").html($("#corp").html() + '<input type="text" class="js-range-slider" value="" id="slider_' + i + '" \/></div><br>');
+    $("#slider_" + i++).ionRangeSlider({
+                  min: 100,
+                  max: 1000,
+                  from: 550
+              })
+  }
+</script>
+</html>
