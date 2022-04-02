@@ -169,9 +169,8 @@ function populateHolidays() {
 
 function getHolidays() {
   collab_id = 0; //se va lua collab_idul de unde o fi el
-  $.get("handler.php?r=holidays&collab_id=" + collab_id, function(data, status) {
+  $.get("handler.php?r=holidays", function(data, status) {
     rcvData = JSON.parse(data);
-    console.log(rcvData);
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
     holidayArray = [];
@@ -466,6 +465,9 @@ function validateConcediu () {
 
 function getNoDaysOff(data1, data2) {
   var zileLibere = 0;
+  data1.setHours(0, 0, 0);
+  data2.setHours(0, 0, 0);
+  console.log(holidayArray);
   for (var d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
     if (d.getDay()>0 && d.getDay()<6 && !isInArray(holidayArray, d)) {
       zileLibere = zileLibere + 1;
@@ -497,17 +499,31 @@ function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
-    addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, "pontare", "#8773c1");
+    addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
 }
 
-function buildCalendarHolidays(daysoffArray, holidaysArray) {
-  daysoffArray.forEach(element => {
-    curDays = getNoDaysOff((new Date(element.startdate)).setHours(0, 0, 0), (new Date(element.enddate)).setHours(0, 0, 0));
-    addCalendarEvent('dayoff-'+element.startdate, Concediu, "Concediu " + curDays + curDays == 1 ? curDays + " zile" : curDays + " zi", element.startdate, element.enddate, "Holidays", "#77bfe9");
+function buildCalendarHolidays(doArray, hdArray) {
+  daysoffArray = [];
+  holidayArray = [];
+  hdArray.forEach(element => {
+    dt = new Date(element.date);
+    dt.setHours(0, 0, 0);
+    holidayArray.push(dt);
   });
-  holidaysArray.forEach(element => {
-    addCalendarEvent('holiday-'+element.date, element.name, "", element.date, element.date, "Holidays", "#57d110");
+  doArray.forEach(element => {
+    dStart = new Date(element.startdate);
+    dStart.setHours(0, 0, 0);
+    dEnd = new Date(element.enddate);
+    dEnd.setHours(0, 0, 0);
+    daysoffArray.push([dStart, dEnd]);
+  });
+  doArray.forEach(element => {
+    curDays = getNoDaysOff(new Date(element.startdate), new Date(element.enddate));
+    addCalendarEvent('dayoff-'+element.startdate, "Concediu", "Concediu " + (curDays > 1 ? curDays + " zile" : curDays + " zi"), element.startdate, element.enddate, "dayoff", "#77bfe9");
+  });
+  hdArray.forEach(element => {
+    addCalendarEvent('holiday-'+element.date, element.name, "Zi libera", element.date, element.date, "Holidays", "#57d110");
   });
 }
 
