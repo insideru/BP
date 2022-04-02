@@ -61,8 +61,11 @@ if ($_POST["action"]=="addTimesheet") {
 }
 
 if ($_POST["action"]=="getTimesheets") {
-    $collabID = $_POST["collab_id"];
-    echo json_encode(getTimesheets($collabID));
+    $response["timesheets"] = getTimesheets($_POST["collab_id"]);
+    $response["daysoff"] = getDaysoff($_POST["collab_id"]);
+    $response["holidays"] = getHolidays();
+    echo json_encode($response);
+    
 }
 
 if ($_POST["action"]=="deleteTimesheets") {

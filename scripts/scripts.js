@@ -451,7 +451,7 @@ function validateConcediu () {
     }
     if (data2 > data1) {
       nrZileLibere = getNoDaysOff(data1, data2);
-      console.log(nrZileLibere);
+      //console.log(nrZileLibere);
       daysoffArray.forEach(element => {
         if (compareDateRanges(data1, data2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
@@ -501,31 +501,22 @@ function buildTimesheetCalendarEvents(eventsArray) {
  }
 }
 
-function buildCalendarHolidays() {
-  $('#calendar').evoCalendar('addCalendarEvent', {
-    id: 'Bhay68t',
-    name: "Vacation Leave",
-    //badge: "02/13 - 02/15", // Event badge (optional)
-    date: ["2022-03-04", "2022-03-11"], // Date range
-    description: "Vacation leave for 7 days.", // Event description (optional)
-    type: "dayoff",
-    color: "#77bfe9" // Event custom color (optional)
+function buildCalendarHolidays(daysoffArray, holidaysArray) {
+  daysoffArray.forEach(element => {
+    curDays = getNoDaysOff((new Date(element.startdate)).setHours(0, 0, 0), (new Date(element.enddate)).setHours(0, 0, 0));
+    addCalendarEvent('dayoff-'+element.startdate, Concediu, "Concediu " + curDays + curDays == 1 ? curDays + " zile" : curDays + " zi", element.startdate, element.enddate, "Holidays", "#77bfe9");
   });
-  $.get("handler.php?r=holidays", function(data, status) {
-    //console.log("Data: " + data + "\nStatus: " + status);
-    holidaysData = JSON.parse(data);
-    holidaysData.forEach(element => {
-      addCalendarEvent('holiday-'+element.date, element.name, "", element.date, "Holidays", "#57d110");
-    });
+  holidaysArray.forEach(element => {
+    addCalendarEvent('holiday-'+element.date, element.name, "", element.date, element.date, "Holidays", "#57d110");
   });
 }
 
-function addCalendarEvent(eventID, eventName, eventDescription, eventDate, eventType, color) {
+function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDate, eventType, color) {
   $('#calendar').evoCalendar('addCalendarEvent', {
     id: eventID,
     name: eventName,
     description: eventDescription,
-    date: eventDate,
+    date: [startDate, endDate],
     type: eventType,
     color: color
   });
@@ -597,8 +588,8 @@ function initCalendar() {
       success     : function(data) {
         rvdData = JSON.parse(data);
         if (Array.isArray(rvdData)) {
-          buildTimesheetCalendarEvents(rvdData);
-          buildCalendarHolidays();
+          buildTimesheetCalendarEvents(rvdData.timesheets);
+          buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
         } else {
           M.toast({html: data.substring(15)});
         }
