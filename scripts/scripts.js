@@ -587,7 +587,7 @@ function initCalendar() {
       encode      : true,
       success     : function(data) {
         rvdData = JSON.parse(data);
-        if (Array.isArray(rvdData)) {
+        if (typeof(rvdData) === 'object') {
           buildTimesheetCalendarEvents(rvdData.timesheets);
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
         } else {
