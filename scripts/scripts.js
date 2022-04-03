@@ -485,10 +485,10 @@ function validateConcediu () {
       if (compareDateRanges(d1, d2, element, element)) {
         overlap = true;
       }
-      if (overlap) {
-        M.toast({html: 'In perioada aleasa exista zile pontate!'});
-      }
     });
+    if (overlap) {
+      M.toast({html: 'In perioada aleasa exista zile pontate!'});
+    }
   }
   else {
     return valid;
