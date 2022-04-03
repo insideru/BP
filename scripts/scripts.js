@@ -256,6 +256,7 @@ function getFullDate(selectedDate) {
 }
 
 function changeRangeVal(rangeID, rangeValue) {
+  updatePB();
   for (let element of timesheetsObject) {
     if (element.id==rangeID.split('_')[0])
     {
