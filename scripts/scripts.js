@@ -615,7 +615,11 @@ $.ajax({
 }
 
 function ponteazaWithDate(date) {
-  console.log(date);
+  if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("dataPontaj", date);
+    window.location.href = window.location.protocol + "//" + + window.location.host + "proto-pontaj.html";
+    }
 }
 
 function initCalendar() {

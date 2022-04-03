@@ -21,8 +21,6 @@
       </nav>
 
       <div class="container">
-        <div class="row"></div>
-        <div class="row"></div>
         <div class="row">
           <div class="input-field">
             <input id="data-pontaj" type="text" class="datepicker" onclick="getHolidays();">
@@ -102,15 +100,18 @@
       $(document).ready(function(){
         var getVars = getVars();
         var pontajDate;
-        if (getVars['addPontaj']!="") {
-          pontajDate = getVars['addPontaj'];
-        }
+        if (typeof(Storage) !== "undefined") {
+          // Retrieve
+          pontajDate = new Date(localStorage.getItem("dataPontaj"));
+          } else {
+          pontajDate = new Date();
+          }
             //$('.datepicker').datepicker();
             //$('.timepicker').timepicker();
             //$('.collapsible').collapsible();
             var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
-            defaultDate: new Date(pontajDate),    
+            defaultDate: pontajDate,    
             setDefaultDate: true,
             format: 'dd mmmm yyyy',
             onClose: changeSelectedDate,
