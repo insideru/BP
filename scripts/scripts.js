@@ -175,6 +175,7 @@ function getHolidays() {
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
     timesheetsData = rcvData.timesheets;
+    console.log(timesheetsData);
     holidayArray = [];
     daysoffArray = [];
     timesheetsArray = [];
