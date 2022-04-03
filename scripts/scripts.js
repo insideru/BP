@@ -487,6 +487,7 @@ function validateConcediu () {
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
+          valid = false;
         }
       });
     }
@@ -498,11 +499,10 @@ function validateConcediu () {
     });
     if (overlap) {
       M.toast({html: 'In perioada aleasa exista zile pontate!'});
+      valid = false;
     }
   }
-  else {
-    return valid;
-  }
+  return valid;
 }
 
 function getVars () {
