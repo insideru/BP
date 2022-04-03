@@ -652,7 +652,7 @@
             } else {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForThisDay+'</p>';
             }
-            markup += '<br><center><a class="waves-effect waves-light btn onClick="ponteazawithdate(\''+_.$active.date+'\');">Adauga pontaj</a></div>';
+            markup += '<br><center><a class="waves-effect waves-light btn onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
         }
         eventListEl.append(markup)
     }
