@@ -49,12 +49,10 @@
         $("#endDate").removeClass("valid invalid");
         if (validateConcediu()) {
           var formData = {
-                'action'            : 'addTimesheet',
+                'action'            : 'addDaysoff',
                 'collab_id'         : 0, //trebuie luat din cookie sau cumva
-                'ziua'              : getSelectedDate(),
-                'oraVenire'        : $("#ora-venire").val(),
-                'oraPlecare'       : $("#ora-plecare").val(),
-                'timesheet'         : timesheetsObject
+                'startdate'         : $("#startDate").val(),
+                'enddate'        : $("#endDate").val()
             };
             $.ajax({
                 type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -68,6 +66,7 @@
                   }
                   if (data.substring(0,8)=="Success:") {
                     //e corecta ma
+                    window.location.href = location.protocol + "//" + location.host + dashboardPage;
                   }
                 },
                 error: function(){

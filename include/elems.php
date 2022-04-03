@@ -205,6 +205,34 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function addDaysoff (int $collab_id, string $startDate, string $endDate) {
+	/* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate)';
+    
+    /* Values array for PDO */
+    $values = array(':collab_id' => $collab_id, ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)));
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success:" . $pdo->lastInsertId();
+}
+
 function getDaysoff(int $collab_id) {
     global $pdo;
 	global $schema;

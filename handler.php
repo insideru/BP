@@ -60,6 +60,10 @@ if ($_POST["action"]=="addTimesheet") {
     echo "Success:Pontaj adaugat cu succes!";
 }
 
+if ($_POST["action"]=="addDaysoff") {
+    return addDaysoff($_POST["collab_id"], $_POST["startdate"], $_POST["enddate"]);
+}
+
 if ($_POST["action"]=="getTimesheets") {
     $response["timesheets"] = getTimesheets($_POST["collab_id"]);
     $response["daysoff"] = getDaysoff($_POST["collab_id"]);
