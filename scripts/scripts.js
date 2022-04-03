@@ -169,7 +169,7 @@ function populateHolidays() {
 
 function getHolidays() {
   collab_id = 0; //se va lua collab_idul de unde o fi el
-  $.get("handler.php?r=holidays", function(data, status) {
+  $.get("handler.php?r=holidays&collab_id="+collab_id, function(data, status) {
     rcvData = JSON.parse(data);
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
@@ -438,21 +438,21 @@ function validateConcediu () {
     $("#endDate").addClass("valid");
   }
   if (valid) {
-    data1 = new Date(data1);
-    data2 = new Date(data2);
-    if (data1 > data2) {
+    d1 = new Date(data1);
+    d2 = new Date(data2);
+    if (d1 > d2) {
       valid = false;
       M.toast({html: 'Data de inceput nu poate fi dupa data de sfarsit a concediului!'});
     }
-    if (data1 - data2 == 0) {
+    if (d1 - d2 == 0) {
       valid = false;
       M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi acceasi!'});
     }
-    if (data2 > data1) {
-      nrZileLibere = getNoDaysOff(data1, data2);
+    if (d2 > d1) {
+      nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
       //console.log(nrZileLibere);
       daysoffArray.forEach(element => {
-        if (compareDateRanges(data1, data2, element[0], element[1])) {
+        if (compareDateRanges(d1, d2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
         }
       });
