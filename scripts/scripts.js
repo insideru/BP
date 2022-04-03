@@ -27,6 +27,7 @@ function arrayRemove(arr, value) {
 function removeProj(id) {
     $('#project_'+id).remove();
     timesheetsObject = arrayRemove(timesheetsObject, id);
+    updatePB();
 }
 
 function getProjectType (name) {
@@ -708,9 +709,9 @@ function updateText(ore, minute) {
 
 function updatePB() {
   var maxCurrentValue = calculateHours("toate") * 60;
+  console.log(timesheetsObject);
   //var PBValue = Math.floor(maxCurrentValue);
   if ($('#maxPontaj').text()!="") {
-    document.getElementById("workPB").style.width = Math.floor((maxCurrentValue/workedTime)*100) + '%'; 
-    //$('#workPB').css('width: ' + Math.floor((workedTime/maxCurrentValue)*100) + '%');
+    document.getElementById("workPB").style.width = Math.floor((maxCurrentValue/workedTime)*100) + '%';
   }
 }
