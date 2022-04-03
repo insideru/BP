@@ -100,12 +100,17 @@
       }
         
       $(document).ready(function(){
+        var getVars = getVars();
+        var pontajDate;
+        if (getVars['addPontaj']!="") {
+          pontajDate = getVars['addPontaj'];
+        }
             //$('.datepicker').datepicker();
             //$('.timepicker').timepicker();
             //$('.collapsible').collapsible();
             var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
-            defaultDate: new Date(),    
+            defaultDate: new Date(pontajDate),    
             setDefaultDate: true,
             format: 'dd mmmm yyyy',
             onClose: changeSelectedDate,
