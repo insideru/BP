@@ -98,17 +98,13 @@
       }
         
       $(document).ready(function(){
-        var pontajDate;
+        var pontajDate = new Date();
         if (typeof(Storage) !== "undefined") {
           // Retrieve
           if (localStorage.getItem("dataPontaj")!="") {
             pontajDate = new Date(localStorage.getItem("dataPontaj"));
             localStorage.removeItem("dataPontaj");
-          } else {
-            pontajDate = new Date();
           }
-         } else {
-          pontajDate = new Date();
         }
             //$('.datepicker').datepicker();
             //$('.timepicker').timepicker();
