@@ -377,7 +377,7 @@ function getSelectedDate(selectedDate) {
 function validateTime (time) {
   if (time.length==5) {
     timeArray = time.split(":");
-    if (Number(timeArray[0])<23 && Number(timeArray[1])<60) {
+    if (Number(timeArray[0])<24 && Number(timeArray[1])<60) {
       return true;
     }
   }
@@ -708,7 +708,7 @@ function addLinks() {
 }
 
 function updateText(ore, minute) {
-  $('#maxPontaj').text("Ponteaza cel mult " + ore + (ore > 1 ? " ore " : " ora ") + minute + (minute > 1 ? " minute." : " minut."));
+  $('#maxPontaj').text("Ponteaza cel mult " + ore + (ore == 1 ? " ora " : " ore ") + minute + (minute == 1 ? " minut." : " minute."));
 }
 
 function updatePB() {
