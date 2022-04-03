@@ -614,7 +614,7 @@ $.ajax({
 });
 }
 
-function ponteazawithdate(date) {
+function ponteazaWithDate(date) {
   console.log(date);
 }
 
