@@ -511,7 +511,7 @@ function getVars () {
           $_GET[aux[0]] = aux[1];
         }
     }
-  return $_GET;  
+  return $_GET;
 }
 
 function getNoDaysOff(data1, data2) {

@@ -104,6 +104,8 @@
           if (localStorage.getItem("dataPontaj")!="") {
             pontajDate = new Date(localStorage.getItem("dataPontaj"));
             localStorage.removeItem("dataPontaj");
+          } else {
+            pontajDate = new Date();
           }
          } else {
           pontajDate = new Date();
