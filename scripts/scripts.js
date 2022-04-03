@@ -618,7 +618,7 @@ function ponteazaWithDate(date) {
   if (typeof(Storage) !== "undefined") {
     // Store
     localStorage.setItem("dataPontaj", date);
-    window.location.href = window.location.protocol + "//" + + window.location.host + "proto-pontaj.html";
+    window.location.href = window.location.protocol + "//" + window.location.host + "proto-pontaj.html";
     }
 }
 
