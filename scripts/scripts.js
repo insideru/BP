@@ -446,6 +446,10 @@ function validatePontaj () {
       valid = false;
       M.toast({html: 'Alege cel putin o activitate la care ai lucrat!'});
     }
+    if (calculateHours("toate") * 60 > workedTime) {
+      valid = false;
+      M.toast({html: 'Pontajul depaseste perioada de lucru aleasa!'});
+    }
   }
   return valid;
 }
@@ -709,7 +713,6 @@ function updateText(ore, minute) {
 
 function updatePB() {
   var maxCurrentValue = calculateHours("toate") * 60;
-  console.log(timesheetsObject);
   //var PBValue = Math.floor(maxCurrentValue);
   if ($('#maxPontaj').text()!="") {
     document.getElementById("workPB").style.width = Math.floor((maxCurrentValue/workedTime)*100) + '%';
