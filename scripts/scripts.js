@@ -174,7 +174,7 @@ function getHolidays() {
     rcvData = JSON.parse(data);
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
-    timesheetsData = rcvData.timesheets;
+    timesheetsData = rcvData.pontaje;
     console.log(timesheetsData);
     holidayArray = [];
     daysoffArray = [];

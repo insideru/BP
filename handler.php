@@ -131,7 +131,7 @@ if ($_REQUEST["r"]=="holidays") {
     $response = array();
     $response["holidays"] = getHolidays();
     $response["daysoff"] = getDaysoff($_GET["collab_id"]);
-    $response["timesheets"] = getTimesheets($_GET["collab_id"]);
+    $response["pontaje"] = getPontaje($_GET["collab_id"]);
     echo json_encode($response);
 }
 
