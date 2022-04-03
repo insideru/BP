@@ -278,9 +278,9 @@ function calculateHours (id) {
           wrkdHours+=Number(element[property]);
         }
       }
-      return isNaN(wrkdHours) ? 0 : wrkdHours;
     }
   }
+  return isNaN(wrkdHours) ? 0 : wrkdHours;
 }
 
 function initRange(elemID) {
