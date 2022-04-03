@@ -5,6 +5,7 @@ collabsObject = [];
 projectsObject = [];
 activitiesObject = [];
 timesheetsObject = [];
+timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
 
@@ -173,8 +174,10 @@ function getHolidays() {
     rcvData = JSON.parse(data);
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
+    timesheetsData = rvdData.timesheets;
     holidayArray = [];
     daysoffArray = [];
+    timesheetsArray = [];
     holidaysData.forEach(element => {
         dt = new Date(element.date);
         dt.setHours(0, 0, 0);
@@ -187,6 +190,11 @@ function getHolidays() {
        dEnd.setHours(0, 0, 0);
        daysoffArray.push([dStart, dEnd]);
     });
+    timesheetsData.forEach(element => {
+      dt = new Date(element.date);
+      dt.setHours(0, 0, 0);
+      timesheetsArray.push(dt);
+  });
 });
 }
 
@@ -409,6 +417,21 @@ function validatePontaj () {
   } else {
     $("#ora-plecare").addClass("valid");
   }
+  if (validateDate(data)) {
+    daysoffArray.forEach(element => {
+      dt = new Date(data);
+      dt.setHours(0, 0, 0);
+      if (compareDateRanges(dt, dt, element[0], element[1])) {
+        M.toast({html: 'Nu poti ponta intr-o zi de concediu!'});
+        valid = false;
+      }
+    });
+  }
+
+  if (!valid) {
+    return valid;
+  }
+
   if (timesheetsObject.length==0) {
     valid = false;
     M.toast({html: 'Adauga cel putin un proiect la care ai lucrat!'});
@@ -457,6 +480,13 @@ function validateConcediu () {
         }
       });
     }
+    timesheetsArray.forEach(element => {
+      dt = new Date(element);
+      dt.setHours(0, 0, 0);
+      if (compareDateRanges(d1, d2, dt, dt)) {
+        M.toast({html: 'In perioada aleasa exista zile pontate!'});
+      }
+    });
   }
   else {
     return valid;
