@@ -175,7 +175,6 @@ function getHolidays() {
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
     timesheetsData = rcvData.pontaje;
-    console.log(timesheetsData);
     holidayArray = [];
     daysoffArray = [];
     timesheetsArray = [];
@@ -481,10 +480,12 @@ function validateConcediu () {
         }
       });
     }
-    console.log(timesheetsArray);
+    var overlap = false;
     timesheetsArray.forEach(element => {
       if (compareDateRanges(d1, d2, element, element)) {
-        console.log(d1, d2, element);
+        overlap = true;
+      }
+      if (overlap) {
         M.toast({html: 'In perioada aleasa exista zile pontate!'});
       }
     });
