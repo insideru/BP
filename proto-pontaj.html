@@ -101,7 +101,7 @@
         var pontajDate = new Date();
         if (typeof(Storage) !== "undefined") {
           // Retrieve
-          if (localStorage.getItem("dataPontaj")!="") {
+          if (localStorage.getItem("dataPontaj")!=null) {
             pontajDate = new Date(localStorage.getItem("dataPontaj"));
             localStorage.removeItem("dataPontaj");
           }
