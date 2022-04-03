@@ -480,6 +480,7 @@ function validateConcediu () {
         }
       });
     }
+    console.log(timesheetsArray);
     timesheetsArray.forEach(element => {
       if (compareDateRanges(d1, d2, element, element)) {
         console.log(d1, d2, element);
