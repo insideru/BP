@@ -15,7 +15,7 @@
           <ul id="nav-mobile" class="left">
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
             <li><a href="#" id="linkPontaj">Ponteaza</a></li>
-            <li><a href="#" id="linkConcediu">Adauga concediu</a></li>
+            <li><a href="#" id="linkConcediu">Concediu</a></li>
           </ul>
         </div>
       </nav>
@@ -82,6 +82,7 @@
             //$('.datepicker').datepicker();
             //$('.timepicker').timepicker();
             //$('.collapsible').collapsible();
+            addLinks();
             var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
                 defaultDate: new Date(),    

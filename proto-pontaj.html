@@ -15,7 +15,7 @@
           <ul id="nav-mobile" class="left">
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
             <li><a href="#" id="linkPontaj">Ponteaza</a></li>
-            <li><a href="#" id="linkConcediu">Adauga concediu</a></li>
+            <li><a href="#" id="linkConcediu">Concediu</a></li>
           </ul>
         </div>
       </nav>
@@ -98,6 +98,7 @@
       }
         
       $(document).ready(function(){
+        addLinks();
         var pontajDate = new Date();
         if (typeof(Storage) !== "undefined") {
           // Retrieve

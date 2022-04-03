@@ -678,7 +678,7 @@ function initCalendar() {
 }
 
 function addLinks() {
-  $("#linkDashboard").attr("href", "proto-dashboard.html");
-  $("#linkPontaj").attr("href", "proto-pontaj.html");
-  $("#linkConcediu").attr("href", "proto-concediu.html");
+  $('#linkDashboard').attr("href", "proto-dashboard.html");
+  $('#linkPontaj').attr("href", "proto-pontaj.html");
+  $('#linkConcediu').attr("href", "proto-concediu.html");
 }
