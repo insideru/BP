@@ -708,9 +708,8 @@ function updateText(ore, minute) {
 
 function updatePB() {
   var maxCurrentValue = calculateHours("toate") * 60;
-  console.log(maxCurrentValue);
   //var PBValue = Math.floor(maxCurrentValue);
   if ($('#maxPontaj').text()!="") {
-    $('#maxPontaj').css('width: ' + Math.floor((workedTime/maxCurrentValue)*100) + '%');
+    document.getElementById("div1").style.width = Math.floor((workedTime/maxCurrentValue)*100) + '%'; 
   }
 }
