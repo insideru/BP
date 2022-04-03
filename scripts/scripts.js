@@ -256,7 +256,6 @@ function getFullDate(selectedDate) {
 }
 
 function changeRangeVal(rangeID, rangeValue) {
-  updatePB();
   for (let element of timesheetsObject) {
     if (element.id==rangeID.split('_')[0])
     {
@@ -265,6 +264,7 @@ function changeRangeVal(rangeID, rangeValue) {
       $("#" + rangeID.split('_')[0] + "_totalHours").html(wrkdHours != 1 ? wrkdHours + " ore" : wrkdHours + " ora");
     }
   }
+  updatePB();
 }
 
 function calculateHours (id) {
@@ -711,6 +711,6 @@ function updatePB() {
   console.log(maxCurrentValue);
   //var PBValue = Math.floor(maxCurrentValue);
   if ($('#maxPontaj').text()!="") {
-    $('#maxPontaj').css('width', + Math.floor((workedTime/maxCurrentValue)*100) + '%');
+    $('#maxPontaj').css('width: ' + Math.floor((workedTime/maxCurrentValue)*100) + '%');
   }
 }
