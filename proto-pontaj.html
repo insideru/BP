@@ -21,6 +21,7 @@
       </nav>
 
       <div class="container">
+        <div class="row"></div>
         <div class="row">
           <div class="input-field">
             <input id="data-pontaj" type="text" class="datepicker" onclick="getHolidays();">
@@ -39,6 +40,16 @@
             <label for="ora-plecare">Ora plecare</label>
             <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incheiere a programului</span>
           </div>
+        </div>
+        <div class="row">
+          <h6 id="maxPontaj"></h6>
+        </div>
+        <div class="row">
+          <div>
+            <div class="progress">
+              <div id="workPB" class="determinate" style="width: 0%"></div>
+          </div>
+        </div>
         </div>
         <div class="row">
         <ul id="projTimesheet" class="collapsible">
@@ -127,7 +138,8 @@
         });
         var elems = document.querySelectorAll('.timepicker');
         var instances = M.Timepicker.init(elems, {
-          twelveHour: false
+          twelveHour: false,
+          onCloseEnd: changeSelectedTime
         });
         $('.collapsible').collapsible();
 

@@ -8,6 +8,7 @@ timesheetsObject = [];
 timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
+workedTime = 0;
 pontajPage = "/proto-pontaj.html";
 dashboardPage = "/proto-dashboard.html";
 concediuPage = "/proto-concediu.html";
@@ -472,7 +473,7 @@ function validateConcediu () {
     }
     if (d1 - d2 == 0) {
       valid = false;
-      M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi acceasi!'});
+      M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
     }
     if (d2 > d1) {
       nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
@@ -538,6 +539,23 @@ function changeSelectedDate() {
   //for (i=0;i<timeWorked.length; i++) {
   //    timeWorked[i][4] = newDate;
   //}
+  //console.log("Ja ca merge data!");
+}
+
+function changeSelectedTime () {
+  var oraVenire = $('#ora-venire').val();
+  var oraPlecare = $('#ora-plecare').val();
+  if (validateTime(oraVenire) && validateTime(oraPlecare)) {
+    var d1 = new Date();
+    var d2 = new Date();
+    d1.setHours(oraVenire.split(":")[0], oraVenire.split(":")[1], 0, 0);
+    d2.setHours(oraPlecare.split(":")[0], oraPlecare.split(":")[1], 0, 0);
+    if (d1>d2) { d2.setDate(d2.getDate() + 1); }
+    var wrkHours = Math.floor((d2-d1)/3600000);
+    var wrkMinutes = Math.floor(((d2-d1)-(wrkHours*3600000))/60000);
+    workedTime = wrkHours * 60 + wrkMinutes;
+    updateText(wrkHours, wrkMinutes);
+  }
 }
 
 function buildEventsObject(eventsArray) {
@@ -681,4 +699,17 @@ function addLinks() {
   $('#linkDashboard').attr("href", "proto-dashboard.html");
   $('#linkPontaj').attr("href", "proto-pontaj.html");
   $('#linkConcediu').attr("href", "proto-concediu.html");
+}
+
+function updateText(ore, minute) {
+  $('#maxPontaj').text("Ponteaza cel mult " + ore + (ore > 1 ? " ore " : " ora ") + minute + (minute > 1 ? " minute." : " minut."));
+}
+
+function updatePB() {
+  var maxCurrentValue = calculateHours("toate") * 60;
+  console.log(maxCurrentValue);
+  //var PBValue = Math.floor(maxCurrentValue);
+  if ($('#maxPontaj').text()!="") {
+    $('#maxPontaj').css('width', + Math.floor((workedTime/maxCurrentValue)*100) + '%');
+  }
 }
