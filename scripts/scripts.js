@@ -717,9 +717,11 @@ function updatePB() {
   if ($('#maxPontaj').text()!="") {
     document.getElementById("workPB").style.width = Math.floor((maxCurrentValue/workedTime)*100) + '%';
     if (Math.floor((maxCurrentValue/workedTime)*100)>100) {
-      $('#workPB').addClass("preloaderOOB");
+      $('#workPB').addClass("red");
+      $('#workPBMain').addClass("blue");
     } else {
-      $('#workPB').removeClass("preloaderOOB");
+      $('#workPB').removeClass("red");
+      $('#workPBMain').addClass("blue");
     }
   }
 }
