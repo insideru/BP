@@ -710,7 +710,7 @@ function updatePB() {
   var maxCurrentValue = calculateHours("toate") * 60;
   //var PBValue = Math.floor(maxCurrentValue);
   if ($('#maxPontaj').text()!="") {
-    //document.getElementById("div1").style.width = Math.floor((workedTime/maxCurrentValue)*100) + '%'; 
-    $('#workPB').css('width: ' + Math.floor((workedTime/maxCurrentValue)*100) + '%');
+    document.getElementById("workPB").style.width = Math.floor((workedTime/maxCurrentValue)*100) + '%'; 
+    //$('#workPB').css('width: ' + Math.floor((workedTime/maxCurrentValue)*100) + '%');
   }
 }
