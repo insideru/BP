@@ -484,6 +484,7 @@ function validateConcediu () {
       dt = new Date(element);
       dt.setHours(0, 0, 0);
       if (compareDateRanges(d1, d2, dt, dt)) {
+        console.log(d1, d2, dt);
         M.toast({html: 'In perioada aleasa exista zile pontate!'});
       }
     });
