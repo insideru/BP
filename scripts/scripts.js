@@ -8,6 +8,9 @@ timesheetsObject = [];
 timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
+pontajPage = "/proto-pontaj.html";
+dashboardPage = "/proto-dashboard.html";
+concediuPage = "/proto-concediu.html";
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -618,7 +621,7 @@ function ponteazaWithDate(date) {
   if (typeof(Storage) !== "undefined") {
     // Store
     localStorage.setItem("dataPontaj", date);
-    window.location.href = location.protocol + "//" + location.host + "/proto-pontaj.html";
+      window.location.href = location.protocol + "//" + location.host + pontajPage;
     }
 }
 
@@ -672,4 +675,10 @@ function initCalendar() {
           //
       }
   });
+}
+
+function addLinks() {
+  $("#linkDashboard").attr("href", "proto-dashboard.html");
+  $("#linkPontaj").attr("href", "proto-pontaj.html");
+  $("#linkConcediu").attr("href", "proto-concediu.html");
 }
