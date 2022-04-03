@@ -481,10 +481,8 @@ function validateConcediu () {
       });
     }
     timesheetsArray.forEach(element => {
-      dt = new Date(element);
-      dt.setHours(0, 0, 0);
-      if (compareDateRanges(d1, d2, dt, dt)) {
-        console.log(d1, d2, dt);
+      if (compareDateRanges(d1, d2, element, element)) {
+        console.log(d1, d2, element);
         M.toast({html: 'In perioada aleasa exista zile pontate!'});
       }
     });
