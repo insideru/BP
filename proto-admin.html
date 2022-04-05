@@ -195,6 +195,38 @@
                                           <tbody id="usersTable">
                                           </tbody>
                                       </table>
+                                      <div id="newPontor" class="modal">
+                                        <div class="modal-content">
+                                          <h5>Adauga utilizatori</h5>
+                                          <div class="row"></div>
+                                          <div class="row">
+                                            <div class="input-field col s12">
+                                              <input placeholder="username" id="userAdd" type="text" class="validate">
+                                              <label for="userAdd">Username</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                              <input placeholder="password" id="userPass1" type="password" class="validate">
+                                              <label for="userPass1">Password</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                              <input placeholder="password" id="userPass2" type="password" class="validate">
+                                              <label for="userPass2">Re-enter password</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                              <select id="userRights" class="browser-default" onchange="something();">
+                                                <option value="" disabled selected>Categorie drepturi</option>
+                                                <option value="">0 - Varianta 1</option>
+                                                <option value="">1 - Varianta 2</option>
+                                                <option value="">2 - Varianta 3</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <a href="#!" class="waves-effect waves-green btn-flat">Adauga</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <a class="waves-effect waves-light btn modal-trigger" href="#newPontor">Modal</a>
                                       <table class="centered highlight">
                                         <tbody>
                                           <tr>
@@ -318,12 +350,13 @@
                 monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
             }
         });
-
+        $(document).ready(function(){
+          $('.modal').modal();
+        });
         //initializare tabele
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
-          console.log(initData);
           clientsObject = initData.clients;
           collabCatsObject = initData.collabCats;
           projCatsObject = initData.projCats;
@@ -495,7 +528,6 @@
                 encode      : true,
                 success     : function(data) {
                     if (data.substring(0,8)=="Success:") {
-                      console.log (data);
                       dbID=data.substring(8);
                       switch (typeNo) {
                         case 1: //add project category
