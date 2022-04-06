@@ -5,6 +5,7 @@ collabsObject = [];
 projectsObject = [];
 activitiesObject = [];
 timesheetsObject = [];
+accountsObject = [];
 timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
@@ -722,4 +723,11 @@ function updatePB() {
       $('#workPB').removeClass("red");
     }
   }
+}
+
+function validateAdduser () {
+  var newUsername = $("#userAdd").val();
+  var newPass1 = $("#userPass1").val();
+  var newPass2 = $("#userPass2").val();
+  var newRights = $("#userRights").val();
 }

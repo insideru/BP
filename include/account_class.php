@@ -2,63 +2,62 @@
 
 class Account {
     private $id;
+	private $collabID;
     private $group;
-	private $name;
-	private $email;
+	private $username;
     public $authenticated;
     private $token;
 
     public function __construct() {
         $this->id = NULL;
-        $this->group = 1;
-		$this->name = NULL;
-		$this->email = NULL;
+        $this->group = NULL;
+		$this->username = NULL;
         $this->authenticated = FALSE;
         $this->token = NULL;
+		$this->collabID = NULL;
     }
 
     public function __destruct() {
 		
 	}
 
-public function addAccount(string $name, string $email, string $passwd): int {
+public function addAccount(string $username, string $passwd, int $group, int $collab_id): int {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
 	
 	/* Trim the strings to remove extra spaces */
-	$name = trim($name);
-	$email = trim($email);
+	$username = trim($username);
 	$passwd = trim($passwd);
 	
 	/* Check if the user name is valid. If not, throw an exception */
-	if (!$this->isNameValid($name))
+	if (!$this->isNameValid($username))
 	{
-		throw new Exception('Invalid user name');
+		throw new Exception('Usernameul trebuie sa aiba cel putin 4 caractere alfanumerice!');
 	}
 	
 	/* Check if the password is valid. If not, throw an exception */
 	if (!$this->isPasswdValid($passwd))
 	{
-		throw new Exception('Invalid password');
+		throw new Exception('Parola trebuie sa aiba cel putin 6 caractere!');
 	}
 	
 	/* Check if an account having the same name already exists. If it does, throw an exception */
-	if (!is_null($this->getIdFromEmail($email)))
+	if (!is_null($this->getIdFromUsername($username)))
 	{
-		throw new Exception('Email deja folosit');
+		throw new Exception('Username-ul este deja inregistrat!');
 	}
 	
 	/* Finally, add the new account */
 	
 	/* Insert query template */
-	$query = 'INSERT INTO '.$schema.'.accounts (account_email, account_name, account_passwd) VALUES (:email, :name, :passwd)';
+	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id) VALUES (:group, :username, :passwd, :collab_id)';
 	
 	/* Password hash */
 	$hash = password_hash($passwd, PASSWORD_DEFAULT);
 	
 	/* Values array for PDO */
-	$values = array(':email' => $email, ':name' => $name, ':passwd' => $hash);
+	$values = array(':group' => $group, ':username' => $username, ':passwd' => $hash, ':collab_id' => $collab_id);
 	
 	/* Execute the query */
 	try
@@ -88,6 +87,9 @@ public function isNameValid(string $name): bool {
 	{
 		$valid = FALSE;
 	}
+	if (!ctype_alnum($name)) {
+		$valid = FALSE;
+	}
 	
 	/* You can add more checks here */
 	
@@ -103,7 +105,7 @@ public function isPasswdValid(string $passwd): bool
 	/* Example check: the length must be between 8 and 16 chars */
 	$len = mb_strlen($passwd);
 	
-	if (($len < 8) || ($len > 16))
+	if (($len < 6) || ($len > 40))
 	{
 		$valid = FALSE;
 	}
@@ -114,14 +116,14 @@ public function isPasswdValid(string $passwd): bool
 }
 
 /* Returns the account id having $name as name, or NULL if it's not found */
-public function getIdFromEmail(string $email): ?int
+public function getIdFromUsername(string $username): ?int
 {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
 	
 	/* Since this method is public, we check $name again here */
-	if (!$this->isNameValid($email))
+	if (!$this->isNameValid($username))
 	{
 		throw new Exception('Invalid user name');
 	}
@@ -130,8 +132,8 @@ public function getIdFromEmail(string $email): ?int
 	$id = NULL;
 	
 	/* Search the ID on the database */
-	$query = 'SELECT account_id FROM '.$schema.'.accounts WHERE (account_email = :email)';
-	$values = array(':email' => $email);
+	$query = 'SELECT account_id FROM '.$schema.'.accounts WHERE (account_username = :username)';
+	$values = array(':username' => $username);
 	
 	try
 	{
@@ -155,7 +157,81 @@ public function getIdFromEmail(string $email): ?int
 	return $id;
 }
 
-public function editAccount(int $id, string $email, string $name, string $passwd, bool $enabled)
+public function changePassword(int $id, string $passwd)
+{
+	/* Global $pdo object */
+    global $pdo;
+    global $schema;
+	
+	/* Trim the strings to remove extra spaces */
+	$passwd = trim($passwd);
+	
+	/* Check if the password is valid. */
+	if (!$this->isPasswdValid($passwd))
+	{
+		throw new Exception('Parola trebuie sa aiba cel putin 6 caractere!');
+	}
+	
+	/* Finally, edit the account */
+	
+	/* Edit query template */
+	$query = 'UPDATE '.$schema.'.accounts SET account_passwd = :passwd WHERE account_id = :id';
+	
+	/* Password hash */
+	$hash = password_hash($passwd, PASSWORD_DEFAULT);
+	
+	/* Int value for the $enabled variable (0 = false, 1 = true) */
+	$intEnabled = $enabled ? 1 : 0;
+	
+	/* Values array for PDO */
+	$values = array(':passwd' => $hash, ':id' => $id);
+	
+	/* Execute the query */
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+	   /* If there is a PDO exception, throw a standard exception */
+	   throw new Exception($e->getMessage());
+	}
+}
+
+public function changeGroup(int $id, int $newGroup)
+{
+	/* Global $pdo object */
+    global $pdo;
+    global $schema;
+	
+	/* Check if the ID is valid */
+	if (!$this->isIdValid($id))
+	{
+		throw new Exception('Invalid account ID');
+	}
+	/* Finally, edit the account */
+	
+	/* Edit query template */
+	$query = 'UPDATE '.$schema.'.accounts SET account_group = :group WHERE account_id = :id';
+	
+	/* Values array for PDO */
+	$values = array(':group' => $newGroup, ':id' => $id);
+	
+	/* Execute the query */
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+	   /* If there is a PDO exception, throw a standard exception */
+	   throw new Exception($e->getMessage());
+	}
+}
+
+public function changeEnabled(int $id, bool $enabled)
 {
 	/* Global $pdo object */
     global $pdo;
@@ -171,40 +247,16 @@ public function editAccount(int $id, string $email, string $name, string $passwd
 	{
 		throw new Exception('Invalid account ID');
 	}
-	
-	/* Check if the user name is valid. */
-	if (!$this->isNameValid($name))
-	{
-		throw new Exception('Invalid user name');
-	}
-	
-	/* Check if the password is valid. */
-	if (!$this->isPasswdValid($passwd))
-	{
-		throw new Exception('Invalid password');
-	}
-	
-	/* Check if an account having the same name already exists (except for this one). */
-	$idFromName = $this->getIdFromEmail($name);
-	
-	if (!is_null($idFromName) && ($idFromName != $id))
-	{
-		throw new Exception('User name already used');
-	}
-	
 	/* Finally, edit the account */
 	
 	/* Edit query template */
-	$query = 'UPDATE '.$schema.'.accounts SET account_name = :name, account_passwd = :passwd, account_enabled = :enabled WHERE account_id = :id';
-	
-	/* Password hash */
-	$hash = password_hash($passwd, PASSWORD_DEFAULT);
+	$query = 'UPDATE '.$schema.'.accounts SET account_enabled = :enabled WHERE account_id = :id';
 	
 	/* Int value for the $enabled variable (0 = false, 1 = true) */
 	$intEnabled = $enabled ? 1 : 0;
 	
 	/* Values array for PDO */
-	$values = array(':name' => $name, ':passwd' => $hash, ':enabled' => $intEnabled, ':id' => $id);
+	$values = array(':enabled' => $intEnabled, ':id' => $id);
 	
 	/* Execute the query */
 	try
@@ -218,7 +270,6 @@ public function editAccount(int $id, string $email, string $name, string $passwd
 	   throw new Exception($e->getMessage());
 	}
 }
-
 public function isIdValid(int $id): bool
 {
 	/* Initialize the return variable */
@@ -285,18 +336,20 @@ public function deleteAccount(int $id)
 	}
 }
 
-public function login(string $email, string $passwd, int $remember): bool
+
+
+public function login(string $username, string $passwd, int $remember): bool
 {
 	/* Global $pdo object */
     global $pdo;
     global $schema;	
 	
 	/* Trim the strings to remove extra spaces */
-	$email = trim($email);
+	$username = trim($username);
 	$passwd = trim($passwd);
 	
 	/* Check if the user name is valid. If not, return FALSE meaning the authentication failed */
-	if (!$this->isNameValid($email))
+	if (!$this->isNameValid($username))
 	{
 		return FALSE;
 	}
@@ -308,10 +361,10 @@ public function login(string $email, string $passwd, int $remember): bool
 	}
 	
 	/* Look for the account in the db. Note: the account must be enabled (account_enabled = 1) */
-	$query = 'SELECT * FROM '.$schema.'.accounts WHERE (account_email = :email) AND (account_enabled = 1)';
+	$query = 'SELECT * FROM '.$schema.'.accounts WHERE (account_username = :username) AND (account_enabled = 1)';
 	
 	/* Values array for PDO */
-	$values = array(':email' => $email);
+	$values = array(':username' => $username);
 	
 	/* Execute the query */
 	try
@@ -332,11 +385,10 @@ public function login(string $email, string $passwd, int $remember): bool
 	{
 		if (password_verify($passwd, $row['account_passwd']))
 		{
-			/* Authentication succeeded. Set the class properties (id and name) */
+			/* Authentication succeeded. Set the class properties (id and group) */
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
-			$this->name = $row['account_name'];
-			$this->email = $email;
+			$this->username = $username;
 			$this->authenticated = TRUE;
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
@@ -454,9 +506,8 @@ public function sessionLogin(): bool
 			/* Authentication succeeded. Set the class properties (id and name) and return TRUE*/
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
-			$this->name = $row['account_name'];
-			$this->email = $row['account_email'];
-			$this->authenticated = TRUE;	
+			$this->username = $row['account_username'];
+			$this->authenticated = TRUE;
 			return TRUE;
 		}
 
@@ -530,9 +581,7 @@ public function logout()
 	
 	/* Reset the account-related properties */
 	$this->id = NULL;
-	$this->id = 1;
-	$this->name = NULL;
-	$this->email = NULL;
+	$this->username = NULL;
 	$this->authenticated = FALSE;
 	
 	/* If there is an open Session, remove it from the account_sessions table */
@@ -576,12 +625,6 @@ public function getId(): int
 public function getGroup(): int
 {
 	return $this->group;
-}
-
-
-public function getName(): string
-{
-	return $this->name;
 }
 
 public function getEmail(): string

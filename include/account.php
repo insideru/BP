@@ -8,13 +8,13 @@ require_once 'account_class.php';
 
 $account = new Account();
 
-function newAccount($newEmail, $newName, $newPass) {
+function newAccount(string $username, string $passwd, int $group, int $collab_id) {
 
     global $account;
 
     try
     {
-        $newId = $account->addAccount($newEmail, $newName, $newPass);
+        $newId = $account->addAccount($username, $passwd, $group, $collab_id);
     }
     catch (Exception $e)
     {

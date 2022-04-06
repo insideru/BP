@@ -127,6 +127,7 @@ if ($_REQUEST["r"]=="init") {
     $response["projects"] = getProjects();
     $response["activities"] = getActivities();
     $response["holidays"] = getHolidays();
+    $response["accounts"] = getAccounts();
     
     echo json_encode($response);
 }
