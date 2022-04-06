@@ -165,7 +165,7 @@ function populateCollabs() {
     });
     if (bool) {
       //nu e adaugat user
-      $('#collabsTable').append('<td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Modal</a></td></tr>');
+      $('#collabsTable').append('<td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Adaga user</a></td></tr>');
     } else {
       $('#collabsTable').append('<td></td></tr>');
     }
