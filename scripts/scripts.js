@@ -156,7 +156,7 @@ function populateClients() {
 
 function populateCollabs() {
   collabsObject.forEach(element => {
-    $('#collabsTable').append("<tr><td>"+element.name+"</td><td>"+getDBNameFromId(element.collabCatID, "colabCat")+'</td>');
+    $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td>');
     var bool = false;
     accountsObject.forEach(elem => {
       if (elem.collab_id==element.id && elem.account_username!="") {
@@ -164,10 +164,10 @@ function populateCollabs() {
       }
     });
     if (bool) {
-      //nu e adaugat user
-      $('#collabsTable').append('<td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Adaga user</a></td></tr>');
-    } else {
+      //e adaugat user
       $('#collabsTable').append('<td></td></tr>');
+    } else {
+      $('#collabsTable').append('<td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Adaga user</a></td></tr>');
     }
   });
 }
