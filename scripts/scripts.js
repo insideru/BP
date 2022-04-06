@@ -156,7 +156,7 @@ function populateClients() {
 
 function populateCollabs() {
   collabsObject.forEach(element => {
-    $('#collabsTable').append("<tr><td>"+element.name+"</td><td>"+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><i class="material-icons" id="newUser'+ element.id +'">add_box</i><i class="material-icons" id="changePass'+ element.id +'">lock_outline</i></td></tr>');
+    $('#collabsTable').append("<tr><td>"+element.name+"</td><td>"+getDBNameFromId(element.collabCatID, "colabCat")+'</td>');
     var bool = false;
     accountsObject.forEach(elem => {
       if (elem.collab_id==element.id && elem.account_username!="") {
@@ -164,9 +164,10 @@ function populateCollabs() {
       }
     });
     if (bool) {
-      $('#newUser'+ element.id).addClass("green-text");
+      //nu e adaugat user
+      $('#collabsTable').append('<td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Modal</a></td></tr>');
     } else {
-      $('#changePass'+ element.id).addClass("green-text");
+      $('#collabsTable').append('<td></td></tr>');
     }
   });
 }
