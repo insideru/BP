@@ -164,9 +164,9 @@ function populateCollabs() {
       }
     });
     if (bool) {
-      $('#newUser'+ element.id).addClass(green);
+      $('#newUser'+ element.id).addClass("green");
     } else {
-      $('#changePass'+ element.id).addClass(green);
+      $('#changePass'+ element.id).addClass("green");
     }
   });
 }
