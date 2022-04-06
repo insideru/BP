@@ -9,36 +9,6 @@
   </head>
     <body>
         <div id="container" class="container">
-          <div id="newPontor" class="modal">
-            <div class="modal-content">
-              <h5>Adauga utilizatori</h5>
-              <div class="row"></div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="username" id="userAdd" type="text" class="validate">
-                  <label for="userAdd">Username</label>
-                </div>
-                <div class="input-field col s12">
-                  <input placeholder="password" id="userPass1" type="password" class="validate">
-                  <label for="userPass1">Password</label>
-                </div>
-                <div class="input-field col s12">
-                  <input placeholder="password" id="userPass2" type="password" class="validate">
-                  <label for="userPass2">Re-enter password</label>
-                </div>
-                <div class="input-field col s12">
-                  <select id="userRights" class="browser-default" onchange="something();">
-                    <option value="" disabled selected>Categorie drepturi</option>
-                    <option value="">0 - Varianta 1</option>
-                    <option value="">1 - Varianta 2</option>
-                    <option value="">2 - Varianta 3</option>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="waves-effect waves-green btn-flat">Adauga</a>
-              </div>
-            </div>
         <div class="row">
             <div class="col s12">
               <ul class="tabs">
@@ -182,6 +152,37 @@
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">filter_drama</i>Colaboratori</div>
                                 <div class="collapsible-body">
+                                  <div id="newPontor" class="modal">
+                                    <div class="modal-content">
+                                      <h5>Adauga utilizatori</h5>
+                                      <div class="row"></div>
+                                      <div class="row">
+                                        <div class="input-field col s12">
+                                          <input placeholder="username" id="userAdd" type="text" class="validate">
+                                          <label for="userAdd">Username</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <input placeholder="password" id="userPass1" type="password" class="validate">
+                                          <label for="userPass1">Password</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <input placeholder="password" id="userPass2" type="password" class="validate">
+                                          <label for="userPass2">Re-enter password</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <select id="userRights" class="browser-default" onchange="something();">
+                                            <option value="" disabled selected>Categorie drepturi</option>
+                                            <option value="">0 - Varianta 1</option>
+                                            <option value="">1 - Varianta 2</option>
+                                            <option value="">2 - Varianta 3</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <a href="#!" class="waves-effect waves-green btn-flat">Adauga</a>
+                                      </div>
+                                    </div>
+                                  </div>
                                     <table class="centered highlight">
                                         <thead>
                                           <tr>
@@ -226,7 +227,6 @@
                                           <tbody id="usersTable">
                                           </tbody>
                                       </table>
-                                      </div>
                                       <table class="centered highlight">
                                         <tbody>
                                           <tr>

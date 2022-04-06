@@ -167,6 +167,7 @@ function populateCollabs() {
       $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
       $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Adauga user</a></td></tr>');
+      // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
 }
