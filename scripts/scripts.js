@@ -156,7 +156,18 @@ function populateClients() {
 
 function populateCollabs() {
   collabsObject.forEach(element => {
-    $('#collabsTable').append("<tr><td>"+element.name+"</td><td>"+getDBNameFromId(element.collabCatID, "colabCat")+"</td></tr>");
+    $('#collabsTable').append("<tr><td>"+element.name+"</td><td>"+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><i class="material-icons" id="newUser'+ element.id +'">add_box</i><i class="material-icons"  id="changePass'+ element.id +'">lock_outline</i></td></tr>');
+    var bool = false;
+    accountsObject.forEach(elem => {
+      if (elem.id==element.id && elem.account_username!="") {
+        bool = true;
+      }
+    });
+    if (bool) {
+      $('#newUser'+ element.id).addClass(green);
+    } else {
+      $('#changePass'+ element.id).addClass(green);
+    }
   });
 }
 
