@@ -53,7 +53,7 @@
         $("#startDate").removeClass("valid invalid");
         $("#endDate").removeClass("valid invalid");
         if (validateConcediu()) {
-          var guidCookie = document.cookie.userGUID;
+          var guidCookie = getCookie("userGUID");
           var formData = {
                 'action'            : 'addDaysoff',
                 'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva

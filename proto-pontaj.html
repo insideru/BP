@@ -83,7 +83,7 @@
         $("#ora-venire").removeClass("valid invalid");
         $("#ora-plecare").removeClass("valid invalid");
         if (validatePontaj()) {
-          var guidCookie = document.cookie.userGUID;
+          var guidCookie = getCookie("userGUID");
           var formData = {
                 'action'            : 'addTimesheet',
                 'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva

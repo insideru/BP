@@ -187,7 +187,7 @@ function populateHolidays() {
 }
 
 function getHolidays() {
-  var guidCookie = document.cookie.userGUID;
+  var guidCookie = getCookie("userGUID");
   $.get("handler.php?r=holidays&collab_guid="+guidCookie, function(data, status) {
     rcvData = JSON.parse(data);
     holidaysData = rcvData.holidays;
@@ -629,7 +629,7 @@ function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDa
 }
 
 function deletePontaj (date) {
-  var guidCookie = document.cookie.userGUID;
+  var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteTimesheets',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
@@ -690,7 +690,7 @@ function initCalendar() {
     //$('#calendar').evoCalendar('removeCalendarEvent', activeEvent['id']);
   });
   //get pontaje for current user
-  var guidCookie = document.cookie.userGUID;
+  var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'getTimesheets',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
