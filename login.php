@@ -9,6 +9,8 @@
     </head>
     <body class="teal lighten-5 valign-wrapper">
         <div class="container">
+            <div class="z-depth-5 blue-grey lighten-5 loginCard">
+                <div class="z-depth-2 grey lighten-5 container">
                     <div class="row">
                         <form class="col s12" id="form">
                             <div class="row">
@@ -43,6 +45,8 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
