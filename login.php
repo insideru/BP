@@ -24,16 +24,12 @@
                             </div>
                             <div class = "row">
                                 <div class = "input-field col s12">
-                                    <input id = "email" type = "email" data-error="Email invalid" class="validate" required>
-                                    <label for = "email">E-mail</label>
+                                    <input id = "email" type = "text" data-error="user invalid" class="validate" required>
+                                    <label for = "email">User</label>
                                 </div>
                                 <div class = "input-field col s12">      
                                     <label for = "password">Parola</label>
                                     <input id = "password" type = "password" class = "validate" required>          
-                                </div>
-                                <div class = "input-field col s12 hidden" id="numeReg">      
-                                    <input id = "nume" type = "text">
-                                    <label for = "nume">Nume</label>         
                                 </div>
                             </div>
                             <div class = "row">
@@ -43,11 +39,8 @@
                                     </label>
                             </div>
                             <div class = "row">
-                                <div class="col s6 center-align">
+                                <div class="col s12 center-align">
                                     <button class="waves-effect waves-light btn" id="login" type="submit" name="action" onclick="logReg=1;">Login</button>
-                                </div>
-                                <div class="col s6 center-align">
-                                    <button class="waves-effect waves-light btn" id="register" type="submit" name="action" onclick="logReg=2;">Inregistreaza-te</button>
                                 </div>
                             </div>
                         </form>
@@ -120,56 +113,6 @@
             }
         });
     }
-
-    function clickRegister () {
-        document.getElementById('numeReg').classList.remove('hidden');
-        document.getElementById('loader1').classList.remove('hidden2');
-        document.getElementById('loader2').classList.remove('hidden2');
-        if (document.getElementById('remember').checked) {
-            memberMe=1;
-        } else {
-            memberMe=0;
-        }
-
-        var formData = {
-            'action'            : 'register',
-            'email'             : $('input[id=email]').val(),
-            'password'          : $('input[id=password]').val(),
-            'name'              : $('input[id=nume]').val(),
-            'remember'          : memberMe
-        };
-
-        $.ajax({
-            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url         : 'handler.php', // the url where we want to POST
-            data        : formData, // our data object
-            //dataType    : 'json', // what type of data do we expect back from the server
-            encode      : true,
-            success     : function(data) {
-                document.getElementById('loader1').classList.add('hidden2');
-                document.getElementById('loader2').classList.add('hidden2');
-                switch (data) {
-                    case "no email":
-                        document.getElementById('error').innerHTML = "E-mailul este obligatoriu!";
-                        break;
-                    case "no pass":
-                        document.getElementById('error').innerHTML = "Alege o parola!";
-                        break;
-                    case "no name":
-                        document.getElementById('error').innerHTML = "Numele este obligatoriu!";
-                        break;
-                    default:
-                        //document.getElementById('error').innerHTML = data;
-                        window.location.reload(true);
-                 }
-            },
-            error: function(){
-                document.getElementById('error').innerHTML = data;
-            }
-        });
-    }
-
-
 </script>
     </body>
 </html>
