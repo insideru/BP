@@ -20,6 +20,7 @@ if ($account->authenticated) {
             logout();
             require 'login.php';
             die;
+        }
     }
     require 'proto-dashboard.html';
     }
