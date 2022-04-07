@@ -119,7 +119,7 @@ if ($_POST["action"]=="changeProjState") {
 
 if ($_POST["action"]=="addNewUser") {
     $response = array();
-    $response["newAccount"] = newAccount($_POST["username"], $_POST["passwd"], $_POST["group"], $_POST["collab_id"]);
+    $response["newAccount"] = array(newAccount($_POST["username"], $_POST["passwd"], $_POST["group"], $_POST["collab_id"]));
     $response["accounts"] = getAccounts();
     
     echo json_encode($response);

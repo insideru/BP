@@ -778,8 +778,9 @@ function validateAdduser () {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
+      console.log(data);
       rcvData = JSON.parse(data);
-      if (rcvData.newAccount.substring(0, 21) == "The new account ID is") {
+      if (data.newAccount[0].substring(0, 21) == "The new account ID is") {
         //a mers
         var modalInstance = M.Modal.getInstance($('#newPontor'));
         modalInstance.close();
