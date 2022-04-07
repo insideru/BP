@@ -780,7 +780,7 @@ function validateAdduser () {
     success     : function(data) {
       console.log(data);
       rcvData = JSON.parse(data);
-      if (data.newAccount[0].substring(0, 21) == "The new account ID is") {
+      if (rcvData.newAccount['message'].substring(0, 21) == "The new account ID is") {
         //a mers
         var modalInstance = M.Modal.getInstance($('#newPontor'));
         modalInstance.close();
@@ -789,7 +789,7 @@ function validateAdduser () {
         populateCollabs();
         M.toast({html: rcvData.newAccount});
       } else {
-        $("#addUserError").html(rcvData.newAccount);
+        $("#addUserError").html(rcvData.newAccount['message']);
         return;
       }
     }
