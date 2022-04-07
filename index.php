@@ -16,7 +16,10 @@ if ($account->authenticated) {
         } else if ($_GET['page']=="concediu"){
             require 'proto-concediu.html';
             die;
-        }
+        } else if ($_GET['page']=="logout"){
+            logout();
+            require 'login.php';
+            die;
     }
     require 'proto-dashboard.html';
     }

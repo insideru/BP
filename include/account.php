@@ -129,6 +129,7 @@ function logout() {
                 $account->logout();
         }
     }
+    
     catch (Exception $e)
         {
             echo $e->getMessage();
