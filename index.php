@@ -18,7 +18,7 @@ if ($account->authenticated) {
             die;
         } else if ($_GET['page']=="logout"){
             logout();
-            require 'login.php';
+            header("Location: /");
             die;
         }
     }
