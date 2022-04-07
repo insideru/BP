@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body class="teal lighten-5 valign-wrapper">
-        <div class="container container-750">
+        <div class="container">
             <div class="z-depth-5 blue-grey lighten-5 loginCard">
                 <div class="z-depth-2 grey lighten-5 container">
                     <div class="row">
