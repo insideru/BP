@@ -715,9 +715,9 @@ function initCalendar() {
 }
 
 function addLinks() {
-  $('#linkDashboard').attr("href", "proto-dashboard.html");
-  $('#linkPontaj').attr("href", "proto-pontaj.html");
-  $('#linkConcediu').attr("href", "proto-concediu.html");
+  $('#linkDashboard').attr("href", dashboardPage);
+  $('#linkPontaj').attr("href", pontajPage);
+  $('#linkConcediu').attr("href", concediuPage);
 }
 
 function updateText(ore, minute) {
