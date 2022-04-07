@@ -10,7 +10,7 @@
     <body class="teal lighten-5 valign-wrapper">
         <div class="container">
             <div class="z-depth-5 blue-grey lighten-5 loginCard">
-                <div class="z-depth-2 grey lighten-5 container">
+                <div class="z-depth-2 grey lighten-5">
                     <div class="row">
                         <form class="col s12" id="form">
                             <div class="row">
