@@ -289,7 +289,7 @@ function getUsernames () {
 	return $fields;
 }
 
-function getIDfromGUID ($string $guid) {
+function getIDfromGUID (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
