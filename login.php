@@ -99,7 +99,7 @@
                 document.getElementById('loader2').classList.add('hidden2');
                 switch (data) {
                     case "no email":
-                        document.getElementById('error').innerHTML = "E-mailul este necesar!";
+                        document.getElementById('error').innerHTML = "Username-ul este necesar!";
                         break;
                     case "Authentication successful.":
                         window.location.reload(true);

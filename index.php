@@ -15,7 +15,7 @@ if ($account->authenticated) {
             die;
         }
     }
-    require 'ponteaza.php';
+    require 'proto-dashboard.html';
     }
     else {
         //echo "Nu exista user logat";
