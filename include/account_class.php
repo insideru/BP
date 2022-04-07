@@ -390,7 +390,7 @@ public function login(string $username, string $passwd, int $remember): bool
 			/* Authentication succeeded. Set the class properties (id and group) */
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
-			$this->guid = intval($row['guid']);
+			$this->guid = $row['guid'];
 			$this->username = $username;
 			$this->authenticated = TRUE;
 			/* Register the current Sessions on the database */

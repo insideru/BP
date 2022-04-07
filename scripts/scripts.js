@@ -691,7 +691,6 @@ function initCalendar() {
   });
   //get pontaje for current user
   var guidCookie = document.cookie.userGUID;
-  console.log(guidCookie);
   var formData = {
     'action'            : 'getTimesheets',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
