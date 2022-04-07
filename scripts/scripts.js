@@ -166,7 +166,7 @@ function populateCollabs() {
       //e adaugat user
       $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
-      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'; console.log(addNewUserID);">Adauga user</a></td></tr>');
+      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
@@ -742,4 +742,56 @@ function validateAdduser () {
   var newPass1 = $("#userPass1").val();
   var newPass2 = $("#userPass2").val();
   var newRights = $("#userRights").val();
+
+  if (newPass1!=newPass2) {
+    M.toast({html: 'Parolele nu sunt identice!'});
+    return;
+  }
+
+  if (newPass1.length<6) {
+    M.toast({html: 'Parola trebuie sa aiba cel putin 6 caractere!'});
+    return;
+  }
+
+  if (newUsername.length<4) {
+    M.toast({html: 'Usernameul trebuie sa aiba cel putin 4 caractere!'});
+    return;
+  }
+
+  if (newRights<1) {
+    M.toast({html: 'Trebuie aleasa o categorie de drepturi!'});
+    return;
+  }
+
+  var formData = {
+    'action'            : 'addNewUser',
+    'collab_id'         : addNewUserID, 
+    'username'          : newUsername,
+    'passwd'            : newPass1,
+    'group'             : newRights
+  };
+
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      rcvData = JSON.parse(data);
+      if (rcvData.newAccount.substring(0, 21) == "The new account ID is") {
+        //a mers
+        var modalInstance = M.Modal.getInstance($('#newPontor'));
+        modalInstance.close();
+        accountsObject = rcvData.accounts;
+        $('#collabsTable').html("");
+        populateCollabs();
+        M.toast({html: data});
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
+  //
 }

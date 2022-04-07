@@ -114,7 +114,15 @@ if ($_POST["action"]=="addToDB") {
 }
 
 if ($_POST["action"]=="changeProjState") {
-    return changeProjectState((int)$_POST["proj_id"]);
+    echo changeProjectState((int)$_POST["proj_id"]);
+}
+
+if ($_POST["action"]=="addNewUser") {
+    $response = array();
+    $response["newAccount"] = newAccount($_POST["username"], $_POST["passwd"], $_POST["group"], $_POST["collab_id"]);
+    $response["accounts"] = getAccounts();
+    
+    echo json_encode($response);
 }
 
 if ($_REQUEST["r"]=="init") {
