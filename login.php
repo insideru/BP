@@ -4,7 +4,7 @@
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
-        <!-- <link rel="stylesheet" href="styles/styles.css"> -->
+        <link rel="stylesheet" href="styles/styles.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body class="teal lighten-5 valign-wrapper">
