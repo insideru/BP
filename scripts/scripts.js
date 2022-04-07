@@ -166,7 +166,7 @@ function populateCollabs() {
       //e adaugat user
       $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
-      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
+      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
