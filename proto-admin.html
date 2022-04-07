@@ -177,6 +177,7 @@
                                             <option value="3">3 - Varianta 3</option>
                                           </select>
                                         </div>
+                                        <p id="addUserError"></p>
                                       </div>
                                       <div class="modal-footer">
                                         <a href="#!" class="waves-effect waves-green btn-flat">Adauga</a>
@@ -365,8 +366,6 @@
           activitiesObject = initData.activities;
           holidaysObject = initData.holidays;
           accountsObject = initData.accounts;
-
-          console.log(accountsObject);
 
           //initializare categorii proiect
           populateProjCat();

@@ -744,22 +744,22 @@ function validateAdduser () {
   var newRights = $("#userRights").val();
 
   if (newPass1!=newPass2) {
-    M.toast({html: 'Parolele nu sunt identice!'});
+    $("#addUserError").html('Parolele nu sunt identice!');
     return;
   }
 
   if (newPass1.length<6) {
-    M.toast({html: 'Parola trebuie sa aiba cel putin 6 caractere!'});
+    $("#addUserError").html('Parola trebuie sa aiba cel putin 6 caractere!');
     return;
   }
 
   if (newUsername.length<4) {
-    M.toast({html: 'Usernameul trebuie sa aiba cel putin 4 caractere!'});
+    $("#addUserError").html('Usernameul trebuie sa aiba cel putin 4 caractere!');
     return;
   }
 
   if (newRights<1) {
-    M.toast({html: 'Trebuie aleasa o categorie de drepturi!'});
+    $("#addUserError").html('Trebuie aleasa o categorie de drepturi!');
     return;
   }
 
@@ -786,9 +786,9 @@ function validateAdduser () {
         accountsObject = rcvData.accounts;
         $('#collabsTable').html("");
         populateCollabs();
-        M.toast({html: data});
+        M.toast({html: rcvData.newAccount});
       } else {
-        M.toast({html: data});
+        $("#addUserError").html(rcvData.newAccount);
         return;
       }
     }
