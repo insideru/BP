@@ -7,7 +7,7 @@ require_once 'account.php';
 //  exit;
 //}
 
-function addAttendance(int $collab_id, string $date, string $start, string $end) {
+function addAttendance(string $guid, string $date, string $start, string $end) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
@@ -16,7 +16,7 @@ function addAttendance(int $collab_id, string $date, string $start, string $end)
     $query = 'INSERT INTO '.$schema.'.attendance (collab_id, date, start, end) VALUES (:collab_id, :date, :start, :end)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $collab_id, ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
+    $values = array(':collab_id' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
     
     /* Execute the query */
     try
@@ -36,7 +36,7 @@ function addAttendance(int $collab_id, string $date, string $start, string $end)
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addTimesheetEntry(int $collab_id, string $date, int $project_id, int $activity_id, float $time) {
+function addTimesheetEntry(string $guid, string $date, int $project_id, int $activity_id, float $time) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
@@ -45,7 +45,7 @@ function addTimesheetEntry(int $collab_id, string $date, int $project_id, int $a
     $query = 'INSERT INTO '.$schema.'.timesheets (collab_id, date, project_id, activity_id, time) VALUES (:collab_id, :date, :project_id, :activity_id, :time)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $collab_id, ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':activity_id' => $activity_id, ':time' => $time);
+    $values = array(':collab_id' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':activity_id' => $activity_id, ':time' => $time);
     
     /* Execute the query */
     try
@@ -64,13 +64,13 @@ function addTimesheetEntry(int $collab_id, string $date, int $project_id, int $a
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getTimesheets (int $collab_id) {
+function getTimesheets (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
 
 	$query = 'SELECT * FROM '.$schema.'.timesheets WHERE (collab_id = :cid)';
-	$values = array(':cid' => $collab_id);
+	$values = array(':cid' => getIDfromGUID($guid));
 	
 	try
 	{
@@ -93,13 +93,13 @@ function getTimesheets (int $collab_id) {
 	return $fields;
 }
 
-function getPontaje (int $collab_id) {
+function getPontaje (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
 
 	$query = 'SELECT * FROM '.$schema.'.attendance WHERE (collab_id = :cid)';
-	$values = array(':cid' => $collab_id);
+	$values = array(':cid' => getIDfromGUID($guid));
 	
 	try
 	{
@@ -122,12 +122,12 @@ function getPontaje (int $collab_id) {
 	return $fields;
 }
 
-function deleteTimesheet (int $collab_id, string $date) {
+function deleteTimesheet (string $guid, string $date) {
     global $pdo;
 	global $schema;
 
 	$query1 = 'DELETE FROM '.$schema.'.timesheets WHERE collab_id = :cid AND date = :date; DELETE FROM '.$schema.'.attendance WHERE collab_id = :cid AND date = :date';
-	$values = array(':cid' => $collab_id, ':date' => date("Y-m-d", strtotime($date)));
+	$values = array(':cid' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)));
 	
 	try
 	{
@@ -146,13 +146,13 @@ function deleteTimesheet (int $collab_id, string $date) {
     echo "Success!";
 }
 
-function verifyDate(int $accountId, string $date):bool {
+function verifyDate(string $guid, string $date):bool {
 	/* Global $pdo object */
     global $pdo;
 	global $schema;
 
 	$query = 'SELECT date FROM '.$schema.'.attendance WHERE (collab_id = :cid)';
-	$values = array(':cid' => $accountId);
+	$values = array(':cid' => getIDfromGUID($guid));
 	
 	try
 	{
@@ -205,7 +205,7 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addDaysoff (int $collab_id, string $startDate, string $endDate) {
+function addDaysoff (string $collab_guid, string $startDate, string $endDate) {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
@@ -214,7 +214,7 @@ function addDaysoff (int $collab_id, string $startDate, string $endDate) {
     $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $collab_id, ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)));
+    $values = array(':collab_id' => getIDfromGUID($collab_guid), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)));
     
     /* Execute the query */
     try
@@ -233,12 +233,12 @@ function addDaysoff (int $collab_id, string $startDate, string $endDate) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getDaysoff(int $collab_id) {
+function getDaysoff(string $guid) {
     global $pdo;
 	global $schema;
 
 	$query = 'SELECT * FROM '.$schema.'.daysoff WHERE (collab_id = :cid)';
-	$values = array(':cid' => $collab_id);
+	$values = array(':cid' => getIDfromGUID($guid));
 	
 	try
 	{
@@ -287,5 +287,31 @@ function getUsernames () {
 	}
 
 	return $fields;
+}
+
+function getIDfromGUID ($string $guid) {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'SELECT collab_id FROM '.$schema.'.accounts WHERE (guid = :guid)';
+	$values = array(':guid' => $guid);
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+
+	$fields=array();
+
+	$row = $res->fetch(PDO::FETCH_ASSOC); 
+
+	return $row['collab_id'];
 }
 ?>

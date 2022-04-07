@@ -1,6 +1,7 @@
 CREATE TABLE `accounts` (
   `account_id` int(10) UNSIGNED NOT NULL,
   `collab_id` int(10) UNSIGNED NOT NULL,
+  `guid` varchar(255) NOT NULL,
   `account_group` tinyint(1) UNSIGNED NOT NULL,
   `account_username` varchar(255) NOT NULL,
   `account_passwd` varchar(255) NOT NULL,

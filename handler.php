@@ -39,21 +39,21 @@ if ($_POST["action"]=="register") {
 }
 
 if ($_POST["action"]=="addTimesheet") {
-    $collabID = $_POST["collab_id"];
+    $collabGUID = $_POST["collab_guid"];
     $ziua = date("Y-m-d", strtotime($_POST["ziua"]));
     $oraVenire = $_POST["oraVenire"];
     $oraPlecare = $_POST["oraPlecare"];
     $timesheet = $_POST["timesheet"];
-    if (!verifyDate($collabID, $ziua)) {
+    if (!verifyDate($collabGUID, $ziua)) {
 		echo "Failure:Pentru data selectata exista deja un pontaj!";
         return 0;
 	}
-    addAttendance($collabID, $ziua, $oraVenire, $oraPlecare);
+    addAttendance($collabGUID, $ziua, $oraVenire, $oraPlecare);
     foreach ($timesheet as $timesheetProject) {
         $currID = $timesheetProject['id'];
         foreach($timesheetProject as $key => $value) {
             if ($key!="id" && $value!=0.0) {
-                addTimesheetEntry($collabID, $ziua, $currID, $key, $value);
+                addTimesheetEntry($collabGUID, $ziua, $currID, $key, $value);
             }
         }
     }
@@ -61,21 +61,19 @@ if ($_POST["action"]=="addTimesheet") {
 }
 
 if ($_POST["action"]=="addDaysoff") {
-    echo addDaysoff($_POST["collab_id"], $_POST["startdate"], $_POST["enddate"]);
+    echo addDaysoff($_POST["collab_guid"], $_POST["startdate"], $_POST["enddate"]);
 }
 
 if ($_POST["action"]=="getTimesheets") {
-    $response["timesheets"] = getTimesheets($_POST["collab_id"]);
-    $response["daysoff"] = getDaysoff($_POST["collab_id"]);
+    $response["timesheets"] = getTimesheets($_POST["collab_guid"]);
+    $response["daysoff"] = getDaysoff($_POST["collab_guid"]);
     $response["holidays"] = getHolidays();
     echo json_encode($response);
     
 }
 
 if ($_POST["action"]=="deleteTimesheets") {
-    $collabID = $_POST["collab_id"];
-    $date = $_POST["date"];
-    deleteTimesheet($collabID, $date);
+    deleteTimesheet($_POST["collab_guid"], $_POST["date"]);
 }
 
 if ($_POST["action"]=="logout") {
@@ -144,8 +142,8 @@ if ($_REQUEST["r"]=="init") {
 if ($_REQUEST["r"]=="holidays") {    
     $response = array();
     $response["holidays"] = getHolidays();
-    $response["daysoff"] = getDaysoff($_GET["collab_id"]);
-    $response["pontaje"] = getPontaje($_GET["collab_id"]);
+    $response["daysoff"] = getDaysoff($_GET["collab_guid"]);
+    $response["pontaje"] = getPontaje($_GET["collab_guid"]);
     echo json_encode($response);
 }
 

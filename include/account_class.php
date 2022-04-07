@@ -7,6 +7,7 @@ class Account {
 	private $username;
     public $authenticated;
     private $token;
+	private $guid;
 
     public function __construct() {
         $this->id = NULL;
@@ -15,13 +16,14 @@ class Account {
         $this->authenticated = FALSE;
         $this->token = NULL;
 		$this->collabID = NULL;
+		$this->guid = NULL;
     }
 
     public function __destruct() {
 		
 	}
 
-public function addAccount(string $username, string $passwd, int $group, int $collab_id): int {
+public function addAccount(string $username, string $passwd, int $group, int $collab_id, string $guid): int {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
@@ -51,13 +53,13 @@ public function addAccount(string $username, string $passwd, int $group, int $co
 	/* Finally, add the new account */
 	
 	/* Insert query template */
-	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id) VALUES (:group, :username, :passwd, :collab_id)';
+	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id, guid) VALUES (:group, :username, :passwd, :collab_id, guid)';
 	
 	/* Password hash */
 	$hash = password_hash($passwd, PASSWORD_DEFAULT);
 	
 	/* Values array for PDO */
-	$values = array(':group' => $group, ':username' => $username, ':passwd' => $hash, ':collab_id' => $collab_id);
+	$values = array(':group' => $group, ':username' => $username, ':passwd' => $hash, ':collab_id' => $collab_id, ':guid' => $guid);
 	
 	/* Execute the query */
 	try
@@ -388,20 +390,21 @@ public function login(string $username, string $passwd, int $remember): bool
 			/* Authentication succeeded. Set the class properties (id and group) */
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
+			$this->guid = intval($row['guid']);
 			$this->username = $username;
 			$this->authenticated = TRUE;
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
 
+			$current_time = time();
+			$current_date = date("Y-m-d H:i:s", $current_time);
+			// Set Cookie expiration for 1 month
+			$cookie_expiration_time = $current_time + (30 * 24 * 60 * 60);  // for 1 month
+
+			setcookie("userGUID", $this->guid, $cookie_expiration_time);
 			/* Daca e setat remember */
 			if ($remember==1) {
 
-				$current_time = time();
-				$current_date = date("Y-m-d H:i:s", $current_time);
-
-				// Set Cookie expiration for 1 month
-				$cookie_expiration_time = $current_time + (30 * 24 * 60 * 60);  // for 1 month
-	            
 	            $random_token = $this->getToken(16);
 	            setcookie("wrkTracker", $random_token, $cookie_expiration_time);
 	            
@@ -582,6 +585,8 @@ public function logout()
 	/* Reset the account-related properties */
 	$this->id = NULL;
 	$this->username = NULL;
+	$this->group = NULL;
+	$this->guid = NULL;
 	$this->authenticated = FALSE;
 	
 	/* If there is an open Session, remove it from the account_sessions table */
@@ -608,6 +613,10 @@ public function logout()
 		if (isset($_COOKIE['wrkTracker'])) {
     		unset($_COOKIE['wrkTracker']);
     		setcookie('wrkTracker', '', time() - 3600, '/'); // empty value and old timestamp
+		}
+		if (isset($_COOKIE['userGUID'])) {
+    		unset($_COOKIE['userGUID']);
+    		setcookie('userGUID', '', time() - 3600, '/'); // empty value and old timestamp
 		}
 	}
 }
