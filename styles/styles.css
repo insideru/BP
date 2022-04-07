@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .valign-wrapper {
-  /* min-height: calc(100vh - 64px); */
+  min-height: calc(100vh - 64px);
 }
 
 .cardItem {
