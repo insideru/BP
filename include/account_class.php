@@ -53,7 +53,7 @@ public function addAccount(string $username, string $passwd, int $group, int $co
 	/* Finally, add the new account */
 	
 	/* Insert query template */
-	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id, guid) VALUES (:group, :username, :passwd, :collab_id, guid)';
+	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id, guid) VALUES (:group, :username, :passwd, :collab_id, :guid)';
 	
 	/* Password hash */
 	$hash = password_hash($passwd, PASSWORD_DEFAULT);
