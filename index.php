@@ -8,10 +8,13 @@ if ($account->authenticated) {
     //user e logat
     if (isset($_GET['page'])) {
         if ($_GET['page']=="dashboard"){
-            require 'dashboard.php';
+            require 'proto-dashboard.html';
             die;
-        } else if ($_GET['page']=="addtime"){
-            require 'addtime.php';
+        } else if ($_GET['page']=="ponteaza"){
+            require 'proto-pontaj.html';
+            die;
+        } else if ($_GET['page']=="concediu"){
+            require 'proto-concediu.html';
             die;
         }
     }

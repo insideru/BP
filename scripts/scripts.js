@@ -10,9 +10,9 @@ timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
 workedTime = 0;
-pontajPage = "/proto-pontaj.html";
-dashboardPage = "/proto-dashboard.html";
-concediuPage = "/proto-concediu.html";
+pontajPage = "/?page=ponteaza";
+dashboardPage = "/";
+concediuPage = "/?page=concediu";
 
 $.fn.exists = function () {
     return this.length !== 0;
