@@ -23,7 +23,7 @@ function newAccount(string $username, string $passwd, int $group, int $collab_id
         die();
     }
 
-    echo 'The new account ID is ' . $newId;
+    return 'The new account ID is ' . $newId;
 }
 
 function editAccount($id, $newEmail, $newName, $newPass) {
