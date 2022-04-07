@@ -308,8 +308,6 @@ function getIDfromGUID (string $guid) {
 		echo "Database error ".$e->getMessage();
 	}
 
-	$fields=array();
-
 	$row = $res->fetch(PDO::FETCH_ASSOC); 
 
 	return $row['collab_id'];
