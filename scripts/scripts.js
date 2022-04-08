@@ -126,7 +126,7 @@ function populateProjCat() {
   $('#dropdown_categorie_proiect').html('');
   $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>');
   projCatsObject.forEach(element => {
-    $('#projCatTable').append('<tr><td onlick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
+    $('#projCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
     //initializare dropdown categorii proiecte
     $('#dropdown_categorie_proiect').append('<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+element.name+'</a></li>');
     $('#dropdown_categorie_proiect2').append('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+element.name+'</a></li>');
@@ -136,7 +136,7 @@ function populateProjCat() {
 function populateActivities() {
   $('#activityTable').html('');
   activitiesObject.forEach(element => {
-    $('#activityTable').append('<tr><td onlick="renameName(this.innerHTML, \'activities\')">'+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
+    $('#activityTable').append('<tr><td onclick="renameName(this.innerHTML, \'activities\')">'+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
   });
 }
 
