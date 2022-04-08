@@ -551,9 +551,9 @@
                           projectsObject.push(addedItem);
                           break;
                         case 4: //add collaborator
-                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+"</td></tr>");
+                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "collab")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + dbID +'">Adauga user</a></td></tr>');
                           addedItem = {id: dbID, name: elemName, collabCatID: catID};
-                          collabCatsObject.push(addedItem);
+                          collabsObject.push(addedItem);
                           break;
                         case 5: //add client
                           $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+elemName+"</td></tr>");
@@ -568,6 +568,7 @@
                           break;
                         case 7: //add holiday
                           $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedDate(date) + '\')">delete_forever</i></td></tr>');
+                          holidaysObject.push(addedItem);
                           break;
                       }
                     }

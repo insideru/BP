@@ -62,6 +62,11 @@ function getDBidFromName (name, cat) {
             if (element.name==name) { 
                 return element.id;}
             }
+      case "collab":
+        for (let element of collabsObject) {
+          if (element.name==name) {
+              return element.id;}
+          }
     }
   }
 
@@ -197,7 +202,7 @@ function populateHolidays() {
 }
 
 function populateUsers() {
-  
+
 }
 
 function getHolidays() {
