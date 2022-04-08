@@ -46,15 +46,15 @@
             <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incheiere a programului</span>
           </div>
         </div>
-        <div class="row">
-          <h6 id="maxPontaj"></h6>
-        </div>
-        <div class="row">
-          <div>
+        <div class="pinned">
+          <div class="row">
+            <h6 id="maxPontaj"></h6>
+          </div>
+          <div class="row">
             <div class="progress" id="workPBMain">
               <div id="workPB" class="determinate" style="width: 0%"></div>
+            </div>
           </div>
-        </div>
         </div>
         <div class="row">
         <ul id="projTimesheet" class="collapsible">
@@ -115,6 +115,11 @@
       }
         
       $(document).ready(function(){
+        $('.pinned').pushpin({
+          top: 0,
+          bottom: 1000,
+          offset: 0
+        });
         addLinks();
         var pontajDate = new Date();
         if (typeof(Storage) !== "undefined") {
