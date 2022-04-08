@@ -821,7 +821,7 @@ function renameName (curName, curTable) {
   switch (curTable) {
     case "projCat":
       replaceName(projCatsObject, curName, response);
-      populateColabCat();
+      populateProjCat();
       break;
     case "activities":
       replaceName(activitiesObject, curName, response);
