@@ -142,22 +142,27 @@ function populateActivities() {
 }
 
 function populateColabCat() {
+  $('#colabCatTable').html('');
+  $('#dropdown_categorie_colaborator').html('');
   collabCatsObject.forEach(element => {
-    $('#colabCatTable').append("<tr><td>"+element.name+"</td></tr>");
+    $('#colabCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'collab_groups\')">'+element.name+"</td></tr>");
     //initializare dropdown clienti
     $('#dropdown_categorie_colaborator').append('<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+element.name+'</a></li>');
   });
 }
 
 function populateClients() {
+  $('#clientsTable').html('');
+  $('#dropdown_client_proiect').html('');
   clientsObject.forEach(element => {
-    $('#clientsTable').append("<tr><td>"+element.name+"</td></tr>");
+    $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+element.name+"</td></tr>");
     //initializare dropdown clienti
     $('#dropdown_client_proiect').append('<li><a href="#!" onclick="changeClient(this.innerHTML)">'+element.name+'</a></li>');
   });
 }
 
 function populateCollabs() {
+  $('#collabsTable').html('');
   collabsObject.forEach(element => {
     var bool = false;
     accountsObject.forEach(elem => {
@@ -167,25 +172,27 @@ function populateCollabs() {
     });
     if (bool) {
       //e adaugat user
-      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
+      $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
-      $('#collabsTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
+      $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
 }
 
 function populateProjects() {
+  $('#projTable').html('');
   projectsObject.forEach(element => {
     isChecked = "";
     if (element.active=="1") { isChecked = 'checked="checked" ';}
-    $('#projTable').append('<tr><td>'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
+    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
 }
 
 function populateHolidays() {
+  $('#daysoffTable').html('');
   holidaysObject.forEach(element => {
-    $('#daysoffTable').append("<tr><td>"+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
+    $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')>'+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
   });
 }
 
@@ -827,6 +834,26 @@ function renameName (curName, curTable) {
     case "activities":
       replaceName(activitiesObject, curName, response);
       populateActivities();
+      break;
+    case "projects":
+      replaceName(projectsObject, curName, response);
+      populateProjects();
+      break;
+    case "collab_groups":
+      replaceName(collabCatsObject, curName, response);
+      populateColabCat();
+      break;
+    case "collaborators":
+      replaceName(collabsObject, curName, response);
+      populateCollabs();
+      break;
+    case "clients":
+      replaceName(clientsObject, curName, response);
+      populateClients();
+      break;
+    case "holidays":
+      replaceName(holidaysObject, curName, response);
+      populateHolidays();
       break;
   }
   var formData = {
