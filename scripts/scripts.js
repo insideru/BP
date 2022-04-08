@@ -123,9 +123,10 @@ function changeProjState(proj_id) {
 }
 
 function populateProjCat() {
+  $('#dropdown_categorie_proiect').html('');
   $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>');
   projCatsObject.forEach(element => {
-    $('#projCatTable').append("<tr><td>"+element.name+"</td></tr>");
+    $('#projCatTable').append('<tr><td onlick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
     //initializare dropdown categorii proiecte
     $('#dropdown_categorie_proiect').append('<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+element.name+'</a></li>');
     $('#dropdown_categorie_proiect2').append('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+element.name+'</a></li>');
@@ -133,8 +134,9 @@ function populateProjCat() {
 }
 
 function populateActivities() {
+  $('#activityTable').html('');
   activitiesObject.forEach(element => {
-    $('#activityTable').append("<tr><td>"+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
+    $('#activityTable').append('<tr><td onlick="renameName(this.innerHTML, \'activities\')">'+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
   });
 }
 
@@ -807,3 +809,20 @@ function getCookie(cookiename)
   // Return everything after the equal sign, or an empty string if the cookie name not found
   return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
   }
+
+function renameName (curName, curTable) {
+  let response = prompt("Introdu un nou nume:", curName);
+  if (response == null || response == "") {
+    //User cancelled the prompt, do nothing
+    return "Fail";
+  }
+  console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
+  switch (curTable) {
+    case "projCat":
+
+      break;
+    case "activities":
+      
+      break;
+  }
+}

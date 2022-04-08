@@ -312,4 +312,25 @@ function getIDfromGUID (string $guid) {
 
 	return $row['collab_id'];
 }
+
+function renameName (string $table, string $oldName, string $newName) {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'UPDATE '.$schema.'.'.$table.' SET name = :newName WHERE name = :oldName';
+	$values = array(':newName' => $newName, ':oldName' => $oldName);
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+	return "Success!";
+}
 ?>
