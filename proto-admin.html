@@ -396,8 +396,8 @@
             clientID = "";
             switch (typeNo) {
                 case 1: //add project category
-                  elemName = $('input[id=addProjCategory]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addProjCategory]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele categoriei nu poate fi gol!'});
                     return;
                   }
@@ -411,8 +411,8 @@
                   break;
 
                 case 2: //add collaborator category
-                  elemName = $('input[id=addCollabCategory]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addCollabCategory]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele categoriei nu poate fi gol!'});
                     return;
                   }
@@ -430,8 +430,8 @@
                     M.toast({html: 'Trebuie ales un client!'});
                     return;
                   }
-                  elemName = $('input[id=addProjectName]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addProjectName]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele proiectului nu poate fi gol!'});
                     return;
                   }
@@ -447,8 +447,8 @@
                     M.toast({html: 'Trebuie aleasa o categorie de colaborator!'});
                     return;
                   }
-                  elemName = $('input[id=addCollab]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addCollab]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele colaboratorului nu poate fi gol!'});
                     return;
                   }
@@ -459,8 +459,8 @@
                   break;
 
                 case 5: //add client
-                  elemName = $('input[id=addClient]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addClient]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele clientului nu poate fi gol!'});
                     return;
                   }
@@ -470,8 +470,8 @@
                   break;
 
                 case 6: //add activity
-                  elemName = $('input[id=addActivity]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addActivity]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Numele activititatii nu poate fi gol!'});
                     return;
                   }
@@ -486,9 +486,8 @@
                   break;
 
                   case 7: //adauga zi libera
-                  
-                  elemName = $('input[id=addNameDayOff]').val();
-                  if (elemName.trim() == "") {
+                  elemName = $('input[id=addNameDayOff]').val().trim();
+                  if (elemName == "") {
                     M.toast({html: 'Ziua trebuie sa aiba un nume!'});
                     return;
                   }
@@ -504,7 +503,7 @@
             }
             //reseteaza formul
             //$('form')[typeNo-1].reset();
-            if (typeNo==7) {
+          if (typeNo==7) {
             var formData = {
                 'action'            : 'addToDB',
                 'type'              : type,
@@ -545,13 +544,13 @@
                           addedItem = {id: dbID, name: elemName};
                           collabCatsObject.push(addedItem);
                           break;
-                        case 3:
+                        case 3: //add project
                           $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+elemName+'</td><td>'+getDBNameFromId(catID, "projCat")+'</td><td>'+getDBNameFromId(clientID, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + dbID + '" onclick="changeProjState(this.id)" checked="checked" /><span></span></label></td></tr>');
                           addedItem = {id: dbID, name: elemName, type_id: catID, client_id: clientID, active: "1"};
                           projectsObject.push(addedItem);
                           break;
                         case 4: //add collaborator
-                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "collab")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + dbID +'">Adauga user</a></td></tr>');
+                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + dbID +'">Adauga user</a></td></tr>');
                           addedItem = {id: dbID, name: elemName, collabCatID: catID};
                           collabsObject.push(addedItem);
                           break;
@@ -568,7 +567,7 @@
                           break;
                         case 7: //add holiday
                           $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedDate(date) + '\')">delete_forever</i></td></tr>');
-                          addedItem = {id: dbID, name: elemName, date: getSelectedDate(date)};
+                          addedItem = {id: dbID, name: elemName, date: date};
                           holidaysObject.push(addedItem);
                           break;
                       }
