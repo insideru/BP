@@ -192,7 +192,7 @@ function populateProjects() {
 function populateHolidays() {
   $('#daysoffTable').html('');
   holidaysObject.forEach(element => {
-    $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')>'+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
+    $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
   });
 }
 
@@ -820,7 +820,7 @@ function getCookie(cookiename)
 
 function renameName (curName, curTable) {
   let response = prompt("Introdu un nou nume:", curName);
-  response = response.trim();
+  if (typeof response === 'string') { response = response.trim(); }
   if (response == null || response == "" || response == curName) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
