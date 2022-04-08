@@ -820,7 +820,7 @@ function renameName (curName, curTable) {
   }
   //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
   switch (curTable) {
-    case "projCat":
+    case "project_types":
       replaceName(projCatsObject, curName, response);
       populateProjCat();
       break;
