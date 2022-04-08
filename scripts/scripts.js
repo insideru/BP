@@ -826,42 +826,57 @@ function renameName (curName, curTable) {
     return "Fail";
   }
   //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
-  switch (curTable) {
-    case "project_types":
-      replaceName(projCatsObject, curName, response);
-      populateProjCat();
-      break;
-    case "activities":
-      replaceName(activitiesObject, curName, response);
-      populateActivities();
-      break;
-    case "projects":
-      replaceName(projectsObject, curName, response);
-      populateProjects();
-      break;
-    case "collab_groups":
-      replaceName(collabCatsObject, curName, response);
-      populateColabCat();
-      break;
-    case "collaborators":
-      replaceName(collabsObject, curName, response);
-      populateCollabs();
-      break;
-    case "clients":
-      replaceName(clientsObject, curName, response);
-      populateClients();
-      break;
-    case "holidays":
-      replaceName(holidaysObject, curName, response);
-      populateHolidays();
-      break;
-  }
   var formData = {
     'action'        : 'reName',
     'table'         : curTable, 
     'oldname'       : curName,
     'newname'       : response
   };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        switch (curTable) {
+          case "project_types":
+            replaceName(projCatsObject, curName, response);
+            populateProjCat();
+            break;
+          case "activities":
+            replaceName(activitiesObject, curName, response);
+            populateActivities();
+            break;
+          case "projects":
+            replaceName(projectsObject, curName, response);
+            populateProjects();
+            break;
+          case "collab_groups":
+            replaceName(collabCatsObject, curName, response);
+            populateColabCat();
+            break;
+          case "collaborators":
+            replaceName(collabsObject, curName, response);
+            populateCollabs();
+            break;
+          case "clients":
+            replaceName(clientsObject, curName, response);
+            populateClients();
+            break;
+          case "holidays":
+            replaceName(holidaysObject, curName, response);
+            populateHolidays();
+            break;
+        }
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }
 
 function replaceName (array, curName, newName) {

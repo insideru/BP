@@ -21,6 +21,7 @@ ALTER TABLE `daysoff`
 
   ALTER TABLE `holidays`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
   ADD UNIQUE KEY `date` (`date`);
 
 ALTER TABLE `holidays`

@@ -64,6 +64,10 @@ if ($_POST["action"]=="addDaysoff") {
     echo addDaysoff($_POST["collab_guid"], $_POST["startdate"], $_POST["enddate"]);
 }
 
+if ($_POST["action"]=="reName") {
+    echo renameName($_POST["table"], $_POST["oldname"], $_POST["newname"]);
+}
+
 if ($_POST["action"]=="getTimesheets") {
     $response["timesheets"] = getTimesheets($_POST["collab_guid"]);
     $response["daysoff"] = getDaysoff($_POST["collab_guid"]);
