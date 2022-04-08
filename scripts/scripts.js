@@ -123,6 +123,7 @@ function changeProjState(proj_id) {
 }
 
 function populateProjCat() {
+  $('#projCatTable').html('');
   $('#dropdown_categorie_proiect').html('');
   $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>');
   projCatsObject.forEach(element => {
