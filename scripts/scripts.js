@@ -812,17 +812,34 @@ function getCookie(cookiename)
 
 function renameName (curName, curTable) {
   let response = prompt("Introdu un nou nume:", curName);
-  if (response == null || response == "") {
-    //User cancelled the prompt, do nothing
+  response = response.trim();
+  if (response == null || response == "" || response == curName) {
+    //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
+  //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
   switch (curTable) {
     case "projCat":
-
+      replaceName(projCatsObject, curName, response);
+      populateColabCat();
       break;
     case "activities":
-      
+      replaceName(activitiesObject, curName, response);
+      populateActivities();
       break;
   }
+  var formData = {
+    'action'        : 'reName',
+    'table'         : curTable, 
+    'oldname'       : curName,
+    'newname'       : response
+  };
+}
+
+function replaceName (array, curName, newName) {
+  array.forEach(element => {
+    if (element.name == curName) {
+      element.name = newName;
+    }
+  });
 }
