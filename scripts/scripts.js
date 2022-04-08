@@ -196,6 +196,10 @@ function populateHolidays() {
   });
 }
 
+function populateUsers() {
+  
+}
+
 function getHolidays() {
   var guidCookie = getCookie("userGUID");
   $.get("handler.php?r=holidays&collab_guid="+guidCookie, function(data, status) {

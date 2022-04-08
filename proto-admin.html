@@ -533,41 +533,41 @@
                       dbID=data.substring(8);
                       switch (typeNo) {
                         case 1: //add project category
-                          $('#projCatTable').append("<tr><td>"+elemName+"</td></tr>");
+                          $('#projCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'project_types\')">'+elemName+"</td></tr>");
                           $('#dropdown_categorie_proiect').html($('#dropdown_categorie_proiect').html()+'<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+elemName+'</a></li>');
                           $('#dropdown_categorie_proiect2').html($('#dropdown_categorie_proiect2').html()+'<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+elemName+'</a></li>');
                           addedItem = {id: dbID, name: elemName};
                           projCatsObject.push(addedItem);
                           break;
                         case 2: //add collaborator category
-                          $('#colabCatTable').append("<tr><td>"+elemName+"</td></tr>");
+                          $('#colabCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'collab_groups\')">'+elemName+"</td></tr>");
                           $('#dropdown_categorie_colaborator').html($('#dropdown_categorie_colaborator').html()+'<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+elemName+'</a></li>');
                           addedItem = {id: dbID, name: elemName};
                           collabCatsObject.push(addedItem);
                           break;
                         case 3:
-                          $('#projTable').append('<tr><td>'+elemName+'</td><td>'+getDBNameFromId(catID, "projCat")+'</td><td>'+getDBNameFromId(clientID, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + dbID + '" onclick="changeProjState(this.id)" checked="checked" /><span></span></label></td></tr>');
+                          $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+elemName+'</td><td>'+getDBNameFromId(catID, "projCat")+'</td><td>'+getDBNameFromId(clientID, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + dbID + '" onclick="changeProjState(this.id)" checked="checked" /><span></span></label></td></tr>');
                           addedItem = {id: dbID, name: elemName, type_id: catID, client_id: clientID, active: "1"};
                           projectsObject.push(addedItem);
                           break;
                         case 4: //add collaborator
-                          $('#collabsTable').append("<tr><td>"+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+"</td></tr>");
+                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+"</td></tr>");
                           addedItem = {id: dbID, name: elemName, collabCatID: catID};
                           collabCatsObject.push(addedItem);
                           break;
                         case 5: //add client
-                          $('#clientsTable').append("<tr><td>"+elemName+"</td></tr>");
+                          $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+elemName+"</td></tr>");
                           $('#dropdown_client_proiect').html($('#dropdown_client_proiect').html()+'<li><a href="#!" onclick="changeClient(this.innerHTML)">'+elemName+'</a></li>');
                           addedItem = {id: dbID, name: elemName};
                           clientsObject.push(addedItem);
                           break;
                         case 6: //add activity
-                          $('#activityTable').append("<tr><td>"+elemName+'</td></td><td>'+getDBNameFromId(catID, "projCat")+'</td></tr>');
+                          $('#activityTable').append('<tr><td onclick="renameName(this.innerHTML, \'activities\')">'+elemName+'</td></td><td>'+getDBNameFromId(catID, "projCat")+'</td></tr>');
                           addedItem = {id: dbID, name: elemName, project_type: catID};
                           activitiesObject.push(addedItem);
                           break;
                         case 7: //add holiday
-                          $('#daysoffTable').append("<tr><td>"+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedDate(date) + '\')">delete_forever</i></td></tr>');
+                          $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedDate(date) + '\')">delete_forever</i></td></tr>');
                           break;
                       }
                     }

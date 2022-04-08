@@ -330,7 +330,8 @@ function renameName (string $table, string $oldName, string $newName) {
 	{
 		/* If there is a PDO exception, throw a standard exception */
 		echo "Database error ".$e->getMessage();
+		exit();
 	}
-	return "Success!";
+	echo "Success!";
 }
 ?>
