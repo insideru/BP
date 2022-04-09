@@ -319,7 +319,7 @@ function changeConcediu (string $accID, string $column, int $value) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.accounts SET '.$column.' = :value WHERE account_id = :id';
+    $query = 'UPDATE '. $schema . '.accounts SET '.$column.' = :value WHERE account_id = :id';
     $values = array(":id" => $accID, ":value" => $value);
 
     try
@@ -334,9 +334,9 @@ function changeConcediu (string $accID, string $column, int $value) {
         echo "Database error".$e->getMessage();
         die();
     }
-    $row = $res->fetch(PDO::FETCH_ASSOC);
+    $return = $res->rowCount();
 
-    return $row ? "Success!" : $query . "||" . $accID . "||" . $value;
+    return $return == 1 ? "Success!" : $query . "||" . $accID . "||" . $value;
 }
 
 function changeUserState (int $user_id) {
