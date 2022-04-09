@@ -47,8 +47,8 @@ input:focus, textarea:focus, button:focus {
     z-index: 1;
 }
 .--weekend .day {
-    color: #a10000 !important;
-    font-weight: bold;
+    color: #c60000 !important;
+    font-weight: bold !important;
   }
 .calendar-sidebar {
     position: absolute;
