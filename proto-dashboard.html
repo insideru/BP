@@ -40,9 +40,9 @@
         addLinks();
         initCalendar();
         dt = new Date();
-        dt.setDate(dt.getDate() + 1);
+        dt.setDate(dt.getDate() - 1);
         $('#calendar').evoCalendar('selectDate', dt);
-        $('#calendar').evoCalendar('selectDate', new Date());
+        //$('#calendar').evoCalendar('selectDate', new Date());
       })
     </script>
   </body>
