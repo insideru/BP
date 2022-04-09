@@ -993,7 +993,7 @@ function calculatePontaje(month) {
 }
 
 function buildMonthlyData(month) {
-  $('.biweekly').html(month);
+  $('.monthlyData').html(month);
 }
 
 function changeReport (accID, oldValue) {
