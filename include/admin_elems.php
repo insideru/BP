@@ -335,7 +335,7 @@ function changeUserState (int $user_id) {
     global $pdo;
     global $schema;
 
-    $query = 'UPDATE '. $schema . '.accounts SET account_enabled = CASE WHEN account_enabled = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $query = 'UPDATE '. $schema . '.accounts SET account_enabled = CASE WHEN account_enabled = 1 THEN 0 ELSE 1 END WHERE account_id = :id';
     $values = array(":id" => $user_id);
 
     try
