@@ -647,6 +647,7 @@ function buildCalendarHolidays(doArray, hdArray) {
     dEnd.setHours(0, 0, 0);
     daysoffArray.push([dStart, dEnd]);
   });
+  console.log(holidayArray);
   doArray.forEach(element => {
     curDays = getNoDaysOff(new Date(element.startdate), new Date(element.enddate));
     addCalendarEvent('dayoff-'+element.startdate, "Concediu", "Concediu " + (curDays > 1 ? curDays + " zile" : curDays + " zi"), element.startdate, element.enddate, "dayoff", "#77bfe9");
