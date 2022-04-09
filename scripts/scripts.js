@@ -535,6 +535,7 @@ function validateConcediu () {
     }
     if (d2 > d1) {
       nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
+      console.log(nrZileLibere);
       //console.log(nrZileLibere);
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
