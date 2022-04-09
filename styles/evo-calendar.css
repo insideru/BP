@@ -852,7 +852,7 @@ button.icon-button > span.chevron-arrow-right {
 
     .calendar-inner {
         margin-left: 0;
-        padding: 70px 0 40px 0;
+        padding: 55px 0 55px 0;
         float: unset;
     }
     .calendar-inner::after {
