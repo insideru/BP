@@ -988,6 +988,11 @@ function changeConcediu (accID, oldValue) {
   });
 }
 
+function calculatePontaje(month) {
+  console.log(month);
+  $('.biweekly').html(month);
+}
+
 function changeReport (accID, oldValue) {
   let response = prompt("Introdu numarul de zile de concediu reportate:", oldValue);
   if (typeof response === 'string') { response = response.trim(); }
