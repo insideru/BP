@@ -205,7 +205,7 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getZileLibere(string $collab_guid) {
+function getZileLibere(string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
