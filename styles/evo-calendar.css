@@ -10,6 +10,16 @@
  * Issues: https://github.com/edlynvillegas/evo-calendar/issues
  *
 */
+div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.progress.taller {
+    height:10px;
+}
 
 *, ::after, ::before {
     -webkit-box-sizing: border-box;
