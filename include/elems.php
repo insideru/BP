@@ -210,7 +210,7 @@ function getZileLibere(string $guid) {
 	global $pdo;
 	global $schema;
 
-	$query = 'SELECT zile_concediu, zile_report, zile_ramase FROM '.$schema.'.accounts WHERE (guid = :guid)';
+	$query = 'SELECT zile_concediu, zile_report, zile_ramase FROM '.$schema.'.accounts WHERE guid = :guid';
 	$values = array(':guid' => $guid);
 	
 	try
@@ -226,7 +226,7 @@ function getZileLibere(string $guid) {
 
 	$row = $res->fetch(PDO::FETCH_ASSOC); 
 
-	return $row;
+	return $row ? $row : $query;
 }
 
 function addDaysoff (string $collab_guid, string $startDate, string $endDate, int $number) {
