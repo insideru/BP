@@ -992,8 +992,6 @@ function calculatePontaje(month) {
   $('.biweekly').html(month);
 }
 
-<div class="monthlyData"></div>
-
 function buildMonthlyData(month) {
   $('.biweekly').html(month);
 }
