@@ -207,7 +207,7 @@ function populateProjects() {
   projectsObject.forEach(element => {
     isChecked = "";
     if (element.active=="1") { isChecked = 'checked="checked" ';}
-    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /></td></tr>');
+    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /></label></td></tr>');
   });
 }
 
@@ -221,7 +221,7 @@ function populateHolidays() {
 function populateUsers() {
   $('#usersTable').html('');
   accountsObject.forEach(element => {
-    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td>'+element.account_group+'</td><td><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled ? 'checked="checked" ' : '') +' /></td></tr>');
+    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td>'+element.account_group+'</td><td><label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled ? 'checked="checked" ' : '') +' /></label></td></tr>');
   });
 }
 
