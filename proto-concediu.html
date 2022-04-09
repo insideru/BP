@@ -117,10 +117,11 @@
             $.get("handler.php?r=concediu&guid=guidCookie", function(data, status) {
             //console.log("Data: " + data + "\nStatus: " + status);
             initData = JSON.parse(data);
+            console.log(initData);
             holidayArray = [];
             //zile_concediu = initData.concediu.zile_concediu;
             //zile_report = initData.concediu.zile_report;
-            zile_ramase = initData.concediu.zile_ramase;
+            zile_ramase = initData.concediu['zile_ramase'];
             console.log(zile_ramase);
             initData.holidays.forEach(element => {
               dt = new Date(element.date);
