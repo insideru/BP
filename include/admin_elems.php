@@ -424,7 +424,7 @@ function getAccounts () {
     global $pdo;
     global $schema;
 
-    $query = 'SELECT account_id, collab_id, account_username, account_group, account_enabled FROM '. $schema . '.accounts';
+    $query = 'SELECT account_id, collab_id, account_username, account_group, account_enabled FROM '. $schema . '.accounts ORDER BY account_enabled DESC';
 
     try
     {
