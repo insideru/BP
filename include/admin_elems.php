@@ -285,29 +285,13 @@ function getProjects() {
 }
 
 function changeProjectState (int $proj_id) {
-    $projects = array();
-    $projects = getProjects();
-    $proj_state = 0;
-
-    foreach ($projects as $project) {
-        $object = (object) $project;
-        if ($object->id == $proj_id) {
-            if ($object->active=="0") {
-                $proj_state = 1;
-            }
-            else {
-                $proj_state = 0;
-            }
-            break;
-        }
-    }
 
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET active = :active WHERE id = :id';
-    $values = array(':active' => $proj_state, ":id" => $proj_id);
+    $query = ' UPDATE '. $schema . '.projects SET active = CASE WHEN active = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $values = array(":id" => $proj_id);
 
     try
     {

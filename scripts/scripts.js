@@ -139,7 +139,6 @@ function changeUserState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          console.log(proj_id.substring(7) + "\n" + data);
           //console.log("Ar trebui sa mearga! " + data);
         }
     });
