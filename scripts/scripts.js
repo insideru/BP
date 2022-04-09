@@ -993,8 +993,9 @@ function calculatePontaje(month) {
 }
 
 function buildMonthlyData(month) {
-  $('.monthlyData').html(month);
   $('.monthlyData').addClass('event-container');
+  stoul = "stourile cele mai tare";
+  $('.monthlyData').html('<div class="event-icon"><div class="event-bullet-pontare" style="background-color:#77bfe9"></div></div><div class="event-info"><p class="event-title">Pontaje ' + month + '</p><p class="event-desc">' + stoul + '</p></div></div>');
 }
 
 function changeReport (accID, oldValue) {
