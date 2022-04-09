@@ -114,7 +114,7 @@
                 }
             });
             var guidCookie = getCookie("userGUID");
-            $.get("handler.php?r=concediu&guid=guidCookie", function(data, status) {
+            $.get("handler.php?r=concediu&guid=" + guidCookie, function(data, status) {
             //console.log("Data: " + data + "\nStatus: " + status);
             initData = JSON.parse(data);
             console.log(initData);
