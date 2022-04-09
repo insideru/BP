@@ -689,7 +689,7 @@ $.ajax({
         //$('#calendar').evoCalendar('removeCalendarEvent', "pontaj-" + date);
         $('#calendar').evoCalendar('destroy');
         initCalendar();
-        $('#calendar').evoCalendar('selectDate', date);
+        $('#calendar').evoCalendar('selectDate', new Date());
       }
     },
     error: function(){
