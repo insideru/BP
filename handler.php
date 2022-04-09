@@ -161,6 +161,15 @@ if ($_REQUEST["r"]=="holidays") {
     echo json_encode($response);
 }
 
+if ($_REQUEST["r"]=="concediu") {    
+    $response = array();
+    $response["holidays"] = getHolidays();
+    if (isset($_GET["collab_guid"])) {
+        $response["concediu"] = getZileLibere($_GET["collab_guid"]);
+    }
+    echo json_encode($response);
+}
+
 if ($_REQUEST["r"]=="deleteHoliday") {    
     $date=$_GET['date'];
     echo deleteHoliday($date);

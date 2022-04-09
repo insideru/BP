@@ -205,6 +205,30 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function getZileLibere(string $collab_guid) {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'SELECT zile_concediu, zile_report, zile_ramase FROM '.$schema.'.accounts WHERE (guid = :guid)';
+	$values = array(':guid' => $guid);
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+
+	$row = $res->fetch(PDO::FETCH_ASSOC); 
+
+	return $row;
+}
+
 function addDaysoff (string $collab_guid, string $startDate, string $endDate, int $number) {
 	/* Global $pdo object */
     global $pdo;
