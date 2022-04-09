@@ -27,7 +27,7 @@
 
       <div class="container">
         <div class="row"></div>
-        <div class="row"></div>
+        <div class="row"><div id="zileRamase" class="chips"></div></div>
         <div class="row">
           <div class="input-field col s6">
             <input id="startDate" type="text" class="datepicker" onclick="getHolidays()">
@@ -120,6 +120,19 @@
             //zile_concediu = initData.concediu.zile_concediu;
             //zile_report = initData.concediu.zile_report;
             zile_ramase = initData.concediu.zile_ramase;
+            if (zile_ramase<0) {
+              $('#zileRamase').html('Ai depasit zilele de concediu alocate acestui an. Un numar de ' + (zile_ramase*-1) + (zile_ramase*-1 > 1 ? " zile vor fi scazute " : " zi va fi scazuta ") + 'de anul viitor');
+            }
+            if (zile_ramase) == 0 {
+              $('#zileRamase').html('Nu mai ai nicio zi de concediu ramasa in acest an');
+            }
+            if (zile_ramase) == 1 {
+              $('#zileRamase').html('Mai ai o singura zi de concediu ramasa in acest an');
+            }
+            if (zile_ramase) > 1 {
+              $('#zileRamase').html('Mai ai ' + zile_ramase  + ' zile de concediu ramase in acest an');
+            }
+            
             initData.holidays.forEach(element => {
               dt = new Date(element.date);
               dt.setHours(0, 0, 0);

@@ -236,7 +236,7 @@ function addDaysoff (string $collab_guid, string $startDate, string $endDate, in
 	//update accounts set `zile_ramase` = `zile_concediu`-5 where guid="6f0c7834-4a68-433f-bc06-e8e1fd38d33a"
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate); UPDATE '.$schema.'.accounts SET zile_ramase = zile_concediu - :number WHERE guid= :guid';
+    $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate); UPDATE '.$schema.'.accounts SET zile_ramase = zile_ramase - :number WHERE guid= :guid';
     
     /* Values array for PDO */
     $values = array(':collab_id' => getIDfromGUID($collab_guid), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)), ':number' => $number, ':guid' => $collab_guid);
