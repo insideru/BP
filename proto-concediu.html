@@ -106,7 +106,22 @@
                     months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
                     monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
                 }
-            });  
+            });
+            $.get("handler.php?r=init", function(data, status) {
+            //console.log("Data: " + data + "\nStatus: " + status);
+            initData = JSON.parse(data);
+            holidayArray = [];
+            initData.holidays.forEach(element => {
+              dt = new Date(element.date);
+              dt.setHours(0, 0, 0);
+              holidayArray.push(dt);
+            });
+
+            //initializare categorii proiect
+            //populateActiveProjects();
+            populateActiveDropdown();
+            $('select').formSelect();
+          });
       });    
     </script>
   </body>

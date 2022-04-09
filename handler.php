@@ -154,8 +154,10 @@ if ($_REQUEST["r"]=="init") {
 if ($_REQUEST["r"]=="holidays") {    
     $response = array();
     $response["holidays"] = getHolidays();
-    $response["daysoff"] = getDaysoff($_GET["collab_guid"]);
-    $response["pontaje"] = getPontaje($_GET["collab_guid"]);
+    if (isset($_GET["collab_guid"])) {
+        $response["daysoff"] = getDaysoff($_GET["collab_guid"]);
+        $response["pontaje"] = getPontaje($_GET["collab_guid"]);
+    }
     echo json_encode($response);
 }
 
