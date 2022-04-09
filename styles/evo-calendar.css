@@ -36,7 +36,7 @@ input:focus, textarea:focus, button:focus {
     overflow: hidden;
     z-index: 1;
 }
-.--weekend {
+.--weekend .day {
     color: red !important;
   }
 .calendar-sidebar {
