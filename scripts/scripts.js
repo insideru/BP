@@ -914,7 +914,8 @@ function renameName (curName, curTable) {
 }
 
 function changePass (userID) {
-  let response = prompt("Introdu un nou nume:", curName);
+  console.log("click!");
+  let response = prompt("Introdu parola noua:", curName);
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || response == "") {
     //a dat cancel sau a bagat fix acelasi lucru
