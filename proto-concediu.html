@@ -61,7 +61,7 @@
                 'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
                 'startdate'         : sd,
                 'enddate'           : ed,
-                'number'            : getNoDaysOff(new Date(sd.split("-")[2], sd.split("-")[1], sd.split("-")[0]), new Date(ed.split("-")[2], ed.split("-")[1], ed.split("-")[0]))
+                'number'            : 0 //getNoDaysOff(new Date(sd.split("-")[2], sd.split("-")[1], sd.split("-")[0]), new Date(ed.split("-")[2], ed.split("-")[1], ed.split("-")[0]))
             };
             console.log([new Date(sd.split("-")[2], sd.split("-")[1], sd.split("-")[0]), new Date(ed.split("-")[2], ed.split("-")[1], ed.split("-")[0])]);
             console.log(formData);
