@@ -313,6 +313,35 @@ function changeProjectState (int $proj_id) {
     return $fields;
 }
 
+function changeConcediu (string $accID, string $column, int $value) {
+
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.accounts SET '.$column.' = :value WHERE account_id = :id';
+    $values = array(":id" => $accID, ":value" => $value);
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function changeUserState (int $user_id) {
 
     /* Global $pdo object */
@@ -465,11 +494,10 @@ function getHolidays() {
         echo "Database error".$e->getMessage();
         die();
     }
-    $fields=array();
+    $row = $res->fetch(PDO::FETCH_ASSOC);
 
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
+    if ($row) {
+        return "Success!";
     }
-    return $fields;
 }
 ?>

@@ -963,8 +963,29 @@ function changeConcediu (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  changeAccountsObject("concediu", accID, response);
-  populateUsers();
+  var formData = {
+    'action'    : 'changeConcediu',
+    'id'        : accID, 
+    'table'     : "zile_concediu",
+    'value'     : response
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        changeAccountsObject("concediu", accID, response);
+        populateUsers();
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }
 
 function changeReport (accID, oldValue) {
@@ -974,8 +995,29 @@ function changeReport (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  changeAccountsObject("report", accID, response);
-  populateUsers();
+  var formData = {
+    'action'    : 'changeConcediu',
+    'id'        : accID, 
+    'table'     : "zile_report",
+    'value'     : response
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        changeAccountsObject("report", accID, response);
+        populateUsers();
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }
 
 function changeRamase (accID, oldValue) {
@@ -985,8 +1027,29 @@ function changeRamase (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  changeAccountsObject("ramase", accID, response);
-  populateUsers();
+  var formData = {
+    'action'    : 'changeConcediu',
+    'id'        : accID, 
+    'table'     : "zile_ramase",
+    'value'     : response
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        changeAccountsObject("ramase", accID, response);
+        populateUsers();
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }
 
 function changeGroup (accID, oldValue) {

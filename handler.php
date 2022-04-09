@@ -161,6 +161,10 @@ if ($_REQUEST["r"]=="holidays") {
     echo json_encode($response);
 }
 
+if ($_POST["action"]=="changeConcediu") {
+    echo changeConcediu($_POST['name'], $_POST['name'], $_POST['name']);
+}
+
 if ($_REQUEST["r"]=="concediu") {    
     $response = array();
     $response["holidays"] = getHolidays();
