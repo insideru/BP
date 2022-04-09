@@ -61,7 +61,7 @@ if ($_POST["action"]=="addTimesheet") {
 }
 
 if ($_POST["action"]=="addDaysoff") {
-    echo addDaysoff($_POST["collab_guid"], $_POST["startdate"], $_POST["enddate"]);
+    echo addDaysoff($_POST["collab_guid"], $_POST["startdate"], $_POST["enddate"], $_POST["number"]);
 }
 
 if ($_POST["action"]=="reName") {
