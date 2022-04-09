@@ -580,6 +580,7 @@ function getNoDaysOff(data1, data2) {
   var zileLibere = 0;
   data1.setHours(0, 0, 0);
   data2.setHours(0, 0, 0);
+  console.log(holidayArray);
   for (var d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
     if (d.getDay()>0 && d.getDay()<6 && !isInArray(holidayArray, d)) {
       zileLibere = zileLibere + 1;
