@@ -581,6 +581,7 @@ function getNoDaysOff(data1, data2) {
   data1.setHours(0, 0, 0);
   data2.setHours(0, 0, 0);
   for (var d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
+    console.log(d);
     if (d.getDay()>0 && d.getDay()<6 && !isInArray(holidayArray, d)) {
       zileLibere = zileLibere + 1;
     }
@@ -589,7 +590,7 @@ function getNoDaysOff(data1, data2) {
 }
 
 function isInArray(array, value) {
-  return !!array.find(item => {console.log(item.getTime(), value.getTime()); return item.getTime() == value.getTime();});
+  return !!array.find(item => {return item.getTime() == value.getTime();});
 }
 
 function changeSelectedDate() {
