@@ -38,6 +38,7 @@ input:focus, textarea:focus, button:focus {
 }
 .--weekend .day {
     color: red !important;
+    font-weight: bold;
   }
 .calendar-sidebar {
     position: absolute;
