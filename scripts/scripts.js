@@ -127,6 +127,23 @@ function changeProjState(proj_id) {
     });
 }
 
+function changeUserState(proj_id) {
+  var formData = {
+        'action'            : 'changeUserState',
+        'user_id'           : proj_id.substring(7)
+    };
+    $.ajax({
+        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url         : 'handler.php', // the url where we want to POST
+        data        : formData, // our data object
+        //dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true,
+        success     : function(data) {
+          //console.log("Ar trebui sa mearga! " + data);
+        }
+    });
+}
+
 function populateProjCat() {
   $('#projCatTable').html('');
   $('#dropdown_categorie_proiect').html('');
@@ -190,7 +207,7 @@ function populateProjects() {
   projectsObject.forEach(element => {
     isChecked = "";
     if (element.active=="1") { isChecked = 'checked="checked" ';}
-    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
+    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /></td></tr>');
   });
 }
 
@@ -202,7 +219,10 @@ function populateHolidays() {
 }
 
 function populateUsers() {
-
+  $('#usersTable').html('');
+  accountsObject.forEach(element => {
+    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td>'+element.account_group+'</td><td><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled ? 'checked="checked" ' : '') +' /></td></tr>');
+  });
 }
 
 function getHolidays() {
@@ -885,6 +905,37 @@ function renameName (curName, curTable) {
             populateHolidays();
             break;
         }
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
+}
+
+function changePass (userID) {
+  let response = prompt("Introdu un nou nume:", curName);
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || response == "") {
+    //a dat cancel sau a bagat fix acelasi lucru
+    return "Fail";
+  }
+  //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
+  var formData = {
+    'action'        : 'changePass',
+    'userid'        : userID, 
+    'newpass'       : response
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        M.toast({html: 'Parola a fost schimbata cu succes!'});
       } else {
         M.toast({html: data});
         return;

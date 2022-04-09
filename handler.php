@@ -119,6 +119,14 @@ if ($_POST["action"]=="changeProjState") {
     echo changeProjectState((int)$_POST["proj_id"]);
 }
 
+if ($_POST["action"]=="changeUserState") {
+    echo changeUserState((int)$_POST["user_id"]);
+}
+
+if ($_POST["action"]=="changePass") {
+    echo changePass((int)$_POST["userid"], $_POST["response"]);
+}
+
 if ($_POST["action"]=="addNewUser") {
     $response = array();
     //$response["newAccount"] = (object) ['message' => newAccount($_POST["username"], $_POST["passwd"], $_POST["group"], $_POST["collab_id"])];

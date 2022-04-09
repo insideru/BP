@@ -298,7 +298,6 @@ function changeProjectState (int $proj_id) {
             else {
                 $proj_state = 0;
             }
-            echo ($object->active . " || " . $proj_state);
             break;
         }
     }
@@ -309,6 +308,35 @@ function changeProjectState (int $proj_id) {
 
     $query = ' UPDATE '. $schema . '.projects SET active = :active WHERE id = :id';
     $values = array(':active' => $proj_state, ":id" => $proj_id);
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
+function changeUserState (int $user_id) {
+
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.accounts SET account_enabled = CASE WHEN account_enabled = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $values = array(":id" => $user_id);
 
     try
     {

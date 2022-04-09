@@ -265,7 +265,7 @@ function getUsernames () {
 	global $pdo;
 	global $schema;
 
-	$query = 'SELECT * FROM '.$schema.'.accounts';
+	$query = 'SELECT collab_id, account_group, account_username, account_enabled FROM '.$schema.'.accounts';
 	$values = array(':cid' => $collab_id);
 	
 	try
