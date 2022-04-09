@@ -535,7 +535,6 @@ function validateConcediu () {
     }
     if (d2 > d1) {
       nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
-      console.log(nrZileLibere);
       //console.log(nrZileLibere);
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
@@ -543,6 +542,10 @@ function validateConcediu () {
           valid = false;
         }
       });
+      if (nrZileLibere<1) {
+        M.toast({html: 'In perioada aleasa toate zilele sunt libere!'});
+        valid = false;
+      }
     }
     var overlap = false;
     timesheetsArray.forEach(element => {
@@ -582,7 +585,6 @@ function getNoDaysOff(data1, data2) {
   data1.setHours(0, 0, 0);
   data2.setHours(0, 0, 0);
   for (var d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
-    console.log(d);
     if (d.getDay()>0 && d.getDay()<6 && !isInArray(holidayArray, d)) {
       zileLibere = zileLibere + 1;
     }
