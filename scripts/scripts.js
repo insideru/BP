@@ -221,7 +221,7 @@ function populateHolidays() {
 function populateUsers() {
   $('#usersTable').html('');
   accountsObject.forEach(element => {
-    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td><td><div class="chip tooltipped" data-position="top" data-tooltip="Total zile concediu" style="cursor:pointer" onclick="changeConcediu(\''+ element.account_id +'\', \''+element.zile_concediu+'\')">'+element.zile_concediu+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="bottom" data-tooltip="Zile concediu raportate" style="cursor:pointer" onclick="changeRaport(\''+ element.account_id +'\', \''+element.zile_report+'\')">'+element.zile_report+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="top" data-tooltip="Zile concediu ramase" style="cursor:pointer" onclick="changeRamase(\''+ element.account_id +'\', \''+element.zile_ramase+'\')">'+element.zile_ramase+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td><td><label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label></td></tr>');
+    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td><td><div class="chip tooltipped" data-position="top" data-tooltip="Total zile concediu" style="cursor:pointer" onclick="changeConcediu(\''+ element.account_id +'\', \''+element.zile_concediu+'\')">'+element.zile_concediu+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="bottom" data-tooltip="Zile concediu reportate" style="cursor:pointer" onclick="changeReport(\''+ element.account_id +'\', \''+element.zile_report+'\')">'+element.zile_report+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="top" data-tooltip="Zile concediu ramase" style="cursor:pointer" onclick="changeRamase(\''+ element.account_id +'\', \''+element.zile_ramase+'\')">'+element.zile_ramase+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td><td><label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label></td></tr>');
   });
 }
 
@@ -964,16 +964,29 @@ function changeConcediu (accID, oldValue) {
     return "Fail";
   }
   changeAccountsObject("concediu", accID, response);
+  populateUsers();
 }
 
-function changeRaport (accID, oldValue) {
-  let response = prompt("Introdu numarul de zile de concediu raportate:", oldValue);
+function changeReport (accID, oldValue) {
+  let response = prompt("Introdu numarul de zile de concediu reportate:", oldValue);
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || isNaN(response)) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  changeAccountsObject("raport", accID, response);
+  changeAccountsObject("report", accID, response);
+  populateUsers();
+}
+
+function changeRamase (accID, oldValue) {
+  let response = prompt("Introdu numarul de zile de concediu ramase:", oldValue);
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || isNaN(response)) {
+    //a dat cancel sau a bagat fix acelasi lucru
+    return "Fail";
+  }
+  changeAccountsObject("ramase", accID, response);
+  populateUsers();
 }
 
 function changeGroup (accID, oldValue) {
@@ -986,16 +999,20 @@ function changeGroup (accID, oldValue) {
   changeAccountsObject("grup", accID, response);
 }
 
-function changeRamase (accID, oldValue) {
-  let response = prompt("Introdu numarul de zile de concediu ramase:", oldValue);
-  if (typeof response === 'string') { response = response.trim(); }
-  if (response == null || isNaN(response)) {
-    //a dat cancel sau a bagat fix acelasi lucru
-    return "Fail";
-  }
-  changeAccountsObject("ramase", accID, response);
-}
-
 function changeAccountsObject(elementName, accID, value) {
-  
+  accountsObject.forEach(element => {
+    if (element.account_id == accID) {
+      switch (elementName) {
+        case "concediu":
+          element.zile_concediu = value;
+          break;
+        case "report":
+          element.zile_report = value;
+          break;
+        case "ramase":
+          element.zile_ramase = value;
+          break;
+      }
+    }
+  });
 }
