@@ -609,7 +609,6 @@
         _.buildCalendar();
         _.buildEventList();
         _.initEventListener(); // test
-        calculatePontaje(_.$active.date);
         _.resize();
     }
 
@@ -655,7 +654,8 @@
             }
             markup += '<br><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
         }
-        eventListEl.append(markup)
+        eventListEl.append(markup);
+        calculatePontaje(_.$active.date);
     }
 
     // v1.0.0 - Add single event to event list
