@@ -813,6 +813,7 @@ function validateAdduser () {
         $("#userPass1").val('');
         $("#userPass2").val('');
         $("#userRights").val('');
+        $("#addUserError").html('');
         M.toast({html: "Utilizator adaugat cu succes!"});
       } else {
         $("#addUserError").html(rcvData.newAccount);
