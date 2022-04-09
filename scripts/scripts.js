@@ -966,7 +966,7 @@ function changeConcediu (accID, oldValue) {
   var formData = {
     'action'    : 'changeConcediu',
     'id'        : accID, 
-    'table'     : "zile_concediu",
+    'column'    : "zile_concediu",
     'value'     : response
   };
   $.ajax({
@@ -998,7 +998,7 @@ function changeReport (accID, oldValue) {
   var formData = {
     'action'    : 'changeConcediu',
     'id'        : accID, 
-    'table'     : "zile_report",
+    'column'    : "zile_report",
     'value'     : response
   };
   $.ajax({
@@ -1030,7 +1030,7 @@ function changeRamase (accID, oldValue) {
   var formData = {
     'action'    : 'changeConcediu',
     'id'        : accID, 
-    'table'     : "zile_ramase",
+    'column'    : "zile_ramase",
     'value'     : response
   };
   $.ajax({

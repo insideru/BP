@@ -334,12 +334,9 @@ function changeConcediu (string $accID, string $column, int $value) {
         echo "Database error".$e->getMessage();
         die();
     }
-    $fields=array();
+    $row = $res->fetch(PDO::FETCH_ASSOC);
 
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
-    }
-    return $fields;
+    return $row ? "Success!" : 0;
 }
 
 function changeUserState (int $user_id) {
@@ -494,10 +491,11 @@ function getHolidays() {
         echo "Database error".$e->getMessage();
         die();
     }
-    $row = $res->fetch(PDO::FETCH_ASSOC);
+    $fields=array();
 
-    if ($row) {
-        return "Success!";
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
     }
+    return $fields;
 }
 ?>

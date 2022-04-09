@@ -162,7 +162,7 @@ if ($_REQUEST["r"]=="holidays") {
 }
 
 if ($_POST["action"]=="changeConcediu") {
-    echo changeConcediu($_POST['name'], $_POST['name'], $_POST['name']);
+    echo changeConcediu($_POST['id'], $_POST['column'], $_POST['value']);
 }
 
 if ($_REQUEST["r"]=="concediu") {    
