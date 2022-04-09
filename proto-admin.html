@@ -69,6 +69,7 @@
                                       <tbody>
                                         <tr>
                                           <form id="addActivityForm">
+                                            <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_proiect2' id="actProjCat">Categorie proiect</a></td>
                                               <td>
                                                   <div class="input-field">
                                                       <i class="material-icons prefix">add</i>
@@ -76,7 +77,6 @@
                                                       <label for="addActivity">Adauga activitate noua</label>
                                                   </div>
                                               </td>
-                                              <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_proiect2' id="actProjCat">Categorie proiect</a></td>
                                           </form>
                                         </tr>
                                       </tbody>
@@ -102,14 +102,14 @@
                             <tbody>
                               <tr>
                                 <form id="addProjForm">
-                                    <td><div class="input-field">
-                                        <i class="material-icons prefix">add</i>
-                                        <input type="text" id="addProjectName" onclick="typeNo=3;" required>
-                                        <label for="addProjectName">Nume proiect</label>
-                                    </div></td>
                                     <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_proiect' id="projCat">Alege categorie</a></td>
                                     <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_client_proiect' id="projClient">Alege client</a></td>
-                                </form>
+                                    <td><div class="input-field">
+                                      <i class="material-icons prefix">add</i>
+                                      <input type="text" id="addProjectName" onclick="typeNo=3;" required>
+                                      <label for="addProjectName">Nume proiect</label>
+                                  </div></td>
+                                  </form>
                               </tr>
                             </tbody>
                           </table>
@@ -199,14 +199,14 @@
                                         <tbody>
                                           <tr>
                                             <form id="addColabForm">
-                                                <td>
-                                                    <div class="input-field">
-                                                        <i class="material-icons prefix">add</i>
-                                                        <input type="text" id="addCollab" onclick="typeNo=4;" required>
-                                                        <label for="addCollab">Adauga colaborator nou</label>
-                                                    </div>
-                                                </td>
                                                 <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_colaborator' id="colabCat">Alege categorie</a></td>
+                                                <td>
+                                                  <div class="input-field">
+                                                      <i class="material-icons prefix">add</i>
+                                                      <input type="text" id="addCollab" onclick="typeNo=4;" required>
+                                                      <label for="addCollab">Adauga colaborator nou</label>
+                                                  </div>
+                                              </td>
                                             </form>
                                           </tr>
                                         </tbody>
