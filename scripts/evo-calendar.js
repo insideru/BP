@@ -609,7 +609,7 @@
         _.buildCalendar();
         _.buildEventList();
         _.initEventListener(); // test
-        calculatePontaje($label.months);
+        calculatePontaje(_.$active.date);
         _.resize();
     }
 
