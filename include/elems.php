@@ -226,7 +226,7 @@ function getZileLibere(string $guid) {
 
 	$row = $res->fetch(PDO::FETCH_ASSOC); 
 
-	return $row ? $row : $query;
+	return $row ? $row : $query . " " . $guid;
 }
 
 function addDaysoff (string $collab_guid, string $startDate, string $endDate, int $number) {
