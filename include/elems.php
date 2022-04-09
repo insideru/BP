@@ -205,7 +205,7 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addDaysoff (string $collab_guid, string $startDate, string $endDate, string $number) {
+function addDaysoff (string $collab_guid, string $startDate, string $endDate, int $number) {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
