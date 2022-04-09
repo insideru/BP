@@ -39,6 +39,9 @@
       $(document).ready(function() {
         addLinks();
         initCalendar();
+        dt = new Date();
+        dt.setDate(d.getDate() + 1);
+        $('#calendar').evoCalendar('selectDate', dt);
         $('#calendar').evoCalendar('selectDate', new Date());
       })
     </script>
