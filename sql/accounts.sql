@@ -8,7 +8,8 @@ CREATE TABLE `accounts` (
   `account_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `account_enabled` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `zile_concediu` int(10) UNSIGNED NOT NULL DEFAULT '20',
-  `zile_report` int(10) NOT NULL DEFAULT '0'
+  `zile_report` int(10) NOT NULL DEFAULT '0',
+  `zile_ramase` int(10) NOT NULL DEFAULT '20'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `accounts`
