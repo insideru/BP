@@ -261,34 +261,6 @@ function getDaysoff(string $guid) {
 	return $fields;
 }
 
-function getUsernames () {
-	global $pdo;
-	global $schema;
-
-	$query = 'SELECT collab_id, account_group, account_username, account_enabled FROM '.$schema.'.accounts';
-	$values = array(':cid' => $collab_id);
-	
-	try
-	{
-		$res = $pdo->prepare($query);
-		$res->execute($values);
-	}
-	catch (PDOException $e)
-	{
-		/* If there is a PDO exception, throw a standard exception */
-		echo "Database error ".$e->getMessage();
-	}
-
-	$fields=array();
-
-	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
-    {
-		array_push($fields, $row);
-	}
-
-	return $fields;
-}
-
 function getIDfromGUID (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
