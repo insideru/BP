@@ -148,10 +148,6 @@ hr {
   font-weight: lighter;
 }
 
-.--weekend {
-  color: red;
-}
-
 .cursor-pointer {
     cursor:pointer;
 }
