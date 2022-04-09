@@ -721,7 +721,7 @@ function initCalendar() {
       //dataType    : 'json', // what type of data do we expect back from the server
       encode      : true,
       success     : function(data) {
-        console.log(data);
+        //console.log(data);
         rvdData = JSON.parse(data);
         if (typeof(rvdData) === 'object') {
           buildTimesheetCalendarEvents(rvdData.timesheets);
@@ -800,7 +800,7 @@ function validateAdduser () {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
-      console.log(data);
+      //console.log(data);
       rcvData = JSON.parse(data);
       if (rcvData.newAccount.substring(0, 21) == "The new account ID is") {
         //a mers
@@ -809,7 +809,11 @@ function validateAdduser () {
         accountsObject = rcvData.accounts;
         $('#collabsTable').html("");
         populateCollabs();
-        M.toast({html: rcvData.newAccount});
+        $("#userAdd").val('');
+        $("#userPass1").val('');
+        $("#userPass2").val('');
+        $("#userRights").val('');
+        M.toast({html: "Utilizator adaugat cu succes!"});
       } else {
         $("#addUserError").html(rcvData.newAccount);
         return;
