@@ -221,7 +221,7 @@ function populateHolidays() {
 function populateUsers() {
   $('#usersTable').html('');
   accountsObject.forEach(element => {
-    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td>'+element.account_group+'</td><td><label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled ? 'checked="checked" ' : '') +' /><span></span></label></td></tr>');
+    $('#usersTable').append('<tr><td onclick="changePass(\''+ element.account_id +'\')">'+element.account_username+'</td><td>'+element.account_group+'</td><td><label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label></td></tr>');
   });
 }
 
