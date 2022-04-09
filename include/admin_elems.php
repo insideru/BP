@@ -336,7 +336,7 @@ function changeConcediu (string $accID, string $column, int $value) {
     }
     $row = $res->fetch(PDO::FETCH_ASSOC);
 
-    return $row ? "Success!" : 0;
+    return $row ? "Success!" : $query . "||" . $accID . "||" . $value;
 }
 
 function changeUserState (int $user_id) {
