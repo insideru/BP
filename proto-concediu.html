@@ -63,6 +63,7 @@
                 'enddate'           : ed,
                 'number'            : nrZileLibere //getNoDaysOff(new Date(sd.split("-")[2], sd.split("-")[1], sd.split("-")[0]), new Date(ed.split("-")[2], ed.split("-")[1], ed.split("-")[0]))
             };
+            console.log(nrZileLibere, zile_ramase);
             if (nrZileLibere>zile_ramase) {
               if (!confirm("Se depasesc zilele de concediu ramase! Continui?")) {
                 return;
@@ -120,6 +121,7 @@
             //zile_concediu = initData.concediu.zile_concediu;
             //zile_report = initData.concediu.zile_report;
             zile_ramase = initData.concediu.zile_ramase;
+            console.log(zile_ramase);
             initData.holidays.forEach(element => {
               dt = new Date(element.date);
               dt.setHours(0, 0, 0);
