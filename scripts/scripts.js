@@ -963,6 +963,7 @@ function changeConcediu (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
+  changeAccountsObject("concediu", accID, response);
 }
 
 function changeRaport (accID, oldValue) {
@@ -972,6 +973,7 @@ function changeRaport (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
+  changeAccountsObject("raport", accID, response);
 }
 
 function changeGroup (accID, oldValue) {
@@ -981,6 +983,7 @@ function changeGroup (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
+  changeAccountsObject("grup", accID, response);
 }
 
 function changeRamase (accID, oldValue) {
@@ -990,4 +993,9 @@ function changeRamase (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
+  changeAccountsObject("ramase", accID, response);
+}
+
+function changeAccountsObject(elementName, accID, value) {
+  
 }
