@@ -989,7 +989,12 @@ function changeConcediu (accID, oldValue) {
 }
 
 function calculatePontaje(month) {
-  console.log(month);
+  $('.biweekly').html(month);
+}
+
+<div class="monthlyData"></div>
+
+function buildMonthlyData(month) {
   $('.biweekly').html(month);
 }
 

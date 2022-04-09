@@ -577,7 +577,7 @@
                                     markup += '<td class="'+headerClass+'">'+_.$label.days[i]+'</td>';
                                 }
                                 markup += '</tr></table>'+
-                        '</div>';
+                        '<div class="monthlyData"></div></div>';
 
             // events
             markup += '<div class="calendar-events">'+
@@ -655,7 +655,7 @@
             markup += '<br><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
         }
         eventListEl.append(markup);
-        calculatePontaje(_.$active.date);
+        //calculatePontaje(_.$active.date);
     }
 
     // v1.0.0 - Add single event to event list
@@ -772,6 +772,8 @@
         if(_.options.calendarEvents != null) { // For event indicator (dots)
             _.buildEventIndicator();
         }
+
+        buildMonthlyData(title);
     };
 
     // v1.0.0 - Add event indicator/s (dots)
