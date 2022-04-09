@@ -35,34 +35,6 @@ function addProjCat(string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getUsernames () {
-	global $pdo;
-	global $schema;
-
-	$query = 'SELECT account_id, collab_id, account_group, account_username, account_enabled FROM '.$schema.'.accounts';
-	$values = array(':cid' => $collab_id);
-	
-	try
-	{
-		$res = $pdo->prepare($query);
-		$res->execute($values);
-	}
-	catch (PDOException $e)
-	{
-		/* If there is a PDO exception, throw a standard exception */
-		echo "Database error ".$e->getMessage();
-	}
-
-	$fields=array();
-
-	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
-    {
-		array_push($fields, $row);
-	}
-
-	return $fields;
-}
-
 function getProjCat() {
 	/* Global $pdo object */
 	global $pdo;
@@ -468,7 +440,7 @@ function getAccounts () {
     global $pdo;
     global $schema;
 
-    $query = 'SELECT collab_id, account_username, account_group, account_enabled FROM '. $schema . '.accounts';
+    $query = 'SELECT account_id, collab_id, account_username, account_group, account_enabled FROM '. $schema . '.accounts';
 
     try
     {
