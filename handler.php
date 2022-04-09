@@ -164,8 +164,8 @@ if ($_REQUEST["r"]=="holidays") {
 if ($_REQUEST["r"]=="concediu") {    
     $response = array();
     $response["holidays"] = getHolidays();
-    if (isset($_GET["collab_guid"])) {
-        $response["concediu"] = getZileLibere($_GET["collab_guid"]);
+    if (isset($_GET["guid"])) {
+        $response["concediu"] = getZileLibere($_GET["guid"]);
     }
     echo json_encode($response);
 }
