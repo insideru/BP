@@ -994,6 +994,7 @@ function calculatePontaje(month) {
 
 function buildMonthlyData(month) {
   $('.monthlyData').html(month);
+  $('.monthlyData').addClass('event-container');
 }
 
 function changeReport (accID, oldValue) {
