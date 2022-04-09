@@ -124,7 +124,7 @@ if ($_POST["action"]=="changeUserState") {
 }
 
 if ($_POST["action"]=="changePass") {
-    echo changePass((int)$_POST["userid"], $_POST["response"]);
+    echo changePass((int)$_POST["userid"], $_POST["newpass"]);
 }
 
 if ($_POST["action"]=="addNewUser") {
