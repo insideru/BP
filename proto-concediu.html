@@ -109,7 +109,6 @@
             });
             $.get("handler.php?r=holidays", function(data, status) {
             //console.log("Data: " + data + "\nStatus: " + status);
-            initData = JSON.parse(data);
             holidayArray = [];
             console.log(initData);
             initData.holidays.forEach(element => {
@@ -117,7 +116,6 @@
               dt.setHours(0, 0, 0);
               holidayArray.push(dt);
             });
-            console.log(holidayArray);
           });
       });    
     </script>
