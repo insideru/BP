@@ -6,5 +6,11 @@ $group = 0;
 $collab_id = 0;
 //echo newAccount($username, $passwd, $group, $collab_id);
 global $account;
-echo "account este " . $account->sessionLogin();
+$account->sessionLogin();
+
+if ($account->authenticated) {
+    echo "Authenticated!";
+} else  {
+    echo "Din pula!";
+}
 ?>
