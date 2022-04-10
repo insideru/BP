@@ -994,10 +994,12 @@ function calculatePontaje(month) {
 }
 
 function buildMonthlyData(month) {
-  $('.monthlyData').addClass('event-container');
-  stoul = "stourile cele mai tari";
-  $('.monthlyData').html('</p><div class="event-icon"><div class="event-bullet-pontare-bilunara" style="background-color:#8773c1"></div></div><div class="event-info"><p class="event-title">Pontaje 1-15</p><p class="event-desc">' + stoul + '</p></div></div></p>');
-  $('.monthlyData').append('</p><div class="event-icon"><div class="event-bullet-pontare-bilunara" style="background-color:#8773c1"></div></div><div class="event-info"><p class="event-title">Pontaje 15-31</p><p class="event-desc">' + stoul + '</p></div></div></p>');
+  //$('.monthlyData').addClass('event-container');
+  let stoul = "stourile cele mai tari";
+  //$('.monthlyData').html('</p><div class="event-icon"><div class="event-bullet-pontare-bilunara" style="background-color:#8773c1"></div></div><div class="event-info"><p class="event-title">Pontaje 1-15</p><p class="event-desc">' + stoul + '</p></div></div></p>');
+  //$('.monthlyData').append('</p><div class="event-icon"><div class="event-bullet-pontare-bilunara" style="background-color:#8773c1"></div></div><div class="event-info"><p class="event-title">Pontaje 15-31</p><p class="event-desc">' + stoul + '</p></div></div></p>');
+  let markup = '<table class="calendar-table"><tbody>><tr class="calendar-header"><td class="calendar-header-day">1-15</td><td class="calendar-header-day">15-31</td></tr><tr class="calendar-body"><td class="calendar-day">'+stoul+'</td><td class="calendar-day">'+stoul+'</td></tr></tbody></table>';
+  $('.monthlyData').html(markup);
 }
 
 function changeReport (accID, oldValue) {
