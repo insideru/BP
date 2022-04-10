@@ -750,6 +750,7 @@ function initCalendar() {
         if (typeof(rvdData) === 'object') {
           buildTimesheetCalendarEvents(rvdData.timesheets);
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
+          $('#calendar').evoCalendar('selectDate', new Date());
         } else {
           M.toast({html: data.substring(15)});
         }
