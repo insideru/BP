@@ -2,10 +2,9 @@
 require_once 'db.php';
 require_once 'account.php';
 
-// if (!$account->authenticated || $account->getGroup()!=2) {
-  //header("Location: http://");
-//  exit;
-//}
+if (!$account->authenticated) {
+	die();
+}
 
 function addAttendance(string $guid, string $date, string $start, string $end) {
     /* Global $pdo object */
