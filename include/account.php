@@ -5,7 +5,6 @@ session_start();
 require_once 'db.php';
 require_once 'account_class.php';
 
-
 $account = new Account();
 
 function newAccount(string $username, string $passwd, int $group, int $collab_id) {
