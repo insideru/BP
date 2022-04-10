@@ -1078,6 +1078,8 @@
         } else if (typeof arr === 'object') { // Single event
             addEvent(arr)
         }
+        _.buildEventList();
+        _.initEventListener(); // test
     };
 
     // v1.0.0 - Remove Calendar Event(s)
