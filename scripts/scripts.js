@@ -1136,7 +1136,6 @@ function hoursWorked(month, part) {
       }
     }
   });
-  console.log(res);
   return res;
 }
 

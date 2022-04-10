@@ -539,8 +539,10 @@ public function sessionLogin(): bool
 			//iteram prin toate sesiunile
 			while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
  				$hashedToken = $row['account_token'];
+				echo $accountToken . '||' . $hashedToken .'<BR>';
  				//verificam daca se potriveste cookieul cu tokenul
  				if (password_verify($accountToken, $hashedToken)) {
+					echo 'JA CA A MERS!<BR>';
  					//modificam sesiunea
  					$query = 'UPDATE '.$schema.'.sessions SET session_id = :sid WHERE account_token = :stk';
 					try {
