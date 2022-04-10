@@ -6,8 +6,6 @@ require_once './include/admin_elems.php';
 global $account;
 $account->sessionLogin();
 
-echo $account->authenticated . ' || ' . $_POST["action"];
-
 if ($account->authenticated || $_POST["action"]=="login") {} else 
 {
     die();
