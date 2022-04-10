@@ -415,7 +415,7 @@ public function login(string $username, string $passwd, int $remember): bool
 	            $expiry_date = date("Y-m-d H:i:s", $cookie_expiration_time);
 	            
 	            // Insert new token
-				$query = 'UPDATE '.$schema.'.sessions SET session_token = :token WHERE (account_id = :id) AND (session_id = :sid)';
+				$query = 'UPDATE '.$schema.'.sessions SET account_token = :token WHERE (account_id = :id) AND (session_id = :sid)';
 				$values = array(':token' => $random_token_hash, ':id' => $this->id, ':sid' => session_id());
 				
 				/* Execute the query */
