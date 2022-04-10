@@ -20,6 +20,10 @@ if ($account->authenticated) {
             logout();
             header("Location: /");
             die;
+        } else if ($_GET['page']=="admin"){
+            logout();
+            header("proto-admin.html");
+            die;
         }
     }
     require 'proto-dashboard.html';

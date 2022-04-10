@@ -2,7 +2,7 @@
 require_once 'db.php';
 require_once 'account.php';
 
-if (!$account->authenticated) {
+if (!$account->authenticated && $account->getGroup() !=0 ) {
     die();
 }
 
