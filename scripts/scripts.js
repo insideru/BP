@@ -1113,14 +1113,14 @@ function hoursWorked(month, part) {
   if (part==1) {
     //1-15
     var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 15, 0, 0, 0);
   } else {
     //16-31
     var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1, 0, 0, 0);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1]), 0, 0, 0);
   }
   pontajeObjectArray.forEach(element => {
-    if (element.date>=intervalStart && element.date<intervalEnd) {
+    if (element.date>=intervalStart && element.date<=intervalEnd) {
       //avem 3 variante
       if (isInArray(holidayArray, element.date)) {
         //e 2x
