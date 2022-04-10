@@ -3,7 +3,9 @@ require_once './include/account.php';
 require_once './include/elems.php';
 require_once './include/admin_elems.php';
 
-if (!$account->authenticated) {
+$account->sessionLogin();
+
+if (!$account->authenticated || $_POST["action"]!="login") {
     die();
 }
 

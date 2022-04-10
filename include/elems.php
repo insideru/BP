@@ -2,6 +2,9 @@
 require_once 'db.php';
 require_once 'account.php';
 
+global $account;
+$account->sessionLogin();
+
 if (!$account->authenticated) {
 	die();
 }

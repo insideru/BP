@@ -1,7 +1,7 @@
 <?php
 require_once './include/account.php';
-global $account;
 
+global $account;
 $account->sessionLogin();
 
 if ($account->authenticated) {
