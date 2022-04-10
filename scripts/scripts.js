@@ -1014,6 +1014,7 @@ function buildMonthlyData(month) {
                 '<td> Total: ' + (adouaParte[0]*2 + adouaParte[1]*1.5 + adouaParte[2]) + '</td>'+
                 '</tr></tbody></table></div></li></ul>';
   $('.monthlyData').html(markup);
+  $('.collapsible').collapsible();
 }
 
 function changeReport (accID, oldValue) {
