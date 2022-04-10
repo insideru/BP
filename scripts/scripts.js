@@ -1110,12 +1110,12 @@ function hoursWorked(month, part) {
   let res = [0, 0, 0];
   if (part==1) {
     //1-15
-    var intervalStart = new Date(wrkDate[2], wrkDate[1], 1);
-    var intervalEnd = new Date(wrkDate[2], wrkDate[1], 16);
+    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
   } else {
     //16-31
-    var intervalStart = new Date(wrkDate[2], wrkDate[1], 16);
-    var intervalEnd = new Date(wrkDate[2], wrkDate[1], getLastDayOfMonth(wrkDate[1]));
+    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1);
   }
   console.log(intervalStart, intervalEnd);
   pontajeObjectArray.forEach(element => {
