@@ -1140,5 +1140,5 @@ function hoursWorked(month, part) {
 
 function getLastDayOfMonth(month) {
   let noOfDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return noOfDays[month];
+  return noOfDays[Number(month)];
 }
