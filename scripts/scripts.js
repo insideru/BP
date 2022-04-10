@@ -632,7 +632,9 @@ function buildEventsObject(eventsArray) {
 function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
-    pontajeObjectArray.push({date: new Date(key), hours: eventsObject[key]});
+    let datedDate = new Date(key);
+    datedDate.setHours(0, 0, 0);
+    pontajeObjectArray.push({date: datedDate, hours: eventsObject[key]});
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
@@ -1110,12 +1112,12 @@ function hoursWorked(month, part) {
   let res = [0, 0, 0];
   if (part==1) {
     //1-15
-    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
+    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
   } else {
     //16-31
-    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1);
+    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
+    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1, 0, 0, 0);
   }
   console.log(holidayArray);
   pontajeObjectArray.forEach(element => {
