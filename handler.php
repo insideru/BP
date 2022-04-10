@@ -3,9 +3,9 @@ require_once './include/account.php';
 require_once './include/elems.php';
 require_once './include/admin_elems.php';
 
-//if (!isset($_POST["action"])) {
-//    die("Aceasta pagina nu se acceseaza direct.");
-//}
+if (!$account->authenticated) {
+    die();
+}
 
 if ($_POST["action"]=="login") {
     if (!empty($_POST["email"])) {
