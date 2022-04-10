@@ -1117,8 +1117,8 @@ function hoursWorked(month, part) {
     var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
     var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1);
   }
-  console.log(intervalStart, intervalEnd);
   pontajeObjectArray.forEach(element => {
+    console.log(element.date, intervalStart, intervalEnd);
     if (element.date>=intervalStart && element.date<=intervalEnd) {
       //avem 3 variante
       if (isInArray(holidayArray, element.date)) {
