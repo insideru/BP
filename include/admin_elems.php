@@ -5,11 +5,10 @@ require_once 'account.php';
 global $account;
 $account->sessionLogin();
 
-if ($account->authenticated || $_POST["action"]=="login") {} else 
+if (($account->authenticated && $account->getGroup() !=0 ) || $_POST["action"]=="login") {} else 
 {
     die();
 }
-
 function addProjCat(string $name) {
     /* Global $pdo object */
     global $pdo;
