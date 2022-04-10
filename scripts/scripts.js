@@ -630,7 +630,9 @@ function buildEventsObject(eventsArray) {
 
 function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
+  console.log(eventsObject);
   for(let key in eventsObject){
+    console.log(key);
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
@@ -989,10 +991,6 @@ function changeConcediu (accID, oldValue) {
   });
 }
 
-function calculatePontaje(month) {
-  $('.biweekly').html(month);
-}
-
 function buildMonthlyData(month) {
   //$('.monthlyData').addClass('event-container');
   let stoul = "stourile cele mai tari";
@@ -1096,4 +1094,14 @@ function changeAccountsObject(elementName, accID, value) {
       }
     }
   });
+}
+
+function hoursWorked(month, part) {
+  let wrkDate = getSelectedDate("01 " + month);
+
+  if (part==1) {
+    //1-15
+  } else {
+    //16-31
+  }
 }
