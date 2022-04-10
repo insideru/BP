@@ -583,7 +583,7 @@
             markup += '<div class="calendar-events">'+
                             '<div class="event-header"><p></p></div>'+
                             '<div class="event-list"></div>'+
-                            '<div class="biweekly"></div>'
+                            '<div class="biweekly"></div>'+
                         '</div>';
 
             // --- Finally, build it now! --- //
