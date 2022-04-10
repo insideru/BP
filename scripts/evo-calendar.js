@@ -1078,6 +1078,7 @@
         } else if (typeof arr === 'object') { // Single event
             addEvent(arr)
         }
+        _.buildCalendar();
         _.buildEventList();
         _.initEventListener(); // test
     };
