@@ -126,19 +126,6 @@
                         nextYearText: "Volgend jaar",
                         closeSidebarText: "Sluit de zijbalk",
                         closeEventListText: "Sluit de event lijst"
-                    },
-                    ro: {
-                        days: ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"],
-                        daysShort: ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sam"],
-                        daysMin: ["Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sa"],
-                        months: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
-                        monthsShort: ["Ian", "Feb", "Mar", "Apr", "Mai", "Iun", "Iul", "Aug", "Sep", "Oct", "Noi", "Dec"],
-                        noEventForToday: "Nu ai pontat astazi!",
-                        noEventForThisDay: "Nu ai pontat in aceasta zi!",
-                        previousYearText: "Anul precedent",
-                        nextYearText: "Anul viitor",
-                        closeSidebarText: "Inchide lista ani",
-                        closeEventListText: "Inchide lista de evenimente"
                     }
                 }
             }
@@ -577,13 +564,12 @@
                                     markup += '<td class="'+headerClass+'">'+_.$label.days[i]+'</td>';
                                 }
                                 markup += '</tr></table>'+
-                        '<div class="monthlyData"></div></div>';
+                        '</div>';
 
             // events
             markup += '<div class="calendar-events">'+
                             '<div class="event-header"><p></p></div>'+
                             '<div class="event-list"></div>'+
-                            '<div class="biweekly"></div>'
                         '</div>';
 
             // --- Finally, build it now! --- //
@@ -609,6 +595,7 @@
         _.buildCalendar();
         _.buildEventList();
         _.initEventListener(); // test
+
         _.resize();
     }
 
@@ -652,10 +639,9 @@
             } else {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForThisDay+'</p>';
             }
-            markup += '<br><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
+            markup += '</div>';
         }
-        eventListEl.append(markup);
-        //calculatePontaje(_.$active.date);
+        eventListEl.append(markup)
     }
 
     // v1.0.0 - Add single event to event list
@@ -772,8 +758,6 @@
         if(_.options.calendarEvents != null) { // For event indicator (dots)
             _.buildEventIndicator();
         }
-
-        buildMonthlyData(title);
     };
 
     // v1.0.0 - Add event indicator/s (dots)
