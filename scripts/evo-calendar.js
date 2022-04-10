@@ -655,7 +655,7 @@
             markup += '<br><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
         }
         eventListEl.append(markup);
-        //calculatePontaje(_.$active.date);
+        calculatePontaje(_.$active.date);
     }
 
     // v1.0.0 - Add single event to event list
