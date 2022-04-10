@@ -5,7 +5,8 @@ require_once 'account.php';
 global $account;
 $account->sessionLogin();
 
-if (!$account->authenticated && $account->getGroup() !=0 ) {
+if ($account->authenticated || $_POST["action"]=="login") {} else 
+{
     die();
 }
 

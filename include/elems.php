@@ -5,8 +5,9 @@ require_once 'account.php';
 global $account;
 $account->sessionLogin();
 
-if (!$account->authenticated) {
-	die();
+if ($account->authenticated || $_POST["action"]=="login") {} else 
+{
+    die();
 }
 
 function addAttendance(string $guid, string $date, string $start, string $end) {
