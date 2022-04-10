@@ -10,6 +10,7 @@ timesheetsArray = [];
 holidayArray = [];
 daysoffArray = [];
 workedTime = 0;
+pontajeObjectArray = [];
 pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
@@ -630,12 +631,12 @@ function buildEventsObject(eventsArray) {
 
 function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
-  console.log(eventsObject);
   for(let key in eventsObject){
-    console.log(key);
+    pontajeObjectArray.push({date: new Date(key), hours: eventsObject[key]});
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
+ console.log(pontajeObjectArray);
 }
 
 function buildCalendarHolidays(doArray, hdArray) {
