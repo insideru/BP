@@ -1119,15 +1119,13 @@ function hoursWorked(month, part) {
     var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
     var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1, 0, 0, 0);
   }
-  console.log(holidayArray);
   pontajeObjectArray.forEach(element => {
-    console.log(element.date);
     if (element.date>=intervalStart && element.date<=intervalEnd) {
       //avem 3 variante
       if (isInArray(holidayArray, element.date)) {
         //e 2x
         res[0]+= element.hours;
-      } else if (element.date.getDay()>0 && element.date.getDay()<6) {
+      } else if (element.date.getDay()==0 || element.date.getDay()==6) {
         //e 1,5x
         res[1]+= element.hours;
       } else {
