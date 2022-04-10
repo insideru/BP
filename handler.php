@@ -3,6 +3,7 @@ require_once './include/account.php';
 require_once './include/elems.php';
 require_once './include/admin_elems.php';
 
+global $account;
 $account->sessionLogin();
 
 if ($account->authenticated || $_POST["action"]=="login") {} else 
