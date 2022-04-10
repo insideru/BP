@@ -999,6 +999,7 @@ function buildMonthlyData(month) {
   //$('.monthlyData').append('</p><div class="event-icon"><div class="event-bullet-pontare-bilunara" style="background-color:#8773c1"></div></div><div class="event-info"><p class="event-title">Pontaje 15-31</p><p class="event-desc">' + stoul + '</p></div></div></p>');
   //let markup = '<table class="calendar-table"><tbody>><tr class="calendar-header"><td class="calendar-header-day">1-15</td><td class="calendar-header-day">15-31</td></tr><tr class="calendar-body center-align"><td style="font-size: 14px;">'+stoul+'</td><td style="font-size: 14px;">'+stoul+'</td></tr></tbody></table>';
   let wrkDate = getSelectedDate("01 " + month).split('-');
+  console.log(wrkDate);
   let primaParte = hoursWorked(month, 1);
   let adouaParte = hoursWorked(month, 2);
   let markup = '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody>'+
@@ -1118,6 +1119,7 @@ function hoursWorked(month, part) {
     var intervalStart = new Date(wrkDate[2], wrkDate[1], 16);
     var intervalEnd = new Date(wrkDate[2], wrkDate[1], getLastDayOfMonth(wrkDate[1]));
   }
+  console.log(intervalStart, intervalEnd);
   pontajeObjectArray.forEach(element => {
     if (element.date>=intervalStart && element.date<=intervalEnd) {
       //avem 3 variante
