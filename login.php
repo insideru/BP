@@ -2,6 +2,7 @@
 <html>
     <head>
         <!-- Compiled and minified CSS -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
         <link rel="stylesheet" href="styles/styles.css">
