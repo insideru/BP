@@ -1001,14 +1001,14 @@ function buildMonthlyData(month) {
   let wrkDate = getSelectedDate("01 " + month);
   let primaParte = hoursWorked(month, 1);
   let adouaParte = hoursWorked(month, 2);
-  let markup = '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody><tr>'+
-                '<td> ore 2x: ' + primaParte[0] + '</td>'+
-                '<td> ore 2x: ' + adouaParte[0] + '</td>'+
-                '<td> ore 1,5x: ' + primaParte[1] + '</td>'+
-                '<td> ore 1,5x: ' + adouaParte[1] + '</td>'+
-                '<td> ore 1x: ' + primaParte[2] + '</td>'+
-                '<td> ore 1x: ' + adouaParte[2] + '</td>'+
-                '<td> Total: ' + (primaParte[0]*2 + primaParte[1]*1.5 + primaParte[2]) + '</td>'+
+  let markup = '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody>'+
+                '<tr><td> ore 2x: ' + primaParte[0] + '</td>'+
+                '<td> ore 2x: ' + adouaParte[0] + '</td></tr>'+
+                '<tr><td> ore 1,5x: ' + primaParte[1] + '</td>'+
+                '<td> ore 1,5x: ' + adouaParte[1] + '</td></tr>'+
+                '<tr><td> ore 1x: ' + primaParte[2] + '</td>'+
+                '<td> ore 1x: ' + adouaParte[2] + '</td></tr>'+
+                '<tr><td> Total: ' + (primaParte[0]*2 + primaParte[1]*1.5 + primaParte[2]) + '</td>'+
                 '<td> Total: ' + (adouaParte[0]*2 + adouaParte[1]*1.5 + adouaParte[2]) + '</td>'+
                 '</tr></tbody></table>';
   $('.monthlyData').html(markup);
