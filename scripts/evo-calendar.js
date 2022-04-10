@@ -420,6 +420,7 @@
             _.toggleEventList(false);
 
             if (_.windowW <= _.$breakpoints.mobile) { // mobile
+                _.toggleEventList(true);
                 $(window)
                     .off('click.evocalendar.evo-' + _.instanceUid)
             } else {
