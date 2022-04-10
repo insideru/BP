@@ -633,7 +633,6 @@ function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
     pontajeObjectArray.push({date: new Date(key), hours: eventsObject[key]});
-    console.log(pontajeObjectArray);
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
@@ -1118,7 +1117,6 @@ function hoursWorked(month, part) {
     var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16);
     var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1])+1);
   }
-  console.log(pontajeObjectArray);
   pontajeObjectArray.forEach(element => {
     console.log(element.date, intervalStart, intervalEnd);
     if (element.date>=intervalStart && element.date<=intervalEnd) {
