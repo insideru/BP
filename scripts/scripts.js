@@ -633,6 +633,7 @@ function buildTimesheetCalendarEvents(eventsArray) {
   var eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
     pontajeObjectArray.push({date: new Date(key), hours: eventsObject[key]});
+    console.log(pontajeObjectArray);
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
