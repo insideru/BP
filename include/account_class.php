@@ -538,7 +538,7 @@ public function sessionLogin(): bool
 
 			//iteram prin toate sesiunile
 			while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
- 				$hashedToken = $row['session_token'];
+ 				$hashedToken = $row['account_token'];
 				echo $accountToken . '||' . $hashedToken .'<BR>';
  				//verificam daca se potriveste cookieul cu tokenul
  				if (password_verify($accountToken, $hashedToken)) {
