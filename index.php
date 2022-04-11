@@ -29,6 +29,6 @@ if ($account->authenticated) {
     }
     else {
         //echo "Nu exista user logat";
-        require 'login.php';
+        require 'login.html';
     }
 ?>

@@ -5261,7 +5261,7 @@ small {
 }
 
 .btn:hover, .btn-large:hover, .btn-small:hover {
-  background-color: #2bbbad;
+  background-color: #0f4979;
 }
 
 .btn-floating {
@@ -7600,7 +7600,7 @@ input[type=range]::-ms-thumb {
 }
 
 .sidenav li > a.btn:hover, .sidenav li > a.btn-large:hover, .sidenav li > a.btn-small:hover, .sidenav li > a.btn-large:hover {
-  background-color: #2bbbad;
+  background-color: #0f4979;
 }
 
 .sidenav li > a.btn-floating:hover {
