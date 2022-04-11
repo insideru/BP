@@ -4,11 +4,9 @@ require_once 'account.php';
 
 global $account;
 $account->sessionLogin();
-echo 'account este ' . $account->authenticated . ' si grupul este' . $account->getGroup();
-if (($account->authenticated && $account->getGroup() !=0 ) || $_POST["action"]=="login") {
-    echo 'wtf!';
+
+if (($account->authenticated && $account->getGroup() ==0 ) || $_POST["action"]=="login") {
 } else {
-    echo 'muie!';
     die();
 }
 function addProjCat(string $name) {
