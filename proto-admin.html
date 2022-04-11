@@ -7,7 +7,17 @@
     <style href="styles/styles.css"></style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
-    <body>
+    <body><nav>
+      <div class="nav-wrapper">
+        <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
+        <ul id="nav-mobile" class="left">
+          <li><a href="#" id="linkDashboard">Dashboard</a></li>
+          <li><a href="#" id="linkPontaj">Ponteaza</a></li>
+          <li><a href="#" id="linkConcediu">Concediu</a></li>
+          <?php global $account; $account->sessionLogin(); if ($account->getGroup()==0) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+        </ul>
+      </div>
+    </nav>
         <div id="container" class="container">
         <div class="row">
             <div class="col s12">

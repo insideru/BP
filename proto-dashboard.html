@@ -23,7 +23,7 @@
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
             <li><a href="#" id="linkPontaj">Ponteaza</a></li>
             <li><a href="#" id="linkConcediu">Concediu</a></li>
-            <?php global $account; $account->sessionLogin(); if ($account->getGroup()==0) {echo '<li><a href="/?page=concediu" id="linkAdmin">Admin</a></li>';}?>
+            <?php global $account; $account->sessionLogin(); if ($account->getGroup()==0) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
           </ul>
         </div>
       </nav>
