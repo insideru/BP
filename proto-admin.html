@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -338,6 +341,7 @@
       //}
 
         $( document ).ready(function() {
+          addLinks();
           var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
             defaultDate: new Date(),    
