@@ -718,6 +718,7 @@ function ponteazaWithDate(date) {
 function initCalendar() {
   //initialize calendar
   $('#calendar').evoCalendar({
+    theme: 'Blueprint',
     language: 'ro',
     format:	'yyyy-mm-dd',
     eventHeaderFormat: 'dd MM yyyy',
