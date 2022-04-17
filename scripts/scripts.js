@@ -235,17 +235,14 @@ function errorLog(event) {
 
   let msg = source = lineNo = columnNo = error = time = "";
     event.preventDefault();
+    console.log(event);
     msg = event.message;
     source = event.filename;
     lineNo = event.lineno;
     columnNo = event.colno;
     error = event.error;
     time = event.time;
-    for (var key in event) {
-      if (event.hasOwnProperty(key)) {
-        console.log(key + " => " + event[key]);
-      }
-    }
+    
     js_error++;
     if (js_error<10) {
         var req = new XMLHttpRequest();
@@ -257,7 +254,6 @@ function errorLog(event) {
             'Column: ' + columnNo,
             'Error object: ' + JSON.stringify(error)
           ].join(' - ');
-          console.log(message);
         req.open("POST", "errorlog.php");
         req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         req.send(message);
