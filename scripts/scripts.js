@@ -536,25 +536,24 @@ function validatePontaj () {
 }
 
 function validateConcediu () {
-  var data1 = $("#startDate").val();
   var valid = true;
-  if (!validateDate(data1)) {
+  if (!validateDate($("#startDate").val())) {
     valid = false;
     $("#startDate").addClass("invalid");
   } else {
     $("#startDate").addClass("valid");
   }
-  var data2 = $("#endDate").val();
-  if (!validateDate(data2)) {
+  if (!validateDate($("#endDate").val())) {
     valid = false;
     $("#endDate").addClass("invalid");
   } else {
     $("#endDate").addClass("valid");
   }
-  console.log(data1, data2);
+  let data1 = getSelectedDate($("#startDate").val()).split('-');
+  let data2 = getSelectedDate($("#endDate").val()).split('-');
   if (valid) {
-    d1 = new Date(data1);
-    d2 = new Date(data2);
+    d1 = new Date(data1[2], data1[1], data1[0], 0, 0, 0);
+    d2 = new Date(data2[2], data2[1], data2[0], 0, 0, 0);
     console.log(d1, d2);
     if (d1 > d2) {
       valid = false;
@@ -568,7 +567,7 @@ function validateConcediu () {
     }
     console.log(d1, d2);
     if (d2 > d1) {
-      nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
+      nrZileLibere = getNoDaysOff(new Date(data1[2], data1[1], data1[0], 0, 0, 0), new Date(data2[2], data2[1], data2[0], 0, 0, 0));
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
