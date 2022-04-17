@@ -563,8 +563,9 @@ function validateConcediu () {
       M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
     }
     if (d2 > d1) {
+      console.log(d1, d2);
       nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
-      //console.log(nrZileLibere);
+      console.log(nrZileLibere);
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
