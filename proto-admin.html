@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
     <style href="styles/styles.css"></style>
-    <script src="scripts/jquery-3.6.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
     <body><nav>
       <div class="nav-wrapper">
@@ -333,7 +333,6 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
       js_error = 0;
-      errorLog();
       M.AutoInit();
       selProjCat = "";
       selProjCat2 = "";
@@ -403,8 +402,6 @@
           //console.log(accountsObject);
           $('.tooltipped').tooltip();
         });
-
-        patrizia();
                 
         $('form').submit(function(event) {
           event.preventDefault();

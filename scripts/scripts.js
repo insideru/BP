@@ -14,6 +14,7 @@ pontajeObjectArray = [];
 pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
+nrZileLibere = 0;
 
 $.fn.exists = function () {
     return this.length !== 0;
