@@ -378,7 +378,7 @@ function initRange(elemID) {
   behaviour: 'none',
   pips: {
     mode: 'steps',
-    density: 3
+    density: 2
   },
   format: wNumb( { decimals: 1 })
   });
