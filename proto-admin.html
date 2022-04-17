@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>window.addEventListener("error", function(event) {
-      for (var key in event) {
-        if (event.hasOwnProperty(key)) {
-          console.log(key + " => " + event[key]);
-        }
-      }
-    }
-    );</script>
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/materialize.css">
@@ -341,6 +333,9 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
       js_error = 0;
+      window.addEventListener("error", (event) => {
+        console.log(event);
+      });
       M.AutoInit();
       selProjCat = "";
       selProjCat2 = "";
