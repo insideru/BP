@@ -231,6 +231,36 @@ function populateUsers() {
   });
 }
 
+function errorLog(event) {
+
+  let msg = source = lineno = colno = error = time = "";
+    event.preventDefault();
+    msg = event.message;
+    source = event.filename;
+    lineNo = event.lineno;
+    columnNo = event.colno;
+    error = event.error;
+    time = event.time;
+
+    js_error++;
+    if (js_error<10) {
+        var req = new XMLHttpRequest();
+        var params = "msg=" + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url) + "&lineNo=" + lineNo;
+        var message = 'key=BP_ERROR_LOG&err=' + [
+            'Time: ' + time,
+            'Message: ' + msg,
+            'Source: ' + source,
+            'Line: ' + lineNo,
+            'Column: ' + columnNo,
+            'Error object: ' + JSON.stringify(error)
+          ].join(' - ');
+          console.log(message);
+        req.open("POST", "errorlog.php");
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.send(message);
+    }
+}
+
 function getHolidays() {
   var guidCookie = getCookie("userGUID");
   $.get("handler.php?r=holidays&collab_guid="+guidCookie, function(data, status) {
