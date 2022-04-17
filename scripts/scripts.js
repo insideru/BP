@@ -551,31 +551,30 @@ function validateConcediu () {
   } else {
     $("#endDate").addClass("valid");
   }
-  console.log(data2, data1);
   if (valid) {
     d1 = new Date(data1);
     d2 = new Date(data2);
-    console.log(d1, d2);
     if (d1 > d2) {
       valid = false;
       M.toast({html: 'Data de inceput nu poate fi dupa data de sfarsit a concediului!'});
+      return false;
     }
     if (d1 - d2 == 0) {
       valid = false;
       M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
+      return false;
     }
     if (d2 > d1) {
-      console.log(d1, d2);
       nrZileLibere = getNoDaysOff(new Date(data1), new Date(data2));
       daysoffArray.forEach(element => {
         if (compareDateRanges(d1, d2, element[0], element[1])) {
           M.toast({html: 'Perioada aleasa se suprapune cu un alt concediu!'});
-          valid = false;
+          return false;
         }
       });
       if (nrZileLibere<1) {
         M.toast({html: 'In perioada aleasa toate zilele sunt libere!'});
-        valid = false;
+        return false;
       }
     }
     var overlap = false;
@@ -586,7 +585,7 @@ function validateConcediu () {
     });
     if (overlap) {
       M.toast({html: 'In perioada aleasa exista zile pontate!'});
-      valid = false;
+      return false;
     }
   }
   return valid;
