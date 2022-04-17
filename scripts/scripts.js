@@ -376,6 +376,10 @@ function initRange(elemID) {
   },
   connect: 'lower',
   behaviour: 'none',
+  pips: {
+    mode: 'steps',
+    density: 3
+  }
   format: wNumb( { decimals: 1 })
   });
 
