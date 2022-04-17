@@ -7,13 +7,13 @@
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-user-select: none;
-  -ms-touch-action: none;
-  touch-action: none;
+  -ms-touch-action: pan-y;
   -ms-user-select: none;
   -moz-user-select: none;
   user-select: none;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  touch-action: pan-y;
 }
 .noUi-target {
   position: relative;
@@ -70,7 +70,6 @@
 .noUi-touch-area {
   height: 100%;
   width: 100%;
-  touch-action: pan-y;
 }
 .noUi-state-tap .noUi-connect,
 .noUi-state-tap .noUi-origin {
