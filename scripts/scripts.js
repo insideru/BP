@@ -375,7 +375,7 @@ function initRange(elemID) {
       'max': 15
   },
   connect: 'lower',
-  behaviour: 'tap-drag',
+  behaviour: 'drag',
   format: wNumb( { decimals: 1 })
   });
 
@@ -453,6 +453,33 @@ function getSelectedDate(selectedDate) {
   //anul e ultima
   an = dateArray[2];
   return ziua + "-" + luna + "-" + an;
+}
+
+function getSelectedISODate(selectedDate) {
+  dateArray = selectedDate.split(" ");
+
+  //ziua e prima cifra
+  ziua = dateArray[0];
+
+  //luna o transformam in numar
+  switch (dateArray[1].slice(0,3)) {
+      case 'Ian'  : luna = "01"; break;
+      case 'Feb'  : luna = "02"; break;
+      case 'Mar'  : luna = "03"; break;
+      case 'Apr'  : luna = "04"; break;
+      case 'Mai'  : luna = "05"; break;
+      case 'Iun'  : luna = "06"; break;
+      case 'Iul'  : luna = "07"; break;
+      case 'Aug'  : luna = "08"; break;
+      case 'Sep'  : luna = "09"; break;
+      case 'Oct'  : luna = "10"; break;
+      case 'Noi'  : luna = "11"; break;
+      case 'Dec'  : luna = "12"; break;
+  }
+
+  //anul e ultima
+  an = dateArray[2];
+  return an + "-" + luna + "-" + ziua;
 }
 
 function validateTime (time) {
