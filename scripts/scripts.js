@@ -241,7 +241,11 @@ function errorLog(event) {
     columnNo = event.colno;
     error = event.error;
     time = event.time;
-
+    for (var key in event) {
+      if (obj.hasOwnProperty(key)) {
+        console.log(key + " => " + event[key]);
+      }
+    }
     js_error++;
     if (js_error<10) {
         var req = new XMLHttpRequest();
