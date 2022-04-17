@@ -551,6 +551,7 @@ function validateConcediu () {
   } else {
     $("#endDate").addClass("valid");
   }
+  console.log(d1, d2);
   if (valid) {
     d1 = new Date(data1);
     d2 = new Date(data2);
