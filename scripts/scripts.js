@@ -375,7 +375,7 @@ function initRange(elemID) {
       'max': 15
   },
   connect: 'lower',
-  behaviour: 'drag',
+  behaviour: 'none',
   format: wNumb( { decimals: 1 })
   });
 
