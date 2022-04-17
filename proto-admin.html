@@ -338,14 +338,14 @@
           if (js_error<10) {
               var req = new XMLHttpRequest();
               var params = "msg=" + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url) + "&lineNo=" + lineNo;
-              var message = 'err=' + [
+              var message = 'key=BP_ERROR_LOG&err=' + [
                   'Message: ' + msg,
                   'URL: ' + url,
                   'Line: ' + lineNo,
                   'Column: ' + columnNo,
                   'Error object: ' + JSON.stringify(error)
                 ].join(' - ');
-              req.open("POST", "/errorlog.php?key=BP_ERROR_LOG");
+              req.open("POST", "errorlog.php");
               req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
               req.send(message);
           }
@@ -416,7 +416,7 @@
 
           //initializare utilizatori
           populateUsers();
-          console.log(accountsObject);
+          //console.log(accountsObject);
           $('.tooltipped').tooltip();
         });
 
