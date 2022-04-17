@@ -2,7 +2,8 @@ CREATE TABLE `projects` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `client_id` int(10) NOT NULL,
-  `type_id` int(10) NOT NULL
+  `type_id` int(10) NOT NULL,
+  `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `projects`

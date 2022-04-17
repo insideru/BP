@@ -1,7 +1,7 @@
   CREATE TABLE `collaborators` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `group` int(10) NOT NULL
+  `collabCatID` int(10) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   ALTER TABLE `collaborators`

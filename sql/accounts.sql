@@ -14,7 +14,7 @@ CREATE TABLE `accounts` (
 
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`account_id`),
-  ADD UNIQUE KEY `account_username` (`account_username`);
+  ADD UNIQUE KEY `account_username` (`account_username`),
   ADD UNIQUE KEY `collab_id` (`collab_id`);
 
 ALTER TABLE `accounts`
