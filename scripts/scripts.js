@@ -233,7 +233,7 @@ function populateUsers() {
 
 function errorLog(event) {
 
-  let msg = source = lineno = colno = error = time = "";
+  let msg = source = lineNo = columnNo = error = time = "";
     event.preventDefault();
     msg = event.message;
     source = event.filename;
@@ -245,7 +245,6 @@ function errorLog(event) {
     js_error++;
     if (js_error<10) {
         var req = new XMLHttpRequest();
-        var params = "msg=" + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url) + "&lineNo=" + lineNo;
         var message = 'key=BP_ERROR_LOG&err=' + [
             'Time: ' + time,
             'Message: ' + msg,
