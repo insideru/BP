@@ -242,7 +242,7 @@ function errorLog(event) {
     error = event.error;
     time = event.time;
     for (var key in event) {
-      if (obj.hasOwnProperty(key)) {
+      if (event.hasOwnProperty(key)) {
         console.log(key + " => " + event[key]);
       }
     }
