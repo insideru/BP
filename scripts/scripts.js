@@ -231,19 +231,12 @@ function populateUsers() {
   });
 }
 
-function errorLog(event) {
-
-  let msg = source = lineNo = columnNo = error = time = "";
-    event.preventDefault();
-    console.log(event);
-    msg = event.message;
-    source = event.filename;
-    lineNo = event.lineno;
-    columnNo = event.colno;
-    error = event.error;
-    time = event.time;
+function errorLog() {
+  window.onerror = function(msg, url, line, col, error) {
+    console.log(msg + " || " + url + " || " + line + " || " + col + " || " + error);
+  }
     
-    js_error++;
+    /*js_error++;
     if (js_error<10) {
         var req = new XMLHttpRequest();
         var message = 'key=BP_ERROR_LOG&err=' + [
@@ -257,7 +250,7 @@ function errorLog(event) {
         req.open("POST", "errorlog.php");
         req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         req.send(message);
-    }
+    }*/
 }
 
 function getHolidays() {
