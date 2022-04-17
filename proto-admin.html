@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script>window.addEventListener("error", errorLog)</script>
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/materialize.css">
@@ -333,7 +334,6 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
       js_error = 0;
-      window.addEventListener("error", errorLog);
       M.AutoInit();
       selProjCat = "";
       selProjCat2 = "";
