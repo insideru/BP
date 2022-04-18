@@ -84,7 +84,55 @@ function drawProjectsChart () {
 }
 
 function updateProjectCharts (projID) {
-    console.log("Updated cu proiectul " + chartedProjects[projID].name);
+    //console.log("Updated cu proiectul " + chartedProjects[projID].name);
+    let wrkData = getActivitiesAndCollabs (projID);
+
+    //graficul pe activitati
+    let activitiesData = wrkData[0];
+    let activitiesChartData = {
+        series: [
+        {
+          data: activitiesData
+        }
+      ],
+        legend: {
+        show: false
+      },
+      chart: {
+        height: 'auto',
+        type: 'treemap'
+      },
+      title: {
+        text: chartedProjects[projID].name
+      }
+      };
+
+      let activitiesChart = new ApexCharts(document.querySelector("#projectsActivityChart"), activitiesChartData);
+      activitiesChart.render();
+
+      //graficul pe muluci
+      let collabData = wrkData[1];
+      let collabChartData = {
+        series: [
+        {
+          data: collabData
+        }
+      ],
+        legend: {
+        show: false
+      },
+      chart: {
+        height: 'auto',
+        type: 'treemap'
+      },
+      title: {
+        text: chartedProjects[projID].name
+      }
+      };
+
+      let collabChart = new ApexCharts(document.querySelector("#projectsCollabChart"), collabChartData);
+      collabChart.render();
+
 }
 
 function buildProjectWorkHours (projID) {
@@ -95,4 +143,47 @@ function buildProjectWorkHours (projID) {
         }
     });
     return retval;
+}
+
+function getActivitiesAndCollabs (projID) {
+    let tmpActivities = {};
+    let tmpCollabs = {};
+    let res = [];
+    let res0 = [];
+    let res1 = [];
+    alltimesheetsObject.forEach(element => {
+        if (Number(element.project_id) == projID) {
+            tmpActivities[getActivityNameFromID(element.activity_id)] += Number(element.time);
+            tmpCollabs[getCollabNameFromID(element.collab_id)] += Number(element.time);
+        }
+    });
+    Object.keys(tmpActivities).forEach(function(key,index) {
+        res0.push({x: key, Y: workObject[key]});
+    });
+    Object.keys(tmpCollabs).forEach(function(key,index) {
+        res1.push({x: key, Y: workObject[key]});
+    });
+    res.push(res0);
+    res.push(res1);
+    return res;
+}
+
+function getActivityNameFromID (activityID) {
+    let res="";
+    activitiesObject.forEach(element => {
+        if (Number(element.id) == activityID) {
+            res = element.name;
+        }
+    });
+    return res;
+}
+
+function getCollabNameFromID (collabID) {
+    let res="";
+    collabsObject.forEach(element => {
+        if (Number(element.id) == collabID) {
+            res = element.name;
+        }
+    });
+    return res;
 }
