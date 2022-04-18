@@ -1,8 +1,20 @@
 function drawProjectsChart () {
     let options = 0;
-    let chart = new ApexCharts(document.querySelector("#chart"), options);
+    projectsObject.forEach(element => {
+        if (element.active) {
+            let projDetails = buildProjectWorkHours(element.id);
+            console.log(element.name, projDetails);
+        }
+    });
+    let chart = new ApexCharts(document.querySelector("#projectsChart"), options);
 }
 
-function buildProjectWorkHours (proj) {
-    
+function buildProjectWorkHours (projID) {
+    let retval = 0;
+    alltimesheetsObject.forEach(element => {
+        if (element.proj_id == projID) {
+            retval+=element.time;
+        }
+    });
+    return retval;
 }
