@@ -29,7 +29,7 @@ function drawProjectsChart () {
         }
     });
     console.log(colorArray);
-    let chartHeight = (chartSeriesData.length+1)*50;
+    let chartHeight = (chartSeriesData.length+1)*40;
     let chartOptions = {
         series: [
         {
