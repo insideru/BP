@@ -1,6 +1,6 @@
 function drawProjectsChart () {
-    let chartSeriesDataOnTrack = [];
-    let chartSeriesDataOffTrack = [];
+    let chartSeriesData = [];
+    let colorArray = [];
     projectsObject.forEach(element => {
         if (element.active) {
             let projActualTime = buildProjectWorkHours(element.id);
@@ -20,10 +20,11 @@ function drawProjectsChart () {
                   }
                 ]
               };
+              chartSeriesData.push(projChartData);
               if (projActualTime>projBudget) {
-                chartSeriesDataOffTrack.push(projChartData);
+                colorArray.push('#00E396');
               } else {
-                chartSeriesDataOnTrack.push(projChartData);
+                colorArray.push('e51c23');
               }
         }
     });
@@ -47,7 +48,7 @@ function drawProjectsChart () {
           horizontal: true,
         }
       },
-      colors: ['#00E396', '#e51c23'],
+      colors: colorArray,
       dataLabels: {
         formatter: function(val, opt) {
           const goals =
