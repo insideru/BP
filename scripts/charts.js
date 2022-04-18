@@ -156,11 +156,17 @@ function getActivitiesAndCollabs (projID) {
     alltimesheetsObject.forEach(element => {
         if (Number(element.project_id) == projID) {
             let tmpAct = getActivityNameFromID(element.activity_id);
-            console.log(tmpAct);
             let tmpCollab = getCollabNameFromID(element.collab_id);
-            console.log(tmpCollab);
-            tmpActivities[tmpAct] += Number(element.time);
-            tmpCollabs[tmpCollab] += Number(element.time);
+            if (isNaN(tmpActivities[tmpAct])) {
+                tmpActivities[tmpAct] = Number(element.time);
+            } else {
+                tmpActivities[tmpAct] += Number(element.time);
+            }
+            if (isNaN(tmpCollabs[tmpCollab])) {
+                tmpCollabs[tmpCollab] = Number(element.time);
+            } else {
+                tmpCollabs[tmpCollab] += Number(element.time);
+            }
         }
     });
     console.log(tmpActivities);
