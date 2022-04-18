@@ -425,6 +425,34 @@ function getActivities() {
     return $fields;
 }
 
+function getAllTimesheets() {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'SELECT * FROM '.$schema.'.timesheets';
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute();
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+
+	$fields=array();
+
+	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
+    {
+		array_push($fields, $row);
+	}
+
+	return $fields;
+}
+
 function deleteHoliday (string $date) {
     global $pdo;
 	global $schema;
