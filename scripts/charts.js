@@ -33,7 +33,6 @@ function drawProjectsChart () {
     let chartOptions = {
         series: [
         {
-          name: 'Proiecte',
           data: chartSeriesData
         }
       ],
@@ -44,6 +43,7 @@ function drawProjectsChart () {
       plotOptions: {
         bar: {
           horizontal: true,
+          distributed: true,
         }
       },
       colors: colorArray,
@@ -64,7 +64,7 @@ function drawProjectsChart () {
         showForSingleSeries: true,
         customLegendItems: ['On track', 'Buget depasit', 'Durata bugetata'],
         markers: {
-          fillColors: ['#00E396', '#e51c23', '#775DD0']
+          fillColors: ['#00E396', '#E51C23', '#775DD0']
         }
       }
       };
