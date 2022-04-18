@@ -3,6 +3,7 @@ CREATE TABLE `projects` (
   `name` varchar(255) NOT NULL,
   `client_id` int(10) NOT NULL,
   `type_id` int(10) NOT NULL,
+  `budget` INT(10) NOT NULL DEFAULT '100',
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
