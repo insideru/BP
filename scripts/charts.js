@@ -1,5 +1,6 @@
 function drawProjectsChart () {
-    let chartSeriesData = [];
+    let chartSeriesDataOnTrack = [];
+    let chartSeriesDataOffTrack = [];
     projectsObject.forEach(element => {
         if (element.active) {
             let projActualTime = buildProjectWorkHours(element.id);
@@ -13,24 +14,32 @@ function drawProjectsChart () {
                   {
                     name: 'Ore bugetate',
                     value: projBudget,
-                    strokeWidth: 2,
-                    strokeDashArray: 2,
+                    strokeWidth: 5,
+                    strokeHeight: 10,
                     strokeColor: '#775DD0'
                   }
                 ]
               };
-              chartSeriesData.push(projChartData);
+              if (projActualTime>projBudget) {
+                chartSeriesDataOffTrack.push(projChartData);
+              } else {
+                chartSeriesDataOnTrack.push(projChartData);
+              }
         }
     });
     let chartOptions = {
         series: [
         {
-          name: 'Actual',
-          data: chartSeriesData
+          name: 'On Track',
+          data: chartSeriesDataOnTrack
+        },
+        {
+            name: 'Depasite',
+            data: chartSeriesDataOffTrack
         }
       ],
         chart: {
-        height: 350,
+        height: 'auto',
         type: 'bar'
       },
       plotOptions: {
@@ -38,7 +47,7 @@ function drawProjectsChart () {
           horizontal: true,
         }
       },
-      colors: ['#00E396'],
+      colors: ['#00E396', '#e51c23'],
       dataLabels: {
         formatter: function(val, opt) {
           const goals =
@@ -54,9 +63,9 @@ function drawProjectsChart () {
       legend: {
         show: true,
         showForSingleSeries: true,
-        customLegendItems: ['Actual', 'Expected'],
+        customLegendItems: ['On track', 'Buget depasit', 'Durata bugetata'],
         markers: {
-          fillColors: ['#00E396', '#775DD0']
+          fillColors: ['#00E396', '#e51c23', '#775DD0']
         }
       }
       };
