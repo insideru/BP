@@ -89,6 +89,7 @@ function updateProjectCharts (projID) {
 
     //graficul pe activitati
     let activitiesData = wrkData[0];
+    console.log(activitiesData);
     let activitiesChartData = {
         series: [
         {
@@ -112,6 +113,7 @@ function updateProjectCharts (projID) {
 
       //graficul pe muluci
       let collabData = wrkData[1];
+      console.log(collabData);
       let collabChartData = {
         series: [
         {
@@ -158,10 +160,10 @@ function getActivitiesAndCollabs (projID) {
         }
     });
     Object.keys(tmpActivities).forEach(function(key,index) {
-        res0.push({x: key, Y: workObject[key]});
+        res0.push({x: key, Y: tmpActivities[key]});
     });
     Object.keys(tmpCollabs).forEach(function(key,index) {
-        res1.push({x: key, Y: workObject[key]});
+        res1.push({x: key, Y: tmpCollabs[key]});
     });
     res.push(res0);
     res.push(res1);
