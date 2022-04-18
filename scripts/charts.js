@@ -13,7 +13,7 @@ function buildProjectWorkHours (projID) {
     let retval = 0;
     alltimesheetsObject.forEach(element => {
         if (element.project_id == projID) {
-            retval+=element.time;
+            retval+=Number(element.time);
         }
     });
     return retval;
