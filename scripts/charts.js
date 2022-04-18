@@ -159,6 +159,8 @@ function getActivitiesAndCollabs (projID) {
             tmpCollabs[getCollabNameFromID(element.collab_id)] += Number(element.time);
         }
     });
+    console.log(tmpActivities);
+    console.log(tmpCollabs);
     Object.keys(tmpActivities).forEach(function(key,index) {
         res0.push({x: key, Y: tmpActivities[key]});
     });
