@@ -22,9 +22,9 @@ function drawProjectsChart () {
               };
               chartSeriesData.push(projChartData);
               if (projActualTime>projBudget) {
-                colorArray.push('#00E396');
-              } else {
                 colorArray.push('#E51C23');
+              } else {
+                colorArray.push('#00E396');
               }
         }
     });
@@ -44,6 +44,12 @@ function drawProjectsChart () {
         bar: {
           horizontal: true,
           distributed: true,
+        }
+      },
+      events: {
+        click: function(event, chartContext, config) {
+          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+          console.log(event, chartContext, config);
         }
       },
       colors: colorArray,
