@@ -2,7 +2,7 @@ function drawProjectsChart () {
     let chartSeriesData = [];
     let colorArray = [];
     projectsObject.forEach(element => {
-        if (element.active) {
+        if (Number(element.active)) {
             let projActualTime = buildProjectWorkHours(element.id);
             let projName = element.name;
             let projBudget = Number(element.budget);
@@ -28,6 +28,7 @@ function drawProjectsChart () {
               }
         }
     });
+    console.log()
     let chartOptions = {
         series: [
         {
