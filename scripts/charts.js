@@ -24,11 +24,11 @@ function drawProjectsChart () {
               if (projActualTime>projBudget) {
                 colorArray.push('#00E396');
               } else {
-                colorArray.push('e51c23');
+                colorArray.push('#E51C23');
               }
         }
     });
-    console.log()
+    let chartHeight = (chartSeriesData.length+1)*50;
     let chartOptions = {
         series: [
         {
@@ -37,7 +37,7 @@ function drawProjectsChart () {
         }
       ],
         chart: {
-        height: 'auto',
+        height: chartHeight,
         type: 'bar'
       },
       plotOptions: {
