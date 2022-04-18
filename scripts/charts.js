@@ -38,18 +38,18 @@ function drawProjectsChart () {
       ],
         chart: {
         height: chartHeight,
-        type: 'bar'
+        type: 'bar',
+        events: {
+            click: function(event, chartContext, config) {
+              // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+              console.log(event, chartContext, config);
+            }
+          },
       },
       plotOptions: {
         bar: {
           horizontal: true,
           distributed: true,
-        }
-      },
-      events: {
-        click: function(event, chartContext, config) {
-          // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-          console.log(event, chartContext, config);
         }
       },
       colors: colorArray,
