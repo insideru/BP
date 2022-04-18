@@ -31,12 +31,8 @@ function drawProjectsChart () {
     let chartOptions = {
         series: [
         {
-          name: 'On Track',
-          data: chartSeriesDataOnTrack
-        },
-        {
-            name: 'Depasite',
-            data: chartSeriesDataOffTrack
+          name: 'Proiecte',
+          data: chartSeriesData
         }
       ],
         chart: {
