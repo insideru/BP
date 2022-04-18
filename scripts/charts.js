@@ -1,6 +1,10 @@
+var chartedProjects = [];
+
 function drawProjectsChart () {
     let chartSeriesData = [];
     let colorArray = [];
+    chartedProjects = [];
+
     projectsObject.forEach(element => {
         if (Number(element.active)) {
             let projActualTime = buildProjectWorkHours(element.id);
@@ -20,6 +24,7 @@ function drawProjectsChart () {
                   }
                 ]
               };
+              chartedProjects.push(element);
               chartSeriesData.push(projChartData);
               if (projActualTime>projBudget) {
                 colorArray.push('#E51C23');
@@ -28,7 +33,6 @@ function drawProjectsChart () {
               }
         }
     });
-    console.log(colorArray);
     let chartHeight = (chartSeriesData.length+1)*40;
     let chartOptions = {
         series: [
@@ -42,7 +46,7 @@ function drawProjectsChart () {
         events: {
             click: function(event, chartContext, config) {
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-              console.log(event, chartContext, config);
+              updateProjectCharts(config.dataPointIndex);
             }
           },
       },
@@ -77,6 +81,10 @@ function drawProjectsChart () {
 
     let chart = new ApexCharts(document.querySelector("#projectsChart"), chartOptions);
     chart.render();
+}
+
+function updateProjectCharts (projID) {
+    console.log("Updated cu proiectul " + chartedProjects[projID].id);
 }
 
 function buildProjectWorkHours (projID) {
