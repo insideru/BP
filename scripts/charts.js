@@ -85,7 +85,7 @@ function drawProjectsChart () {
 
 function updateProjectCharts (projID) {
     //console.log("Updated cu proiectul " + chartedProjects[projID].name);
-    let wrkData = getActivitiesAndCollabs (projID);
+    let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
 
     //graficul pe activitati
     let activitiesData = wrkData[0];
