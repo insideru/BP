@@ -84,7 +84,7 @@ function drawProjectsChart () {
 }
 
 function updateProjectCharts (projID) {
-    console.log("Updated cu proiectul " + chartedProjects[projID].id);
+    console.log("Updated cu proiectul " + chartedProjects[projID].name);
 }
 
 function buildProjectWorkHours (projID) {
