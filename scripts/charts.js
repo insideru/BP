@@ -155,8 +155,12 @@ function getActivitiesAndCollabs (projID) {
     let res1 = [];
     alltimesheetsObject.forEach(element => {
         if (Number(element.project_id) == projID) {
-            tmpActivities[getActivityNameFromID(element.activity_id)] += Number(element.time);
-            tmpCollabs[getCollabNameFromID(element.collab_id)] += Number(element.time);
+            let tmpAct = getActivityNameFromID(element.activity_id);
+            console.log(tmpAct);
+            let tmpCollab = getCollabNameFromID(element.collab_id);
+            console.log(tmpCollab);
+            tmpActivities[tmpAct] += Number(element.time);
+            tmpCollabs[tmpCollab] += Number(element.time);
         }
     });
     console.log(tmpActivities);
