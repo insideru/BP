@@ -61,7 +61,7 @@ function drawProjectsChart () {
       }
       };
 
-    let chart = new ApexCharts(document.querySelector("#projectsChart"), chartSeries);
+    let chart = new ApexCharts(document.querySelector("#projectsChart"), chartOptions);
     chart.render();
 }
 
