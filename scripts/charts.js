@@ -172,10 +172,10 @@ function getActivitiesAndCollabs (projID) {
     console.log(tmpActivities);
     console.log(tmpCollabs);
     Object.keys(tmpActivities).forEach(function(key,index) {
-        res0.push({x: key, Y: tmpActivities[key]});
+        res0.push({x: key, y: tmpActivities[key]});
     });
     Object.keys(tmpCollabs).forEach(function(key,index) {
-        res1.push({x: key, Y: tmpCollabs[key]});
+        res1.push({x: key, y: tmpCollabs[key]});
     });
     res.push(res0);
     res.push(res1);
