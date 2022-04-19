@@ -122,7 +122,7 @@ function updateProjectCharts (projID) {
         legend: {
         show: false
       },
-      colors: ['#833737'],
+      colors: ['#136267'],
       chart: {
         height: 'auto',
         type: 'treemap'
