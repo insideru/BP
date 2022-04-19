@@ -1,4 +1,5 @@
 var chartedProjects = [];
+var secondCharts = false;
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -108,9 +109,6 @@ function updateProjectCharts (projID) {
       }
       };
 
-      let activitiesChart = new ApexCharts(document.querySelector("#projectsActivityChart"), activitiesChartData);
-      activitiesChart.render();
-
       //graficul pe muluci
       let collabData = wrkData[1];
       console.log(collabData);
@@ -132,9 +130,17 @@ function updateProjectCharts (projID) {
       }
       };
 
-      let collabChart = new ApexCharts(document.querySelector("#projectsCollabChart"), collabChartData);
-      collabChart.render();
-
+      if (!secondCharts) {
+        activitiesChart = new ApexCharts(document.querySelector("#projectsActivityChart"), activitiesChartData);
+        activitiesChart.render();
+        collabChart = new ApexCharts(document.querySelector("#projectsCollabChart"), collabChartData);
+        collabChart.render();
+      } else {
+        activitiesChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
+        activitiesChart.updateSeries ([{data: activitiesData}], true);
+        collabChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
+        collabChart.updateSeries ([{data: collabData}], true);
+      }
 }
 
 function buildProjectWorkHours (projID) {
