@@ -135,6 +135,7 @@ function updateProjectCharts (projID) {
         activitiesChart.render();
         collabChart = new ApexCharts(document.querySelector("#projectsCollabChart"), collabChartData);
         collabChart.render();
+        secondCharts = true;
       } else {
         activitiesChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
         activitiesChart.updateSeries ([{data: activitiesData}], true);
