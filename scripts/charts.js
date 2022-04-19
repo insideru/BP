@@ -100,6 +100,7 @@ function updateProjectCharts (projID) {
         legend: {
         show: false
       },
+      colors: ['#8773c1'],
       chart: {
         height: 'auto',
         type: 'treemap'
@@ -121,6 +122,7 @@ function updateProjectCharts (projID) {
         legend: {
         show: false
       },
+      colors: ['#EF9A9A'],
       chart: {
         height: 'auto',
         type: 'treemap'
@@ -129,7 +131,7 @@ function updateProjectCharts (projID) {
         text: chartedProjects[projID].name
       }
       };
-
+      
       if (!secondCharts) {
         activitiesChart = new ApexCharts(document.querySelector("#projectsActivityChart"), activitiesChartData);
         activitiesChart.render();
