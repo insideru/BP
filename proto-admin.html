@@ -374,10 +374,7 @@
             }
         });
         $('#newProjectDeadline').change(function() {
-          if ($(this).val()!=$('#newProjectDeadline').val()) {
-            console.log('am trimisla update');
-            setProjectDeadline($(this).val());
-          }
+          setProjectDeadline($(this).val());
         });
         $(document).ready(function(){
           $('.modal').modal();

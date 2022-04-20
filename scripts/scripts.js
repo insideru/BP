@@ -1221,6 +1221,7 @@ function setProjectDeadline (newDate) {
     'proj_id'     : selProjID,
     'deadline'    : getSelectedDate(newDate)
   };
+  console.log(formData);
   $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST
@@ -1230,7 +1231,8 @@ function setProjectDeadline (newDate) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        $('#projDeadline_' + selProjID).html(newDate + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
+        console.log(data);
+        $('#projDeadline_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
       } else {
         M.toast({html: data});
         return;
