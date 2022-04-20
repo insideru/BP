@@ -1197,7 +1197,7 @@ function changeProjectBudget(projID) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        $('#' + projID).html(response);
+        $('#' + projID).html(response + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
         $('#' + projID).attr('id', 'projBudget_' + response);
       } else {
         M.toast({html: data});

@@ -446,7 +446,7 @@ function setProjectBudget (int $proj_id, int $new_budget) {
         die();
     }
 
-    return "Success!" . $res->fetch(PDO::FETCH_ASSOC);
+    return $proj_id . "Success!" . $res->fetch(PDO::FETCH_ASSOC);
 }
 
 function getAllTimesheets() {
