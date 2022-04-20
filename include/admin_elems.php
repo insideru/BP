@@ -430,8 +430,8 @@ function setProjectBudget (int $proj_id, int $new_budget) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET budget = new_budget WHERE id = :proj_id';
-    $values = array(':id' => $proj_id, 'new_budget' => $new_budget);
+    $query = ' UPDATE '. $schema . '.projects SET budget = :new_budget WHERE id = :proj_id';
+    $values = array(':proj_id' => $proj_id, ':new_budget' => $new_budget);
 
     try
     {
