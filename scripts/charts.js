@@ -88,8 +88,7 @@ function drawProjectsChart () {
 
 function updateProjectCharts (projID) {
     //console.log("Updated cu proiectul " + chartedProjects[projID].name);
-    console.log(projID);
-    if (chartedProjects[projID].id == null) { return; }
+    if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
 
     //graficul pe activitati
