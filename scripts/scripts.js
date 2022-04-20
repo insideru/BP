@@ -1208,6 +1208,14 @@ function changeProjectBudget(projID, projBudget) {
   });
 }
 
+function changeProjectDeadline () {
+  var instance = M.Datepicker.getInstance('#newProjectDeadline');
+  $('#newProjectDeadline').change(function() {
+    console.log($(this).val());
+  });
+  instance.open();
+}
+
 function hoursWorked(month, part) {
   let wrkDate = getSelectedDate("01 " + month).split('-');
   let res = [0, 0, 0];
