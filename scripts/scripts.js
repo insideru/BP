@@ -1209,10 +1209,7 @@ function changeProjectBudget(projID, projBudget) {
 }
 
 function changeProjectDeadline () {
-  var instance = M.Datepicker.getInstance($('#newProjectDeadline'));
-  $('#newProjectDeadline').change(function() {
-    console.log($(this).val());
-  });
+  let instance = M.Datepicker.getInstance($('#newProjectDeadline'));
   instance.open();
 }
 
