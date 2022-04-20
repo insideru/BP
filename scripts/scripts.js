@@ -1208,6 +1208,7 @@ function changeProjectBudget(projID, projBudget) {
 }
 
 function changeProjectDeadline (projID, projOldDate) {
+  console.log(projOldDate);
   selProjID = Number(projID.substring(13));
   let instance = M.Datepicker.getInstance($('#newProjectDeadline'));
   let instanceDate = projOldDate.split('-');
