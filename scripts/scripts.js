@@ -212,7 +212,7 @@ function populateProjects() {
     if (element.active=="1") { isChecked = 'checked="checked" ';}
     $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
     '</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
-    '<td><div class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(projBudget_'+ element.budget +')">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
+    '<td><div class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(\'projBudget_'+ element.budget +'\')">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
 }
