@@ -454,7 +454,7 @@ function setProjectDeadline (int $proj_id, string $deadline) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET deadlie = :deadline WHERE id = :proj_id';
+    $query = ' UPDATE '. $schema . '.projects SET deadline = :deadline WHERE id = :proj_id';
     $values = array(':proj_id' => $proj_id, ':deadline' => date("Y-m-d", strtotime($deadline)));
 
     try
