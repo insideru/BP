@@ -64,7 +64,7 @@ function drawProjectsChart () {
             opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex]
               .goals
 
-              console.log(goals);
+              console.log(val, goals);
       
           if (goals && goals.length) {
             return val!=="series-1" ? `${val} / ${goals[0].value}` : `Ore pontate / ${goals[0].value}`;
