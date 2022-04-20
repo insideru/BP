@@ -212,7 +212,7 @@ function populateProjects() {
     if (element.active=="1") { isChecked = 'checked="checked" ';}
     $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
     '</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
-    '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
+    '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, '+ element.budget +')">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
 }
@@ -1175,9 +1175,9 @@ function changeAccountsObject(elementName, accID, value) {
   });
 }
 
-function changeProjectBudget(projID) {
+function changeProjectBudget(projID, projBudget) {
   let project_dbid = Number(projID.substring(11));
-  let response = prompt("Introdu noul grup de permisii:", project_dbid);
+  let response = prompt("Introdu noul grup de permisii:", projBudget);
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || isNaN(response)) {
     //a dat cancel sau a bagat fix acelasi lucru
