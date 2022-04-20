@@ -210,7 +210,10 @@ function populateProjects() {
   projectsObject.forEach(element => {
     isChecked = "";
     if (element.active=="1") { isChecked = 'checked="checked" ';}
-    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
+    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
+    '</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
+    '<td><div class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(projBudget_'+ element.budget +')">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
+    '<td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
 }
 
@@ -1167,6 +1170,37 @@ function changeAccountsObject(elementName, accID, value) {
         case "ramase":
           element.zile_ramase = value;
           break;
+      }
+    }
+  });
+}
+
+function changeProjectBudget(projID) {
+  let response = prompt("Introdu noul grup de permisii:", oldValue);
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || isNaN(response)) {
+    //a dat cancel sau a bagat fix acelasi lucru
+    return "Fail";
+  }
+  let project_dbid = number(projID.substring(11));
+  var formData = {
+    'action'      : 'setProjectBudget',
+    'proj_id'     : project_dbid, 
+    'new_budget'  : response
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        $('#' + projID).html(response);
+      } else {
+        M.toast({html: data});
+        return;
       }
     }
   });

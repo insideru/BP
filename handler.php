@@ -123,6 +123,10 @@ if ($_POST["action"]=="changeProjState") {
     echo changeProjectState((int)$_POST["proj_id"]);
 }
 
+if ($_POST["action"]=="setProjectBudget") {
+    echo setProjectBudget((int)$_POST["proj_id"], (int)$_POST['new_budget']);
+}
+
 if ($_POST["action"]=="changeUserState") {
     echo changeUserState((int)$_POST["user_id"]);
 }
