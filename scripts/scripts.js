@@ -1211,7 +1211,7 @@ function changeProjectDeadline (projID, projOldDate) {
   selProjID = Number(projID.substring(13));
   let instance = M.Datepicker.getInstance($('#newProjectDeadline'));
   let instanceDate = projOldDate.split('-');
-  instance.setDate(new Date(Number(instanceDate[0]), Number(instanceDate[1])+1, Number(instanceDate[2])));
+  instance.setDate(new Date(Number(instanceDate[0]), Number(instanceDate[1])-1, Number(instanceDate[2])));
   instance.open();
 }
 
