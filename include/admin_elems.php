@@ -449,6 +449,30 @@ function setProjectBudget (int $proj_id, int $new_budget) {
     return "Success!" . $res->fetch(PDO::FETCH_ASSOC);
 }
 
+function setProjectDeadline (int $proj_id, string $deadline) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.projects SET deadlie = :deadline WHERE id = :proj_id';
+    $values = array(':proj_id' => $proj_id, ':deadline' => date("Y-m-d", strtotime($deadline)));
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+
+    return "Success!" . $res->fetch(PDO::FETCH_ASSOC);
+}
+
 function getAllTimesheets() {
 	/* Global $pdo object */
 	global $pdo;

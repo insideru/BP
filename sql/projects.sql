@@ -4,6 +4,7 @@ CREATE TABLE `projects` (
   `client_id` int(10) NOT NULL,
   `type_id` int(10) NOT NULL,
   `budget` INT(10) NOT NULL DEFAULT '100',
+  `deadline` DATE NOT NULL DEFAULT (DATE_ADD(NOW(), INTERVAL 30 DAY)),
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
