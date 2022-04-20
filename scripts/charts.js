@@ -47,7 +47,7 @@ function drawProjectsChart () {
         events: {
             click: function(event, chartContext, config) {
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-              if (typeof(config.dataPointIndex) !== "undefined") {
+              if (config.dataPointIndex != null) {
                 updateProjectCharts(config.dataPointIndex);
               }
             }
