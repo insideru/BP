@@ -1199,7 +1199,6 @@ function changeProjectBudget(projID, projBudget) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
         $('#' + projID).html(response + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
-        $('#' + projID).attr('id', 'projBudget_' + response);
       } else {
         M.toast({html: data});
         return;
@@ -1209,7 +1208,7 @@ function changeProjectBudget(projID, projBudget) {
 }
 
 function changeProjectDeadline (projID, projOldDate) {
-  selProjID = Number(projID.sustring());
+  selProjID = Number(projID.substring(13));
   let instance = M.Datepicker.getInstance($('#newProjectDeadline'));
   let instanceDate = projOldDate.split('-');
   instance.setDate(new Date(instanceDate[0], instanceDate[1]+1, instanceDate[2]));
@@ -1219,7 +1218,7 @@ function changeProjectDeadline (projID, projOldDate) {
 function setProjectDeadline (newDate) {
   var formData = {
     'action'      : 'setProjectDeadline',
-    'proj_id'     : selProjID, 
+    'proj_id'     : selProjID,
     'deadline'    : getSelectedDate(newDate)
   };
   $.ajax({
@@ -1231,8 +1230,7 @@ function setProjectDeadline (newDate) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        $('#' + projID).html(newDate + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
-        $('#' + projID).attr('id', 'projBudget_' + response);
+        $('#projDeadline_' + selProjID).html(newDate + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
       } else {
         M.toast({html: data});
         return;
