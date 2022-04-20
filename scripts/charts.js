@@ -47,7 +47,9 @@ function drawProjectsChart () {
         events: {
             click: function(event, chartContext, config) {
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-              updateProjectCharts(config.dataPointIndex);
+              if (typeof(config.dataPointIndex) !== "undefined") {
+                updateProjectCharts(config.dataPointIndex);
+              }
             }
           },
       },
@@ -63,6 +65,8 @@ function drawProjectsChart () {
           const goals =
             opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex]
               .goals
+
+              console.log(goals);
       
           if (goals && goals.length) {
             return val!=="series-1" ? `${val} / ${goals[0].value}` : `Ore pontate / ${goals[0].value}`;
