@@ -65,7 +65,7 @@ function drawProjectsChart () {
               .goals
       
           if (goals && goals.length) {
-            return `${val} / ${goals[0].value}`
+            return val!=="series-1" ? `${val} / ${goals[0].value}` : `Ore pontate / ${goals[0].value}`;
           }
           return val
         }
