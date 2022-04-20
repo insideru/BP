@@ -1177,7 +1177,7 @@ function changeAccountsObject(elementName, accID, value) {
 
 function changeProjectBudget(projID, projBudget) {
   let project_dbid = Number(projID.substring(11));
-  let response = prompt("Introdu noul grup de permisii:", projBudget);
+  let response = prompt("Introdu numarul de ore bugetate pentru proiect:", projBudget);
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || isNaN(response)) {
     //a dat cancel sau a bagat fix acelasi lucru
