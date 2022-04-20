@@ -1176,7 +1176,7 @@ function changeAccountsObject(elementName, accID, value) {
 }
 
 function changeProjectBudget(projID) {
-  let project_dbid = number(projID.substring(11));
+  let project_dbid = Number(projID.substring(11));
   let response = prompt("Introdu noul grup de permisii:", project_dbid);
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || isNaN(response)) {
