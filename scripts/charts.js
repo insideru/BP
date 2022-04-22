@@ -90,6 +90,7 @@ function updateProjectCharts (projID) {
 
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
+    console.log(tmlData);
     let uniq = 0;
     let j = "";
     tmlData.forEach(element => {
@@ -98,6 +99,7 @@ function updateProjectCharts (projID) {
         uniq++;
       }
     });
+    console.log(uniq);
     let tmlChartData = {
       series: [
         {
