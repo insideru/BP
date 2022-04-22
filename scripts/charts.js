@@ -158,6 +158,7 @@ function buildProjectWorkHours (projID) {
 
 function buildProjetTimeline (projID) {
   let projectTimesheets = new Array(activitiesObject.length);
+  let res = new Object;
   alltimesheetsObject.forEach(element => {
     if (element.project_id == projID) {
       if (typeof projectTimesheets[element.activity_id] === 'undefined') {
@@ -169,7 +170,6 @@ function buildProjetTimeline (projID) {
     }
   });
   projectTimesheets.forEach((element, index, _array) => {
-    let res = new Object;
     let primu = true;
     let iStart = iEnd = new Date;
     for (i=0; i<element.length; i++) {
