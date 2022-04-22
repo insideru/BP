@@ -183,7 +183,7 @@ function updateProjectCharts (projID) {
         secondCharts = true;
       } else {
         tmlChart.updateSeries ([{data: tmlData}], true);
-        //tmlChart.updateOptions ({height: uniq}, true, true, true);
+        tmlChart.updateOptions ({chart: {height: uniq}}, true, true, true);
         activitiesChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
         activitiesChart.updateSeries ([{data: activitiesData}], true);
         collabChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
