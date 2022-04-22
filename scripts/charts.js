@@ -194,7 +194,7 @@ function buildProjectWorkHours (projID) {
   return retval;
 }
 
-function buildProjetTimeline (projID, dealineID) {
+function buildProjetTimeline (projID, deadlineID) {
   let projectTimesheets = new Array(activitiesObject.length);
   let res = new Object;
   alltimesheetsObject.forEach(element => {
@@ -255,7 +255,7 @@ function buildProjetTimeline (projID, dealineID) {
         tempObj['goals'] = [
           {
             name: 'Deadline',
-            value: new Date(chartedProjects[dealineID].deadline).getTime(),
+            value: new Date(chartedProjects[deadlineID].deadline).getTime(),
             strokeColor: '#CD2F2A'
           }];
       }
