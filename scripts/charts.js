@@ -93,7 +93,11 @@ function updateProjectCharts (projID) {
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id);
     let tmlChartData = {
-      series: tmlData,
+      series: [
+        {
+          name: 'Bob',
+          data:tmlData
+        }],
       chart: {
       height: 450,
       type: 'rangeBar'
