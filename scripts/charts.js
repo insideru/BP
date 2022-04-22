@@ -175,6 +175,7 @@ function updateProjectCharts (projID) {
         collabChart.render();
         secondCharts = true;
       } else {
+        tmlChart.updateSeries ([{data: tmlChartData}], true);
         activitiesChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
         activitiesChart.updateSeries ([{data: activitiesData}], true);
         collabChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
