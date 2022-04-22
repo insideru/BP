@@ -186,7 +186,7 @@ function buildProjetTimeline (projID) {
         } else {
           primu = true;
           if (iStart == iEnd) {
-            iEnd = iEnd.setDate(iEnd.getDate()+1);
+            iEnd.setDate(iEnd.getDate()+1);
             console.log(iStart, iEnd);
           } else {
             console.log(iStart, iEnd);
@@ -196,7 +196,7 @@ function buildProjetTimeline (projID) {
     }
     if (!primu) {
       if (iStart == iEnd) {
-        iEnd = iEnd.setDate(iEnd.getDate()+1);
+        iEnd.setDate(iEnd.getDate()+1);
         console.log(iStart, iEnd);
       } else {
         console.log(iStart, iEnd);
