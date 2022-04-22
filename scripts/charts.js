@@ -82,7 +82,6 @@ function drawProjectsChart () {
 
     let chart = new ApexCharts(document.querySelector("#projectsChart"), chartOptions);
     chart.render();
-    console.log(chartedProjects);
 }
 
 function updateProjectCharts (projID) {
@@ -194,7 +193,6 @@ function buildProjectWorkHours (projID) {
 }
 
 function buildProjetTimeline (projID, deadlineID) {
-  console.log(projID, deadlineID);
   let projectTimesheets = new Array(activitiesObject.length);
   let res = new Object;
   alltimesheetsObject.forEach(element => {
