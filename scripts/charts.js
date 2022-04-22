@@ -190,7 +190,8 @@ function buildProjetTimeline (projID) {
           if (typeof res[getActivityNameFromID(index)] === 'undefined') {
             res[getActivityNameFromID(index)] = new Array;
           }
-          res[getActivityNameFromID(index)].push(iStart, iEnd)
+          console.log(getActivityNameFromID(index), iStart, iEnd);
+          res[getActivityNameFromID(index)].push(iStart, iEnd);
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         }
       }
@@ -202,7 +203,8 @@ function buildProjetTimeline (projID) {
       if (typeof res[getActivityNameFromID(index)] === 'undefined') {
         res[getActivityNameFromID(index)] = new Array;
       }
-      res[getActivityNameFromID(index)].push(iStart, iEnd)
+      console.log(getActivityNameFromID(index), iStart, iEnd);
+      res[getActivityNameFromID(index)].push(iStart, iEnd);
     }
   })
   console.log(res);
