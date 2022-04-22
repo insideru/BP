@@ -169,7 +169,35 @@ function buildProjetTimeline (projID) {
     }
   });
   projectTimesheets.forEach(element => {
-    console.log(element);
+    let primu = true;
+    let iStart = iEnd = new Date;
+    for (i=0; i<element.length; i++) {
+      let _date = element[i].split('-');
+      if (primu) {
+        iStart = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
+        iEnd = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
+        primu = false;
+      } else {
+        let curDate = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
+        if (curDate.getDate() + 1 == iEnd) {
+          iEnd = new Date(curDate);
+        } else {
+          primu = true;
+          if (iStart == iEnd) {
+            console.log(iStart, iEnd.setDate(iEnd.getDate()+1));
+          } else {
+            console.log(iStart, iEnd);
+          }
+        }
+      }
+    }
+    if (!primu) {
+      if (iStart == iEnd) {
+        console.log(iStart, iEnd.setDate(iEnd.getDate()+1));
+      } else {
+        console.log(iStart, iEnd);
+      }
+    }
   })
 }
 
