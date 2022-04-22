@@ -86,13 +86,13 @@ function drawProjectsChart () {
 }
 
 function updateProjectCharts (projID) {
-    console.log("Updated cu proiectul " + chartedProjects[projID].id);
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
     buildProjetTimeline(chartedProjects[projID].id);
 
     //graficul de timeline
-    let tmlData = buildProjetTimeline (chartedProjects[projID].id);
+    let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
+    console.log(tmlData);
     let tmlChartData = {
       series: [
         {
@@ -194,7 +194,7 @@ function buildProjectWorkHours (projID) {
   return retval;
 }
 
-function buildProjetTimeline (projID) {
+function buildProjetTimeline (projID, dealineID) {
   let projectTimesheets = new Array(activitiesObject.length);
   let res = new Object;
   alltimesheetsObject.forEach(element => {
@@ -255,7 +255,7 @@ function buildProjetTimeline (projID) {
         tempObj['goals'] = [
           {
             name: 'Deadline',
-            value: new Date(chartedProjects[projID].deadline).getTime(),
+            value: new Date(chartedProjects[dealineID].deadline).getTime(),
             strokeColor: '#CD2F2A'
           }];
       }
