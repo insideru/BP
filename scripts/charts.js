@@ -91,7 +91,7 @@ function updateProjectCharts (projID) {
     buildProjetTimeline(chartedProjects[projID].id);
 
     //graficul de timeline
-    let tmlData = buildProjetTimeline (projID);
+    let tmlData = buildProjetTimeline (chartedProjects[projID].id);
     let tmlChartData = {
       series: tmlData,
       chart: {
