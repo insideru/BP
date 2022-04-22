@@ -108,7 +108,7 @@ function updateProjectCharts (projID) {
           data: tmlData
         }],
       chart: {
-      height: uniq,
+      height: 'auto',
       type: 'rangeBar'
       },
       plotOptions: {
@@ -185,7 +185,7 @@ function updateProjectCharts (projID) {
         secondCharts = true;
       } else {
         tmlChart.updateSeries ([{data: tmlData}], true);
-        tmlChart.updateOptions ({height: uniq}, true, true, true);
+        //tmlChart.updateOptions ({height: uniq}, true, true, true);
         activitiesChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
         activitiesChart.updateSeries ([{data: activitiesData}], true);
         collabChart.updateOptions ({title: {text: chartedProjects[projID].name}}, true, true, true);
