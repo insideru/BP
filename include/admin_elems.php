@@ -478,7 +478,7 @@ function getAllTimesheets() {
 	global $pdo;
 	global $schema;
 
-	$query = 'SELECT * FROM '.$schema.'.timesheets';
+	$query = 'SELECT * FROM '.$schema.'.timesheets ORDER BY date ASC';
 	
 	try
 	{
