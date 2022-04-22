@@ -193,6 +193,7 @@ function buildProjetTimeline (projID) {
           console.log(getActivityNameFromID(index), iStart, iEnd);
           res[getActivityNameFromID(index)].push(iStart, iEnd);
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
+          iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         }
       }
     }
