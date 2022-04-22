@@ -96,16 +96,7 @@ function updateProjectCharts (projID) {
       series: [
         {
           name: 'Pontaj',
-          data:tmlData
-        },
-        {
-          goals: [
-            {
-              name: 'Deadline',
-              value: new Date(chartedProjects[projID].deadline).getTime(),
-              strokeColor: '#CD2F2A'
-            }
-          ]
+          data: tmlData
         }],
       chart: {
       height: 'auto',
@@ -258,6 +249,14 @@ function buildProjetTimeline (projID) {
       let tempObj = {};
       tempObj['x'] = key;
       tempObj['y'] = [res[key][i].getTime(), res[key][i+1].getTime()];
+      if (i+2 == res[key].length) {
+        tempObj['goals'] = [
+          {
+            name: 'Deadline',
+            value: new Date(chartedProjects[projID].deadline).getTime(),
+            strokeColor: '#CD2F2A'
+          }];
+      }
       result.push(tempObj);
     }
   }
