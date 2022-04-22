@@ -90,6 +90,7 @@ function updateProjectCharts (projID) {
     //console.log("Updated cu proiectul " + chartedProjects[projID].name);
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
+    buildProjetTimeline(projID);
 
     //graficul pe activitati
     let activitiesData = wrkData[0];
@@ -148,13 +149,25 @@ function updateProjectCharts (projID) {
 }
 
 function buildProjectWorkHours (projID) {
-    let retval = 0;
-    alltimesheetsObject.forEach(element => {
-        if (element.project_id == projID) {
-            retval+=Number(element.time);
-        }
-    });
-    return retval;
+  let retval = 0;
+  alltimesheetsObject.forEach(element => {
+      if (element.project_id == projID) {
+          retval+=Number(element.time);
+      }
+  });
+  return retval;
+}
+
+function buildProjetTimeline (projID) {
+  let projectTimesheets = [];
+  alltimesheetsObject.forEach(element => {
+    if (element.project_id == projID) {
+      if (!projectTimesheets[element.activity_id].includes(element.date)) {
+        projectTimesheets[element.activity_id].push(element.date);
+      }
+    }
+    console.log(projectTimesheets);
+  });
 }
 
 function getActivitiesAndCollabs (projID) {
