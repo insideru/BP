@@ -90,7 +90,7 @@ function updateProjectCharts (projID) {
     //console.log("Updated cu proiectul " + chartedProjects[projID].name);
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
-    buildProjetTimeline(projID);
+    buildProjetTimeline(chartedProjects[projID].id);
 
     //graficul pe activitati
     let activitiesData = wrkData[0];
