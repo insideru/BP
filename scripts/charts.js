@@ -186,6 +186,7 @@ function buildProjetTimeline (projID) {
           iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         } else {
           primu = true;
+          i--;
           if (iStart - iEnd == 0) {
             iEnd.setDate(iEnd.getDate()+1);
             console.log(iStart, iEnd);
