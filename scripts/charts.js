@@ -63,8 +63,6 @@ function drawProjectsChart () {
           const goals =
             opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex]
               .goals
-
-              console.log(val, goals);
       
           if (goals && goals.length) {
             return `${val} / ${goals[0].value}`;
@@ -169,8 +167,8 @@ function buildProjetTimeline (projID) {
         projectTimesheets[element.activity_id].push(element.date);
       }
     }
-    console.log(projectTimesheets);
   });
+  console.log(projectTimesheets);
 }
 
 function getActivitiesAndCollabs (projID) {
