@@ -171,10 +171,8 @@ function buildProjetTimeline (projID) {
   projectTimesheets.forEach((element, index, _array) => {
     let primu = true;
     let iStart = iEnd = new Date;
-    console.log(index);
     for (i=0; i<element.length; i++) {
       let _date = element[i].split('-');
-      console.log(_date);
       if (primu) {
         iStart = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         iEnd = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
@@ -189,20 +187,16 @@ function buildProjetTimeline (projID) {
           i--;
           if (iStart - iEnd == 0) {
             iEnd.setDate(iEnd.getDate()+1);
-            console.log(iStart, iEnd);
-          } else {
-            console.log(iStart, iEnd);
           }
+          console.log(activitiesObject[index], iStart, iEnd);
         }
       }
     }
     if (!primu) {
       if (iStart - iEnd == 0) {
         iEnd.setDate(iEnd.getDate()+1);
-        console.log(iStart, iEnd);
-      } else {
-        console.log(iStart, iEnd);
       }
+      console.log(activitiesObject[index], iStart, iEnd);
     }
   })
 }
