@@ -169,6 +169,7 @@ function buildProjetTimeline (projID) {
     }
   });
   projectTimesheets.forEach((element, index, _array) => {
+    let res = new Object;
     let primu = true;
     let iStart = iEnd = new Date;
     for (i=0; i<element.length; i++) {
@@ -186,7 +187,7 @@ function buildProjetTimeline (projID) {
           if (iStart - iEnd == 0) {
             iEnd.setDate(iEnd.getDate()+1);
           }
-          console.log(getActivityNameFromID(index), iStart, iEnd);
+          res[getActivityNameFromID(index)] = [iStart, iEnd];
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         }
       }
@@ -195,9 +196,10 @@ function buildProjetTimeline (projID) {
       if (iStart - iEnd == 0) {
         iEnd.setDate(iEnd.getDate()+1);
       }
-      console.log(getActivityNameFromID(index), iStart, iEnd);
+      res[getActivityNameFromID(index)] = [iStart, iEnd];
     }
   })
+  console.log(res);
 }
 
 function getActivitiesAndCollabs (projID) {
