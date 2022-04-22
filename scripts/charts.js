@@ -181,10 +181,8 @@ function buildProjetTimeline (projID) {
         primu = false;
       } else {
         let curDate = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
-        console.log("curdate: " + curDate);
         curDate.setDate(curDate.getDate() - 1);
-        console.log("curdate: " + curDate);
-        if (curDate == iEnd) {
+        if (curDate - iEnd == 0) {
           iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         } else {
           primu = true;
@@ -198,7 +196,7 @@ function buildProjetTimeline (projID) {
       }
     }
     if (!primu) {
-      if (iStart == iEnd) {
+      if (iStart - iEnd == 0) {
         iEnd.setDate(iEnd.getDate()+1);
         console.log(iStart, iEnd);
       } else {
