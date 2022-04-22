@@ -181,8 +181,8 @@ function buildProjetTimeline (projID) {
         primu = false;
       } else {
         let curDate = new Date (Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
-        if (curDate.getDate() + 1 == iEnd) {
-          iEnd = new Date(curDate);
+        if (curDate.setDate(curDate.getDate() - 1) == iEnd) {
+          iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         } else {
           primu = true;
           if (iStart == iEnd) {
