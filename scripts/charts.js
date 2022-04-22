@@ -90,6 +90,36 @@ function updateProjectCharts (projID) {
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
     buildProjetTimeline(chartedProjects[projID].id);
 
+    //graficul de timeline
+    let tmlData = buildProjetTimeline (projID);
+    let tmlChartData = {
+      series: tmlData,
+      chart: {
+      height: 450,
+      type: 'rangeBar'
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: '80%'
+        }
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+      stroke: {
+        width: 1
+      },
+      fill: {
+        type: 'solid',
+        opacity: 0.6
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left'
+      }
+    };
+
     //graficul pe activitati
     let activitiesData = wrkData[0];
     let activitiesChartData = {
@@ -133,6 +163,8 @@ function updateProjectCharts (projID) {
       };
       
       if (!secondCharts) {
+        tmlChart = new ApexCharts(document.querySelector("#projectsTimeline"), tmlChartData);
+        tmlChart.render();
         activitiesChart = new ApexCharts(document.querySelector("#projectsActivityChart"), activitiesChartData);
         activitiesChart.render();
         collabChart = new ApexCharts(document.querySelector("#projectsCollabChart"), collabChartData);
@@ -216,7 +248,7 @@ function buildProjetTimeline (projID) {
       result.push(tempObj);
     }
   }
-  console.log(result);
+  return result;
 }
 
 function getActivitiesAndCollabs (projID) {
