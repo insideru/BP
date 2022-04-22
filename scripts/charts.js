@@ -88,7 +88,6 @@ function drawProjectsChart () {
 function updateProjectCharts (projID) {
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
-    buildProjetTimeline(chartedProjects[projID].id);
 
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
