@@ -82,10 +82,11 @@ function drawProjectsChart () {
 
     let chart = new ApexCharts(document.querySelector("#projectsChart"), chartOptions);
     chart.render();
+    console.log(chartedProjects);
 }
 
 function updateProjectCharts (projID) {
-    //console.log("Updated cu proiectul " + chartedProjects[projID].name);
+    console.log("Updated cu proiectul " + chartedProjects[projID].name);
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
     buildProjetTimeline(chartedProjects[projID].id);
