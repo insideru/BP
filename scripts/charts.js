@@ -190,7 +190,6 @@ function buildProjetTimeline (projID) {
           if (typeof res[getActivityNameFromID(index)] === 'undefined') {
             res[getActivityNameFromID(index)] = new Array;
           }
-          console.log(getActivityNameFromID(index), iStart, iEnd);
           res[getActivityNameFromID(index)].push(iStart, iEnd);
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
           iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
@@ -204,11 +203,20 @@ function buildProjetTimeline (projID) {
       if (typeof res[getActivityNameFromID(index)] === 'undefined') {
         res[getActivityNameFromID(index)] = new Array;
       }
-      console.log(getActivityNameFromID(index), iStart, iEnd);
       res[getActivityNameFromID(index)].push(iStart, iEnd);
     }
   })
-  console.log(res);
+
+  let result = new Array;
+  for (const key in res) {
+    for (i=0; i<res[key].length; i=i+2) {
+      let tempObj = {};
+      tempObj['x'] = key;
+      tempObj['y'] = [res[key][i].getTime(), res[key][i+1].getTime()];
+      result.push(tempObj);
+    }
+  }
+  console.log(result);
 }
 
 function getActivitiesAndCollabs (projID) {
