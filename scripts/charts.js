@@ -188,7 +188,7 @@ function buildProjetTimeline (projID) {
           if (iStart - iEnd == 0) {
             iEnd.setDate(iEnd.getDate()+1);
           }
-          console.log(activitiesObject[index], iStart, iEnd);
+          console.log(getActivityNameFromID(activitiesObject[index]), iStart, iEnd);
         }
       }
     }
@@ -196,7 +196,7 @@ function buildProjetTimeline (projID) {
       if (iStart - iEnd == 0) {
         iEnd.setDate(iEnd.getDate()+1);
       }
-      console.log(activitiesObject[index], iStart, iEnd);
+      console.log(getActivityNameFromID(activitiesObject[index]), iStart, iEnd);
     }
   })
 }
