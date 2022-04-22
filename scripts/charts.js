@@ -95,11 +95,20 @@ function updateProjectCharts (projID) {
     let tmlChartData = {
       series: [
         {
-          name: 'Bob',
+          name: 'Pontaj',
           data:tmlData
+        },
+        {
+          goals: [
+            {
+              name: 'Deadline',
+              value: new Date(chartedProjects[projID].deadline).getTime(),
+              strokeColor: '#CD2F2A'
+            }
+          ]
         }],
       chart: {
-      height: 450,
+      height: 'auto',
       type: 'rangeBar'
       },
       plotOptions: {
