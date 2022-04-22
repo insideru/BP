@@ -168,7 +168,9 @@ function buildProjetTimeline (projID) {
       }
     }
   });
-  console.log(projectTimesheets);
+  projectTimesheets.forEach(element => {
+    console.log(element);
+  })
 }
 
 function getActivitiesAndCollabs (projID) {
