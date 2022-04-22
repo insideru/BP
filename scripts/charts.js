@@ -162,6 +162,9 @@ function buildProjetTimeline (projID) {
   let projectTimesheets = new Array(activitiesObject.length);
   alltimesheetsObject.forEach(element => {
     if (element.project_id == projID) {
+      if (typeof projectTimesheets[element.activity_id] === 'undefined') {
+        projectTimesheets[element.activity_id] = new Array;
+      }
       if (!projectTimesheets[element.activity_id].includes(element.date)) {
         projectTimesheets[element.activity_id].push(element.date);
       }
