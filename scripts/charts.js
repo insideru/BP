@@ -86,7 +86,7 @@ function drawProjectsChart () {
 }
 
 function updateProjectCharts (projID) {
-    console.log("Updated cu proiectul " + chartedProjects[projID].name);
+    console.log("Updated cu proiectul " + chartedProjects[projID].id);
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
     buildProjetTimeline(chartedProjects[projID].id);
@@ -100,7 +100,7 @@ function updateProjectCharts (projID) {
           data: tmlData
         }],
       chart: {
-      height: 'auto',
+      height: (tmlData.length+1)*40,
       type: 'rangeBar'
       },
       plotOptions: {
