@@ -159,7 +159,7 @@ function buildProjectWorkHours (projID) {
 }
 
 function buildProjetTimeline (projID) {
-  let projectTimesheets = [];
+  let projectTimesheets = new Array(activitiesObject.length);
   alltimesheetsObject.forEach(element => {
     if (element.project_id == projID) {
       if (!projectTimesheets[element.activity_id].includes(element.date)) {
