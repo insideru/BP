@@ -90,7 +90,14 @@ function updateProjectCharts (projID) {
 
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
-    console.log(tmlData);
+    let uniq = 0;
+    let j = "";
+    tmlData.forEach(element => {
+      if (element.x != j) {
+        j = element.x;
+        uniq++;
+      }
+    });
     let tmlChartData = {
       series: [
         {
@@ -98,7 +105,7 @@ function updateProjectCharts (projID) {
           data: tmlData
         }],
       chart: {
-      height: (tmlData.length+1)*40,
+      height: uniq*40,
       type: 'rangeBar'
       },
       plotOptions: {
