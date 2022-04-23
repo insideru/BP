@@ -98,7 +98,7 @@ function updateProjectCharts (projID) {
         uniq++;
       }
     });
-    uniq*=40;
+    uniq = uniq + uniq * 40;
     let tmlChartData = {
       series: [
         {
