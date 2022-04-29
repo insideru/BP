@@ -676,8 +676,8 @@
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
         if (event_data.type == "pontare") {
             markup +=   '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Vizualizare pontaj</a></p>' +
-                        '<p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Editare pontaj</a></p>' +
-                        '<p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
+                        '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Editare pontaj</a></p>' +
+                        '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
         }
         markup += '</div>';
         markup += '</div>';
