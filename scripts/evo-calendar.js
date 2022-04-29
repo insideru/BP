@@ -662,7 +662,6 @@
     // v1.0.0 - Add single event to event list
     EvoCalendar.prototype.addEventList = function(event_data) {
         var _ = this, markup;
-        console.log(event_data);
         var eventListEl = _.$elements.eventEl.find('.event-list');
         if (eventListEl.find('[data-event-index]').length === 0) eventListEl.empty();
         _.$active.events.push(event_data);
@@ -675,6 +674,11 @@
         if (event_data.badge) markup += '<span>'+event_data.badge+'</span>';
         markup += '</p>'
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
+        if (event_data.type == "pontare") {
+            markup +=   '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Vizualizare pontaj</a></p>' +
+                        '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Editare pontaj</a></p>' +
+                        '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
+        }
         markup += '</div>';
         markup += '</div>';
         eventListEl.append(markup);
