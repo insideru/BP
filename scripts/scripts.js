@@ -746,9 +746,8 @@ function deletePontaj (date) {
   var formData = {
     'action'            : 'deleteTimesheets',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
-    'date'              : date
+    'date'              : date[0]
 };
-  console.log(date);
 $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST
@@ -756,7 +755,6 @@ $.ajax({
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
-      console.log(data);
       if (data.substring(0,8)=="Success!") {
         //$('#calendar').evoCalendar('removeCalendarEvent', "pontaj-" + date);
         $('#calendar').evoCalendar('destroy');
