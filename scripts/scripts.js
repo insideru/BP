@@ -748,6 +748,7 @@ function deletePontaj (date) {
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'date'              : date
 };
+  console.log(date);
 $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST
