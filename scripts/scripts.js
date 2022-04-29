@@ -746,7 +746,7 @@ function deletePontaj (date) {
   var formData = {
     'action'            : 'deleteTimesheets',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
-    'date'              : date[0]
+    'date'              : date
 };
 $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
