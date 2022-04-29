@@ -755,6 +755,7 @@ $.ajax({
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
+      console.log(data);
       if (data.substring(0,8)=="Success!") {
         //$('#calendar').evoCalendar('removeCalendarEvent', "pontaj-" + date);
         $('#calendar').evoCalendar('destroy');
