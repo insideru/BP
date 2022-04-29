@@ -789,9 +789,9 @@ function initCalendar() {
   $('#calendar').evoCalendar('toggleEventList', true);
   $('#calendar').on('selectEvent', function(event, activeEvent) {
     if (activeEvent['type']=="pontare") {
-      if (confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
-        deletePontaj(activeEvent['date']);
-      }
+      //if (confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
+      //  deletePontaj(activeEvent['date']);
+      //}
     }
     if (activeEvent['type']=="Holidays") {
       //daca e zi speciala

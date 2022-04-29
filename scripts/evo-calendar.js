@@ -653,7 +653,7 @@
             } else {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForThisDay+'</p>';
             }
-            markup += '<br><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></div>';
+            markup += '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></p></div>';
         }
         eventListEl.append(markup);
         //calculatePontaje(_.$active.date);
@@ -675,9 +675,9 @@
         markup += '</p>'
         if (event_data.description) markup += '<p class="event-desc">'+event_data.description+'</p>';
         if (event_data.type == "pontare") {
-            markup +=   '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Vizualizare pontaj</a></p>' +
-                        '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Editare pontaj</a></p>' +
-                        '<p><center><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
+            markup +=   '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Vizualizare pontaj</a></p>' +
+                        '<p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Editare pontaj</a></p>' +
+                        '<p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
         }
         markup += '</div>';
         markup += '</div>';
