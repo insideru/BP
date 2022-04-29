@@ -662,6 +662,7 @@
     // v1.0.0 - Add single event to event list
     EvoCalendar.prototype.addEventList = function(event_data) {
         var _ = this, markup;
+        console.log(event_data);
         var eventListEl = _.$elements.eventEl.find('.event-list');
         if (eventListEl.find('[data-event-index]').length === 0) eventListEl.empty();
         _.$active.events.push(event_data);
