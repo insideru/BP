@@ -742,6 +742,9 @@ function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDa
 }
 
 function deletePontaj (date) {
+  if (!confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
+    return;
+  }
   var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteTimesheets',
@@ -766,6 +769,10 @@ $.ajax({
         //
     }
 });
+}
+
+function vizualizareWithDate(date) {
+  console.log(date);
 }
 
 function ponteazaWithDate(date) {
