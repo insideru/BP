@@ -306,6 +306,7 @@ function getActivitiesAndCollabs (projID) {
 }
 
 function drawPontajChart (date) {
+  $("#viewPontajChart").html('');
   let series = []
   let labels = [];
   for (let element of myTimesheets) {
@@ -319,7 +320,7 @@ function drawPontajChart (date) {
   let options = {
     series: series,
     chart: {
-    type: 'donut',
+      type: 'donut',
     },
     labels: labels,
         dataLabels: {
@@ -353,6 +354,6 @@ function drawPontajChart (date) {
   }]
   };
 
-  var chart = new ApexCharts(document.querySelector("#viewPontajChart"), options);
+  let chart = new ApexCharts(document.querySelector("#viewPontajChart"), options);
   chart.render();
 }
