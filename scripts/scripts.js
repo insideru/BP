@@ -91,6 +91,18 @@ function getDBNameFromId (id, cat) {
       for (let element of collabCatsObject) {
         if (element.id==id) { return element.name;}
       }
+    case "activity":
+      for (let element of activitiesObject) {
+        if (element.id==id) { return element.name;}
+      }
+    case "project":
+      for (let element of projectsObject) {
+        if (element.id==id) { return element.name;}
+      }
+    case "collab":
+      for (let element of collabsObject) {
+        if (element.id==id) { return element.name;}
+      }
   }
 }
 
@@ -773,7 +785,7 @@ $.ajax({
 }
 
 function vizualizareWithDate(date) {
-  console.log(date);
+  $("#viewPontajModalTitle").html('Pontare ' + getFullDate(date));
   console.log(myTimesheets);
 }
 
@@ -1279,9 +1291,4 @@ function hoursWorked(month, part) {
     }
   });
   return res;
-}
-
-function getLastDayOfMonth(month) {
-  let noOfDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return noOfDays[Number(month)-1];
 }

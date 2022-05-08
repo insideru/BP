@@ -232,10 +232,10 @@ function buildProjetTimeline (projID, deadlineID) {
           if (iStart - iEnd == 0) {
             iEnd.setDate(iEnd.getDate()+1);
           }
-          if (typeof res[getActivityNameFromID(index)] === 'undefined') {
-            res[getActivityNameFromID(index)] = new Array;
+          if (typeof res[getDBNameFromId(index, 'activity')] === 'undefined') {
+            res[getDBNameFromId(index, 'activity')] = new Array;
           }
-          res[getActivityNameFromID(index)].push(iStart, iEnd);
+          res[getDBNameFromId(index, 'activity')].push(iStart, iEnd);
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
           iEnd = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
         }
@@ -245,10 +245,10 @@ function buildProjetTimeline (projID, deadlineID) {
       if (iStart - iEnd == 0) {
         iEnd.setDate(iEnd.getDate()+1);
       }
-      if (typeof res[getActivityNameFromID(index)] === 'undefined') {
-        res[getActivityNameFromID(index)] = new Array;
+      if (typeof res[getDBNameFromId(index, 'activity')] === 'undefined') {
+        res[getDBNameFromId(index, 'activity')] = new Array;
       }
-      res[getActivityNameFromID(index)].push(iStart, iEnd);
+      res[getDBNameFromId(index, 'activity')].push(iStart, iEnd);
     }
   })
 
@@ -280,8 +280,8 @@ function getActivitiesAndCollabs (projID) {
     let res1 = [];
     alltimesheetsObject.forEach(element => {
         if (Number(element.project_id) == projID) {
-            let tmpAct = getActivityNameFromID(element.activity_id);
-            let tmpCollab = getCollabNameFromID(element.collab_id);
+            let tmpAct = getDBNameFromId(element.activity_id, 'activity');
+            let tmpCollab = getDBNameFromId(element.collab_id, 'collab');
             if (isNaN(tmpActivities[tmpAct])) {
                 tmpActivities[tmpAct] = Number(element.time);
             } else {
@@ -305,22 +305,10 @@ function getActivitiesAndCollabs (projID) {
     return res;
 }
 
-function getActivityNameFromID (activityID) {
-    let res="";
-    activitiesObject.forEach(element => {
-        if (Number(element.id) == activityID) {
-            res = element.name;
-        }
-    });
-    return res;
-}
-
-function getCollabNameFromID (collabID) {
-    let res="";
-    collabsObject.forEach(element => {
-        if (Number(element.id) == collabID) {
-            res = element.name;
-        }
-    });
-    return res;
+function drawPontajChart (date) {
+  for (let element of myTimesheets) {
+    if (element.date == date) {
+      console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
+    }
+  }
 }
