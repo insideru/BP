@@ -786,7 +786,7 @@ $.ajax({
 
 function vizualizareWithDate(date) {
   $("#viewPontajModalTitle").html('Pontare ' + getFullDate(date));
-  console.log(myTimesheets);
+  drawPontajChart(date);
 }
 
 function ponteazaWithDate(date) {
