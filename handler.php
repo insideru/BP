@@ -76,6 +76,8 @@ if ($_POST["action"]=="getTimesheets") {
     $response["timesheets"] = getTimesheets($_POST["collab_guid"]);
     $response["daysoff"] = getDaysoff($_POST["collab_guid"]);
     $response["holidays"] = getHolidays();
+    $response["projects"] = getProjects();
+    $response["activities"] = getActivities();
     echo json_encode($response);
     
 }

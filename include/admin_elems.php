@@ -204,33 +204,6 @@ function addCollab (string $name, int $id) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getCollabs() {
-    /* Global $pdo object */
-    global $pdo;
-    global $schema;
-
-    $query = 'SELECT * FROM '. $schema . '.collaborators ORDER BY name ASC';
-
-    try
-    {
-        $res = $pdo->prepare($query);
-        $res->execute();
-    }
-
-    catch (PDOException $e)
-    {
-        /* If there is a PDO exception, throw a standard exception */
-        echo "Database error".$e->getMessage();
-        die();
-    }
-    $fields=array();
-
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
-    }
-    return $fields;
-}
-
 function addProject (string $name, int $catid, int $clientid) {
     /* Global $pdo object */
     global $pdo;
@@ -257,33 +230,6 @@ function addProject (string $name, int $catid, int $clientid) {
     
     /* Return the new ID */
     return "Success:" . $pdo->lastInsertId();
-}
-
-function getProjects() {
-    /* Global $pdo object */
-    global $pdo;
-    global $schema;
-
-    $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, name ASC';
-
-    try
-    {
-        $res = $pdo->prepare($query);
-        $res->execute();
-    }
-
-    catch (PDOException $e)
-    {
-        /* If there is a PDO exception, throw a standard exception */
-        echo "Database error".$e->getMessage();
-        die();
-    }
-    $fields=array();
-
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
-    }
-    return $fields;
 }
 
 function changeProjectState (int $proj_id) {
@@ -398,33 +344,6 @@ function addActivity (string $name, int $id) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getActivities() {
-    /* Global $pdo object */
-    global $pdo;
-    global $schema;
-
-    $query = 'SELECT * FROM '. $schema . '.activities ORDER BY name ASC';
-
-    try
-    {
-        $res = $pdo->prepare($query);
-        $res->execute();
-    }
-
-    catch (PDOException $e)
-    {
-        /* If there is a PDO exception, throw a standard exception */
-        echo "Database error".$e->getMessage();
-        die();
-    }
-    $fields=array();
-
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
-    }
-    return $fields;
-}
-
 function setProjectBudget (int $proj_id, int $new_budget) {
     /* Global $pdo object */
     global $pdo;
@@ -529,33 +448,6 @@ function getAccounts () {
     global $schema;
 
     $query = 'SELECT account_id, collab_id, account_username, account_group, account_enabled, zile_concediu, zile_report, zile_ramase FROM '. $schema . '.accounts ORDER BY account_enabled DESC';
-
-    try
-    {
-        $res = $pdo->prepare($query);
-        $res->execute();
-    }
-
-    catch (PDOException $e)
-    {
-        /* If there is a PDO exception, throw a standard exception */
-        echo "Database error".$e->getMessage();
-        die();
-    }
-    $fields=array();
-
-    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
-    }
-    return $fields;
-}
-
-function getHolidays() {
-    /* Global $pdo object */
-    global $pdo;
-    global $schema;
-
-    $query = 'SELECT * FROM '. $schema . '.holidays ORDER BY date ASC';
 
     try
     {

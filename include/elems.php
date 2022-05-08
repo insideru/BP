@@ -334,4 +334,112 @@ function renameName (string $table, string $oldName, string $newName) {
 	}
 	echo "Success!";
 }
+
+function getProjects() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, name ASC';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
+function getActivities() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.activities ORDER BY name ASC';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
+function getHolidays() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.holidays ORDER BY date ASC';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
+function getCollabs() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.collaborators ORDER BY name ASC';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
 ?>
