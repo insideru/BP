@@ -306,9 +306,52 @@ function getActivitiesAndCollabs (projID) {
 }
 
 function drawPontajChart (date) {
+  let series = labels = [];
   for (let element of myTimesheets) {
     if (element.date == date) {
-      console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
+      //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
+      series.push(element.time);
+      labels.push(getDBNameFromId(element.project_id, 'project') + " - " + getDBNameFromId(element.activity_id, 'activity'));
     }
   }
+
+  let options = {
+    series: series,
+    chart: {
+    type: 'donut',
+    },
+    labels: labels,
+        dataLabels: {
+          dropShadow: {
+            blur: 3,
+            opacity: 0.8
+          }
+        },
+    plotOptions: {
+      pie: {
+        startAngle: -90,
+        endAngle: 90,
+        offsetY: 10
+      }
+    },
+    grid: {
+      padding: {
+        bottom: -80
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+        legend: {
+          position: 'bottom'
+        }
+    }
+  }]
+  };
+
+  var chart = new ApexCharts(document.querySelector("#viewPontajChart"), options);
+  chart.render();
 }
