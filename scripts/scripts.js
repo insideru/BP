@@ -16,6 +16,7 @@ pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
 nrZileLibere = selProjID = 0;
+myTimesheets = [];
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -773,6 +774,7 @@ $.ajax({
 
 function vizualizareWithDate(date) {
   console.log(date);
+  console.log(myTimesheets);
 }
 
 function ponteazaWithDate(date) {
@@ -826,6 +828,7 @@ function initCalendar() {
         //console.log(data);
         rvdData = JSON.parse(data);
         if (typeof(rvdData) === 'object') {
+          myTimesheets = rvdData.timesheets;
           buildTimesheetCalendarEvents(rvdData.timesheets);
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
           //$('#calendar').evoCalendar('selectDate', new Date());
