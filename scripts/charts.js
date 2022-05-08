@@ -352,9 +352,6 @@ function drawPontajChart (date) {
       groups: groups
     }
   },
-  title: {
-      text: 'Grouped Labels on the X-axis',
-  },
   tooltip: {
     x: {
       formatter: function(val) {
