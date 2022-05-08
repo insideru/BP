@@ -307,55 +307,61 @@ function getActivitiesAndCollabs (projID) {
 
 function drawPontajChart (date) {
   $("#viewPontajChart").html('');
-  let series = []
-  let labels = [];
+  let data = [];
+  let groups = [];
+  let oldName = newName = "";
+  let counter = 1;
   for (let element of myTimesheets) {
     if (element.date == date) {
+      newName = element.project_id;
       //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
-      series.push(Number(element.time));
-      labels.push(getDBNameFromId(element.project_id, 'project') + " - " + getDBNameFromId(element.activity_id, 'activity'));
+      data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
+      if (oldName!=newName) {
+        if (oldName!="") {
+          groups.push({title: oldName, cols: counter});
+        }
+        oldName = newName;
+        counter = 1;
+      } else {
+        counter++;
+      }
     }
   }
-  console.log(series, labels);
+  groups.push({title: oldName, cols: counter});
   let options = {
-    series: series,
-    chart: {
-      height: 'auto',
-      type: 'donut',
-    },
-    labels: labels,
-        dataLabels: {
-          formatter: function (val) {
-            return val
-          },
-          dropShadow: {
-            blur: 3,
-            opacity: 0.8
-          }
-        },
-    plotOptions: {
-      pie: {
-        startAngle: -90,
-        endAngle: 90,
-        offsetY: 10
+  series: [{
+    name: "Pontaj",
+    data: data
+  }],
+  chart: {
+    type: 'bar',
+    height: 380
+  },
+  xaxis: {
+    type: 'category',
+    labels: {
+      formatter: function(val) {
+        return val
       }
     },
-    grid: {
-      padding: {
-        bottom: -80
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 'auto'
-        },
-        legend: {
-          position: 'bottom'
-        }
+    group: {
+      style: {
+        fontSize: '10px',
+        fontWeight: 700
+      },
+      groups: groups
     }
-  }]
+  },
+  title: {
+      text: 'Grouped Labels on the X-axis',
+  },
+  tooltip: {
+    x: {
+      formatter: function(val) {
+        return val
+      }  
+    }
+  },
   };
 
   let chart = new ApexCharts(document.querySelector("#viewPontajChart"), options);
