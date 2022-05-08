@@ -1263,6 +1263,11 @@ function setProjectDeadline (newDate) {
   });
 }
 
+function getLastDayOfMonth(month) {
+  let noOfDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return noOfDays[Number(month)-1];
+} 
+
 function hoursWorked(month, part) {
   let wrkDate = getSelectedDate("01 " + month).split('-');
   let res = [0, 0, 0];
