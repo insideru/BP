@@ -310,11 +310,11 @@ function drawPontajChart (date) {
   for (let element of myTimesheets) {
     if (element.date == date) {
       //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
-      series.push(element.time);
+      series.push(Number(element.time));
       labels.push(getDBNameFromId(element.project_id, 'project') + " - " + getDBNameFromId(element.activity_id, 'activity'));
     }
   }
-
+  console.log(series, labels);
   let options = {
     series: series,
     chart: {
@@ -343,7 +343,7 @@ function drawPontajChart (date) {
       breakpoint: 480,
       options: {
         chart: {
-          width: 200
+          width: 'auto'
         },
         legend: {
           position: 'bottom'
