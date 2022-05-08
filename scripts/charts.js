@@ -306,7 +306,8 @@ function getActivitiesAndCollabs (projID) {
 }
 
 function drawPontajChart (date) {
-  let series = labels = [];
+  let series = []
+  let labels = [];
   for (let element of myTimesheets) {
     if (element.date == date) {
       //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
