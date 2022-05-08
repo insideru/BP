@@ -313,7 +313,7 @@ function drawPontajChart (date) {
   let counter = 1;
   for (let element of myTimesheets) {
     if (element.date == date) {
-      newName = element.project_id;
+      newName = getDBNameFromId(element.project_id, 'project');
       //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
       data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
       if (oldName!=newName) {
