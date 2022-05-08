@@ -843,8 +843,8 @@ function initCalendar() {
           myTimesheets = rvdData.timesheets;
           buildTimesheetCalendarEvents(rvdData.timesheets);
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
-          activitiesObject = rcvData.activities;
-          projectsObject = rcvData.projects;
+          activitiesObject = rvdData.activities;
+          projectsObject = rvdData.projects;
           //$('#calendar').evoCalendar('selectDate', new Date());
         } else {
           M.toast({html: data.substring(15)});
