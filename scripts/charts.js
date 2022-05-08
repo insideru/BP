@@ -320,10 +320,14 @@ function drawPontajChart (date) {
   let options = {
     series: series,
     chart: {
+      height: 'auto',
       type: 'donut',
     },
     labels: labels,
         dataLabels: {
+          formatter: function (val) {
+            return val
+          },
           dropShadow: {
             blur: 3,
             opacity: 0.8
