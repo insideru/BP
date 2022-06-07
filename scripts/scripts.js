@@ -1345,3 +1345,7 @@ function hoursWorked(month, part) {
   });
   return res;
 }
+
+function addNewSalary(user_id) {
+  console.log(user_id);
+}

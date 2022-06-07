@@ -277,24 +277,24 @@
                                           </table>
                                         </div>
                                         <div class="row">
-                                          <h6>Adauga intrare noua</h6>
+                                          <h5>Adauga intrare noua</h5>
                                           <br>
                                           <table class="centered highlight">
                                             <tbody id="salaryAddTable">
                                               <tr>
                                               <td class="input-field">
-                                                <input placeholder="Salariu orar" id="addHourlySalary" type="text" class="validate">
+                                                <input id="addHourlySalary" type="text" class="validate">
                                                 <label for="addHourlySalary">Salariu orar - 0 daca nu exista</label>
                                               </td>
                                               <td class="input-field">
-                                                <input placeholder="Salariu lunar" id="addMonthlySalary" type="text" class="validate">
+                                                <input id="addMonthlySalary" type="text" class="validate">
                                                 <label for="addMonthlySalary">Salariu lunar - 0 daca nu exista</label>
                                               </td>
                                               <td class="input-field">
                                                 <input type="text" id="addDayOff" class="datepicker">
                                               </td>
                                               <td>
-                                                <a class="waves-effect waves-light btn btn-small" onclick="addNewSalary()">Adauga</a>
+                                                <a class="waves-effect waves-light btn btn-small" onclick="addNewSalary(userID)">Adauga</a>
                                               </td>
                                               </tr>
                                             </tbody>
