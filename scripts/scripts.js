@@ -1349,7 +1349,7 @@ function hoursWorked(month, part) {
 function addNewSalary(user_id) {
   let newHS = $('#addHourlySalary').val();
   if (typeof newHS === 'string') { newHS = newHS.trim(); }
-  if (newHS == null || isNaN(newHS)) {
+  if (newHS == null || newHS == "" || isNaN(newHS)) {
     //newHS nu e ce trebuie
     $('#addHourlySalary').addClass("invalid");
     return 0;
@@ -1358,7 +1358,7 @@ function addNewSalary(user_id) {
   }
   let newMS = $('#addMonthlySalary').val();
   if (typeof newMS === 'string') { newMS = newMS.trim(); }
-  if (newMS == null || isNaN(newHS)) {
+  if (newMS == null || newMS == "" || isNaN(newMS)) {
     //newHS nu e ce trebuie
     $('#addMonthlySalary').addClass("invalid");
     return 0;
