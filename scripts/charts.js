@@ -364,3 +364,8 @@ function drawPontajChart (date) {
   let chart = new ApexCharts(document.querySelector("#viewPontajChart"), options);
   chart.render();
 }
+
+function regenChart() {
+  $('#projectsChart').html();
+  drawProjectsChart();
+}
