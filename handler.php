@@ -185,6 +185,10 @@ if ($_POST["action"]=="changeConcediu") {
     echo changeConcediu($_POST['id'], $_POST['column'], $_POST['value']);
 }
 
+if ($_POST["action"]=="addSalary") {
+    echo addSalary((int)$_POST['collab_id'], (int)$_POST['hourly'], (int)$_POST['monthly'], $_POST['date']);
+}
+
 if ($_REQUEST["r"]=="concediu") {    
     $response = array();
     $response["holidays"] = getHolidays();
@@ -193,6 +197,7 @@ if ($_REQUEST["r"]=="concediu") {
     }
     echo json_encode($response);
 }
+
 
 if ($_REQUEST["r"]=="deleteHoliday") {    
     $date=$_GET['date'];
