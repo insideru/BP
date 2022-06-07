@@ -260,7 +260,7 @@ function populateUsers() {
     }
     $('#usersTable').append('<tr><td  class="tooltipped" data-position="top" data-tooltip="Apasa pentru schimbare parola" style="cursor:pointer" onclick="changePass(\''+element.account_id +'\')">'+element.account_username+'</td>'+
     '<td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
-    '<td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#salaryModal" onclick="userID=' + element.id +'">Date Salariu</a></td>'+
+    '<td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#salaryModal" onclick="userID=' + element.collab_id +'">Date Salariu</a></td>'+
     '<td><div class="chip tooltipped" data-position="top" data-tooltip="Total zile concediu" style="cursor:pointer" onclick="changeConcediu(\''+ element.account_id +'\', \''+element.zile_concediu+'\')">'+element.zile_concediu+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="bottom" data-tooltip="Zile concediu reportate" style="cursor:pointer" onclick="changeReport(\''+ element.account_id +'\', \''+element.zile_report+'\')">'+element.zile_report+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="top" data-tooltip="Zile concediu ramase" style="cursor:pointer" onclick="changeRamase(\''+ element.account_id +'\', \''+element.zile_ramase+'\')">'+element.zile_ramase+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td>'+checkbox+'</td></tr>');
   });
