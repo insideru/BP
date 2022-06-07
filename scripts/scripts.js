@@ -172,7 +172,7 @@ function populateProjCat() {
   $('#dropdown_categorie_proiect').html('');
   $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>');
   projCatsObject.forEach(element => {
-    $('#projCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
+    $('#projCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
     //initializare dropdown categorii proiecte
     $('#dropdown_categorie_proiect').append('<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+element.name+'</a></li>');
     $('#dropdown_categorie_proiect2').append('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+element.name+'</a></li>');
@@ -182,7 +182,7 @@ function populateProjCat() {
 function populateActivities() {
   $('#activityTable').html('');
   activitiesObject.forEach(element => {
-    $('#activityTable').append('<tr><td onclick="renameName(this.innerHTML, \'activities\')">'+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
+    $('#activityTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'activities\')">'+element.name+"</td>"+'</td><td>'+getDBNameFromId(element.project_type, "projCat")+'</td></tr>');
   });
 }
 
@@ -190,7 +190,7 @@ function populateColabCat() {
   $('#colabCatTable').html('');
   $('#dropdown_categorie_colaborator').html('');
   collabCatsObject.forEach(element => {
-    $('#colabCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'collab_groups\')">'+element.name+"</td></tr>");
+    $('#colabCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collab_groups\')">'+element.name+"</td></tr>");
     //initializare dropdown clienti
     $('#dropdown_categorie_colaborator').append('<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+element.name+'</a></li>');
   });
@@ -200,7 +200,7 @@ function populateClients() {
   $('#clientsTable').html('');
   $('#dropdown_client_proiect').html('');
   clientsObject.forEach(element => {
-    $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+element.name+"</td></tr>");
+    $('#clientsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'clients\')">'+element.name+"</td></tr>");
     //initializare dropdown clienti
     $('#dropdown_client_proiect').append('<li><a href="#!" onclick="changeClient(this.innerHTML)">'+element.name+'</a></li>');
   });
@@ -217,9 +217,9 @@ function populateCollabs() {
     });
     if (bool) {
       //e adaugat user
-      $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
+      $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
-      $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
+      $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
@@ -234,8 +234,8 @@ function populateProjects() {
       isChecked = 'checked="checked" ';
       tableName = '#projTable';
     }
-    $(tableName).append('<tr><td class="tooltipped" data-position="top" data-tooltip="Click pe nume pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
-    '</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
+    $(tableName).append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')"'+element.name+'</td>'+
+    '<td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projStartDate_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Data incepe proiect" style="cursor:pointer" onclick="changeProjectStartDate(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.start_date+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projDeadline_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Deadline" style="cursor:pointer" onclick="changeProjectDeadline(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.deadline+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
@@ -246,7 +246,7 @@ function populateProjects() {
 function populateHolidays() {
   $('#daysoffTable').html('');
   holidaysObject.forEach(element => {
-    $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
+    $('#daysoffTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'holidays\')">'+element.name+"</td>"+'</td><td>'+getFullDate(element.date)+'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + element.date + '\')">delete_forever</i></td></tr>');
   });
 }
 
@@ -258,7 +258,7 @@ function populateUsers() {
     } else {
       checkbox = '';
     }
-    $('#usersTable').append('<tr><td onclick="changePass(\''+element.account_id +'\')">'+element.account_username+'</td>'+
+    $('#usersTable').append('<tr><td  class="tooltipped" data-position="top" data-tooltip="Apasa pentru schimbare parola" style="cursor:pointer" onclick="changePass(\''+element.account_id +'\')">'+element.account_username+'</td>'+
     '<td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#salaryModal" onclick="addNewUserID=' + element.id +'">Vezi Salariu</a></td>'+
     '<td><div class="chip tooltipped" data-position="top" data-tooltip="Total zile concediu" style="cursor:pointer" onclick="changeConcediu(\''+ element.account_id +'\', \''+element.zile_concediu+'\')">'+element.zile_concediu+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="bottom" data-tooltip="Zile concediu reportate" style="cursor:pointer" onclick="changeReport(\''+ element.account_id +'\', \''+element.zile_report+'\')">'+element.zile_report+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="top" data-tooltip="Zile concediu ramase" style="cursor:pointer" onclick="changeRamase(\''+ element.account_id +'\', \''+element.zile_ramase+'\')">'+element.zile_ramase+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+

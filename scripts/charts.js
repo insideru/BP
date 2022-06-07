@@ -366,6 +366,6 @@ function drawPontajChart (date) {
 }
 
 function regenChart() {
-  $('#projectsChart').html('');
+  $('#projectsChartDiv').html('<div id="projectsChart"></div>');
   drawProjectsChart();
 }
