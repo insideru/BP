@@ -263,30 +263,44 @@
                                         <h5>Salariu colaborator</h5>
                                         <div class="row"></div>
                                         <div class="row">
-                                          <div class="input-field col s12">
-                                            <input placeholder="username" id="userAdd" type="text" class="validate">
-                                            <label for="userAdd">Username</label>
-                                          </div>
-                                          <div class="input-field col s12">
-                                            <input placeholder="password" id="userPass1" type="password" class="validate">
-                                            <label for="userPass1">Password</label>
-                                          </div>
-                                          <div class="input-field col s12">
-                                            <input placeholder="password" id="userPass2" type="password" class="validate">
-                                            <label for="userPass2">Re-enter password</label>
-                                          </div>
-                                          <div class="input-field col s12">
-                                            <select id="userRights" class="browser-default">
-                                              <option value="" disabled selected>Categorie drepturi</option>
-                                              <option value="1">1 - Varianta 1</option>
-                                              <option value="2">2 - Varianta 2</option>
-                                              <option value="3">3 - Varianta 3</option>
-                                            </select>
-                                          </div>
-                                          <p id="addUserError"></p>
+                                          <table class="centered highlight">
+                                            <thead>
+                                              <tr>
+                                                  <th>Salariu orar</th>
+                                                  <th>Salariu lunar</th>
+                                                  <th>Incepand cu data</th>
+                                                  <th>Modifica</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody id="salaryTable">
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                        <div class="row">
+                                          <h6>Adauga intrare noua</h6>
+                                          <table class="centered highlight">
+                                            <tbody id="salaryAddTable">
+                                              <tr>
+                                              <td class="input-field col s12">
+                                                <input placeholder="Salariu orar" id="addHourlySalary" type="text" class="validate">
+                                                <label for="addHourlySalary">Username</label>
+                                              </td>
+                                              <td class="input-field col s12">
+                                                <input placeholder="Salariu lunar" id="addMonthlySalary" type="text" class="validate">
+                                                <label for="addMonthlySalary">Username</label>
+                                              </td>
+                                              <td class="input-field col s12">
+                                                <input type="text" id="addDayOff" class="datepicker">
+                                              </td>
+                                              <td>
+                                                <a class="waves-effect waves-light btn btn-small" onclick="addNewSalary()">Adauga</a>
+                                              </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
                                         </div>
                                         <div class="modal-footer">
-                                          <a href="#!" class="waves-effect waves-green btn-flat" onclick="validateAdduser()">Adauga</a>
+                                          <a href="#!" class="waves-effect waves-green btn-flat">Inchide</a>
                                         </div>
                                       </div>
                                     </div>
