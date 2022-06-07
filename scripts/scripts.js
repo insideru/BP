@@ -221,11 +221,16 @@ function populateCollabs() {
 function populateProjects() {
   $('#projTable').html('');
   projectsObject.forEach(element => {
-    isChecked = "";
-    if (element.active=="1") { isChecked = 'checked="checked" ';}
-    $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
+    let isChecked = "";
+    let tableName = '#projInactiveTable';
+    if (element.active=="1") {
+      isChecked = 'checked="checked" ';
+      tableName = '#projTable';
+    }
+    $(tableName).append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+element.name+
     '</td><td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
+    '<td><div id="projStartDate_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Data incepe proiect" style="cursor:pointer" onclick="changeProjectStartDate(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.start_date+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projDeadline_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Deadline" style="cursor:pointer" onclick="changeProjectDeadline(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.deadline+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
@@ -1239,13 +1244,45 @@ function changeProjectDeadline (projID, projOldDate) {
   instance.open();
 }
 
+function changeProjectDeadline (projID, projOldDate) {
+  selProjID = Number(projID.substring(13));
+  let instance = M.Datepicker.getInstance($('#newProjectStartDate'));
+  let instanceDate = projOldDate.split('-');
+  instance.setDate(new Date(Number(instanceDate[0]), Number(instanceDate[1])-1, Number(instanceDate[2])));
+  instance.open();
+}
+
 function setProjectDeadline (newDate) {
   var formData = {
     'action'      : 'setProjectDeadline',
     'proj_id'     : selProjID,
     'deadline'    : getSelectedDate(newDate)
   };
-  console.log(formData);
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        console.log(data);
+        $('#projDeadline_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
+}
+
+function setProjectStartDate (newDate) {
+  var formData = {
+    'action'      : 'setProjectStartDate',
+    'proj_id'     : selProjID,
+    'deadline'    : getSelectedDate(newDate)
+  };
   $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST

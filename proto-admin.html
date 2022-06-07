@@ -50,7 +50,7 @@
                     <div class="row">
                         <ul class="collapsible">
                             <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Categorii de proiecte</div>
+                            <div class="collapsible-header"><i class="material-icons">library_add</i>Categorii de proiecte</div>
                             <div class="collapsible-body">
                                 <table class="centered highlight">
                                     <thead>
@@ -79,7 +79,7 @@
                             </div>
                             </li>
                             <li>
-                              <div class="collapsible-header"><i class="material-icons">filter_drama</i>Activitati</div>
+                              <div class="collapsible-header"><i class="material-icons">library_books</i>Activitati</div>
                               <div class="collapsible-body">
                                   <table class="centered highlight">
                                       <thead>
@@ -119,6 +119,7 @@
                                   <th>Categorie</th>
                                   <th>Client</th>
                                   <th>Buget</th>
+                                  <th>Data incepere</th>
                                   <th>Deadline</th>
                                   <th>Activ</th>
                               </tr>
@@ -126,6 +127,17 @@
                             <tbody id="projTable">
                             </tbody>
                           </table>
+                          <ul class="collapsible">
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">layers_clear</i>Proiecte inactive</div>
+                              <div class="collapsible-body">
+                                <table class="centered highlight">
+                                  <tbody id="projInactiveTable">
+                                  </tbody>
+                                </table>
+                              </div>
+                            </li>
+                          </ul>
                           <table class="centered highlight">
                             <tbody>
                               <tr>
@@ -135,6 +147,7 @@
                                     <td><div class="input-field">
                                       <i class="material-icons prefix">add</i>
                                       <input type="text" id="addProjectName" onclick="typeNo=3;" required>
+                                      <input type="hidden" id="newProjectStartDate" class="datepicker">
                                       <input type="hidden" id="newProjectDeadline" class="datepicker">
                                       <label for="addProjectName">Nume proiect</label>
                                   </div></td>
@@ -376,6 +389,9 @@
         });
         $('#newProjectDeadline').change(function() {
           setProjectDeadline($(this).val());
+        });
+        $('#newProjectStartDate').change(function() {
+          setProjectStartDate($(this).val());
         });
         $(document).ready(function(){
           $('.modal').modal();
