@@ -1252,7 +1252,7 @@ function changeProjectDeadline (projID, projOldDate) {
 }
 
 function changeProjectStartDate (projID, projOldDate) {
-  selProjID = Number(projID.substring(13));
+  selProjID = Number(projID.substring(14));
   let instance = M.Datepicker.getInstance($('#newProjectStartDate'));
   let instanceDate = projOldDate.split('-');
   instance.setDate(new Date(Number(instanceDate[0]), Number(instanceDate[1])-1, Number(instanceDate[2])));
@@ -1289,7 +1289,6 @@ function setProjectStartDate (newDate) {
     'proj_id'     : selProjID,
     'startdate'    : getSelectedDate(newDate)
   };
-  console.log(formData);
   $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST
@@ -1297,7 +1296,6 @@ function setProjectStartDate (newDate) {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
-      console.log(data);
       if (data.substring(0, 8) == "Success!") {
         //a mers
         $('#projStartDate_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
