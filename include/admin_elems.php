@@ -444,6 +444,63 @@ function getAllTimesheets() {
 	return $fields;
 }
 
+function getSalaries() {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'SELECT * FROM '.$schema.'.salaries ORDER BY date ASC';
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute();
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+
+	$fields=array();
+
+	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
+    {
+		array_push($fields, $row);
+	}
+
+	return $fields;
+}
+
+function addSalary(int $collab_id, int $hourly, int $monthly, string $date) {
+        /* Global $pdo object */
+        global $pdo;
+        global $schema;
+    
+        /* Insert query template */
+        $query = 'INSERT INTO '.$schema.'.salaries (collab_id, hourly, monthly, date) VALUES (:collab_id, :hourly, :monthly, :date)';
+        
+        /* Values array for PDO */
+        $values = array(':date' => date("Y-m-d", strtotime($date)), ':collab_id' => $collab_id, ':hourly' => $hourly, ':monthly' => $monthly);
+        
+        /* Execute the query */
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+
+        catch (PDOException $e)
+        {
+            /* If there is a PDO exception, throw a standard exception */
+            echo "Database error".$e->getMessage();
+            die();
+        }
+        
+        /* Return the new ID */
+        return "Success:" . $pdo->lastInsertId();
+}
+
 function deleteHoliday (string $date) {
     global $pdo;
 	global $schema;

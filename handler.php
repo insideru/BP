@@ -166,6 +166,7 @@ if ($_REQUEST["r"]=="init") {
     $response["holidays"] = getHolidays();
     $response["accounts"] = getAccounts();
     $response["timesheets"] = getAllTimesheets();
+    $response["salaries"] = getSalaries();
     
     echo json_encode($response);
 }

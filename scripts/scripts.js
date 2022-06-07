@@ -17,6 +17,7 @@ dashboardPage = "/";
 concediuPage = "/?page=concediu";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
+salariesObject = [];
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -260,7 +261,7 @@ function populateUsers() {
     }
     $('#usersTable').append('<tr><td  class="tooltipped" data-position="top" data-tooltip="Apasa pentru schimbare parola" style="cursor:pointer" onclick="changePass(\''+element.account_id +'\')">'+element.account_username+'</td>'+
     '<td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
-    '<td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#salaryModal" onclick="$(\'#addNewSalaryDiv\').removeClass(\'hide\'); userID=' + element.collab_id +'">Date Salariu</a></td>'+
+    '<td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#salaryModal" onclick="resetSalaryForm(); userID=' + element.collab_id +'">Date Salariu</a></td>'+
     '<td><div class="chip tooltipped" data-position="top" data-tooltip="Total zile concediu" style="cursor:pointer" onclick="changeConcediu(\''+ element.account_id +'\', \''+element.zile_concediu+'\')">'+element.zile_concediu+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="bottom" data-tooltip="Zile concediu reportate" style="cursor:pointer" onclick="changeReport(\''+ element.account_id +'\', \''+element.zile_report+'\')">'+element.zile_report+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div><div class="chip tooltipped" data-position="top" data-tooltip="Zile concediu ramase" style="cursor:pointer" onclick="changeRamase(\''+ element.account_id +'\', \''+element.zile_ramase+'\')">'+element.zile_ramase+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td>'+checkbox+'</td></tr>');
   });
@@ -1346,6 +1347,14 @@ function hoursWorked(month, part) {
   return res;
 }
 
+function resetSalaryForm() {
+  $('#addNewSalaryDiv').removeClass('hide');
+  $('#addHourlySalary').removeClass("invalid");
+  $('#addMonthlySalary').removeClass("invalid");
+  $('#addHourlySalary').val('');
+  $('#addMonthlySalary').val('');
+}
+
 function addNewSalary(user_id) {
   let newHS = $('#addHourlySalary').val();
   if (typeof newHS === 'string') { newHS = newHS.trim(); }
@@ -1365,6 +1374,53 @@ function addNewSalary(user_id) {
   } else {
     $('#addMonthlySalary').removeClass("invalid");
   }
-  $('#addNewSalaryDiv').addClass('hide');
-console.log('adaug stoul');
+  
+  var formData = {
+    'action'    : 'addSalary',
+    'collab_id' : user_id, 
+    'hourly'    : newHS,
+    'monthly'   : newMS,
+    'date'      : getSelectedDate($('#addSalaryDate').val())
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        $('#addNewSalaryDiv').addClass('hide');
+        let insertID = data.substring(8);
+        salariesObject.push({id: insertID, collab_id: user_id, hourly: newHS, monthy: newMS, date: datedDate});
+        populateSalaryTable(user_id);
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
+}
+
+function populateSalaryTable(userID) {
+  $('#salaryTable').val('');
+  let contor=0;
+  salariesObject.forEach(element => {
+    if (element.collab_id == userID) {
+      $('#salaryTable').append('<tr><td class="input-field">'+
+          '<input id="hourlySalary_"'+userID+'_'+ contor +' type="text" class="validate">'+
+          '<label for="hourlySalary_"'+userID+'_'+ contor +'">Salariu orar - 0 daca nu exista</label></td>'+
+        '<td class="input-field">'+
+          '<input id="monthlySalary_"'+userID+'_'+ contor +' type="text" class="validate">'+
+          '<label for="monthlySalary_"'+userID+'_'+ contor +'>Salariu lunar - 0 daca nu exista</label></td>'+
+        '<td class="input-field">'+
+          '<input type="text" id="modifySalaryDate" class="datepicker"></td>)'+
+        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+userID+', '+ contor++ +')>Modifica</a></td>');
+    }
+  });
+}
+
+function modifiySalary(userID, contor) {
+  console.log('modific salariul nr ' + contor + 'al userului ' + userID);
 }
