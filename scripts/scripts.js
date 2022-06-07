@@ -1411,10 +1411,8 @@ function populateSalaryTable(userID) {
     if (element.collab_id == userID) {
       $('#salaryTable').append('<tr><td class="input-field">'+
           '<input id="hourlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
-          '<label for="hourlySalary_'+userID+'_'+ contor +'">Salariu orar - 0 daca nu exista</label></td>'+
         '<td class="input-field">'+
           '<input id="monthlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
-          '<label for="monthlySalary_'+userID+'_'+ contor +'">Salariu lunar - 0 daca nu exista</label></td>'+
         '<td class="input-field">'+
           '<input type="text" id="modifySalaryDate_'+userID+'_'+ contor +'" class="datepicker"></td>)'+
         '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+userID+', '+ contor +')>Modifica</a></td>');
