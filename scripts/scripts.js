@@ -138,8 +138,9 @@ function changeProjState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          sgds = 
-          //console.log("Ar trebui sa mearga! " + data);
+          $('projTable').html('');
+          $('projInactiveTable').html('');
+          populateProjects();
         }
     });
 }
@@ -156,9 +157,7 @@ function changeUserState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          $('projTable').html('');
-          $('projInactiveTable').html('');
-          populateProjects();
+          //console.log("Ar trebui sa mearga! " + data);
         }
     });
 }
