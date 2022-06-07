@@ -1358,7 +1358,7 @@ function addNewSalary(user_id) {
   }
   let newMS = $('#addMonthlySalary').val();
   if (typeof newMS === 'string') { newMS = newMS.trim(); }
-  if (newMS == null || newMS(newHS)) {
+  if (newMS == null || isNaN(newHS)) {
     //newHS nu e ce trebuie
     $('#addMonthlySalary').addClass("invalid");
     return 0;
