@@ -140,6 +140,11 @@ function changeProjState(proj_id) {
         success     : function(data) {
           $('projTable').html('');
           $('projInactiveTable').html('');
+          projectsObject.forEach(element => {
+            if (element.id == proj_id.substring(7)) {
+              element.active = (element.active == 1 ? 0 : 1);
+            }
+          });
           populateProjects();
         }
     });
