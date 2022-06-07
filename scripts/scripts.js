@@ -138,8 +138,8 @@ function changeProjState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          $('projTable').html('');
-          $('projInactiveTable').html('');
+          $('#projTable').html('');
+          $('#projInactiveTable').html('');
           projectsObject.forEach(element => {
             if (element.id == proj_id.substring(7)) {
               element.active = (element.active == 1 ? 0 : 1);
