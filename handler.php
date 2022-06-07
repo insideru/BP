@@ -133,6 +133,10 @@ if ($_POST["action"]=="setProjectDeadline") {
     echo setProjectDeadline((int)$_POST["proj_id"], $_POST['deadline']);
 }
 
+if ($_POST["action"]=="setProjectStartDate") {
+    echo setProjectStartDate((int)$_POST["proj_id"], $_POST['deadline']);
+}
+
 if ($_POST["action"]=="changeUserState") {
     echo changeUserState((int)$_POST["user_id"]);
 }

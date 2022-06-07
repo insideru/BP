@@ -138,6 +138,7 @@ function changeProjState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
+          sgds = 
           //console.log("Ar trebui sa mearga! " + data);
         }
     });
@@ -155,7 +156,9 @@ function changeUserState(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          //console.log("Ar trebui sa mearga! " + data);
+          $('projTable').html('');
+          $('projInactiveTable').html('');
+          populateProjects();
         }
     });
 }
@@ -1244,7 +1247,7 @@ function changeProjectDeadline (projID, projOldDate) {
   instance.open();
 }
 
-function changeProjectDeadline (projID, projOldDate) {
+function changeProjectStartDate (projID, projOldDate) {
   selProjID = Number(projID.substring(13));
   let instance = M.Datepicker.getInstance($('#newProjectStartDate'));
   let instanceDate = projOldDate.split('-');
@@ -1293,7 +1296,7 @@ function setProjectStartDate (newDate) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
         console.log(data);
-        $('#projDeadline_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
+        $('#projStartDate_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
       } else {
         M.toast({html: data});
         return;

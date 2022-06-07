@@ -392,6 +392,30 @@ function setProjectDeadline (int $proj_id, string $deadline) {
     return "Success!" . $res->fetch(PDO::FETCH_ASSOC);
 }
 
+function setProjectStartDate (int $proj_id, string $startdate) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.projects SET start_date = :startdate WHERE id = :proj_id';
+    $values = array(':proj_id' => $proj_id, ':startdate' => date("Y-m-d", strtotime($startdate)));
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+
+    return "Success!" . $res->fetch(PDO::FETCH_ASSOC);
+}
+
 function getAllTimesheets() {
 	/* Global $pdo object */
 	global $pdo;
