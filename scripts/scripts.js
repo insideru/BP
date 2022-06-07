@@ -1405,20 +1405,36 @@ function addNewSalary(user_id) {
 }
 
 function populateSalaryTable(userID) {
-  $('#salaryTable').val('');
+  $('#salaryTable').html('');
   let contor=0;
   salariesObject.forEach(element => {
     if (element.collab_id == userID) {
       $('#salaryTable').append('<tr><td class="input-field">'+
-          '<input id="hourlySalary_"'+userID+'_'+ contor +' type="text" class="validate">'+
-          '<label for="hourlySalary_"'+userID+'_'+ contor +'">Salariu orar - 0 daca nu exista</label></td>'+
+          '<input id="hourlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
+          '<label for="hourlySalary_'+userID+'_'+ contor +'">Salariu orar - 0 daca nu exista</label></td>'+
         '<td class="input-field">'+
-          '<input id="monthlySalary_"'+userID+'_'+ contor +' type="text" class="validate">'+
-          '<label for="monthlySalary_"'+userID+'_'+ contor +'>Salariu lunar - 0 daca nu exista</label></td>'+
+          '<input id="monthlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
+          '<label for="monthlySalary_'+userID+'_'+ contor +'">Salariu lunar - 0 daca nu exista</label></td>'+
         '<td class="input-field">'+
-          '<input type="text" id="modifySalaryDate" class="datepicker"></td>)'+
-        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+userID+', '+ contor++ +')>Modifica</a></td>');
+          '<input type="text" id="modifySalaryDate_'+userID+'_'+ contor +'" class="datepicker"></td>)'+
+        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+userID+', '+ contor +')>Modifica</a></td>');
+        var elems = $('#modifySalaryDate_'+userID+'_'+ contor++);
+        let tmpDate = element.date.split('-');
+        var instances = M.Datepicker.init(elems, {
+        defaultDate: new Date(tmpDate[0], tmpDate[1]-1, tmpDate[2]),    
+        setDefaultDate: true,
+        format: 'dd mmmm yyyy',
+        firstDay: 1,
+        i18n: {
+            weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
+            weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
+            weekdaysAbbrev: ['D','L','M','M','J','V','S'],
+            months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+            monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
+        }
+    });
     }
+
   });
 }
 
