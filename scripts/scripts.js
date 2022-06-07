@@ -1353,6 +1353,7 @@ function resetSalaryForm() {
   $('#addMonthlySalary').removeClass("invalid");
   $('#addHourlySalary').val('');
   $('#addMonthlySalary').val('');
+  populateSalaryTable(userID);
 }
 
 function addNewSalary(user_id) {
@@ -1389,7 +1390,7 @@ function addNewSalary(user_id) {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
-      if (data.substring(0, 8) == "Success!") {
+      if (data.substring(0, 8) == "Success:") {
         //a mers
         $('#addNewSalaryDiv').addClass('hide');
         let insertID = data.substring(8);
