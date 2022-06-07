@@ -1274,7 +1274,6 @@ function setProjectDeadline (newDate) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        console.log(data);
         $('#projDeadline_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
       } else {
         M.toast({html: data});
@@ -1288,8 +1287,9 @@ function setProjectStartDate (newDate) {
   var formData = {
     'action'      : 'setProjectStartDate',
     'proj_id'     : selProjID,
-    'deadline'    : getSelectedDate(newDate)
+    'startdate'    : getSelectedDate(newDate)
   };
+  console.log(formData);
   $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
     url         : 'handler.php', // the url where we want to POST
@@ -1297,9 +1297,9 @@ function setProjectStartDate (newDate) {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
+      console.log(data);
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        console.log(data);
         $('#projStartDate_' + selProjID).html(getSelectedISODate(newDate) + '<i class="material-icons tiny" style="padding-left: 5px;">edit</i>');
       } else {
         M.toast({html: data});
