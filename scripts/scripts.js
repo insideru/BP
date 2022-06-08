@@ -1355,6 +1355,7 @@ function resetSalaryForm() {
   $('#addMonthlySalary').val('');
   var instance = M.Datepicker.getInstance($('#addSalaryDate'));
   instance.setDate(new Date());
+  $('#addSalaryDate').val(instance.toString());
   populateSalaryTable(userID);
 }
 
