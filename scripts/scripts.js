@@ -1417,7 +1417,7 @@ function populateSalaryTable(user_id) {
           '<input style="text-align:center;" id="monthlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
         '<td class="input-field">'+
           '<input style="text-align:center;" type="text" id="modifySalaryDate_'+user_id+'_'+ contor +'" class="datepicker"></td>)'+
-        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+user_id+', '+ contor +')>Modifica</a></td>');
+        '<td><a class="waves-effect waves-light btn btn-small" onclick="modifiySalary('+user_id+', '+ contor +'")>Modifica</a></td>');
         var elems = $('#modifySalaryDate_'+user_id+'_'+ contor++);
         let tmpDate = element.date.split('-');
         var instances = M.Datepicker.init(elems, {
