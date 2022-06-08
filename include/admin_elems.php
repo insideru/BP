@@ -501,6 +501,34 @@ function addSalary(int $collab_id, int $hourly, int $monthly, string $date) {
         return "Success:" . $pdo->lastInsertId();
 }
 
+function modifySalary(int $id, int $hourly, int $monthly, string $date) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'UPDATE '.$schema.'.salaries SET hourly = :hourly, monthly = :monthly, date = :date WHERE id = :id';
+    
+    /* Values array for PDO */
+    $values = array(':date' => date("Y-m-d", strtotime($date)), ':id' => $id, ':hourly' => $hourly, ':monthly' => $monthly);
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    return "Success!";
+}
+
 function deleteHoliday (string $date) {
     global $pdo;
 	global $schema;

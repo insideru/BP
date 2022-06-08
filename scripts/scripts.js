@@ -1413,13 +1413,13 @@ function populateSalaryTable(user_id) {
   salariesObject.forEach(element => {
     if (element.collab_id == user_id) {
       $('#salaryTable').append('<tr><td class="input-field">'+
-          '<input style="text-align:center;" id="hourlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
+          '<input style="text-align:center;" id="hourlySalary_'+element.id+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
         '<td class="input-field">'+
-          '<input style="text-align:center;" id="monthlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
+          '<input style="text-align:center;" id="monthlySalary_'+element.id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
         '<td class="input-field">'+
-          '<input style="text-align:center;" type="text" id="modifySalaryDate_'+user_id+'_'+ contor +'" class="datepicker"></td>)'+
-        '<td><a class="waves-effect waves-light btn btn-small" onclick="modifiySalary('+user_id+', '+ contor +'")>Modifica</a></td>');
-        var elems = $('#modifySalaryDate_'+user_id+'_'+ contor++);
+          '<input style="text-align:center;" type="text" id="modifySalaryDate_'+element.id+'_'+ contor +'" class="datepicker"></td>)'+
+        '<td><a class="waves-effect waves-light btn btn-small" onclick="modifiySalary('+element.id+', '+ contor +'")>Modifica</a></td>');
+        var elems = $('#modifySalaryDate_'+element.id+'_'+ contor++);
         let tmpDate = element.date.split('-');
         var instances = M.Datepicker.init(elems, {
         defaultDate: new Date(tmpDate[0], tmpDate[1]-1, tmpDate[2]),    
@@ -1438,6 +1438,53 @@ function populateSalaryTable(user_id) {
   });
 }
 
-function modifiySalary(user_id, contor) {
-  console.log('modific salariul nr ' + contor + 'al userului ' + user_id);
+function modifiySalary(id, contor) {
+  let newHS = $('#hourlySalary_'+id+'_'+contor).val();
+  if (typeof newHS === 'string') { newHS = newHS.trim(); }
+  if (newHS == null || newHS == "" || isNaN(newHS)) {
+    //newHS nu e ce trebuie
+    $('#hourlySalary_'+id+'_'+contor).addClass("invalid");
+    return 0;
+  } else {
+    $('#hourlySalary_'+id+'_'+contor).removeClass("invalid");
+  }
+  let newMS = $('#monthlySalary_'+id+'_'+contor).val();
+  if (typeof newMS === 'string') { newMS = newMS.trim(); }
+  if (newMS == null || newMS == "" || isNaN(newMS)) {
+    //newHS nu e ce trebuie
+    $('#monthlySalary_'+id+'_'+contor).addClass("invalid");
+    return 0;
+  } else {
+    $('#monthlySalary_'+id+'_'+contor).removeClass("invalid");
+  }
+  
+  var formData = {
+    'action'    : 'modifySalary',
+    'id'        : id,
+    'hourly'    : newHS,
+    'monthly'   : newMS,
+    'date'      : getSelectedDate($('#modifySalaryDate_'+id+'_'+ contor).val())
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        salariesObject.forEach(element => {
+          if (element.id == id) {
+            element.hourly = newHS;
+            element.monthly = newMS;
+            element.date = getSelectedISODate($('#addSalaryDate').val());
+          }
+        });
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }

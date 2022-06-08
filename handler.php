@@ -189,6 +189,10 @@ if ($_POST["action"]=="addSalary") {
     echo addSalary((int)$_POST['collab_id'], (int)$_POST['hourly'], (int)$_POST['monthly'], $_POST['date']);
 }
 
+if ($_POST["action"]=="modifySalary") {
+    echo modifySalary((int)$_POST['id'], (int)$_POST['hourly'], (int)$_POST['monthly'], $_POST['date']);
+}
+
 if ($_REQUEST["r"]=="concediu") {    
     $response = array();
     $response["holidays"] = getHolidays();
