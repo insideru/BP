@@ -1353,6 +1353,8 @@ function resetSalaryForm() {
   $('#addMonthlySalary').removeClass("invalid");
   $('#addHourlySalary').val('');
   $('#addMonthlySalary').val('');
+  var instance = M.Datepicker.getInstance($('#addSalaryDate'));
+  instance.setDate(new Date());
   populateSalaryTable(userID);
 }
 
@@ -1410,11 +1412,11 @@ function populateSalaryTable(user_id) {
   salariesObject.forEach(element => {
     if (element.collab_id == user_id) {
       $('#salaryTable').append('<tr><td class="input-field">'+
-          '<input id="hourlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
+          '<input style="text-align:center;" id="hourlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
         '<td class="input-field">'+
-          '<input id="monthlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
+          '<input style="text-align:center;" id="monthlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
         '<td class="input-field">'+
-          '<input type="text" id="modifySalaryDate_'+user_id+'_'+ contor +'" class="datepicker"></td>)'+
+          '<input style="text-align:center;" type="text" id="modifySalaryDate_'+user_id+'_'+ contor +'" class="datepicker"></td>)'+
         '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+user_id+', '+ contor +')>Modifica</a></td>');
         var elems = $('#modifySalaryDate_'+user_id+'_'+ contor++);
         let tmpDate = element.date.split('-');
@@ -1432,7 +1434,6 @@ function populateSalaryTable(user_id) {
         }
     });
     }
-
   });
 }
 
