@@ -1394,7 +1394,7 @@ function addNewSalary(user_id) {
         //a mers
         $('#addNewSalaryDiv').addClass('hide');
         let insertID = data.substring(8);
-        salariesObject.push({id: insertID, collab_id: user_id, hourly: newHS, monthy: newMS, date: datedDate});
+        salariesObject.push({id: insertID, collab_id: user_id, hourly: newHS, monthly: newMS, date: getSelectedISODate($('#addSalaryDate').val())});
         populateSalaryTable(user_id);
       } else {
         M.toast({html: data});
@@ -1404,19 +1404,19 @@ function addNewSalary(user_id) {
   });
 }
 
-function populateSalaryTable(userID) {
+function populateSalaryTable(user_id) {
   $('#salaryTable').html('');
   let contor=0;
   salariesObject.forEach(element => {
-    if (element.collab_id == userID) {
+    if (element.collab_id == user_id) {
       $('#salaryTable').append('<tr><td class="input-field">'+
-          '<input id="hourlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
+          '<input id="hourlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.hourly+'">'+
         '<td class="input-field">'+
-          '<input id="monthlySalary_'+userID+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
+          '<input id="monthlySalary_'+user_id+'_'+ contor +'" type="text" class="validate" value="'+element.monthly+'">'+
         '<td class="input-field">'+
-          '<input type="text" id="modifySalaryDate_'+userID+'_'+ contor +'" class="datepicker"></td>)'+
-        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+userID+', '+ contor +')>Modifica</a></td>');
-        var elems = $('#modifySalaryDate_'+userID+'_'+ contor++);
+          '<input type="text" id="modifySalaryDate_'+user_id+'_'+ contor +'" class="datepicker"></td>)'+
+        '<td><a class="waves-effect waves-light btn btn-small" onclick=modifiySalary('+user_id+', '+ contor +')>Modifica</a></td>');
+        var elems = $('#modifySalaryDate_'+user_id+'_'+ contor++);
         let tmpDate = element.date.split('-');
         var instances = M.Datepicker.init(elems, {
         defaultDate: new Date(tmpDate[0], tmpDate[1]-1, tmpDate[2]),    
@@ -1436,6 +1436,6 @@ function populateSalaryTable(userID) {
   });
 }
 
-function modifiySalary(userID, contor) {
-  console.log('modific salariul nr ' + contor + 'al userului ' + userID);
+function modifiySalary(user_id, contor) {
+  console.log('modific salariul nr ' + contor + 'al userului ' + user_id);
 }
