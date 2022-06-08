@@ -1479,6 +1479,7 @@ function modifiySalary(id, contor) {
             element.hourly = newHS;
             element.monthly = newMS;
             element.date = getSelectedISODate($('#addSalaryDate').val());
+            M.toast({html: "Salariul a fost modificat cu succes!"});
           }
         });
       } else {
