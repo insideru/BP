@@ -1348,6 +1348,7 @@ function hoursWorked(month, part) {
 }
 
 function resetSalaryForm() {
+  $('#numeSalariat').html(getDBNameFromId(userID, 'collab'));
   $('#addNewSalaryDiv').removeClass('hide');
   $('#addHourlySalary').removeClass("invalid");
   $('#addMonthlySalary').removeClass("invalid");
