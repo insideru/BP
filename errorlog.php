@@ -3,5 +3,5 @@ require_once './include/account.php';
 
 global $account;
 $account->sessionLogin();
-echo $account->getCollabID();
+echo json_encode($account->permissions());
 ?>

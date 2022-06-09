@@ -8,6 +8,7 @@ class Account {
     public $authenticated;
     private $token;
 	private $guid;
+	public $permissions;
 
     public function __construct() {
         $this->id = NULL;
@@ -17,6 +18,7 @@ class Account {
         $this->token = NULL;
 		$this->collabID = NULL;
 		$this->guid = NULL;
+		$this->permissions = array();
     }
 
     public function __destruct() {
@@ -482,9 +484,9 @@ public function sessionLogin(): bool
 			Query template to look for the current session ID on the account_sessions table.
 			The query also makes sure the Session is not older than 30 days
 		*/
-		$query = 'SELECT * FROM '.$schema.'.sessions, '.$schema.'.accounts WHERE (sessions.session_id = :sid) ' . 
+		$query = 'SELECT * FROM '.$schema.'.sessions, '.$schema.'.accounts, '.$schema.'.permissions WHERE (sessions.session_id = :sid) ' . 
 		'AND (sessions.login_time >= (NOW() - INTERVAL 30 DAY)) AND (sessions.account_id = accounts.account_id) ' . 
-		'AND (accounts.account_enabled = 1)';
+		'AND (accounts.account_enabled = 1) AND (permissions.id = accounts.account_group)';
 		
 		/* Values array for PDO */
 		$values = array(':sid' => session_id());
@@ -516,6 +518,11 @@ public function sessionLogin(): bool
 			$this->collabID = intval($row['collab_id']);
 			//echo $this->collabID . '<BR>';
 			$this->guid = $row['guid'];
+			array_push($this->permissions, $row['admin']);
+			array_push($this->permissions, $row['bonus']);
+			array_push($this->permissions, $row['external']);
+			array_push($this->permissions, $row['holiday']);
+			array_push($this->permissions, $row['timesheet']);
 			//echo $this->guid . '<BR>';
 			return TRUE;
 		}
