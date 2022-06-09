@@ -1536,12 +1536,12 @@ function modifiySalary(id, contor) {
 
 function populatePermissions () {
   permissionsObject.forEach(element => {
-    $('#permissionsTable').append('<tr><td>element.id</td>'+
-    '<td><label><input type="checkbox" '+(element.id==1 ? ' disabled="disabled"' : '')+' onclick="changePermissions(\'admin, \''+element.id+')"' + (element.admin==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
-    '<td><label><input type="checkbox" onclick="changePermissions(\'bonus, \''+element.id+')"' + (element.bonus==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
-    '<td><label><input type="checkbox" onclick="changePermissions(\'external, \''+element.id+')"' + (element.external==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
-    '<td><label><input type="checkbox" onclick="changePermissions(\'holiday, \''+element.id+')"' + (element.holiday==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
-    '<td><label><input type="checkbox" onclick="changePermissions(\'timesheet, \''+element.id+')"' + (element.timesheet==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    $('#permissionsTable').append('<tr><td>'+element.id+'</td>'+
+    '<td><label><input type="checkbox" class="filled-in" '+(element.id==1 ? ' disabled="disabled"' : '')+' onclick="changePermissions(\'admin, \''+element.id+')"' + (element.admin==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'bonus, \''+element.id+')"' + (element.bonus==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'external, \''+element.id+')"' + (element.external==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'holiday, \''+element.id+')"' + (element.holiday==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'timesheet, \''+element.id+')"' + (element.timesheet==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
     '</tr>');  
   });
 }
