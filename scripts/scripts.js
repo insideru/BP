@@ -739,7 +739,10 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
    //daca e inactiv sau daca e extern NU
   addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
 });
-
+if ($('#day').find('Predari').length !== 0) {
+  console.log('am gasit unul');
+  $('#day').addClass('predare');
+}
 }
 
 function buildCalendarHolidays(doArray, hdArray) {
@@ -764,9 +767,6 @@ function buildCalendarHolidays(doArray, hdArray) {
   hdArray.forEach(element => {
     addCalendarEvent('holiday-'+element.date, element.name, "Zi libera", element.date, element.date, "Holidays", "#57d110");
   });
-  if ($('#calendar-day').find('Predari').length !== 0) {
-    $('#calendar-day').addClass('predare');
-  }
 }
 
 function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDate, eventType, color) {

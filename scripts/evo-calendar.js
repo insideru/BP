@@ -612,6 +612,7 @@
         _.initEventListener(); // test
         _.resize();
         if ($('#day').find('Predari').length !== 0) {
+            console.log('am gasit unul');
             $('#day').addClass('predare');
           }
     }
