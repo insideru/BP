@@ -802,7 +802,7 @@ $.ajax({
 }
 
 function deleteConcediu (date, days) {
-  if (!confirm("Concediul selectat va fi sters. Continua? " + date)) {
+  if (!confirm("Concediul selectat va fi sters. Continua? " + date.substring(7))) {
     return;
   }
   var guidCookie = getCookie("userGUID");
@@ -810,7 +810,7 @@ function deleteConcediu (date, days) {
     'action'            : 'deleteDayoff',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'days'              : days,
-    'date'              : date
+    'date'              : date.substring(7);
 };
 $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
