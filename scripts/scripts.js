@@ -741,6 +741,7 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
 });
 
 $('.day').each(function(i, obj) {
+  console.log($(this));
   if ($(this).find('Predari').length !== 0) {
     console.log($(this));
     $(this).addClass('predare');
