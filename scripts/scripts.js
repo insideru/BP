@@ -1547,5 +1547,24 @@ function populatePermissions () {
 }
 
 function changePermissions(column, row) {
-  console.log(row, column);
+  var formData = {
+    'action'    : 'changePermissionItem',
+    'row'       : row, 
+    'column'    : column
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0, 8) == "Success:") {
+        //a mers
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
 }

@@ -605,4 +605,28 @@ function getAccounts () {
     }
     return $fields;
 }
+
+function changePermissionItem(int $rowNo, string $columnName) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.permissions SET :columnName = CASE WHEN :columnName = 1 THEN 0 ELSE 1 END WHERE rowNo = :rowNo';
+    $values = array(":rowNo" => $rowNo, ":columnName" => $columnName);
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    return "Success!";
+}
 ?>
