@@ -212,7 +212,7 @@
                                       <tbody>
                                         <tr>
                                           <td>
-                                            <a href="#!" class="waves-effect waves-green btn-flat" onclick="addPermissionGroup()">Adauga grup permisii</a>
+                                            <a class="waves-effect waves-green btn" onclick="addPermissionGroup()">Adauga grup permisii</a>
                                           </td>
                                         </tr>
                                       </tbody>
@@ -486,6 +486,7 @@
           accountsObject = initData.accounts;
           alltimesheetsObject = initData.timesheets;
           salariesObject = initData.salaries;
+          permissionsObject = initData.permissions;
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
           drawProjectsChart();
           //initializare categorii proiect
@@ -512,6 +513,8 @@
           //initializare utilizatori
           populateUsers();
           //console.log(accountsObject);
+          populatePermissions();
+          
           $('.tooltipped').tooltip();
         });
                 

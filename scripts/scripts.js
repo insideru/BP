@@ -18,6 +18,7 @@ concediuPage = "/?page=concediu";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
+permissionsObject = [];
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -737,7 +738,7 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
  }
  projectsArray.forEach(element =>{
    //daca e inactiv sau daca e extern NU
-  addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
+    addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
 });
 
 $('.day').each(function(i, obj) {
@@ -1530,5 +1531,16 @@ function modifiySalary(id, contor) {
         return;
       }
     }
+  });
+}
+
+function populatePermissions () {
+  permissionsObject.forEach(element => {
+    $('#permissionsTable').append('<tr><td><label><input type="checkbox" '+(element.id==1 ? ' disabled="disabled"' : '')+' onclick="changePermissions(\'admin, \''+element.id+')"' + (element.admin==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" onclick="changePermissions(\'bonus, \''+element.id+')"' + (element.bonus==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" onclick="changePermissions(\'external, \''+element.id+')"' + (element.external==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" onclick="changePermissions(\'holiday, \''+element.id+')"' + (element.holiday==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" onclick="changePermissions(\'timesheet, \''+element.id+')"' + (element.timesheet==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '</tr>');  
   });
 }

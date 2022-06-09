@@ -50,6 +50,7 @@ input:focus, textarea:focus, button:focus {
     color: #c60000 !important;
     font-weight: bold !important;
   }
+  
 .calendar-sidebar {
     position: absolute;
     margin-top: 0;

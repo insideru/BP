@@ -167,6 +167,7 @@ if ($_REQUEST["r"]=="init") {
     $response["accounts"] = getAccounts();
     $response["timesheets"] = getAllTimesheets();
     $response["salaries"] = getSalaries();
+    $response["permissions"] = getPermissions();
     
     echo json_encode($response);
 }
