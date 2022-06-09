@@ -504,7 +504,7 @@ public function sessionLogin(): bool
 		}
 		
 		$row = $res->fetch(PDO::FETCH_ASSOC);
-		//echo json_encode($row) . '<BR>';
+		echo json_encode($row) . '<BR>';
 		
 		if (is_array($row))
 		{
