@@ -73,7 +73,7 @@ function getTimesheets (string $guid) {
 	global $schema;
 
 	$query = 'SELECT * FROM '.$schema.'.timesheets WHERE (collab_id = :cid)';
-	$values = array(':cid' => getIDfromGUID($guid));
+	$values = array(':cid' => $account->getCollabID());
 	
 	try
 	{
