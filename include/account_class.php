@@ -509,13 +509,33 @@ public function sessionLogin(): bool
 		if (is_array($row))
 		{
 			/* Authentication succeeded. Set the class properties (id and name) and return TRUE*/
-			$this->id = intval($row['account_id']);
-			$this->group = intval($row['account_group']);
-			$this->username = $row['account_username'];
-			$this->authenticated = TRUE;
-			$this->collabID = intval($row['collab_id']);
-			$this->guid = $row['guid'];
-			return TRUE;
+			$query = 'SELECT * FROM '.$schema.'.accounts WHERE (account_id = :id)';
+	
+			/* Values array for PDO */
+			$values = array(':id' => $row['account_id']);
+			
+			/* Execute the query */
+			try
+			{
+				$res = $pdo->prepare($query);
+				$res->execute($values);
+			}
+			catch (PDOException $e)
+			{
+			/* If there is a PDO exception, throw a standard exception */
+			throw new Exception($e->getMessage());
+			}
+			
+			$row = $res->fetch(PDO::FETCH_ASSOC);
+			if (is_array($row)) {
+				$this->id = intval($row['account_id']);
+				$this->group = intval($row['account_group']);
+				$this->username = $row['account_username'];
+				$this->authenticated = TRUE;
+				$this->collabID = intval($row['collab_id']);
+				$this->guid = $row['guid'];
+				return TRUE;
+			}
 		}
 
 		//daca nu e sesiune, poate e cookie
