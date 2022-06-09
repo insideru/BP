@@ -71,6 +71,7 @@ function getTimesheets (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
+    global $account;
 
 	$query = 'SELECT * FROM '.$schema.'.timesheets WHERE (collab_id = :cid)';
 	$values = array(':cid' => $account->getCollabID());
@@ -265,6 +266,7 @@ function deleteDaysoff (string $startDate, int $number) {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
+    global $account;
 	//update accounts set `zile_ramase` = `zile_concediu`-5 where guid="6f0c7834-4a68-433f-bc06-e8e1fd38d33a"
 
     /* Insert query template */

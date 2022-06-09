@@ -338,8 +338,6 @@ public function deleteAccount(int $id)
 	}
 }
 
-
-
 public function login(string $username, string $passwd, int $remember): bool
 {
 	/* Global $pdo object */
