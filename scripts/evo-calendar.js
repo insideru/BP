@@ -612,9 +612,8 @@
         _.initEventListener(); // test
         _.resize();
         $('.day').each(function(i, obj) {
-            if ($(this).find('Predari').length !== 0) {
-                console.log($(this));
-                $(this).addClass('predare');
+            if ($(this).find('type-Predari').length !== 0) {
+              $(this).addClass('predare');
             }
         });
     }
