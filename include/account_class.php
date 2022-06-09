@@ -508,34 +508,18 @@ public function sessionLogin(): bool
 		
 		if (is_array($row))
 		{
-			$query = 'SELECT * FROM '.$schema.'.accounts WHERE (account_id = :id)';
-	
-			/* Values array for PDO */
-			$values = array(':id' => $row['account_id']);
-			
-			/* Execute the query */
-			try
-			{
-				$res = $pdo->prepare($query);
-				$res->execute($values);
-			}
-			catch (PDOException $e)
-			{
-			/* If there is a PDO exception, throw a standard exception */
-			throw new Exception($e->getMessage());
-			}
-			
-			$row2 = $res->fetch(PDO::FETCH_ASSOC);
-			if (is_array($row2)) {
-				echo json_encode($row2). '<BR>';
-				$this->id = intval($row2['account_id']);
-				$this->group = intval($row2['account_group']);
-				$this->username = $row2['account_username'];
-				$this->authenticated = TRUE;
-				$this->collabID = intval($row2['collab_id']);
-				$this->guid = $row2['guid'];
-				return TRUE;
-			}
+			$this->id = intval($row['account_id']);
+			echo $this->id . '<BR>';
+			$this->group = intval($row['account_group']);
+			echo $this->group . '<BR>';
+			$this->username = $row['account_username'];
+			echo $this->username . '<BR>';
+			$this->authenticated = TRUE;
+			$this->collabID = intval($row['collab_id']);
+			echo $this->collabID . '<BR>';
+			$this->guid = $row['guid'];
+			echo $this->guid . '<BR>';
+			return TRUE;
 		}
 
 		//daca nu e sesiune, poate e cookie
