@@ -164,8 +164,6 @@ function changeProjExternal(proj_id) {
         //dataType    : 'json', // what type of data do we expect back from the server
         encode      : true,
         success     : function(data) {
-          $('#projTable').html('');
-          $('#projInactiveTable').html('');
           projectsObject.forEach(element => {
             if (element.id == proj_id.substring(8)) {
               element.external = (element.external == 1 ? 0 : 1);
