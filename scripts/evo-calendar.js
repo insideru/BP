@@ -611,10 +611,11 @@
         _.buildEventList();
         _.initEventListener(); // test
         _.resize();
-        if ($('.day').find('Predari').length !== 0) {
-            console.log('am gasit unul');
-            $('.day').addClass('predare');
-          }
+        $('.day').each(function(i, obj) {
+            if (obj.find('Predari').length !== 0) {
+              obj.addClass('predare');
+            }
+        });
     }
 
     // v1.0.0 - Build Event: Event list

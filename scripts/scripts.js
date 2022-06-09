@@ -739,10 +739,12 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
    //daca e inactiv sau daca e extern NU
   addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
 });
-if ($('.day').find('Predari').length !== 0) {
-  console.log('am gasit unul');
-  $('.day').addClass('predare');
-}
+
+$('.day').each(function(i, obj) {
+  if (obj.find('Predari').length !== 0) {
+    obj.addClass('predare');
+  }
+});
 }
 
 function buildCalendarHolidays(doArray, hdArray) {
