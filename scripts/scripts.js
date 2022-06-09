@@ -810,7 +810,7 @@ function deleteConcediu (date, days) {
     'action'            : 'deleteDayoff',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'days'              : days,
-    'date'              : date.substring(7);
+    'date'              : date.substring(7)
 };
 $.ajax({
     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
