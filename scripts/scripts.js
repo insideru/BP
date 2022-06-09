@@ -221,7 +221,7 @@ function populateCollabs() {
       //e adaugat user
       $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
     } else {
-      $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
+      $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="updatePermissionsDropdown(); addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
   });
@@ -1598,5 +1598,13 @@ function addPermissionGroup() {
         return;
       }
     }
+  });
+}
+
+function updatePermissionsDropdown() {
+  $('#').append('<option value="" disabled selected>Categorie drepturi</option>');
+  permissionsObject.forEach(element => {
+
+    $('#').append('<option value="'+element.id+'">'+element.id+(element.admin==1?" - admin":"")+(element.bonus==1?" - bonus":"")+(element.external==1?" - external":"")+(element.holiday==1?" - holiday":"")+(element.admin==1?" - timesheet":"")+'</option>');
   });
 }
