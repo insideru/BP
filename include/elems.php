@@ -371,7 +371,7 @@ function getProjects() {
     global $pdo;
     global $schema;
 
-    $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, name ASC';
+    $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, start_date ASC';
 
     try
     {
