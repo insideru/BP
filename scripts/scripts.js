@@ -252,6 +252,7 @@ function populateProjects() {
   $('#projTable').html('');
   projectsObject.forEach(element => {
     let isChecked = "";
+    let isExternal = "";
     let tableName = '#projInactiveTable';
     if (element.active=="1") {
       isChecked = 'checked="checked" ';
