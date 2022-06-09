@@ -637,7 +637,7 @@ function addPermissionsGroup() {
     global $schema;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.permissions DEFAULT VALUES';
+    $query = 'INSERT INTO '.$schema.'.permissions () VALUES ()';
 
     /* Values array for PDO */
     $values = array();
