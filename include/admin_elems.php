@@ -611,7 +611,7 @@ function changePermissionItem(int $rowNo, string $columnName) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.permissions SET :columnName = CASE WHEN :columnName = 1 THEN 0 ELSE 1 END WHERE rowNo = :rowNo';
+    $query = ' UPDATE '. $schema . '.permissions SET :columnName = CASE WHEN :columnName = 1 THEN 0 ELSE 1 END WHERE id = :rowNo';
     $values = array(":rowNo" => $rowNo, ":columnName" => $columnName);
 
     try
@@ -626,7 +626,7 @@ function changePermissionItem(int $rowNo, string $columnName) {
         echo "Database error".$e->getMessage();
         die();
     }
-    
+
     return "Success!";
 }
 ?>
