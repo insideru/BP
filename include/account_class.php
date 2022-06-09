@@ -504,21 +504,21 @@ public function sessionLogin(): bool
 		}
 		
 		$row = $res->fetch(PDO::FETCH_ASSOC);
-		echo json_encode($row) . '<BR>';
+		//echo json_encode($row) . '<BR>';
 		
 		if (is_array($row))
 		{
 			$this->id = intval($row['account_id']);
-			echo $this->id . '<BR>';
+			//echo $this->id . '<BR>';
 			$this->group = intval($row['account_group']);
-			echo $this->group . '<BR>';
+			//echo $this->group . '<BR>';
 			$this->username = $row['account_username'];
-			echo $this->username . '<BR>';
+			//echo $this->username . '<BR>';
 			$this->authenticated = TRUE;
 			$this->collabID = intval($row['collab_id']);
-			echo $this->collabID . '<BR>';
+			//echo $this->collabID . '<BR>';
 			$this->guid = $row['guid'];
-			echo $this->guid . '<BR>';
+			//echo $this->guid . '<BR>';
 			return TRUE;
 		}
 
