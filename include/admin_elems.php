@@ -9,6 +9,7 @@ if (($account->authenticated) || $_POST["action"]=="login") { //&& $account->get
 } else {
     die();
 }
+
 function addProjCat(string $name) {
     /* Global $pdo object */
     global $pdo;
@@ -628,5 +629,33 @@ function changePermissionItem(int $rowNo, string $columnName) {
     }
 
     return "Success!";
+}
+
+function addPermissionsGroup() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.permissions DEFAULT VALUES';
+
+    /* Values array for PDO */
+    $values = array();
+
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+
+    /* Return the new ID */
+    return "Success:" . $pdo->lastInsertId();
 }
 ?>

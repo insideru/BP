@@ -1559,8 +1559,40 @@ function changePermissions(column, row) {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
+      if (data.substring(0, 8) == "Success!") {
+        //a mers
+        console.log(permissionsObject);
+        permissionsObject[row-1][column] = permissionsObject[row-1][column] == 0 ? 1 : 0;
+        console.log(permissionsObject);
+      } else {
+        M.toast({html: data});
+        return;
+      }
+    }
+  });
+}
+
+function addPermissionGroup() {
+  var formData = {
+    'action'    : 'addPermissionsGroup'
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
       if (data.substring(0, 8) == "Success:") {
         //a mers
+        $('#permissionsTable').append('<tr><td>'+data.substring(8)+'</td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'admin\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'bonus\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'external\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'holiday\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'timesheet\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '</tr>');
+        permissionsObject.push({id: data.substring(8), admin: 0, bonus: 0, external: 0, holiday: 0, timesheet: 0});
       } else {
         M.toast({html: data});
         return;

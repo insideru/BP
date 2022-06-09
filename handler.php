@@ -149,6 +149,10 @@ if ($_POST["action"]=="changePermissionItem") {
     echo changePermissionItem((int)$_POST["row"], $_POST["column"]);
 }
 
+if ($_POST["action"]=="addPermissionsGroup") {
+    echo addPermissionsGroup();
+}
+
 if ($_POST["action"]=="addNewUser") {
     $response = array();
     //$response["newAccount"] = (object) ['message' => newAccount($_POST["username"], $_POST["passwd"], $_POST["group"], $_POST["collab_id"])];
