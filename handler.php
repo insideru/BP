@@ -125,6 +125,10 @@ if ($_POST["action"]=="changeProjState") {
     echo changeProjectState((int)$_POST["proj_id"]);
 }
 
+if ($_POST["action"]=="changeProjExternal") {
+    echo changeProjExternal((int)$_POST["proj_id"]);
+}
+
 if ($_POST["action"]=="setProjectBudget") {
     echo setProjectBudget((int)$_POST["proj_id"], (int)$_POST['new_budget']);
 }

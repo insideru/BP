@@ -152,6 +152,29 @@ function changeProjState(proj_id) {
     });
 }
 
+function changeProjExternal(proj_id) {
+  var formData = {
+        'action'            : 'changeProjExternal',
+        'proj_id'           : proj_id.substring(8)
+    };
+    $.ajax({
+        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url         : 'handler.php', // the url where we want to POST
+        data        : formData, // our data object
+        //dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true,
+        success     : function(data) {
+          $('#projTable').html('');
+          $('#projInactiveTable').html('');
+          projectsObject.forEach(element => {
+            if (element.id == proj_id.substring(8)) {
+              element.external = (element.external == 1 ? 0 : 1);
+            }
+          });
+        }
+    });
+}
+
 function changeUserState(proj_id) {
   var formData = {
         'action'            : 'changeUserState',
@@ -236,8 +259,10 @@ function populateProjects() {
       isChecked = 'checked="checked" ';
       tableName = '#projTable';
     }
+    if (element.external=="1") { isExternal = 'checked="checked" ';}
     $(tableName).append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td>'+
     '<td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
+    '<td><label><input type="checkbox" id="projExt_' + element.id + '" onclick="changeProjExternal(this.id)"' + isExternal +' /><span></span></label></td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projStartDate_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Data incepe proiect" style="cursor:pointer" onclick="changeProjectStartDate(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.start_date+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projDeadline_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Deadline" style="cursor:pointer" onclick="changeProjectDeadline(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.deadline+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+

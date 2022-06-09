@@ -262,6 +262,35 @@ function changeProjectState (int $proj_id) {
     return $fields;
 }
 
+function changeProjExternal (int $proj_id) {
+
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = ' UPDATE '. $schema . '.projects SET external = CASE WHEN external = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $values = array(":id" => $proj_id);
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function changeConcediu (string $accID, string $column, int $value) {
 
     /* Global $pdo object */
