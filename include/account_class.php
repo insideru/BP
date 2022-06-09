@@ -518,11 +518,11 @@ public function sessionLogin(): bool
 			$this->collabID = intval($row['collab_id']);
 			//echo $this->collabID . '<BR>';
 			$this->guid = $row['guid'];
-			array_push($this->permissions, $row['admin']);
+			/*array_push($this->permissions, $row['admin']);
 			array_push($this->permissions, $row['bonus']);
 			array_push($this->permissions, $row['external']);
 			array_push($this->permissions, $row['holiday']);
-			array_push($this->permissions, $row['timesheet']);
+			array_push($this->permissions, $row['timesheet']);*/
 			//echo $this->guid . '<BR>';
 			return TRUE;
 		}
