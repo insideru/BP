@@ -885,7 +885,7 @@ function initCalendar() {
       //dataType    : 'json', // what type of data do we expect back from the server
       encode      : true,
       success     : function(data) {
-        console.log(data);
+        //console.log(data);
         rvdData = JSON.parse(data);
         if (typeof(rvdData) === 'object') {
           myTimesheets = rvdData.timesheets;
