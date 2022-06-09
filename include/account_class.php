@@ -504,7 +504,7 @@ public function sessionLogin(): bool
 		}
 		
 		$row = $res->fetch(PDO::FETCH_ASSOC);
-		echo json_encode($row);
+		echo json_encode($row) . '<BR>';
 		
 		if (is_array($row))
 		{
@@ -525,15 +525,15 @@ public function sessionLogin(): bool
 			throw new Exception($e->getMessage());
 			}
 			
-			$row = $res->fetch(PDO::FETCH_ASSOC);
-			if (is_array($row)) {
-				echo json_encode($row);
-				$this->id = intval($row['account_id']);
-				$this->group = intval($row['account_group']);
-				$this->username = $row['account_username'];
+			$row2 = $res->fetch(PDO::FETCH_ASSOC);
+			if (is_array($row2)) {
+				echo json_encode($row2). '<BR>';
+				$this->id = intval($row2['account_id']);
+				$this->group = intval($row2['account_group']);
+				$this->username = $row2['account_username'];
 				$this->authenticated = TRUE;
-				$this->collabID = intval($row['collab_id']);
-				$this->guid = $row['guid'];
+				$this->collabID = intval($row2['collab_id']);
+				$this->guid = $row2['guid'];
 				return TRUE;
 			}
 		}
