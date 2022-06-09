@@ -788,6 +788,12 @@
         }
 
         buildMonthlyData(title);
+        $('.day').each(function(i, obj) {
+            if ($(this).find('.type-Predari').length !== 0) {
+              $(this).addClass('predare');
+              console.log($(this));
+            }
+          });
     };
 
     // v1.0.0 - Add event indicator/s (dots)
