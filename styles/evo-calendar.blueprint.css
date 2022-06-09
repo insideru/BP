@@ -16,7 +16,7 @@ html {
     line-height: 1.0 !important;
 }
 .predare {
-    background-color: #ff8080;
+    background-color: #ff8080 !important;
 }
 .blueprint .calendar-sidebar {
     background-color: #0f487b;

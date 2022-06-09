@@ -611,8 +611,8 @@
         _.buildEventList();
         _.initEventListener(); // test
         _.resize();
-        if ($('#calendar-day').find('Predari').length !== 0) {
-            $('#calendar-day').addClass('predare');
+        if ($('#day').find('Predari').length !== 0) {
+            $('#day').addClass('predare');
           }
     }
 
