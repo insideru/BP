@@ -744,6 +744,7 @@ $('.day').each(function(i, obj) {
   if ($(this).find('.type-Predari').length !== 0) {
     console.log($(this));
     $(this).addClass('predare');
+    console.log($(this));
   }
 });
 }
