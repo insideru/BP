@@ -482,7 +482,7 @@ public function sessionLogin(): bool
 	{
 		/* 
 			Query template to look for the current session ID on the account_sessions table.
-			The query also make sure the Session is not older than 30 days
+			The query also makes sure the Session is not older than 30 days
 		*/
 		$query = 'SELECT * FROM '.$schema.'.sessions, '.$schema.'.accounts WHERE (sessions.session_id = :sid) ' . 
 		'AND (sessions.login_time >= (NOW() - INTERVAL 30 DAY)) AND (sessions.account_id = accounts.account_id) ' . 
@@ -504,11 +504,10 @@ public function sessionLogin(): bool
 		}
 		
 		$row = $res->fetch(PDO::FETCH_ASSOC);
-		//echo json_encode($row);
+		echo json_encode($row);
 		
 		if (is_array($row))
 		{
-			/* Authentication succeeded. Set the class properties (id and name) and return TRUE*/
 			$query = 'SELECT * FROM '.$schema.'.accounts WHERE (account_id = :id)';
 	
 			/* Values array for PDO */
@@ -528,6 +527,7 @@ public function sessionLogin(): bool
 			
 			$row = $res->fetch(PDO::FETCH_ASSOC);
 			if (is_array($row)) {
+				echo json_encode($row);
 				$this->id = intval($row['account_id']);
 				$this->group = intval($row['account_group']);
 				$this->username = $row['account_username'];
