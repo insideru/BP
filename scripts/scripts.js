@@ -726,7 +726,7 @@ function buildEventsObject(eventsArray) {
   return retObject;
 }
 
-function buildTimesheetCalendarEvents(eventsArray) {
+function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
   var eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
     let datedDate = new Date(key);
@@ -735,6 +735,9 @@ function buildTimesheetCalendarEvents(eventsArray) {
     //console.log("Adaug pontaj pentru data de " + key + " cu timpul " + eventsObject[key]);
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
+ projectsArray.forEach(element =>{
+  addCalendarEvent('predare-'+element.date, "Predare", "Predare " + element.name, element.date, element.date, "Predari", "#ff0000");
+});
 }
 
 function buildCalendarHolidays(doArray, hdArray) {
@@ -890,7 +893,7 @@ function initCalendar() {
         rvdData = JSON.parse(data);
         if (typeof(rvdData) === 'object') {
           myTimesheets = rvdData.timesheets;
-          buildTimesheetCalendarEvents(rvdData.timesheets);
+          buildTimesheetCalendarEvents(rvdData.timesheets, rvdData.projects);
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
           activitiesObject = rvdData.activities;
           projectsObject = rvdData.projects;
