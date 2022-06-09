@@ -1604,6 +1604,8 @@ function addPermissionGroup() {
 function updatePermissionsDropdown() {
   $('#userRights').html('<option value="" disabled selected>Categorie drepturi</option>');
   permissionsObject.forEach(element => {
-    $('#userRights').append('<option value="'+element.id+'">'+element.id+' - '+(element.admin==1?"Admin":"")+(element.bonus==1?" + Bonus":"")+(element.external==1?" + Externae":"")+(element.holiday==1?" + Concediu":"")+(element.timesheet==1?" + timesheet":"")+'</option>');
+    let newLine = '<option value="'+element.id+'">'+element.id+' - '+(element.admin==1?"Admin + ":"")+(element.bonus==1?"Bonus + ":"")+(element.external==1?"Externe + ":"")+(element.holiday==1?"Concediu + ":"")+(element.timesheet==1?"Pontaj":"")+'</option>';
+    newLine.substring(newLine.length - 3, 3) == " + "?newLine=newLine.substring(0, newLine.length - 3):"";
+    $('#userRights').append(newLine);
   });
 }
