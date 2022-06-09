@@ -16,8 +16,9 @@ html {
     line-height: 1.0 !important;
 }
 .blueprint tr.calendar-body .calendar-day .predare {
-    background-color: rgba(150, 150, 150, 0.25) !important;
-    color: #ff0000 !important;
+    background-color: rgba(255, 0, 0, 0.25) !important;
+    color: #000000 !important;
+    font-weight: bold;
 }
 .blueprint .calendar-sidebar {
     background-color: #0f487b;
