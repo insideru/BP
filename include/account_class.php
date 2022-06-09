@@ -8,7 +8,7 @@ class Account {
     public $authenticated;
     private $token;
 	private $guid;
-	//public $permissions;
+	public $permissions;
 
     public function __construct() {
         $this->id = NULL;
@@ -18,7 +18,7 @@ class Account {
         $this->token = NULL;
 		$this->collabID = NULL;
 		$this->guid = NULL;
-		//$this->permissions = array();
+		$this->permissions = array();
     }
 
     public function __destruct() {
@@ -504,7 +504,7 @@ public function sessionLogin(): bool
 		}
 		
 		$row = $res->fetch(PDO::FETCH_ASSOC);
-		echo json_encode($row) . '<BR>';
+		//echo json_encode($row) . '<BR>';
 		
 		if (is_array($row))
 		{
@@ -518,11 +518,11 @@ public function sessionLogin(): bool
 			$this->collabID = intval($row['collab_id']);
 			//echo $this->collabID . '<BR>';
 			$this->guid = $row['guid'];
-			/*array_push($this->permissions, $row['admin']);
+			array_push($this->permissions, $row['admin']);
 			array_push($this->permissions, $row['bonus']);
 			array_push($this->permissions, $row['external']);
 			array_push($this->permissions, $row['holiday']);
-			array_push($this->permissions, $row['timesheet']);*/
+			array_push($this->permissions, $row['timesheet']);
 			//echo $this->guid . '<BR>';
 			return TRUE;
 		}
