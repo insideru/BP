@@ -1602,7 +1602,7 @@ function addPermissionGroup() {
 }
 
 function updatePermissionsDropdown() {
-  $('#userRights').append('<option value="" disabled selected>Categorie drepturi</option>');
+  $('#userRights').html('<option value="" disabled selected>Categorie drepturi</option>');
   permissionsObject.forEach(element => {
     $('#userRights').append('<option value="'+element.id+'">'+element.id+(element.admin==1?" - admin":"")+(element.bonus==1?" - bonus":"")+(element.external==1?" - external":"")+(element.holiday==1?" - holiday":"")+(element.admin==1?" - timesheet":"")+'</option>');
   });
