@@ -802,13 +802,14 @@ $.ajax({
 }
 
 function deleteConcediu (date, days) {
-  if (!confirm("Concediul selectat va fi sters. Continua? " + days)) {
+  if (!confirm("Concediul selectat va fi sters. Continua? " + date)) {
     return;
   }
   var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteDayoff',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
+    'days'              : days,
     'date'              : date
 };
 $.ajax({
