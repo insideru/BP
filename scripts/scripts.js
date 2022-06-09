@@ -801,8 +801,8 @@ $.ajax({
 });
 }
 
-function deleteConcediu (date, days) {
-  if (!confirm("Concediul selectat va fi sters. Continua? " + date.substring(7))) {
+function deleteConcediu (date, days, selDate) {
+  if (!confirm("Concediul selectat va fi sters. Continua?")) {
     return;
   }
   var guidCookie = getCookie("userGUID");
@@ -823,7 +823,7 @@ $.ajax({
         //$('#calendar').evoCalendar('removeCalendarEvent', "pontaj-" + date);
         $('#calendar').evoCalendar('destroy');
         initCalendar();
-        $('#calendar').evoCalendar('selectDate', date);
+        $('#calendar').evoCalendar('selectDate', selDate);
       }
     },
     error: function(){

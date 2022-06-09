@@ -680,7 +680,7 @@
                         '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="deletePontaj(\''+_.$active.date+'\')">Stergere pontaj</a></p>';
         }
         if (event_data.type == "dayoff") {
-            markup +=   '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="deleteConcediu(\''+event_data.id+'\', ' + event_data.description.split(" ")[1] + ')">Stergere concediu</a></p>';
+            markup +=   '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="deleteConcediu(\''+event_data.id+'\', ' + event_data.description.split(" ")[1] + ', \''+_.$active.date+'\')">Stergere concediu</a></p>';
         }
         markup += '</div>';
         markup += '</div>';

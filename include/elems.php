@@ -261,6 +261,35 @@ function addDaysoff (string $collab_guid, string $startDate, string $endDate, in
     return "Success:" . $pdo->lastInsertId();
 }
 
+function deleteHoliday (string $startDate, int $number) {
+	/* Global $pdo object */
+    global $pdo;
+    global $schema;
+	//update accounts set `zile_ramase` = `zile_concediu`-5 where guid="6f0c7834-4a68-433f-bc06-e8e1fd38d33a"
+
+    /* Insert query template */
+    $query = 'DELETE FROM '.$schema.'.daysoff WHERE collab_id = :collab_id AND startdate = :startdate; UPDATE '.$schema.'.accounts SET zile_ramase = zile_ramase + :number WHERE collab_id= :collab_id';
+    
+    /* Values array for PDO */
+    $values = array(':collab_id' => $account->getCollabID(), ':startdate' => date("Y-m-d", strtotime($startDate)), ':number' => $number);
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success!";
+}
+
 function getDaysoff(string $guid) {
     global $pdo;
 	global $schema;

@@ -391,6 +391,7 @@ public function login(string $username, string $passwd, int $remember): bool
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
 			$this->guid = $row['guid'];
+			$this->collabID = intval($row['collab_id']);
 			$this->username = $username;
 			$this->authenticated = TRUE;
 			/* Register the current Sessions on the database */
@@ -512,6 +513,8 @@ public function sessionLogin(): bool
 			$this->group = intval($row['account_group']);
 			$this->username = $row['account_username'];
 			$this->authenticated = TRUE;
+			$this->collabID = intval($row['collab_id']);
+			$this->guid = $row['guid'];
 			return TRUE;
 		}
 
@@ -589,6 +592,7 @@ public function logout()
 	$this->group = NULL;
 	$this->guid = NULL;
 	$this->authenticated = FALSE;
+	$this->collabID = NULL;
 	
 	/* If there is an open Session, remove it from the account_sessions table */
 	if (session_status() == PHP_SESSION_ACTIVE)
@@ -630,6 +634,16 @@ public function isAuthenticated(): bool
 public function getId(): int
 {
 	return $this->id;
+}
+
+public function getGUID(): string
+{
+	return $this->guid;
+}
+
+public function getCollabID(): int
+{
+	return $this->collabID;
 }
 
 public function getGroup(): int
