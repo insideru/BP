@@ -192,6 +192,38 @@
                             </div>
                             </li>
                             <li>
+                              <div class="collapsible-header"><i class="material-icons">check_box</i>Grupuri de permisii</div>
+                              <div class="collapsible-body">
+                                  <table class="centered highlight">
+                                      <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Acces Admin</th>
+                                            <th>Bonus zile speciale</th>
+                                            <th>Proiecte Externe</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="permissionsTable">
+                                      </tbody>
+                                    </table>
+                                    <table class="centered highlight">
+                                      <tbody>
+                                        <tr>
+                                          <td>
+                                              <form id="addPermissionForm">
+                                                  <div class="input-field">
+                                                      <i class="material-icons prefix">add</i>
+                                                      <input type="text" id="addPermission" onclick="typeNo=2;" required>
+                                                      <label for="addPermission">Adauga grup</label>
+                                                  </div>
+                                              </form>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                              </div>
+                              </li>
+                            <li>
                                 <div class="collapsible-header"><i class="material-icons">group</i>Colaboratori</div>
                                 <div class="collapsible-body">
                                   <div id="newPontor" class="modal">
