@@ -261,7 +261,7 @@ function addDaysoff (string $collab_guid, string $startDate, string $endDate, in
     return "Success:" . $pdo->lastInsertId();
 }
 
-function deleteHoliday (string $startDate, int $number) {
+function deleteDaysoff (string $startDate, int $number) {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
