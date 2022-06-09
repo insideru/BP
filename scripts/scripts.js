@@ -1602,9 +1602,9 @@ function addPermissionGroup() {
 }
 
 function updatePermissionsDropdown() {
-  $('#').append('<option value="" disabled selected>Categorie drepturi</option>');
+  $('#userRights').append('<option value="" disabled selected>Categorie drepturi</option>');
   permissionsObject.forEach(element => {
 
-    $('#').append('<option value="'+element.id+'">'+element.id+(element.admin==1?" - admin":"")+(element.bonus==1?" - bonus":"")+(element.external==1?" - external":"")+(element.holiday==1?" - holiday":"")+(element.admin==1?" - timesheet":"")+'</option>');
+    $('#userRights').append('<option value="'+element.id+'">'+element.id+(element.admin==1?" - admin":"")+(element.bonus==1?" - bonus":"")+(element.external==1?" - external":"")+(element.holiday==1?" - holiday":"")+(element.admin==1?" - timesheet":"")+'</option>');
   });
 }
