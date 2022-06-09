@@ -626,11 +626,12 @@ function validateConcediu () {
       M.toast({html: 'Data de inceput nu poate fi dupa data de sfarsit a concediului!'});
       return false;
     }
-    /*if (d1 - d2 == 0) {
-      valid = false;
-      M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
-      return false;
-    }*/
+    if (d1 - d2 == 0) {
+      //valid = false;
+      //M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
+      //return false;
+      nrZileLibere = getNoDaysOff(new Date(data1[2], data1[1]-1, data1[0], 0, 0, 0), new Date(data2[2], data2[1]-1, data2[0], 0, 0, 0));
+    }
     if (d2 > d1) {
       nrZileLibere = getNoDaysOff(new Date(data1[2], data1[1]-1, data1[0], 0, 0, 0), new Date(data2[2], data2[1]-1, data2[0], 0, 0, 0));
       daysoffArray.forEach(element => {
