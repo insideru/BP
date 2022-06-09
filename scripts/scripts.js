@@ -626,11 +626,11 @@ function validateConcediu () {
       M.toast({html: 'Data de inceput nu poate fi dupa data de sfarsit a concediului!'});
       return false;
     }
-    if (d1 - d2 == 0) {
+    /*if (d1 - d2 == 0) {
       valid = false;
       M.toast({html: 'Data de inceput si de sfarsit a concediului nu pot fi aceeasi!'});
       return false;
-    }
+    }*/
     if (d2 > d1) {
       nrZileLibere = getNoDaysOff(new Date(data1[2], data1[1]-1, data1[0], 0, 0, 0), new Date(data2[2], data2[1]-1, data2[0], 0, 0, 0));
       daysoffArray.forEach(element => {
@@ -778,6 +778,36 @@ function deletePontaj (date) {
   var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteTimesheets',
+    'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
+    'date'              : date
+};
+$.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      if (data.substring(0,8)=="Success!") {
+        //$('#calendar').evoCalendar('removeCalendarEvent', "pontaj-" + date);
+        $('#calendar').evoCalendar('destroy');
+        initCalendar();
+        $('#calendar').evoCalendar('selectDate', date);
+      }
+    },
+    error: function(){
+        //
+    }
+});
+}
+
+function deleteConcediu (date, days) {
+  if (!confirm("Concediul selectat va fi sters. Continua? " + days)) {
+    return;
+  }
+  var guidCookie = getCookie("userGUID");
+  var formData = {
+    'action'            : 'deleteDayoff',
     'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'date'              : date
 };

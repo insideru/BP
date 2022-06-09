@@ -3,6 +3,7 @@ CREATE TABLE `projects` (
   `name` varchar(255) NOT NULL,
   `client_id` int(10) NOT NULL,
   `type_id` int(10) NOT NULL,
+  `external` tinyint(1) NOT NULL DEFAULT 1,
   `budget` INT(10) NOT NULL DEFAULT '100',
   `date_added` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
   `deadline` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
