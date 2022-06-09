@@ -736,7 +736,7 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
  projectsArray.forEach(element =>{
-  addCalendarEvent('predare-'+element.date, "Predare", "Predare " + element.name, element.date, element.date, "Predari", "#ff0000");
+  addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
 });
 }
 
