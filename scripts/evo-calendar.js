@@ -611,6 +611,9 @@
         _.buildEventList();
         _.initEventListener(); // test
         _.resize();
+        if ($('#calendar-day').find('Predari').length !== 0) {
+            $('#calendar-day').addClass('predare');
+          }
     }
 
     // v1.0.0 - Build Event: Event list

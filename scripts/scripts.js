@@ -736,8 +736,10 @@ function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
     addCalendarEvent("pontaj-" + key, Number(eventsObject[key]) + (Number(eventsObject[key]) == 1 ? " ora" : " ore"), "Apasa pentru a sterge pontarea", key, key, "pontare", "#8773c1");
  }
  projectsArray.forEach(element =>{
+   //daca e inactiv sau daca e extern NU
   addCalendarEvent('predare-'+element.deadline, "Predare", "Predare " + element.name, element.deadline, element.deadline, "Predari", "#ff0000");
 });
+
 }
 
 function buildCalendarHolidays(doArray, hdArray) {
@@ -762,6 +764,9 @@ function buildCalendarHolidays(doArray, hdArray) {
   hdArray.forEach(element => {
     addCalendarEvent('holiday-'+element.date, element.name, "Zi libera", element.date, element.date, "Holidays", "#57d110");
   });
+  if ($('#calendar-day').find('Predari').length !== 0) {
+    $('#calendar-day').addClass('predare');
+  }
 }
 
 function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDate, eventType, color) {
