@@ -8,7 +8,7 @@ class Account {
     public $authenticated;
     private $token;
 	private $guid;
-	public $permissions;
+	//public $permissions;
 
     public function __construct() {
         $this->id = NULL;
@@ -18,7 +18,7 @@ class Account {
         $this->token = NULL;
 		$this->collabID = NULL;
 		$this->guid = NULL;
-		$this->permissions = array();
+		//$this->permissions = array();
     }
 
     public function __destruct() {
