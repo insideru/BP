@@ -1647,7 +1647,7 @@ function updatePermissionsDropdown() {
 
 function calculateSalaries(date) {
   let wrkDate = date.split(" ")[0].split('-');
-  timesheetsObject.forEach(element => {
+  alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     console.log(curDate);
     //if (curDate)
