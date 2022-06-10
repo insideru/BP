@@ -275,6 +275,7 @@ function buildProjetTimeline (projID, deadlineID) {
       result.push(tempObj);
     }
   }
+  console.log(chartedProjects);
   return result;
 }
 
