@@ -285,7 +285,7 @@ function populateUsers() {
       checkbox = '';
     }
     $('#usersTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru schimbare parola" style="cursor:pointer" onclick="changePass(\''+element.account_id +'\')">'+element.account_username+'</td>');
-    if (element.id != 1) {
+    if (element.account_id != 1) {
       $('#usersTable').append('<td class="tooltipped" data-position="top" data-tooltip="Grupul acestui utilizator nu poate fi schimbat">'+element.account_group+'</td>');
     } else {
       $('#usersTable').append('<td><div class="chip" style="cursor:pointer" onclick="changeGroup(\''+ element.account_id +'\', \''+element.account_group+'\')">'+element.account_group+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>');
