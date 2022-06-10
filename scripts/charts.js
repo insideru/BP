@@ -264,7 +264,13 @@ function buildProjetTimeline (projID, deadlineID) {
             name: 'Deadline',
             value: new Date(chartedProjects[deadlineID].deadline).getTime(),
             strokeColor: '#CD2F2A'
-          }];
+          },
+          {
+            name: 'Incepere',
+            value: new Date(chartedProjects[deadlineID].start_date).getTime(),
+            strokeColor: '#00ff00'
+          }
+        ];
       }
       result.push(tempObj);
     }
