@@ -1653,15 +1653,18 @@ function calculateSalaries(date) {
   let endDate = new Date(tmp[0], tmp[1]-1, 1);
   endDate.setMonth(endDate.getMonth()+1);
 
+  let show = 1;
+  let show2 = 1;
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
-    let show = 1;
-    if (show) { console.log('1-15'); }
+    
     if (curDate >= wrkDate && curDate<midDate){
+      if (show--) { console.log('1-15'); }
       console.log(curDate);
     }
-    if (show--) { console.log('16-3X'); }
+  
     if (curDate >= midDate && curDate<midDate){
+      if (show2--) { console.log('16-3X'); }
       console.log(curDate);
     }
   });
