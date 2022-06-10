@@ -370,6 +370,7 @@ function getProjects() {
     /* Global $pdo object */
     global $pdo;
     global $schema;
+    global $account;
 
     $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, start_date ASC';
 
@@ -388,7 +389,9 @@ function getProjects() {
     $fields=array();
 
     while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-        array_push($fields, $row);
+        if (($account->permissions['external'] && $row['external']) || ($account->permissions['admin'])) {
+            array_push($fields, $row);
+        }
     }
     return $fields;
 }
