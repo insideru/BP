@@ -1150,7 +1150,7 @@ function changeConcediu (accID, oldValue) {
     return "Fail";
   }
   var formData = {
-    'action'    : 'changeConcediu',
+    'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_concediu",
     'value'     : response
@@ -1206,7 +1206,7 @@ function changeReport (accID, oldValue) {
     return "Fail";
   }
   var formData = {
-    'action'    : 'changeConcediu',
+    'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_report",
     'value'     : response
@@ -1238,7 +1238,7 @@ function changeRamase (accID, oldValue) {
     return "Fail";
   }
   var formData = {
-    'action'    : 'changeConcediu',
+    'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_ramase",
     'value'     : response
@@ -1267,14 +1267,35 @@ function changeGroup (accID, oldValue) {
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || isNaN(response)) {
     //a dat cancel sau a bagat fix acelasi lucru
-    alert("Grupul de permisii ales nu exista!");
+    return 0;
   }
   if (response > 0 && response <= permissionsObject.length) {
-    changeAccountsObject("grup", accID, response);
+    var formData = {
+      'action'    : 'changeAccountDetails',
+      'id'        : accID, 
+      'column'    : "account_group",
+      'value'     : response
+    };
+    $.ajax({
+      type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+      url         : 'handler.php', // the url where we want to POST
+      data        : formData, // our data object
+      //dataType    : 'json', // what type of data do we expect back from the server
+      encode      : true,
+      success     : function(data) {
+        if (data.substring(0, 8) == "Success!") {
+          //a mers
+          changeAccountsObject("grup", accID, response);
+          populateUsers();
+        } else {
+          M.toast({html: data});
+          return;
+        }
+      }
+    });
   } else {
     alert("Grupul de permisii ales nu exista!");
   }
-  
 }
 
 function changeAccountsObject(elementName, accID, value) {
@@ -1290,6 +1311,9 @@ function changeAccountsObject(elementName, accID, value) {
         case "ramase":
           element.zile_ramase = value;
           break;
+        case "grup":
+          element.account_group = value;
+          break; 
       }
     }
   });

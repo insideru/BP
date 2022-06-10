@@ -291,7 +291,7 @@ function changeProjExternal (int $proj_id) {
     return $fields;
 }
 
-function changeConcediu (string $accID, string $column, int $value) {
+function changeAccountDetails (string $accID, string $column, int $value) {
 
     /* Global $pdo object */
     global $pdo;

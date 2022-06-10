@@ -194,8 +194,8 @@ if ($_REQUEST["r"]=="holidays") {
     echo json_encode($response);
 }
 
-if ($_POST["action"]=="changeConcediu") {
-    echo changeConcediu($_POST['id'], $_POST['column'], $_POST['value']);
+if ($_POST["action"]=="changeAccountDetails") {
+    echo changeAccountDetails($_POST['id'], $_POST['column'], $_POST['value']);
 }
 
 if ($_POST["action"]=="addSalary") {
