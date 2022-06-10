@@ -22,6 +22,15 @@
   color: #ff0000;
 }
 
+.adminCard {
+  position: relative;
+  margin: .5rem 0 1rem 0;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 2px;
+  padding: 30px;
+}
+
 .loginCard {
   padding: 15% 0%;
 }

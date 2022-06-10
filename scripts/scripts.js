@@ -1644,3 +1644,12 @@ function updatePermissionsDropdown() {
     $('#userRights').append(newLine);
   });
 }
+
+function calculateSalaries(date) {
+  let wrkDate = date.split(" ")[0].split('-');
+  timesheetsObject.forEach(element => {
+    let curDate = new Date(element.date);
+    console.log(curDate);
+    //if (curDate)
+  });
+}

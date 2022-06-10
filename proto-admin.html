@@ -12,6 +12,8 @@
     <style href="styles/styles.css"></style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="scripts/charts.js"></script>
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
   </head>
     <body><nav>
       <div class="nav-wrapper">
@@ -411,7 +413,31 @@
                     </div>
                 </div>
             </div>
-            <div id="pontaje" class="col s12">Neimplementat</div>
+            <div id="pontaje" class="col s12">
+              <div class="col s12 m12 l6">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Pontaje</span>
+                    <p><input id='calendarPontaje'></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12 m12 l6">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Calculator salarii</span>
+                    <table class="centered">
+                      <tbody>
+                        <tr>
+                          <td>Alege luna de calcul</td>
+                          <td><input id='calendarSalarii'></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div id="venituri" class="col s12">Neimplementat</div>
           </div>
           </div>
@@ -447,6 +473,23 @@
 
         $( document ).ready(function() {
           addLinks();
+          let calendarSalarii = jSuites.calendar(document.getElementById('calendarSalarii'), {
+            type: 'year-month-picker',
+            format: 'MMM-YYYY',
+            months: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'],
+            monthsFull: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+            textDone: 'OK',
+            textReset: 'Reset',
+            textUpdate: 'Update',
+            onchange: function(instance, value) {
+              calculateSalaries(value);
+            },
+          });
+          let today = new Date();
+          today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
+          let todayString = today.toISOString().replace('T', ' ');
+          todayString = todayString.substring(0, todayString.length-5);
+          calendarSalarii.setValue(todayString);
           var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
             defaultDate: new Date(),
