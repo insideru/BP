@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="scripts/charts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <?php if ($account->permissions['bonus']) {echo '<script src="scripts/bonus.js"></script>';} else {echo '<script src="scripts/no-bonus.js"></script>';}?>
     </head>
   <body>
     <nav>
@@ -19,9 +20,9 @@
           <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
           <ul id="nav-mobile" class="left">
             <li><a href="#" id="linkDashboard">Dashboard</a></li>
-            <?php if ($account->permissions['timesheet']==1) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-            <?php if ($account->permissions['holiday']==1) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
-            <?php if ($account->permissions['admin']==1) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+            <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
+            <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
+            <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
           </ul>
         </div>
       </nav>
