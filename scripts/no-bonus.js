@@ -9,8 +9,8 @@ function buildMonthlyData(month) {
     let adouaParte = hoursWorked(month, 2);
     let markup = '<ul class="collapsible"><li><div class="collapsible-header"><i class="material-icons">timeline</i>Ore lucrate</div><div class="collapsible-body">'+
                   '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody>'+
-                  '<tr><td> Total: ' + (primaParte[0] + primaParte[1] + primaParte[2]) + '</td>'+
-                  '<td> Total: ' + (adouaParte[0] + adouaParte[1] + adouaParte[2]) + '</td>'+
+                  '<tr><td> Total: ' + (primaParte[0] + primaParte[1] + primaParte[2]) + ' ore</td>'+
+                  '<td> Total: ' + (adouaParte[0] + adouaParte[1] + adouaParte[2]) + ' ore</td>'+
                   '</tr></tbody></table></div></li></ul>';
     $('.monthlyData').html(markup);
     $('.collapsible').collapsible();

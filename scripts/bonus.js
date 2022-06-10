@@ -15,8 +15,8 @@ function buildMonthlyData(month) {
                   '<td> ore 1,5x: ' + adouaParte[1] + '</td></tr>'+
                   '<tr><td> ore 1x: ' + primaParte[2] + '</td>'+
                   '<td> ore 1x: ' + adouaParte[2] + '</td></tr>'+
-                  '<tr><td> Total: ' + (primaParte[0]*2 + primaParte[1]*1.5 + primaParte[2]) + '</td>'+
-                  '<td> Total: ' + (adouaParte[0]*2 + adouaParte[1]*1.5 + adouaParte[2]) + '</td>'+
+                  '<tr><td> Total: ' + (primaParte[0]*2 + primaParte[1]*1.5 + primaParte[2]) + ' ore</td>'+
+                  '<td> Total: ' + (adouaParte[0]*2 + adouaParte[1]*1.5 + adouaParte[2]) + ' ore</td>'+
                   '</tr></tbody></table></div></li></ul>';
     $('.monthlyData').html(markup);
     $('.collapsible').collapsible();
