@@ -1648,21 +1648,19 @@ function updatePermissionsDropdown() {
 function calculateSalaries(date) {
   let tmp = date.split(" ")[0].split('-');
   let wrkDate = new Date(tmp[0], tmp[1]-1, 1);
-  console.log(wrkDate);
   let midDate = new Date(tmp[0], tmp[1]-1, 1);
   midDate.setDate(16);
-  console.log(midDate);
   let endDate = new Date(tmp[0], tmp[1]-1, 1);
   endDate.setMonth(endDate.getMonth()+1);
-  console.log(endDate);
 
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
-    console.log('1-15');
+    let show = 1;
+    if (show) { console.log('1-15'); }
     if (curDate >= wrkDate && curDate<midDate){
       console.log(curDate);
     }
-    console.log('16-3X');
+    if (show--) { console.log('16-3X'); }
     if (curDate >= midDate && curDate<midDate){
       console.log(curDate);
     }
