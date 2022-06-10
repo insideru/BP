@@ -261,11 +261,11 @@ function populateProjects() {
     if (element.external=="1") { isExternal = 'checked="checked" ';}
     $(tableName).append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td>'+
     '<td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
-    '<td><label><input type="checkbox" id="projExt_' + element.id + '" onclick="changeProjExternal(this.id)"' + isExternal +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" id="projExt_' + element.id + '" onclick="changeProjExternal(this.id)"' + isExternal +' /><span></span></label></td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projStartDate_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Data incepe proiect" style="cursor:pointer" onclick="changeProjectStartDate(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.start_date+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
     '<td><div id="projDeadline_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Deadline" style="cursor:pointer" onclick="changeProjectDeadline(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.deadline+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
-    '<td><label><input type="checkbox" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
+    '<td><label><input type="checkbox" class="filled-in" id="projNo_' + element.id + '" onclick="changeProjState(this.id)"' + isChecked +' /><span></span></label></td></tr>');
   });
 }
 
@@ -281,7 +281,7 @@ function populateUsers() {
   accountsObject.forEach(element => {
     let newRow = "";
     if (element.account_group!=0) {
-      checkbox = '<label><input type="checkbox" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label>';
+      checkbox = '<label><input type="checkbox" class="filled-in" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label>';
     } else {
       checkbox = '';
     }
