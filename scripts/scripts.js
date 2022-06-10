@@ -1659,12 +1659,12 @@ function calculateSalaries(date) {
     let curDate = new Date(element.date);
     
     if (curDate >= wrkDate && curDate<midDate){
-      if (show--) { console.log('1-15'); }
+      if (show) { console.log('1-15'); show=0;}
       console.log(curDate);
     }
   
-    if (curDate >= midDate && curDate<midDate){
-      if (show2--) { console.log('16-3X'); }
+    if (curDate >= midDate && curDate<endDate){
+      if (show2) { console.log('16-3X'); show2=0;}
       console.log(curDate);
     }
   });
