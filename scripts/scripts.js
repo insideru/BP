@@ -1561,6 +1561,7 @@ function modifiySalary(id, contor) {
             element.date = getSelectedISODate($('#modifySalaryDate_'+id+'_'+contor).val());
             buildSalariesPerCollab();
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
+              console.log('trebuie sortat');
               salariesPerCollab[element.collab_id.toString()].sort((a, b) => a.date - b.date);
             }
             M.toast({html: "Salariul a fost modificat cu succes!"});
