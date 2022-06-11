@@ -431,6 +431,8 @@
                         <tr>
                           <td>Alege luna de calcul</td>
                           <td><input id='calendarSalarii'></td>
+                          <td><a class="waves-effect waves-teal btn-flat" onclick="calendarSalarii.prev(); calendarSalarii.setValue(calendarSalarii.getValue());"><i class="material-icons">navigate_before</i></a></td>
+                          <td><a class="waves-effect waves-teal btn-flat" onclick="calendarSalarii.next(); calendarSalarii.setValue(calendarSalarii.getValue());"><i class="material-icons">navigate_next</i></a></td>
                         </tr>
                       </tbody>
                     </table>
@@ -472,6 +474,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
+      var calendarSalarii;
       js_error = 0;
       M.AutoInit();
       selProjCat = "";
@@ -485,9 +488,9 @@
 
         $( document ).ready(function() {
           addLinks();
-          let calendarSalarii = jSuites.calendar(document.getElementById('calendarSalarii'), {
+          calendarSalarii = jSuites.calendar(document.getElementById('calendarSalarii'), {
             type: 'year-month-picker',
-            format: 'MMM-YYYY',
+            format: 'MM-YYYY',
             months: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'],
             monthsFull: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
             textDone: 'OK',
