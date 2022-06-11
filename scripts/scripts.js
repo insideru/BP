@@ -1688,14 +1688,14 @@ function calculateSalaries(date) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 1});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 1});
     }
   
     if (curDate >= midDate && curDate<endDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 2});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 2});
     }
   });
 
@@ -1705,22 +1705,32 @@ function calculateSalaries(date) {
 function populateSalaries (salaries) {
   console.log(salaries);
   const keys = Object.keys(salaries);
+  let h1total = 0;
+  let h2total = 0;
+  let monthlyTotal = 0;
   $('#salariesBody').html('');
   keys.forEach((key, index) => {
     let emplName = getDBNameFromId(key, 'collab');
     let h1 = 0;
     let h2 = 0;
+    let monthly = 0;
     salaries[key].forEach(element => {
+      monthly = element.monthly;
       if (element.half == 1) {
         h1 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
       } else {
         h2 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
       }
     });
+    h1total+=h1;
+    h2total+=h2;
+    monthlyTotal+=monthly;
     $('#salariesBody').append('<tr><td>'+emplName+'</td>'+
     '<td>'+h1+' lei</td>'+
-    '<td>'+h2+' lei</td></tr>');
+    '<td>'+h2+' lei</td>'+
+    '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
   });
+  $('#salariesBody').append('<tr><td>Total</td>'+h1total+'<td></td><td>'+h2total+'</td><td>'+monthlyTotal+'</td>');
 }
 
 function getHourlySalary(collabID, date) {
@@ -1730,12 +1740,31 @@ function getHourlySalary(collabID, date) {
     retValue = 0;
   } else if (salariesPerCollab[collabID].length == 1) {
     //e doar un salariu trecut
-    retValue = salariesPerCollab[collabID][0].hourly;
+    retValue = salariesPerCollab[collabID][0].monthly;
   } else {
     //sunt mai multe
     salariesPerCollab[collabID].forEach(element => {
       if (date >= element.date) {
         retValue = element.hourly;
+      }
+    });
+  }
+  return retValue;
+}
+
+function getMonthlySalary(collabID, date) {
+  let retValue = 0;
+  if (salariesPerCollab[collabID].length == 0) {
+    //nu exista salariu trecut
+    retValue = 0;
+  } else if (salariesPerCollab[collabID].length == 1) {
+    //e doar un salariu trecut
+    retValue = salariesPerCollab[collabID][0].monthly;
+  } else {
+    //sunt mai multe
+    salariesPerCollab[collabID].forEach(element => {
+      if (date >= element.date) {
+        retValue = element.monthly;
       }
     });
   }
