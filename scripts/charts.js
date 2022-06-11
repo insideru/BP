@@ -101,10 +101,10 @@ function generateHeatMapData(noDays) {
         curTimesheets[element.collab_id] = new Array;
       };
       //exista il bagam, altfel il bagam adaugat
-      if (curTimesheets[element.collab_id][curDate] === undefined) {
-        curTimesheets[element.collab_id].push({[curDate]: element.time});
+      if (curTimesheets[element.collab_id][element.date] === undefined) {
+        curTimesheets[element.collab_id].push({[element.date]: element.time});
       } else {
-        curTimesheets[element.collab_id][curDate] += element.time;
+        curTimesheets[element.collab_id][element.date] += element.time;
       }
     }
   });
