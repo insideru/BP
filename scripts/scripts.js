@@ -1682,10 +1682,11 @@ function getSalary(collabID, startDate) {
 
 function buildSalariesPerCollab() {
   salariesObject.forEach(element => {
-    let tmp = new String(element.date).split['-'];
+    let tmp = new String(element.date);
+    let tmpArray = tmp.split['-'];
     console.log(element.date);
-    console.log(tmp);
-    let wrkDate = new Date(tmp[0], tmp[1]-1, tmp[2]);
+    console.log(tmpArray);
+    let wrkDate = new Date(tmpArray[0], tmpArray[1]-1, tmpArray[2]);
     if (element.collab_id.toString() in salariesPerCollab === false ) {
       salariesPerCollab[element.collab_id.toString()] = new Array;
     }
