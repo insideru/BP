@@ -20,6 +20,7 @@ myTimesheets = [];
 salariesObject = [];
 salariesPerCollab = new Object;
 permissionsObject = [];
+permissionsPerCollab = new Object;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -246,6 +247,9 @@ function populateCollabs() {
       $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="updatePermissionsDropdown(); addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
+
+    //facem lista de permisii
+    permissionsPerCollab[elem.collab_id] = elem.account_group;
   });
 }
 
@@ -1665,32 +1669,32 @@ function calculateSalaries(date) {
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
-    let multiplier = 1;
-    console.log(holidayArray);
-    console.log(curDate);
+    let bonus = 1;
+    let multiplier = permissionsObject[permissionsPerCollab[element.collabID]]['bonus'];
+    console.log(permissionsPerCollab);
     if (isInArray(holidayArray, curDate)) {
       //e 2x
-      multiplier = 2;
+      bonus = 1;
     } else if (curDate.getDay()==0 || curDate.getDay()==6) {
       //e 1,5x
-      multiplier = 1.5;
+      bonus = 0.5;
     } else {
       //e 1x
-      multiplier = 1;
+      bonus = 0;
     }
     
     if (curDate >= wrkDate && curDate<midDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: multiplier, half: 1});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 1});
     }
   
     if (curDate >= midDate && curDate<endDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: multiplier, half: 2});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 2});
     }
   });
 
