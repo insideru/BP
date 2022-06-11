@@ -1630,8 +1630,8 @@ function addPermissionGroup() {
         //a mers
         $('#permissionsTable').append('<tr><td>'+data.substring(8)+'</td>'+
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'admin\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
-        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'bonus\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'external\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
+        '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'bonus\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'holiday\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'timesheet\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '</tr>');
