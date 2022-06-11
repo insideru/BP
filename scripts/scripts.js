@@ -1735,7 +1735,7 @@ function populateSalaries (salaries, monthlyDate) {
   collabsObject.forEach(element => {
     if (element.id in collabsAdded === false ) {
       let addName = getDBNameFromId(element.id, 'collab');
-      let addMonthly = Number(getMonthlySalary(collabID,monthlyDate));
+      let addMonthly = Number(getMonthlySalary(element.id, monthlyDate));
       if (addMonthly>0) {
         monthlyTotal+=addMonthly;
         $('#salariesBody').append('<tr><td>'+addName+'</td><td>-</td><td>-</td><td>'+addMonthly+' lei</td></tr>');
