@@ -1668,7 +1668,7 @@ function calculateSalaries(date) {
     if (isInArray(holidayArray, curDate)) {
       //e 2x
       multiplier = 2;
-    } else if (element.date.getDay()==0 || element.date.getDay()==6) {
+    } else if (curDate.getDay()==0 || curDate.getDay()==6) {
       //e 1,5x
       multiplier = 1.5;
     } else {
