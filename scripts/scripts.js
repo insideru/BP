@@ -1701,7 +1701,13 @@ function calculateSalaries(date) {
     }
   });
 
-  console.log(retObject);
+  populateSalaries(retObject);
+}
+
+function populateSalaries (salaries) {
+  for (const key in salaries) {
+    console.log(`${key}: ${salaries[key]}`);
+  }
 }
 
 function getHourlySalary(collabID, date) {
