@@ -1740,7 +1740,7 @@ function getHourlySalary(collabID, date) {
     retValue = 0;
   } else if (salariesPerCollab[collabID].length == 1) {
     //e doar un salariu trecut
-    retValue = salariesPerCollab[collabID][0].monthly;
+    retValue = salariesPerCollab[collabID][0].hourly;
   } else {
     //sunt mai multe
     salariesPerCollab[collabID].forEach(element => {
