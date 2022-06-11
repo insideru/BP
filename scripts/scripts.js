@@ -1554,15 +1554,15 @@ function modifiySalary(id, contor) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        let i = 0;
         salariesObject.forEach(element => {
-          if (element.collab_id == id) {
-            if (contor == i++) {
-              element.hourly = newHS;
-              element.monthly = newMS;
-              element.date = getSelectedISODate($('#addSalaryDate').val());
-              M.toast({html: "Salariul a fost modificat cu succes!"});
+          if (element.id == id) {
+            element.hourly = newHS;
+            element.monthly = newMS;
+            element.date = getSelectedISODate($('#addSalaryDate').val());
+            if (salariesPerCollab[element.collab_id.toString()].length>1) {
+              salariesPerCollab[element.collab_id.toString()].sort((a, b) => a.date - b.date);
             }
+            M.toast({html: "Salariul a fost modificat cu succes!"});
           }
         });
       } else {
@@ -1684,6 +1684,7 @@ function getSalary(collabID, startDate) {
 }
 
 function buildSalariesPerCollab() {
+  salariesPerCollab = new Object;
   salariesObject.forEach(element => {
     console.log(element);
     let wrkDate = new Date(element.date);
