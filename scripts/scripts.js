@@ -1715,11 +1715,11 @@ function populateSalaries (salaries) {
     let h2 = 0;
     let monthly = 0;
     salaries[key].forEach(element => {
-      monthly = element.monthly;
+      monthly = Number(element.monthly);
       if (element.half == 1) {
-        h1 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
+        h1 += Number(element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier);
       } else {
-        h2 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
+        h2 += Number(element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier);
       }
     });
     h1total+=h1;
