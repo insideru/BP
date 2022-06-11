@@ -1556,23 +1556,14 @@ function modifiySalary(id, contor) {
         //a mers
         salariesObject.forEach(element => {
           if (element.id == id) {
-            console.log(element);
             element.hourly = newHS;
             element.monthly = newMS;
             element.date = getSelectedISODate($('#modifySalaryDate_'+id+'_'+contor).val());
             buildSalariesPerCollab();
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
-              console.log(salariesPerCollab[element.collab_id.toString()]);
-              salariesPerCollab[element.collab_id.toString()].sort(function(a, b) {
-                if (a.date - b.date >= 0) {
-                  return 1;
-                } else {
-                  return -1;
-                }
-              }
-              );
-              console.log(salariesPerCollab[element.collab_id.toString()]);
+              salariesPerCollab[element.collab_id.toString()].sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
             }
+            console.log(salariesPerCollab[element.collab_id.toString()]);
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
         });
