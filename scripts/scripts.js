@@ -1673,7 +1673,7 @@ function calculateSalaries(date) {
     curDate.setHours(0, 0, 0);
     let bonus = 1;
     
-    let multiplier = Number(permissionsObject[permissionsPerCollab[element.collab_id].toString()]['bonus']);
+    let multiplier = Number(permissionsObject[(permissionsPerCollab[element.collab_id]-1).toString()]['bonus']);
     
     if (isInArray(holidayArray, curDate)) {
       //e 2x
