@@ -1705,6 +1705,7 @@ function calculateSalaries(date) {
 function populateSalaries (salaries) {
   console.log(salaries);
   const keys = Object.keys(salaries);
+  $('#salariesBody').html('');
   keys.forEach((key, index) => {
     let emplName = getDBNameFromId(key, 'collab');
     let h1 = 0;
@@ -1716,7 +1717,6 @@ function populateSalaries (salaries) {
         h2 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
       }
     });
-    $('#salariesBody').html('');
     $('#salariesBody').append('<tr><td>'+emplName+'</td>'+
     '<td>'+h1+' lei</td>'+
     '<td>'+h2+' lei</td></tr>');
