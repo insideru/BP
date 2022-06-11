@@ -1687,7 +1687,7 @@ function calculateSalaries(date) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), half: 2});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: multiplier, half: 2});
     }
   });
 
