@@ -114,7 +114,7 @@ function generateHeatMapData(noDays) {
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
     let curData = [];
-    for (dayDiff = noDays-1; dayDiff <= 0; dayDiff--) {
+    for (dayDiff = noDays-1; dayDiff >= 0; dayDiff--) {
       let thisDate = new Date();
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
