@@ -1562,7 +1562,10 @@ function modifiySalary(id, contor) {
             buildSalariesPerCollab();
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
               console.log('trebuie sortat');
-              salariesPerCollab[element.collab_id.toString()].sort((a, b) => a.date - b.date);
+              salariesPerCollab[element.collab_id.toString()].sort((a, b) => {
+                console.log(a.date);
+                console.log(b.date);
+                return a.date - b.date});
             }
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
