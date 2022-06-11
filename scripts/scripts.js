@@ -1665,8 +1665,6 @@ function calculateSalaries(date) {
   let retObject = new Object;
 
   buildSalariesPerCollab();
-  console.log(permissionsPerCollab);
-  console.log(permissionsObject);
 
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
@@ -1705,8 +1703,9 @@ function calculateSalaries(date) {
 }
 
 function populateSalaries (salaries) {
+  console.log(salaries);
   for (const key in salaries) {
-    console.log(`${key}: ${salaries[key]}`);
+    //console.log(`${key}: ${salaries[key]}`);
   }
 }
 
