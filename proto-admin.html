@@ -414,11 +414,16 @@
                 </div>
             </div>
             <div id="pontaje" class="col s12">
-              <div class="col s12 m12 l6">
+              <div class="col s12">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">Pontaje</span>
-                    <p><input id='calendarPontaje'></p>
+                    <p><select id="heatmapDays">
+                      <option value="30" selected>30 de zile</option>
+                      <option value="45">45 de zile</option>
+                      <option value="60">60 de zile</option>
+                      <option value="90">90 de zile</option>
+                    </select></p>
                   </div>
                 </div>
               </div>
@@ -522,6 +527,9 @@
         $('#newProjectStartDate').change(function() {
           setProjectStartDate($(this).val());
         });
+        $('#heatmapDays').change(function() {
+          generateHeatMapData($(this).val());
+        });
         $(document).ready(function(){
           $('.modal').modal();
         });
@@ -567,6 +575,8 @@
           populateUsers();
           //console.log(accountsObject);
           populatePermissions();
+
+          generateHeatMapData(90);
 
           holidayArray = [];
           holidaysObject.forEach(element => {

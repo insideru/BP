@@ -84,6 +84,40 @@ function drawProjectsChart () {
     chart.render();
 }
 
+function generateHeatMapData(noDays) {
+  let maxDate = new Date();
+  let minDate = new Date();
+  minDate.setDate(minDate.getDate()-noDays);
+
+  //generate timesheets list
+  let curTimesheets = [];
+  alltimesheetsObject.forEach(element => {
+    let curDate = new Date(element.date);
+    curDate.setHours(0, 0, 0);
+    //verificam daca e in range
+    if (curDate > minDate) {
+      //nu a mai fost tipul asta, facem un array unde sa adaugam
+      if (curTimesheets[element.id] === undefined) {
+        curTimesheets[element.id] = new Array;
+      };
+      //exista il bagam, altfel il bagam adaugat
+      if (curTimesheets[element.id][curdate] === undefined) {
+        curTimesheets[element.id][curdate] = element.time;
+      } else {
+        curTimesheets[element.id][curdate] += element.time;
+      }
+    }
+  });
+
+  console.log(curTimesheets);
+
+  //generate data
+}
+
+function drawHeatMap () {
+
+}
+
 function updateProjectCharts (projID) {
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
