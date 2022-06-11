@@ -239,6 +239,9 @@ function populateCollabs() {
       if (elem.collab_id==element.id && elem.account_username!="") {
         bool = true;
       }
+
+      //facem lista de permisii
+      permissionsPerCollab[elem.collab_id] = elem.account_group;
     });
     if (bool) {
       //e adaugat user
@@ -247,9 +250,6 @@ function populateCollabs() {
       $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="updatePermissionsDropdown(); addNewUserID=' + element.id +'">Adauga user</a></td></tr>');
       // var modalInstance = M.Modal.getInstance($(\'#newPontor\')); modalInstance.open();
     }
-
-    //facem lista de permisii
-    permissionsPerCollab[elem.collab_id] = elem.account_group;
   });
 }
 
