@@ -1666,6 +1666,8 @@ function calculateSalaries(date) {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
     let multiplier = 1;
+    console.log(holidayArray);
+    console.log(curDate);
     if (isInArray(holidayArray, curDate)) {
       //e 2x
       multiplier = 2;
