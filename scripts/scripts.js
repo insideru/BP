@@ -1729,7 +1729,7 @@ function populateSalaries (salaries, monthlyDate) {
     '<td>'+h1+' lei</td>'+
     '<td>'+h2+' lei</td>'+
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
-    collabsAdded.push[key];
+    collabsAdded.push(key);
   });
   console.log(collabsAdded);
   console.log(collabsObject);
