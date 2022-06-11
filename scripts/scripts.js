@@ -1556,11 +1556,13 @@ function modifiySalary(id, contor) {
         //a mers
         let i = 0;
         salariesObject.forEach(element => {
-          if (element.id == id && contor == i++) {
-            element.hourly = newHS;
-            element.monthly = newMS;
-            element.date = getSelectedISODate($('#addSalaryDate').val());
-            M.toast({html: "Salariul a fost modificat cu succes!"});
+          if (element.collab_id == id) {
+            if (contor == i++) {
+              element.hourly = newHS;
+              element.monthly = newMS;
+              element.date = getSelectedISODate($('#addSalaryDate').val());
+              M.toast({html: "Salariul a fost modificat cu succes!"});
+            }
           }
         });
       } else {
