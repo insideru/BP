@@ -18,6 +18,7 @@ concediuPage = "/?page=concediu";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
+salariesPerCollab = new Object;
 permissionsObject = [];
 
 $.fn.exists = function () {
@@ -1646,12 +1647,16 @@ function updatePermissionsDropdown() {
 }
 
 function calculateSalaries(date) {
+
   let tmp = date.split(" ")[0].split('-');
   let wrkDate = new Date(tmp[0], tmp[1]-1, 1);
   let midDate = new Date(tmp[0], tmp[1]-1, 1);
   midDate.setDate(16);
   let endDate = new Date(tmp[0], tmp[1]-1, 1);
   endDate.setMonth(endDate.getMonth()+1);
+
+  buildSalariesPerCollab();
+  console.log(salariesPerCollab);
 
   let show = 1;
   let show2 = 1;
@@ -1667,5 +1672,20 @@ function calculateSalaries(date) {
       if (show2) { console.log('16-3X'); show2=0;}
       console.log(curDate);
     }
+  });
+}
+
+function getSalary(collabID, startDate) {
+  
+}
+
+function buildSalariesPerCollab() {
+  salariesObject.forEach(element => {
+    let tmp = element.date.split['-'];
+    let wrkDate = new Date(tmp[0], tmp[1]-1, tmp[2]);
+    if (element.collab_id.toString() in salariesPerCollab === false ) {
+      salariesPerCollab[element.collab_id.toString()] = new Array;
+    }
+    salariesPerCollab[element.collab_id.toString()].push({hourly: element.hourly, monthly: element.monthly, date: wrkDate});
   });
 }
