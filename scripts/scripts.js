@@ -1685,7 +1685,7 @@ function buildSalariesPerCollab() {
     let tmp = new String(element.date);
     let tmpArray = tmp.split['-'];
     console.log(element.date);
-    console.log(tmpArray);
+    console.log(tmp, tmpArray);
     let wrkDate = new Date(tmpArray[0], tmpArray[1]-1, tmpArray[2]);
     if (element.collab_id.toString() in salariesPerCollab === false ) {
       salariesPerCollab[element.collab_id.toString()] = new Array;
