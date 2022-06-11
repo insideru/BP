@@ -1566,6 +1566,7 @@ function modifiySalary(id, contor) {
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
         });
+        console.log(salariesObject);
         salariesObject.sort((a,b)=>a.date.getTime()-b.date.getTime());
       } else {
         M.toast({html: data});
