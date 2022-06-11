@@ -1731,7 +1731,8 @@ function populateSalaries (salaries) {
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
   });
   $('#salariesBody').append('<tr><td></td><td>'+h1total+' lei</td><td>'+h2total+' lei</td><td>'+(monthlyTotal>0?monthlyTotal + ' lei':'-')+'</td>');
-  $('#salariesBody').append('<tr><td>Total</td><td></td><td></td><td>'+Number(h1total)+Number(h2total)+Number(monthlyTotal)+' lei</td>');
+  let GT = Number(h1total)+Number(h2total)+Number(monthlyTotal);
+  $('#salariesBody').append('<tr><td>Total</td><td></td><td></td><td>'+GT+' lei</td>');
 }
 
 function getHourlySalary(collabID, date) {
