@@ -1749,7 +1749,7 @@ function populateSalaries (salaries, monthlyDate) {
 
 function getHourlySalary(collabID, date) {
   let retValue = 0;
-  if (salariesPerCollab[collabID].length == 0) {
+  if (salariesPerCollab[collabID] === undefined) {
     //nu exista salariu trecut
     retValue = 0;
   } else if (salariesPerCollab[collabID].length == 1) {
