@@ -1554,8 +1554,9 @@ function modifiySalary(id, contor) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
+        let i = 0;
         salariesObject.forEach(element => {
-          if (element.id == id) {
+          if (element.id == id && contor == i++) {
             element.hourly = newHS;
             element.monthly = newMS;
             element.date = getSelectedISODate($('#addSalaryDate').val());
