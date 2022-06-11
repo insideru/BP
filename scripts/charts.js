@@ -1,5 +1,6 @@
 var chartedProjects = [];
 var secondCharts = false;
+var updateHeatMap = false;
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -85,12 +86,11 @@ function drawProjectsChart () {
 }
 
 function generateHeatMapData(noDays) {
-  let maxDate = new Date();
   let minDate = new Date();
   minDate.setDate(minDate.getDate()-noDays);
 
   //generate timesheets list
-  let curTimesheets = [];
+  let curTimesheets = new Object;
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
@@ -109,13 +109,49 @@ function generateHeatMapData(noDays) {
     }
   });
 
-  console.log(curTimesheets);
-
   //generate data
+  let chartSeries = [];
+  for(let key in curTimesheets) {
+    let emplName = getDBNameFromId(key, 'collab');
+    let curData = [];
+    for (dayDiff = noDays-1; dayDiff <= 0; dayDiff--) {
+      let curDate = new Date();
+      curDate.setHours(0, 0, 0);
+      curDate.setDate(curDate.getDate()-dayDiff);
+      if (curTimesheets[key][curDate] === undefined) {
+        curData.push(0);
+      } else {
+        curData.push(curTimesheets[key][curDate]);
+      }
+    }
+    chartSeries.push({name: emplName, data: curData});
+  }
+  console.log(chartSeries);
+  let options = {
+    series: chartSeries,
+    chart: {
+    height: auto,
+    type: 'heatmap',
+  },
+  dataLabels: {
+    enabled: false
+  },
+  colors: ["#008FFB"],
+  title: {
+    text: 'Pontaje pe ultimele ' + noDays + ' zile'
+  }};
+
+  drawHeatMap(options);
 }
 
-function drawHeatMap () {
-
+function drawHeatMap (options) {
+  if (!updateHeatMap) {
+    var heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
+    chart.render();
+  } else {
+    updateHeatMap = true;
+    heatMapChart.updateSeries ([{data: options}], true);
+  }
 }
 
 function updateProjectCharts (projID) {
