@@ -1556,6 +1556,7 @@ function modifiySalary(id, contor) {
         //a mers
         salariesObject.forEach(element => {
           if (element.id == id) {
+            console.log(element);
             element.hourly = newHS;
             element.monthly = newMS;
             element.date = getSelectedISODate($('#modifySalaryDate_'+id+'_'+contor).val());
