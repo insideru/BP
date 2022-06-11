@@ -1688,14 +1688,14 @@ function calculateSalaries(date) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 1});
+      retObject[element.collab_id].push({time: Number(element.time), cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: Number(bonus), multiplier: Number(multiplier), half: 1});
     }
   
     if (curDate >= midDate && curDate<endDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: bonus, multiplier: multiplier, half: 2});
+      retObject[element.collab_id].push({time: Number(element.time), cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: Number(bonus), multiplier: Number(multiplier), half: 2});
     }
   });
 
@@ -1730,7 +1730,7 @@ function populateSalaries (salaries) {
     '<td>'+h2+' lei</td>'+
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
   });
-  $('#salariesBody').append('<tr><td>Total</td><td>'+h1total+'</td><td>'+h2total+'</td><td>'+monthlyTotal+'</td>');
+  $('#salariesBody').append('<tr><td>Total</td><td>'+h1total+'</td><td>'+h2total+'</td><td>'+(monthlyTotal>0?monthlyTotal + ' lei':'-')+'</td>');
 }
 
 function getHourlySalary(collabID, date) {
@@ -1749,7 +1749,7 @@ function getHourlySalary(collabID, date) {
       }
     });
   }
-  return retValue;
+  return Number(retValue);
 }
 
 function getMonthlySalary(collabID, date) {
@@ -1768,7 +1768,7 @@ function getMonthlySalary(collabID, date) {
       }
     });
   }
-  return retValue;
+  return Number(retValue);
 }
 
 function buildSalariesPerCollab() {
