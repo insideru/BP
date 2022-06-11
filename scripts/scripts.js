@@ -1731,8 +1731,6 @@ function populateSalaries (salaries, monthlyDate) {
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
     collabsAdded.push(key);
   });
-  console.log(collabsAdded);
-  console.log(collabsObject);
   collabsObject.forEach(element => {
     if (element.id in collabsAdded === false ) {
       let addName = getDBNameFromId(element.id, 'collab');
