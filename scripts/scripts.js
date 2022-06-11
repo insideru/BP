@@ -1561,8 +1561,8 @@ function modifiySalary(id, contor) {
             element.date = getSelectedISODate($('#modifySalaryDate_'+id+'_'+contor).val());
             buildSalariesPerCollab();
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
+              console.log(salariesPerCollab[element.collab_id.toString()]);
               salariesPerCollab[element.collab_id.toString()].sort(function(a, b) {
-                console.log(a.date, b.date, a.date - b.date);
                 if (a.date - b.date >= 0) {
                   return 1;
                 } else {
@@ -1570,6 +1570,7 @@ function modifiySalary(id, contor) {
                 }
               }
               );
+              console.log(salariesPerCollab[element.collab_id.toString()]);
             }
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
@@ -1609,9 +1610,7 @@ function changePermissions(column, row) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        console.log(permissionsObject);
         permissionsObject[row-1][column] = permissionsObject[row-1][column] == 0 ? 1 : 0;
-        console.log(permissionsObject);
       } else {
         M.toast({html: data});
         return;
@@ -1668,7 +1667,6 @@ function calculateSalaries(date) {
   endDate.setMonth(endDate.getMonth()+1);
 
   buildSalariesPerCollab();
-  console.log(salariesPerCollab);
 
   let show = 1;
   let show2 = 1;
@@ -1695,7 +1693,6 @@ function getSalary(collabID, startDate) {
 function buildSalariesPerCollab() {
   salariesPerCollab = new Object;
   salariesObject.forEach(element => {
-    console.log(element);
     let wrkDate = new Date(element.date);
     if (element.collab_id.toString() in salariesPerCollab === false ) {
       salariesPerCollab[element.collab_id.toString()] = new Array;
