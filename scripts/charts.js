@@ -118,12 +118,14 @@ function generateHeatMapData(noDays) {
       let thisDate = new Date();
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
+      console.log(thisDate);
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
       } else {
         curData.push(curTimesheets[key][thisDate]);
       }
     }
+    console.log(curData);
     chartSeries.push({name: emplName, data: curData});
   }
   console.log(chartSeries);
