@@ -118,7 +118,7 @@
                         <table class="centered highlight">
                             <thead>
                               <tr>
-                                  <th>Name</th>
+                                  <th>Nume</th>
                                   <th>Categorie</th>
                                   <th>Client</th>
                                   <th>Extern</th>
@@ -434,6 +434,17 @@
                         </tr>
                       </tbody>
                     </table>
+                    <table class="centered highlight">
+                      <thead>
+                        <tr>
+                          <th>Nume</th>
+                          <th>1-15</th>
+                          <th>16-Final</th>
+                      </tr>
+                      </thead>
+                      <tbody id="salariesBody">
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -485,11 +496,7 @@
               calculateSalaries(value);
             }
           });
-          let today = new Date();
-          today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
-          let todayString = today.toISOString().replace('T', ' ');
-          todayString = todayString.substring(0, todayString.length-5);
-          calendarSalarii.setValue(todayString);
+    
           var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
             defaultDate: new Date(),
@@ -558,6 +565,12 @@
           populatePermissions();
 
           $('.tooltipped').tooltip();
+
+          let today = new Date();
+          today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
+          let todayString = today.toISOString().replace('T', ' ');
+          todayString = todayString.substring(0, todayString.length-5);
+          calendarSalarii.setValue(todayString);
         });
                 
         $('form').submit(function(event) {

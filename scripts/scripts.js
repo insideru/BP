@@ -1658,37 +1658,57 @@ function calculateSalaries(date) {
   let endDate = new Date(tmp[0], tmp[1]-1, 1);
   endDate.setMonth(endDate.getMonth()+1);
 
+  let retObject = new Object;
+
   buildSalariesPerCollab();
 
-  let show = 1;
-  let show2 = 1;
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     
-    if (curDate >= wrkDate && curDate<midDate){
-      if (show) { console.log('1-15'); show=0;}
-      console.log(curDate);
+    if (curDate >= wrkDate && curDate<midDate) {
+      if (element.collab_id in retObject === false ) {
+        retObject[element.collab_id] = new Array;
+      }
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), half: 1});
     }
   
-    if (curDate >= midDate && curDate<endDate){
-      if (show2) { console.log('16-3X'); show2=0;}
-      console.log(curDate);
+    if (curDate >= midDate && curDate<endDate) {
+      if (element.collab_id in retObject === false ) {
+        retObject[element.collab_id] = new Array;
+      }
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), half: 2});
     }
   });
+
+  console.log(retObject);
 }
 
-function getSalary(collabID, startDate) {
-  let tmp = element.date.split['-'];
-  let wrkDate = new Date(tmp[0], tmp[1]-1, tmp[2]);
+function getHourlySalary(collabID, date) {
+  let retValue = 0;
+  if (salariesPerCollab[collabID].length == 0) {
+    //nu exista salariu trecut
+    retValue = 0;
+  } else if (salariesPerCollab[collabID].length == 1) {
+    //e doar un salariu trecut
+    retValue = salariesPerCollab[collabID][0].hourly;
+  } else {
+    //sunt mai multe
+    salariesPerCollab[collabID].forEach(element => {
+      if (date >= element.date) {
+        retValue = element.hourly;
+      }
+    });
+  }
+  return retValue;
 }
 
 function buildSalariesPerCollab() {
   salariesPerCollab = new Object;
   salariesObject.forEach(element => {
     let wrkDate = new Date(element.date);
-    if (element.collab_id.toString() in salariesPerCollab === false ) {
-      salariesPerCollab[element.collab_id.toString()] = new Array;
+    if (element.collab_id in salariesPerCollab === false ) {
+      salariesPerCollab[element.collab_id] = new Array;
     }
-    salariesPerCollab[element.collab_id.toString()].push({hourly: element.hourly, monthly: element.monthly, date: wrkDate});
+    salariesPerCollab[element.collab_id].push({hourly: element.hourly, monthly: element.monthly, date: wrkDate});
   });
 }
