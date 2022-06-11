@@ -241,7 +241,7 @@ function populateCollabs() {
       }
 
       //facem lista de permisii
-      permissionsPerCollab[elem.collab_id] = elem.account_group;
+      permissionsPerCollab[elem.collab_id] = Number(elem.account_group);
     });
     if (bool) {
       //e adaugat user
