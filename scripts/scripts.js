@@ -1563,10 +1563,10 @@ function modifiySalary(id, contor) {
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
               salariesPerCollab[element.collab_id.toString()].sort((a,b)=>a.date.getTime()-b.date.getTime());
             }
-            console.log(salariesPerCollab[element.collab_id.toString()]);
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
         });
+        salariesObject.sort((a,b)=>a.date.getTime()-b.date.getTime());
       } else {
         M.toast({html: data});
         return;
