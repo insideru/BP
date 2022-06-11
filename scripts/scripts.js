@@ -1730,7 +1730,7 @@ function populateSalaries (salaries) {
     '<td>'+h2+' lei</td>'+
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
   });
-  $('#salariesBody').append('<tr><td>Total</td>'+h1total+'<td></td><td>'+h2total+'</td><td>'+monthlyTotal+'</td>');
+  $('#salariesBody').append('<tr><td>Total</td><td>'+h1total+'</td><td>'+h2total+'</td><td>'+monthlyTotal+'</td>');
 }
 
 function getHourlySalary(collabID, date) {
