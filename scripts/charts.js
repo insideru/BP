@@ -98,11 +98,11 @@ function generateHeatMapData(noDays) {
     if (curDate > minDate) {
       //nu a mai fost tipul asta, facem un array unde sa adaugam
       if (curTimesheets[element.collab_id] === undefined) {
-        curTimesheets[element.collab_id] = new Array;
+        curTimesheets[element.collab_id] = new Object;
       };
       //exista il bagam, altfel il bagam adaugat
       if (curTimesheets[element.collab_id][element.date] === undefined) {
-        curTimesheets[element.collab_id].push({[element.date]: element.time});
+        curTimesheets[element.collab_id][element.date] = element.time;
       } else {
         curTimesheets[element.collab_id][element.date] += element.time;
       }
