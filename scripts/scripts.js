@@ -1699,11 +1699,12 @@ function calculateSalaries(date) {
     }
   });
 
-  populateSalaries(retObject);
+  populateSalaries(retObject, endDate);
 }
 
-function populateSalaries (salaries) {
+function populateSalaries (salaries, monthlyDate) {
   console.log(salaries);
+  let collabsAdded = [];
   const keys = Object.keys(salaries);
   let h1total = 0;
   let h2total = 0;
@@ -1729,10 +1730,21 @@ function populateSalaries (salaries) {
     '<td>'+h1+' lei</td>'+
     '<td>'+h2+' lei</td>'+
     '<td>'+(monthly>0?monthly + ' lei':'-')+'</td></tr>');
+    collabsAdded.push[key];
   });
-  $('#salariesBody').append('<tr><td></td><td>'+h1total+' lei</td><td>'+h2total+' lei</td><td>'+(monthlyTotal>0?monthlyTotal + ' lei':'-')+'</td>');
+  collabsObject.forEach(element => {
+    if (element.id in collabsAdded === false ) {
+      let addName = getDBNameFromId(element.id, 'collab');
+      let addMonthly = Number(getMonthlySalary(collabID,monthlyDate));
+      if (addMonthly>0) {
+        monthlyTotal+=addMonthly;
+        $('#salariesBody').append('<tr><td>'+addName+'</td><td>-</td><td>-</td><td>'+addMonthly+' lei</td></tr>');
+      }
+    }
+  });
+  $('#salariesBody').append('<tr><td></td><td>'+h1total+' lei</td><td>'+h2total+' lei</td><td>'+(monthlyTotal>0?monthlyTotal + ' lei':'-')+'</td></tr>');
   let GT = Number(h1total)+Number(h2total)+Number(monthlyTotal);
-  $('#salariesBody').append('<tr><td>Total</td><td></td><td></td><td>'+GT+' lei</td>');
+  $('#salariesBody').append('<tr><td>Total</td><td></td><td></td><td>'+GT+' lei</td></tr>');
 }
 
 function getHourlySalary(collabID, date) {
