@@ -102,9 +102,9 @@ function generateHeatMapData(noDays) {
       };
       //exista il bagam, altfel il bagam adaugat
       if (curTimesheets[element.collab_id][element.date] === undefined) {
-        curTimesheets[element.collab_id][element.date] = element.time;
+        curTimesheets[element.collab_id][element.date] = Number(element.time);
       } else {
-        curTimesheets[element.collab_id][element.date] += element.time;
+        curTimesheets[element.collab_id][element.date] += Number(element.time);
       }
     }
   });
