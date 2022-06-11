@@ -115,13 +115,13 @@ function generateHeatMapData(noDays) {
     let emplName = getDBNameFromId(key, 'collab');
     let curData = [];
     for (dayDiff = noDays-1; dayDiff <= 0; dayDiff--) {
-      let curDate = new Date();
-      curDate.setHours(0, 0, 0);
-      curDate.setDate(curDate.getDate()-dayDiff);
-      if (curTimesheets[key][curDate] === undefined) {
+      let thisDate = new Date();
+      thisDate.setHours(0, 0, 0);
+      thisDate.setDate(thisDate.getDate()-dayDiff);
+      if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
       } else {
-        curData.push(curTimesheets[key][curDate]);
+        curData.push(curTimesheets[key][thisDate]);
       }
     }
     chartSeries.push({name: emplName, data: curData});
