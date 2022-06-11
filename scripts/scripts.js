@@ -1768,7 +1768,7 @@ function getHourlySalary(collabID, date) {
 
 function getMonthlySalary(collabID, date) {
   let retValue = 0;
-  if (salariesPerCollab[collabID].length == 0) {
+  if (salariesPerCollab[collabID].length === undefined) {
     //nu exista salariu trecut
     retValue = 0;
   } else if (salariesPerCollab[collabID].length == 1) {
