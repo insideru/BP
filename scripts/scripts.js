@@ -1561,11 +1561,15 @@ function modifiySalary(id, contor) {
             element.date = getSelectedISODate($('#modifySalaryDate_'+id+'_'+contor).val());
             buildSalariesPerCollab();
             if (salariesPerCollab[element.collab_id.toString()].length>1) {
-              console.log('trebuie sortat');
-              salariesPerCollab[element.collab_id.toString()].sort((a, b) => {
-                console.log(a.date);
-                console.log(b.date);
-                return a.date - b.date});
+              salariesPerCollab[element.collab_id.toString()].sort(function(a, b) {
+                console.log(a.date, b.date, a.date - b.date);
+                if (a.date - b.date >= 0) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              }
+              );
             }
             M.toast({html: "Salariul a fost modificat cu succes!"});
           }
