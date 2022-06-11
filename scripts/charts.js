@@ -130,7 +130,7 @@ function generateHeatMapData(noDays) {
   let options = {
     series: chartSeries,
     chart: {
-    height: auto,
+    height: 'auto',
     type: 'heatmap',
   },
   dataLabels: {
