@@ -1704,9 +1704,22 @@ function calculateSalaries(date) {
 
 function populateSalaries (salaries) {
   console.log(salaries);
-  for (const key in salaries) {
-    //console.log(`${key}: ${salaries[key]}`);
-  }
+  const keys = Object.keys(salaries);
+  keys.forEach((key, index) => {
+    let emplName = getDBNameFromId(key, 'collab');
+    let h1 = 0;
+    let h2 = 0;
+    salaries[key].forEach(element => {
+      if (element.half == 1) {
+        h1 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
+      } else {
+        h2 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
+      }
+    });
+    $('#salariesBody').append('<tr><td>'+emplName+'</td>'+
+    '<td>'+h1+' lei</td>'+
+    '<td>'+h2+' lei</td></tr>');
+  });
 }
 
 function getHourlySalary(collabID, date) {
