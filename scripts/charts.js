@@ -97,14 +97,14 @@ function generateHeatMapData(noDays) {
     //verificam daca e in range
     if (curDate > minDate) {
       //nu a mai fost tipul asta, facem un array unde sa adaugam
-      if (curTimesheets[element.id] === undefined) {
-        curTimesheets[element.id] = new Array;
+      if (curTimesheets[element.collab_id] === undefined) {
+        curTimesheets[element.collab_id] = new Array;
       };
       //exista il bagam, altfel il bagam adaugat
-      if (curTimesheets[element.id][curDate] === undefined) {
-        curTimesheets[element.id].push({[curDate]: element.time});
+      if (curTimesheets[element.collab_id][curDate] === undefined) {
+        curTimesheets[element.collab_id].push({[curDate]: element.time});
       } else {
-        curTimesheets[element.id][curDate] += element.time;
+        curTimesheets[element.collab_id][curDate] += element.time;
       }
     }
   });
