@@ -1665,12 +1665,14 @@ function calculateSalaries(date) {
   let retObject = new Object;
 
   buildSalariesPerCollab();
+  console.log(permissionsPerCollab);
+  console.log(permissionsObject);
 
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
     let bonus = 1;
-    console.log(permissionsPerCollab);
+    
     let multiplier = permissionsObject[permissionsPerCollab[element.collab_id]]['bonus'];
     
     if (isInArray(holidayArray, curDate)) {
