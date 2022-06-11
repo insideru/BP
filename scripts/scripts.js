@@ -1716,7 +1716,8 @@ function populateSalaries (salaries) {
         h2 += element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier;
       }
     });
-    $('#salariesBody').html('<tr><td>'+emplName+'</td>'+
+    $('#salariesBody').html('');
+    $('#salariesBody').append('<tr><td>'+emplName+'</td>'+
     '<td>'+h1+' lei</td>'+
     '<td>'+h2+' lei</td></tr>');
   });
