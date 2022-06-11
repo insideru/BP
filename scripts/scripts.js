@@ -1703,7 +1703,6 @@ function calculateSalaries(date) {
 }
 
 function populateSalaries (salaries, monthlyDate) {
-  console.log(salaries);
   let collabsAdded = [];
   const keys = Object.keys(salaries);
   let h1total = 0;
@@ -1768,7 +1767,7 @@ function getHourlySalary(collabID, date) {
 
 function getMonthlySalary(collabID, date) {
   let retValue = 0;
-  if (salariesPerCollab[collabID].length === undefined) {
+  if (salariesPerCollab[collabID] === undefined) {
     //nu exista salariu trecut
     retValue = 0;
   } else if (salariesPerCollab[collabID].length == 1) {
