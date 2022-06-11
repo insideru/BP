@@ -1664,12 +1664,23 @@ function calculateSalaries(date) {
 
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
+    let multiplier = 1;
+    if (isInArray(holidayArray, curDate)) {
+      //e 2x
+      multiplier = 2;
+    } else if (element.date.getDay()==0 || element.date.getDay()==6) {
+      //e 1,5x
+      multiplier = 1.5;
+    } else {
+      //e 1x
+      multiplier = 1;
+    }
     
     if (curDate >= wrkDate && curDate<midDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), half: 1});
+      retObject[element.collab_id].push({time: element.time, cost: getHourlySalary(element.collab_id, curDate), bonus: multiplier, half: 1});
     }
   
     if (curDate >= midDate && curDate<endDate) {
