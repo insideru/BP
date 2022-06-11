@@ -1664,6 +1664,7 @@ function calculateSalaries(date) {
 
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
+    curDate.setHours(0, 0, 0);
     let multiplier = 1;
     if (isInArray(holidayArray, curDate)) {
       //e 2x
