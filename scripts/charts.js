@@ -154,7 +154,7 @@ function drawHeatMap (options) {
     updateHeatMap = true;
   } else {
     heatMapChart.updateSeries ([{data: options.series}], true);
-    collabChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
+    heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
 
   }
 }
