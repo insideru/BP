@@ -2,6 +2,7 @@ var chartedProjects = [];
 var secondCharts = false;
 var updateHeatMap = false;
 var dates = [];
+var curTimesheets = {};
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -91,7 +92,7 @@ function generateHeatMapData(noDays) {
   minDate.setDate(minDate.getDate()-noDays);
 
   //generate timesheets list
-  var curTimesheets = new Object;
+  curTimesheets = new Object;
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
