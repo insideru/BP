@@ -520,7 +520,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
     if (contor == collabIndex) {
       //console.log(curTimesheets[key]);
       //console.log(getDBNameFromId(key, 'collab'));
-      console.log(dates[dayIndex]);
+      $('#numePontaj').html('Pontaje pentru ' + getDBNameFromId(key, 'collab') + ' in data de ' + dates[dayIndex]);
       $("#pontajDetailChart").html('');
       let data = [];
       let groups = [];
@@ -530,8 +530,6 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       for (let element of alltimesheetsObject) {
         let curDate = new Date(element.date);
         curDate.setHours(0, 0, 0, 0);
-        console.log(curDate);
-        console.log(curDate - dates[dayIndex]);
         if (curDate - dates[dayIndex] == 0) {
           newName = getDBNameFromId(element.project_id, 'project');
           //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
