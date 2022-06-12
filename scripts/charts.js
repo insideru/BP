@@ -152,7 +152,7 @@ function generateHeatMapData(noDays) {
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       return '<div>' +
-        '<span>' + seriesIndex + '-' + dates[dataPointIndex] + '</span>' +
+        '<span>' + seriesIndex + '-' + dates[dataPointIndex] + '-' + series[seriesIndex][dataPointIndex] + '</span>' +
         '</div>'
     }
   },
