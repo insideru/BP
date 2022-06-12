@@ -141,9 +141,6 @@ function generateHeatMapData(noDays) {
   dataLabels: {
     enabled: false
   },
-  xaxis: {
-    type: 'numeric'
-  },
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       return '<div>' +
@@ -167,9 +164,7 @@ function drawHeatMap (options) {
   } else {
     heatMapChart.updateSeries (options.series, true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
-    heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);
-    heatMapChart.updateOptions ({xaxis: {categories: options.xaxis.categories}}, true, true, true);
-  }
+    heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);  }
 }
 
 function updateProjectCharts (projID) {
