@@ -120,7 +120,7 @@ function generateHeatMapData(noDays) {
     let curData = [];
     for (dayDiff = noDays-1; dayDiff >= 0; dayDiff--) {
       let thisDate = new Date();
-      thisDate.setHours(0, 0, 0);
+      thisDate.setHours(0, 0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
       if (!uniq) {
         dates.push(thisDate);
@@ -529,7 +529,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       
       for (let element of alltimesheetsObject) {
         let curDate = new Date(element.date);
-        curDate.setHours(0, 0, 0);
+        curDate.setHours(0, 0, 0, 0);
         console.log(curDate);
         console.log(curDate - dates[dayIndex]);
         if (curDate - dates[dayIndex] == 0) {
