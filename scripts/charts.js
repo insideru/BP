@@ -12,7 +12,7 @@ function drawProjectsChart () {
 
     projectsObject.forEach(element => {
       if (Number(element.active)) {
-        let projActualTime = buildProjectWorkHours(element.id);
+        let projActualTime = buildProjectWorkHours(element.id, element.budget);
         let projName = element.name;
         let projBudget = Number(element.budget);
         let projChartData = new Object;
@@ -20,7 +20,7 @@ function drawProjectsChart () {
         if (projBudget == 0) {
           projChartData = {
             x: projName,
-            y: 20
+            y: projActualTime
           };
         } else {
           projChartData = {
@@ -339,11 +339,22 @@ function updateProjectCharts (projID) {
       }
 }
 
-function buildProjectWorkHours (projID) {
+function buildProjectWorkHours (projID, budget) {
   let retval = 0;
+  let startDate = new Date();
+  startDate.setHours(0, 0, 0, 0);
+  startDate.setDate(startDate.getDate()-30);
   alltimesheetsObject.forEach(element => {
       if (element.project_id == projID) {
-          retval+=Number(element.time);
+          if (!budget) {
+            let curDate = new Date(element.date);
+            curDate.setHours(0, 0, 0, 0);
+            if (curDate >= startDate) {
+              retval+=Number(element.time);
+            }
+          } else {
+            retval+=Number(element.time);
+          }   
       }
   });
   return retval;
@@ -358,7 +369,18 @@ function buildProjetTimeline (projID, deadlineID) {
         projectTimesheets[element.activity_id] = new Array;
       }
       if (!projectTimesheets[element.activity_id].includes(element.date)) {
-        projectTimesheets[element.activity_id].push(element.date);
+        if (chartedProjects[deadlineID].budget > 0) {
+          projectTimesheets[element.activity_id].push(element.date);
+        } else {
+          let startDate = new Date();
+          startDate.setHours(0, 0, 0, 0);
+          startDate.setDate(startDate.getDate()-30);
+          let curDate = new Date(element.date);
+          curDate.setHours(0, 0, 0, 0);
+          if (curDate >= startDate) {
+            projectTimesheets[element.activity_id].push(element.date);
+          }
+        }
       }
     }
   });
