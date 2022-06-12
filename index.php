@@ -10,8 +10,8 @@ if ($account->authenticated) {
         if ($_GET['page']=="dashboard"){
             require 'proto-dashboard.html';
             die;
-        } else if ($_GET['page']=="ponteaza"){
-            require 'proto-pontaj.html';
+        } else if ($_GET['page']=="calendar"){
+            require 'proto-calendar.html';
             die;
         } else if ($_GET['page']=="ponteaza"){
             require 'proto-pontaj.html';
