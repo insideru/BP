@@ -114,15 +114,26 @@
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
           drawProjectsChart();
 
+          let curDate = new Date();
+          let wrkDate = `${curDate.getFullYear()}-${curDate.getMonth()+1>10?curDate.getMonth()+1:'0'+curDate.getMonth()+1}-${curDate.getDate()}`;
+          let amPontat = false;
+
           alltimesheetsObject.forEach(element => {
             if (element.collab_id == myID) {
               myTimesheets.push(element);
+              if (element.date == wrkDate) {
+                amPontat = true;
+              }
             }
           });
-          let curDate = new Date();
-          let wrkDate = `${curDate.getFullYear()}-${curDate.getMonth()+1}-${curDate.getDate()}`;
+          
           console.log(wrkDate);
-          drawPontajChart(wrkDate);
+
+          if (amPontat) {
+            drawPontajChart(wrkDate);
+          } else {
+
+          }
           $('.tooltipped').tooltip();
         });
       })
