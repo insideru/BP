@@ -169,17 +169,24 @@ if ($_POST["action"]=="addNewUser") {
 if ($_REQUEST["r"]=="init") {
     //trimitem toate datele de initalizare tabele
     $response = array();
-    $response["clients"] = getClients();
-    $response["collabCats"] = getCollabCat();
-    $response["projCats"] = getProjCat();
-    $response["collabs"] = getCollabs();
-    $response["projects"] = getProjects();
-    $response["activities"] = getActivities();
-    $response["holidays"] = getHolidays();
-    $response["accounts"] = getAccounts();
-    $response["timesheets"] = getAllTimesheets();
-    $response["salaries"] = getSalaries();
-    $response["permissions"] = getPermissions();
+    if ($account->permissions['admin']) {
+        $response["clients"] = getClients();
+        $response["collabCats"] = getCollabCat();
+        $response["projCats"] = getProjCat();
+        $response["collabs"] = getCollabs();
+        $response["projects"] = getProjects();
+        $response["activities"] = getActivities();
+        $response["holidays"] = getHolidays();
+        $response["accounts"] = getAccounts();
+        $response["timesheets"] = getAllTimesheets();
+        $response["salaries"] = getSalaries();
+        $response["permissions"] = getPermissions();
+    } else {
+        $response["collabs"] = getCollabs();
+        $response["projects"] = getProjects();
+        $response["activities"] = getActivities();
+        $response["timesheets"] = getAllTimesheets();
+    }
     
     echo json_encode($response);
 }

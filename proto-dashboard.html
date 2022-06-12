@@ -33,7 +33,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Notificari</span>
-            <p></p>
+            <p>Neimplementat</p>
           </div>
         </div>
       </div>
@@ -42,6 +42,24 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Detalii Proiect</span>
+            <p>Neimplementat</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m12 l12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Status proiecte</span>
+            <p><div id="projectsChart"></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Timeline Proiecte</span>
             <p></p>
           </div>
         </div>
@@ -50,7 +68,16 @@
       <div class="col s12 m6 l6">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">Timeline proiecte</span>
+            <span class="card-title">Activitati</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Useri</span>
             <p></p>
           </div>
         </div>
@@ -91,9 +118,20 @@
     <script>
       $(document).ready(function() {
         addLinks();
-        initCalendar();
         $('.collapsible').collapsible();
         $('.modal').modal();
+        $.get("handler.php?r=init", function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
+          collabsObject = initData.collabs;
+          projectsObject = initData.projects;
+          activitiesObject = initData.activities;
+          alltimesheetsObject = initData.timesheets;
+          //console.log(projectsObject, alltimesheetsObject, collabsObject);
+          drawProjectsChart();
+
+          $('.tooltipped').tooltip();
+        });
       })
     </script>
   </body>

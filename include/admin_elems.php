@@ -466,9 +466,11 @@ function getAllTimesheets() {
 
 	$fields=array();
 
-	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
+	while ($row = $res->fetch(PDO::FETCH_ASSOC))
     {
-		array_push($fields, $row);
+        if (($account->permissions['external'] && $row['external']) || ($account->permissions['admin']) || (!$row['external'])) {
+		    array_push($fields, $row);
+        }
 	}
 
 	return $fields;
