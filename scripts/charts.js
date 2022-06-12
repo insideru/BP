@@ -233,6 +233,7 @@ function drawHeatMap (options) {
 }
 
 function updateProjectCharts (projID) {
+    $('.hide').removeClass("hide");
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id, projID);
 
