@@ -130,10 +130,10 @@ function generateHeatMapData(noDays) {
         curData.push(curTimesheets[key][thisDate]);
       }
     }
-    dates.sort((a,b)=>a.getTime()-b.getTime());
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
+  dates.sort((a,b)=>a.getTime()-b.getTime());
   let options = {
     series: chartSeries,
     chart: {
@@ -208,6 +208,7 @@ function generateHeatMapData(noDays) {
 }
 
 function drawHeatMap (options) {
+  console.log(dates);
   if (!updateHeatMap) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
