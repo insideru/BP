@@ -142,7 +142,8 @@ function generateHeatMapData(noDays) {
     enabled: false
   },
   xaxis: {
-    type: 'numeric'
+    type: 'numeric',
+    tickAmount: 5
   },
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
