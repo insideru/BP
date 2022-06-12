@@ -147,6 +147,12 @@ function generateHeatMapData(noDays) {
     tickPlacement: 'on',
     labels: {
       show: false
+    },
+    axisTicks: {
+      show: false
+    },
+    axisBorder: {
+      show: false
     }
   },
   tooltip: {
