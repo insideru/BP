@@ -15,7 +15,7 @@ pontajeObjectArray = [];
 pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
-concediuPage = "/?page=calendar";
+calendarPage = "/?page=calendar";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
