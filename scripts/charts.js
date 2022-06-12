@@ -519,6 +519,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
   for (let key in curTimesheets) {
     if (contor == collabIndex) {
       //console.log(curTimesheets[key]);
+      console.log(getDBNameFromId(key, 'collab'));
       console.log(dates[dayIndex]);
       contor++;
     } else {
