@@ -237,7 +237,7 @@ function updateProjectCharts (projID) {
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
 
     //graficul de timeline
-    let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
+    let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID, chartedProjects[projID].budget);
     let uniq = 0;
     let j = "";
     tmlData.forEach(element => {
@@ -349,7 +349,7 @@ function buildProjectWorkHours (projID) {
   return retval;
 }
 
-function buildProjetTimeline (projID, deadlineID) {
+function buildProjetTimeline (projID, deadlineID, budget) {
   let projectTimesheets = new Array(activitiesObject.length);
   let res = new Object;
   alltimesheetsObject.forEach(element => {
@@ -420,7 +420,10 @@ function buildProjetTimeline (projID, deadlineID) {
           }
         ];
       }
-      result.push(tempObj);
+      if (!budget)
+      {
+        result.push(tempObj);
+      }
     }
   }
   return result;
