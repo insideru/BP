@@ -114,6 +114,7 @@ function generateHeatMapData(noDays) {
   //generate data
   let chartSeries = [];
   let uniq = 0;
+  dates = new Array;
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
     let curData = [];
@@ -133,7 +134,7 @@ function generateHeatMapData(noDays) {
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
-  dates.sort((a,b)=>a.getTime()-b.getTime());
+  //dates.sort((a,b)=>a.getTime()-b.getTime());
   let options = {
     series: chartSeries,
     chart: {
