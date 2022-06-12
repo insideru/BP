@@ -148,11 +148,11 @@ function generateHeatMapData(noDays) {
 
 function drawHeatMap (options) {
   if (!updateHeatMap) {
-    var heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
+    heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
   } else {
     updateHeatMap = true;
-    heatMapChart.updateSeries ([{data: options}], true);
+    heatMapChart.updateSeries ([{data: options.series}], true);
   }
 }
 
