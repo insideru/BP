@@ -152,7 +152,8 @@ function generateHeatMapData(noDays) {
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
-      let today = dates[dataPointIndex].getDate() + '-' + dates[dataPointIndex].getMonth()+1;
+      let luna = dates[dataPointIndex].getMonth()+1;
+      let today = dates[dataPointIndex].getDate() + '-' + luna;
       return '<div>' +
         '<span>' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
         '</div>'
