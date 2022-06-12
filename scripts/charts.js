@@ -519,7 +519,7 @@ function drawPontajChart (date) {
   $("#viewPontajChart").html('');
   let data = [];
   let groups = [];
-  let oldName = newName = "";
+  let oldName = "", newName = "";
   let counter = 1;
   for (let element of myTimesheets) {
     if (element.date == date) {

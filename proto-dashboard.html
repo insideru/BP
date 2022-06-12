@@ -42,7 +42,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Ore pontate azi</span>
-            <p><div class="viewPontajChart"></div></p>
+            <p><div id="viewPontajChart"></div></p>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@
             }
           });
           
-          console.log(wrkDate);
+          console.log(wrkDate, amPontat);
 
           if (amPontat) {
             drawPontajChart(wrkDate);
