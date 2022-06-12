@@ -126,10 +126,8 @@ function generateHeatMapData(noDays) {
         curData.push(curTimesheets[key][thisDate]);
       }
     }
-    console.log(curData);
     chartSeries.push({name: emplName, data: curData});
   }
-  console.log(chartSeries);
   let options = {
     series: chartSeries,
     chart: {
@@ -155,7 +153,7 @@ function drawHeatMap (options) {
   } else {
     heatMapChart.updateSeries (options.series, true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
-    heatMapChart.updateOptions ({chart: {height: options.height}}, true, true, true);
+    heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);
   }
 }
 
