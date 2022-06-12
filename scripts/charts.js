@@ -1,6 +1,7 @@
 var chartedProjects = [];
 var secondCharts = false;
 var updateHeatMap = false;
+var dates = [];
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -112,7 +113,6 @@ function generateHeatMapData(noDays) {
   //generate data
   let chartSeries = [];
   let uniq = 0;
-  let categories = [];
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
     let curData = [];
@@ -121,8 +121,7 @@ function generateHeatMapData(noDays) {
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
       if (!uniq) {
-        let thisDay = thisDate.getDate();
-        categories.push(thisDay);
+        dates.push(thisDay);
       }
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
@@ -150,7 +149,7 @@ function generateHeatMapData(noDays) {
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       return '<div>' +
-        '<span>' + seriesIndex + '-' + dataPointIndex + '</span>' +
+        '<span>' + seriesIndex + '-' + dates[dataPointIndex] + '</span>' +
         '</div>'
     }
   },
