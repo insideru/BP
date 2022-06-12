@@ -130,6 +130,7 @@ function generateHeatMapData(noDays) {
         curData.push(curTimesheets[key][thisDate]);
       }
     }
+    dates.sort((a,b)=>a.date.getTime()-b.date.getTime());
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
@@ -165,9 +166,8 @@ function generateHeatMapData(noDays) {
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
-      let dayDiff = Number($('#heatmapDays').val())-1;
-      let luna = dates[dayDiff - dataPointIndex].getMonth()+1;
-      let zi = dates[dayDiff - dataPointIndex].getDay();
+      let luna = dates[dataPointIndex].getMonth()+1;
+      let zi = dates[dataPointIndex].getDay();
       let lunaChar = "";
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
@@ -193,7 +193,7 @@ function generateHeatMapData(noDays) {
         case 5: ziChar = "Sambata"; break;
         case 6: ziChar = "Duminica"; break;
       }
-      let today = dates[dayDiff - dataPointIndex].getDate() + ' ' + lunaChar;
+      let today = dates[dataPointIndex].getDate() + ' ' + lunaChar;
       return '<div>' +
         '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
         '</div>'
@@ -208,7 +208,6 @@ function generateHeatMapData(noDays) {
 }
 
 function drawHeatMap (options) {
-  console.log(dates);
   if (!updateHeatMap) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
