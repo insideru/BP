@@ -600,7 +600,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       updatePontajDetail = true;
     } else {
       pontajDetailChart.updateSeries (options.series, true);
-      pontajDetailChart.updateOptions ({xaxis: {group: {groups: options.xaxis.group.groups}}}, true, true, true);  }
+      pontajDetailChart.updateOptions ({xaxis: {group: {groups: options.xaxis.group.groups}}}, true, true, true);
     }
     contor++;
     } else {
