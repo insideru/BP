@@ -346,7 +346,7 @@ function buildProjectWorkHours (projID, budget) {
   startDate.setDate(startDate.getDate()-30);
   alltimesheetsObject.forEach(element => {
       if (element.project_id == projID) {
-          if (!budget) {
+          if (budget == 0) {
             let curDate = new Date(element.date);
             curDate.setHours(0, 0, 0, 0);
             if (curDate >= startDate) {
