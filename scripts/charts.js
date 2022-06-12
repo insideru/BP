@@ -11,32 +11,42 @@ function drawProjectsChart () {
     chartedProjects = [];
 
     projectsObject.forEach(element => {
-        if (Number(element.active)) {
-            let projActualTime = buildProjectWorkHours(element.id);
-            let projName = element.name;
-            let projBudget = Number(element.budget);
+      if (Number(element.active)) {
+        let projActualTime = buildProjectWorkHours(element.id);
+        let projName = element.name;
+        let projBudget = Number(element.budget);
+        let projChartData = new Object;
 
-            let projChartData = {
-                x: projName,
-                y: projActualTime,
-                goals: [
-                  {
-                    name: 'Ore bugetate',
-                    value: projBudget,
-                    strokeWidth: 5,
-                    strokeHeight: 10,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              };
-              chartedProjects.push(element);
-              chartSeriesData.push(projChartData);
-              if (projActualTime>projBudget) {
-                colorArray.push('#E51C23');
-              } else {
-                colorArray.push('#00E396');
+        if (projBudget == 0) {
+          projChartData = {
+            x: projName,
+            y: 20
+          };
+        } else {
+          projChartData = {
+            x: projName,
+            y: projActualTime,
+            goals: [
+              {
+                name: 'Ore bugetate',
+                value: projBudget,
+                strokeWidth: 5,
+                strokeHeight: 10,
+                strokeColor: '#775DD0'
               }
+            ]
+          };
         }
+
+        chartedProjects.push(element);
+        chartSeriesData.push(projChartData);
+
+        if (projActualTime>projBudget) {
+          projBudget == 0 ? colorArray.push('#56bae8') : colorArray.push('#E51C23');
+        } else {
+          projBudget == 0 ? colorArray.push('#56bae8') : colorArray.push('#00E396');
+        }
+      }
     });
     let chartHeight = (chartSeriesData.length+1)*40;
     let chartOptions = {
