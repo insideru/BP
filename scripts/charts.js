@@ -143,8 +143,9 @@ function generateHeatMapData(noDays) {
     events: {
       click: function(event, chartContext, config) {
         // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-        console.log(config.globals.series[config.seriesIndex][config.dataPointIndex]);
-        drawPontajPerCollab(config.seriesIndex, config.dataPointIndex);
+        if (config.globals.series[config.seriesIndex][config.dataPointIndex]>0) {
+          drawPontajPerCollab(config.seriesIndex, config.dataPointIndex);
+        }
       }
     }
   },
@@ -517,7 +518,8 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
   console.log(collabIndex, dayIndex);
   for (let key in curTimesheets) {
     if (contor == collabIndex) {
-      console.log(curTimesheets[key]);
+      //console.log(curTimesheets[key]);
+      console.log(dates[dayIndex]);
       contor++;
     } else {
       contor++;
