@@ -209,7 +209,6 @@ function generateHeatMapData(noDays) {
 }
 
 function drawHeatMap (options) {
-  console.log(dates);
   if (!updateHeatMap) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
@@ -514,6 +513,7 @@ function regenChart() {
 
 function drawPontajPerCollab(collabIndex, dayIndex) {
   let contor = 0;
+  console.log(collabIndex, dayIndex);
   for (let key in curTimesheets) {
     if (contor == collabIndex) {
       console.log(dayIndex);
