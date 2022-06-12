@@ -159,6 +159,7 @@ function generateHeatMapData(noDays) {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
       let luna = dates[dataPointIndex].getMonth()+1;
+      let zi = dates[dataPointIndex].getDay();
       let lunaChar = "";
       switch (luna) {
         case 1: lunaChar = "Ian"; break;
@@ -174,9 +175,19 @@ function generateHeatMapData(noDays) {
         case 11: lunaChar = "Noi"; break;
         case 12: lunaChar = "Dec"; break;
       }
+      let ziChar = "";
+      switch (zi) {
+        case 1: ziChar = "Luni"; break;
+        case 1: ziChar = "Marti"; break;
+        case 2: ziChar = "Miercuri"; break;
+        case 3: ziChar = "Joi"; break;
+        case 4: ziChar = "Vineri"; break;
+        case 5: ziChar = "Sambata"; break;
+        case 6: ziChar = "Duminica"; break;
+      }
       let today = dates[dataPointIndex].getDate() + ' ' + lunaChar;
       return '<div>' +
-        '<span>' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
+        '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
         '</div>'
     }
   },
