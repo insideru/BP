@@ -146,7 +146,7 @@ function generateHeatMapData(noDays) {
     tickAmount: 'dataPoints',
     tickPlacement: 'on',
     labels: {
-      show: 1
+      show: false
     }
   },
   tooltip: {
