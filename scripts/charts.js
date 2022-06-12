@@ -121,8 +121,7 @@ function generateHeatMapData(noDays) {
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
       if (!uniq) {
-        let added = thisDate.getDate + "-" + thisDate.getMonth+1;
-        categories.push(added);
+        categories.push(thisDate.getDate);
       }
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
