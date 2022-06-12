@@ -130,7 +130,7 @@ function generateHeatMapData(noDays) {
         curData.push(curTimesheets[key][thisDate]);
       }
     }
-    dates.sort((a,b)=>a.date.getTime()-b.date.getTime());
+    dates.sort((a,b)=>a.getTime()-b.getTime());
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
