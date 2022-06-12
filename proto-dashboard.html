@@ -42,7 +42,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Ore pontate azi</span>
-            <p><div class="viewPontajChart"></p>
+            <p><div class="viewPontajChart"></div></p>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
           drawProjectsChart();
 
           let curDate = new Date();
-          let wrkDate = `${curDate.getFullYear()}-${curDate.getMonth()+1>10?curDate.getMonth()+1:'0'+curDate.getMonth()+1}-${curDate.getDate()}`;
+          let wrkDate = `${curDate.getFullYear()}-${Number(curDate.getMonth())+1>10?Number(curDate.getMonth())+1:'0'+Number(curDate.getMonth())+1}-${curDate.getDate()}`;
           let amPontat = false;
 
           alltimesheetsObject.forEach(element => {
