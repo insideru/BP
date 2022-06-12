@@ -42,7 +42,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Ore pontate azi</span>
-            <p><div id="viewPontajChart"></div></p>
+            <p><div id="viewPontajChart" class="center-align"></div></p>
           </div>
         </div>
       </div>
@@ -99,6 +99,7 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script type="text/javascript" src="scripts/evo-calendar.js"></script>
     <?php echo '<script>var myID='.$account->getCollabID().';</script>'; ?>
+    <?php echo '<script>var potPonta='.$account->permissions['timesheet'])?1:0.'';</script>'; ?>
     <script>
       $(document).ready(function() {
         addLinks();
@@ -127,13 +128,15 @@
               }
             }
           });
-          
-          console.log(wrkDate, amPontat);
 
           if (amPontat) {
             drawPontajChart(wrkDate);
           } else {
-
+            let markup = '<p>Nu ai pontat astazi</p>';
+            markup+='<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+wrkDate+'\')">Adauga pontaj</a>';
+            if (potPonta) {
+              $("#viewPontajChart").html(markup);
+            }
           }
           $('.tooltipped').tooltip();
         });
