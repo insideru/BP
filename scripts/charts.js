@@ -141,6 +141,9 @@ function generateHeatMapData(noDays) {
   dataLabels: {
     enabled: false
   },
+  xaxis: {
+    type: 'numeric'
+  },
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       return '<div>' +
