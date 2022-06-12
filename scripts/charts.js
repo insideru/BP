@@ -121,7 +121,7 @@ function generateHeatMapData(noDays) {
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
       if (!uniq) {
-        dates.push(thisDay);
+        dates.push(thisDate);
       }
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
@@ -132,7 +132,6 @@ function generateHeatMapData(noDays) {
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
-  console.log(categories);
   let options = {
     series: chartSeries,
     chart: {
