@@ -143,8 +143,7 @@ function generateHeatMapData(noDays) {
     events: {
       click: function(event, chartContext, config) {
         // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-        console.log(chartContext);
-        console.log(config);
+        console.log(config.globals.series[seriesIndex][dataPointIndex]);
         drawPontajPerCollab(config.seriesIndex, config.dataPointIndex);
       }
     }
