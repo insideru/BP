@@ -658,7 +658,9 @@
             } else {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForThisDay+'</p>';
             }
-            markup += '<br><p style="text-align: center;"><a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a></p></div>';
+            markup += '<br><p style="text-align: center;">';
+            <?php if ($account->permissions['timesheet']) echo {'markup += '<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+_.$active.date+'\')">Adauga pontaj</a>';'} ?>
+            markup += '</p></div>';
         }
         eventListEl.append(markup);
         //calculatePontaje(_.$active.date);
