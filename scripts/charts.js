@@ -1,6 +1,7 @@
 var chartedProjects = [];
 var secondCharts = false;
 var updateHeatMap = false;
+var updatePontajDetail = false;
 var dates = [];
 var curTimesheets = {};
 
@@ -577,11 +578,15 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
           }  
         }
       },
-      };
-
-      let chart = new ApexCharts(document.querySelector("#pontajDetailChart"), options);
-      chart.render();
-      contor++;
+    };
+    if (!updatePontajDetail) {
+      pontajDetailChart = new ApexCharts(document.querySelector("#pontajDetailChart"), options);
+      pontajDetailChart.render();
+      updatePontajDetail = true;
+    } else {
+      pontajDetailChart.updateSeries (options.series, true);
+    }
+    contor++;
     } else {
       contor++;
     }
