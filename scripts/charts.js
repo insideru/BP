@@ -548,7 +548,6 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         curDate.setHours(0, 0, 0, 0);
         if (curDate - dates[dayIndex] == 0) {
           newName = getDBNameFromId(element.project_id, 'project');
-          console.log(element.project_id, getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
           data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
           if (oldName!=newName) {
             if (oldName!="") {
