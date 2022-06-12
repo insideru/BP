@@ -536,7 +536,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         case 11: lunaChar = "Noiembrie"; break;
         case 12: lunaChar = "Decembrie"; break;
       }
-      $('#numePontaj').html(`Pontaje pentru ${getDBNameFromId(key, 'collab')} in data de ${dates[dayIndex].getDate()} ${lunaChar} ${dates[dayIndex].getYear()}`);
+      $('#numePontaj').html(`Pontaje pentru ${getDBNameFromId(key, 'collab')} in data de ${dates[dayIndex].getDate()} ${lunaChar} ${dates[dayIndex].getFullYear()}`);
       $("#pontajDetailChart").html('');
       let data = [];
       let groups = [];
