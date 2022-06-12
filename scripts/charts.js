@@ -520,16 +520,18 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
     if (contor == collabIndex) {
       //console.log(curTimesheets[key]);
       //console.log(getDBNameFromId(key, 'collab'));
-      //console.log(dates[dayIndex]);
+      console.log(dates[dayIndex]);
       $("#pontajDetailChart").html('');
       let data = [];
       let groups = [];
       let oldName = newName = "";
       let counter = 1;
+      
       for (let element of alltimesheetsObject) {
         let curDate = new Date(element.date);
         curDate.setHours(0, 0, 0);
-
+        console.log(curDate);
+        console(curDate - dates[dayIndex]);
         if (curDate - dates[dayIndex] == 0) {
           newName = getDBNameFromId(element.project_id, 'project');
           //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
