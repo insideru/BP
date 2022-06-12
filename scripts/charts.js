@@ -111,10 +111,10 @@ function generateHeatMapData(noDays) {
 
   //generate data
   let chartSeries = [];
-  console.log(curTimesheets);
+  let uniq = 0;
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
-    console.log(key, emplName);
+    uniq++;
     let curData = [];
     for (dayDiff = noDays-1; dayDiff >= 0; dayDiff--) {
       let thisDate = new Date();
@@ -133,7 +133,7 @@ function generateHeatMapData(noDays) {
   let options = {
     series: chartSeries,
     chart: {
-    height: 'auto',
+    height: uniq = 65 + uniq * 20,
     type: 'heatmap',
   },
   dataLabels: {
@@ -155,7 +155,7 @@ function drawHeatMap (options) {
   } else {
     heatMapChart.updateSeries (options.series, true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
-
+    heatMapChart.updateOptions ({chart: {height: options.height}}, true, true, true);
   }
 }
 
