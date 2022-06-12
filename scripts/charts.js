@@ -166,8 +166,8 @@ function generateHeatMapData(noDays) {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
       let dayDiff = Number($('#heatmapDays').val());
-      let luna = dates[dataPointIndex-dayDiff].getMonth()+1;
-      let zi = dates[dataPointIndex-dayDiff].getDay();
+      let luna = dates[dataPointIndex+dayDiff].getMonth()+1;
+      let zi = dates[dataPointIndex+dayDiff].getDay();
       let lunaChar = "";
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
