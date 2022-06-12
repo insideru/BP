@@ -536,17 +536,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         case 11: lunaChar = "Noiembrie"; break;
         case 12: lunaChar = "Decembrie"; break;
       }
-      let ziChar = "";
-      switch (dates[dayIndex].getDay()) {
-        case 1: ziChar = "Luni"; break;
-        case 2: ziChar = "Marti"; break;
-        case 3: ziChar = "Miercuri"; break;
-        case 4: ziChar = "Joi"; break;
-        case 5: ziChar = "Vineri"; break;
-        case 6: ziChar = "Sambata"; break;
-        case 0: ziChar = "Duminica"; break;
-      }
-      $('#numePontaj').html(`Pontaje pentru ${getDBNameFromId(key, 'collab')} in data de ${ziChar} ${lunaChar} ${dates[dayIndex].getYear()}`);
+      $('#numePontaj').html(`Pontaje pentru ${getDBNameFromId(key, 'collab')} in data de ${dates[dayIndex].getDate()} ${lunaChar} ${dates[dayIndex].getYear()}`);
       $("#pontajDetailChart").html('');
       let data = [];
       let groups = [];
