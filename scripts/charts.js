@@ -86,7 +86,6 @@ function drawProjectsChart () {
 }
 
 function generateHeatMapData(noDays) {
-  console.log(noDays);
   let minDate = new Date();
   minDate.setDate(minDate.getDate()-noDays);
 
@@ -152,8 +151,8 @@ function drawHeatMap (options) {
   if (!updateHeatMap) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
-  } else {
     updateHeatMap = true;
+  } else {
     heatMapChart.updateSeries ([{data: options.series}], true);
     collabChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
 
