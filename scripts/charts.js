@@ -278,7 +278,7 @@ function updateProjectCharts (projID) {
         showForSingleSeries: true,
         customLegendItems: ['Data Incepere', 'Pontaje', 'Data Predare'],
         markers: {
-          fillColors: ['#00FF00', '##008ffb', '#CD2F2A']
+          fillColors: ['#00FF00', '#008ffb', '#CD2F2A']
         }
       }
     };
