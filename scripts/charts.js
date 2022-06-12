@@ -91,7 +91,7 @@ function generateHeatMapData(noDays) {
   minDate.setDate(minDate.getDate()-noDays);
 
   //generate timesheets list
-  let curTimesheets = new Object;
+  var curTimesheets = new Object;
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
@@ -140,7 +140,7 @@ function generateHeatMapData(noDays) {
     events: {
       click: function(event, chartContext, config) {
         // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-          console.log(config.seriesIndex, config.dataPointIndex);
+          drawPontajPerCollab(config.seriesIndex, config.dataPointIndex);
       }
     }
   },
@@ -506,4 +506,16 @@ function drawPontajChart (date) {
 function regenChart() {
   $('#projectsChartDiv').html('<div id="projectsChart"></div>');
   drawProjectsChart();
+}
+
+function drawPontajPerCollab(collabIndex, dayIndex) {
+  let contor = 0;
+  for (let key in curTimesheets) {
+    if (contor == collabIndex) {
+      console.log(dayindex);
+      console.log(curTimesheets[key]);
+    } else {
+      contor++;
+    }
+  }
 }
