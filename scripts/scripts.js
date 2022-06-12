@@ -15,6 +15,7 @@ pontajeObjectArray = [];
 pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
+concediuPage = "/?page=calendar";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
@@ -955,6 +956,7 @@ function addLinks() {
   $('#linkDashboard').attr("href", dashboardPage);
   $('#linkPontaj').attr("href", pontajPage);
   $('#linkConcediu').attr("href", concediuPage);
+  $('#linkCalendar').attr("href", calendarPage);
 }
 
 function updateText(ore, minute) {

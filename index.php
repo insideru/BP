@@ -13,6 +13,9 @@ if ($account->authenticated) {
         } else if ($_GET['page']=="ponteaza"){
             require 'proto-pontaj.html';
             die;
+        } else if ($_GET['page']=="ponteaza"){
+            require 'proto-pontaj.html';
+            die;
         } else if ($_GET['page']=="concediu"){
             require 'proto-concediu.html';
             die;

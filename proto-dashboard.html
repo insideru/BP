@@ -16,28 +16,72 @@
     </head>
   <body>
     <nav>
-        <div class="nav-wrapper">
-          <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
-          <ul id="nav-mobile" class="left">
-            <li><a href="#" id="linkDashboard">Dashboard</a></li>
-            <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-            <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
-            <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
-          </ul>
-        </div>
-      </nav>
-
+      <div class="nav-wrapper">
+        <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
+        <ul id="nav-mobile" class="left">
+          <li><a href="#" id="linkDashboard">Dashboard</a></li>
+          <li><a href="#" id="linkCalendar">Calendar</a></li>
+          <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
+          <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
+          <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+        </ul>
+      </div>
+    </nav>
     <div class="row">
-      <div id="viewPontajModal" class="modal">
-        <div class="modal-content">
-          <h4 id="viewPontajModalTitle">Modal Header</h4>
-          <p><div id="viewPontajChart"></div></p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Inchide</a>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Notificari</span>
+            <p></p>
+          </div>
         </div>
       </div>
-      <div id="calendar"></div>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Detalii Proiect</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Timeline proiecte</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Pontaje</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Detalii Proiect</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Detalii Proiect</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
     </div>
                 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
