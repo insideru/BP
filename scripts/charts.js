@@ -234,7 +234,7 @@ function drawHeatMap (options) {
 
 function updateProjectCharts (projID) {
     if (projID == -1) { return; }
-    let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id);
+    let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id, projID);
 
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
@@ -448,7 +448,7 @@ function buildProjetTimeline (projID, deadlineID) {
   return result;
 }
 
-function getActivitiesAndCollabs (projID) {
+function getActivitiesAndCollabs (projID, index) {
     let tmpActivities = {};
     let tmpCollabs = {};
     let res = [];
@@ -464,7 +464,7 @@ function getActivitiesAndCollabs (projID) {
             let curDate = new Date(element.date);
             curDate.setHours(0, 0, 0, 0);
             if (isNaN(tmpActivities[tmpAct])) {
-              if (chartedProjects[projID].budget > 0) {
+              if (chartedProjects[index].budget > 0) {
                 tmpActivities[tmpAct] = Number(element.time);
               } else {
                 if (curDate >= startDate) {
@@ -472,7 +472,7 @@ function getActivitiesAndCollabs (projID) {
                 }
               }
             } else {
-              if (chartedProjects[projID].budget > 0) {
+              if (chartedProjects[index].budget > 0) {
                 tmpActivities[tmpAct] += Number(element.time);
               } else {
                 if (curDate >= startDate) {
@@ -481,7 +481,7 @@ function getActivitiesAndCollabs (projID) {
               }
             }
             if (isNaN(tmpCollabs[tmpCollab])) {
-              if (chartedProjects[projID].budget > 0) {
+              if (chartedProjects[index].budget > 0) {
                 tmpCollabs[tmpCollab] = Number(element.time);
               } else {
                 if (curDate >= startDate) {
@@ -489,7 +489,7 @@ function getActivitiesAndCollabs (projID) {
                 }
               }
             } else {
-              if (chartedProjects[projID].budget > 0) {
+              if (chartedProjects[index].budget > 0) {
                 tmpCollabs[tmpCollab] += Number(element.time);
               } else {
                 if (curDate >= startDate) {
