@@ -515,12 +515,72 @@ function regenChart() {
 
 function drawPontajPerCollab(collabIndex, dayIndex) {
   let contor = 0;
-  console.log(collabIndex, dayIndex);
+  //console.log(collabIndex, dayIndex);
   for (let key in curTimesheets) {
     if (contor == collabIndex) {
       //console.log(curTimesheets[key]);
-      console.log(getDBNameFromId(key, 'collab'));
-      console.log(dates[dayIndex]);
+      //console.log(getDBNameFromId(key, 'collab'));
+      //console.log(dates[dayIndex]);
+      $("#pontajDetailChart").html('');
+      let data = [];
+      let groups = [];
+      let oldName = newName = "";
+      let counter = 1;
+      for (let element of alltimesheetsObject) {
+        let curDate = new Date(element.date);
+        curDate.setHours(0, 0, 0);
+
+        if (curDate - dates[dayIndex] == 0) {
+          newName = getDBNameFromId(element.project_id, 'project');
+          //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
+          data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
+          if (oldName!=newName) {
+            if (oldName!="") {
+              groups.push({title: oldName, cols: counter});
+            }
+            oldName = newName;
+            counter = 1;
+          } else {
+            counter++;
+          }
+        }
+      }
+      groups.push({title: oldName, cols: counter});
+      let options = {
+      series: [{
+        name: "Pontaj",
+        data: data
+      }],
+      chart: {
+        type: 'bar',
+        height: 380
+      },
+      xaxis: {
+        type: 'category',
+        labels: {
+          formatter: function(val) {
+            return val
+          }
+        },
+        group: {
+          style: {
+            fontSize: '10px',
+            fontWeight: 700
+          },
+          groups: groups
+        }
+      },
+      tooltip: {
+        x: {
+          formatter: function(val) {
+            return val
+          }  
+        }
+      },
+      };
+
+      let chart = new ApexCharts(document.querySelector("#pontajDetailChart"), options);
+      chart.render();
       contor++;
     } else {
       contor++;
