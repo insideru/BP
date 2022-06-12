@@ -165,12 +165,9 @@ function generateHeatMapData(noDays) {
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
-      console.log(dates);
-      console.log(dataPointIndex);
-      let dayDiff = Number($('#heatmapDays').val());
-      console.log(dayDiff);
-      let luna = dates[dataPointIndex].getMonth()+1;
-      let zi = dates[dataPointIndex].getDay();
+      let dayDiff = Number($('#heatmapDays').val())-1;
+      let luna = dates[dayDiff - dataPointIndex].getMonth()+1;
+      let zi = dates[dayDiff - dataPointIndex].getDay();
       let lunaChar = "";
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
