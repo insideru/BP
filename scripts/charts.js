@@ -137,6 +137,12 @@ function generateHeatMapData(noDays) {
     chart: {
     height: uniq = 65 + uniq * 40,
     type: 'heatmap',
+    events: {
+      click: function(event, chartContext, config) {
+        // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+          console.log(config.dataPointIndex);
+      }
+    }
   },
   dataLabels: {
     enabled: false
@@ -194,13 +200,7 @@ function generateHeatMapData(noDays) {
   colors: ["#008FFB"],
   title: {
     text: 'Pontaje pe ultimele ' + noDays + ' zile'
-  },
-  events: {
-    click: function(event, chartContext, config) {
-      // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-        console.log(config.dataPointIndex);
-    }
-  },};
+  }};
 
   drawHeatMap(options);
 }
