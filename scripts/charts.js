@@ -144,12 +144,12 @@ function generateHeatMapData(noDays) {
   xaxis: {
     type: 'numeric',
     tickAmount: 'dataPoints',
-    tickPlacement: 'on',
+    tickPlacement: 'between',
     labels: {
       show: false
     },
     axisTicks: {
-      show: false
+      show: true
     },
     axisBorder: {
       show: false
@@ -162,18 +162,18 @@ function generateHeatMapData(noDays) {
       let zi = dates[dataPointIndex].getDay();
       let lunaChar = "";
       switch (luna) {
-        case 1: lunaChar = "Ian"; break;
-        case 2: lunaChar = "Feb"; break;
-        case 3: lunaChar = "Mar"; break;
-        case 4: lunaChar = "Apr"; break;
+        case 1: lunaChar = "Ianuarie"; break;
+        case 2: lunaChar = "Februarie"; break;
+        case 3: lunaChar = "Martie"; break;
+        case 4: lunaChar = "Aprilie"; break;
         case 5: lunaChar = "Mai"; break;
-        case 6: lunaChar = "Iun"; break;
-        case 7: lunaChar = "Iul"; break;
-        case 8: lunaChar = "Aud"; break;
-        case 9: lunaChar = "Sep"; break;
-        case 10: lunaChar = "Oct"; break;
-        case 11: lunaChar = "Noi"; break;
-        case 12: lunaChar = "Dec"; break;
+        case 6: lunaChar = "Iunie"; break;
+        case 7: lunaChar = "Iulie"; break;
+        case 8: lunaChar = "August"; break;
+        case 9: lunaChar = "Septembrie"; break;
+        case 10: lunaChar = "Octombrie"; break;
+        case 11: lunaChar = "Noiembrie"; break;
+        case 12: lunaChar = "Decembrie"; break;
       }
       let ziChar = "";
       switch (zi) {
