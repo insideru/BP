@@ -133,6 +133,7 @@ function generateHeatMapData(noDays) {
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
+  console.log(categories);
   let options = {
     series: chartSeries,
     chart: {
