@@ -529,8 +529,8 @@
           setProjectStartDate($(this).val());
         });
         $('#heatmapDays').change(function() {
-          generateHeatMapData($(this).val());
           console.log($(this).val());
+          generateHeatMapData($(this).val());
         });
         $(document).ready(function(){
           $('.modal').modal();
