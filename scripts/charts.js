@@ -600,6 +600,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       updatePontajDetail = true;
     } else {
       pontajDetailChart.updateSeries (options.series, true);
+      heatMapChart.updateOptions ({xaxis: {group: {groups: options.xaxis.group.groups}}}, true, true, true);  }
     }
     contor++;
     } else {
