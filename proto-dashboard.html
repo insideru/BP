@@ -99,7 +99,7 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script type="text/javascript" src="scripts/evo-calendar.js"></script>
     <?php echo '<script>var myID='.$account->getCollabID().';</script>'; ?>
-    <?php echo '<script>var potPonta='.$account->permissions['timesheet'])?1:0.';</script>'; ?>
+    <?php echo '<script>var potPonta='.$account->permissions['timesheet']?1:0.';</script>'; ?>
     <script>
       $(document).ready(function() {
         addLinks();
