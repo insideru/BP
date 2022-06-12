@@ -208,6 +208,7 @@ function generateHeatMapData(noDays) {
 }
 
 function drawHeatMap (options) {
+  console.log(dates);
   if (!updateHeatMap) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
