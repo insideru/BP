@@ -454,19 +454,48 @@ function getActivitiesAndCollabs (projID) {
     let res = [];
     let res0 = [];
     let res1 = [];
+    let startDate = new Date();
+    startDate.setHours(0, 0, 0, 0);
+    startDate.setDate(startDate.getDate()-30);
     alltimesheetsObject.forEach(element => {
         if (Number(element.project_id) == projID) {
             let tmpAct = getDBNameFromId(element.activity_id, 'activity');
             let tmpCollab = getDBNameFromId(element.collab_id, 'collab');
+            let curDate = new Date(element.date);
+            curDate.setHours(0, 0, 0, 0);
             if (isNaN(tmpActivities[tmpAct])) {
+              if (chartedProjects[projID].budget > 0) {
                 tmpActivities[tmpAct] = Number(element.time);
+              } else {
+                if (curDate >= startDate) {
+                  tmpActivities[tmpAct] = Number(element.time);
+                }
+              }
             } else {
+              if (chartedProjects[projID].budget > 0) {
                 tmpActivities[tmpAct] += Number(element.time);
+              } else {
+                if (curDate >= startDate) {
+                  tmpActivities[tmpAct] += Number(element.time);
+                }
+              }
             }
             if (isNaN(tmpCollabs[tmpCollab])) {
+              if (chartedProjects[projID].budget > 0) {
                 tmpCollabs[tmpCollab] = Number(element.time);
+              } else {
+                if (curDate >= startDate) {
+                  tmpCollabs[tmpCollab] = Number(element.time);
+                }
+              }
             } else {
+              if (chartedProjects[projID].budget > 0) {
                 tmpCollabs[tmpCollab] += Number(element.time);
+              } else {
+                if (curDate >= startDate) {
+                  tmpCollabs[tmpCollab] += Number(element.time);
+                }
+              }
             }
         }
     });
