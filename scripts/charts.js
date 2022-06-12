@@ -274,8 +274,12 @@ function updateProjectCharts (projID) {
         opacity: 0.6
       },
       legend: {
-        position: 'top',
-        horizontalAlign: 'left'
+        show: true,
+        showForSingleSeries: true,
+        customLegendItems: ['Data Incepere', 'Pontaje', 'Data Predare'],
+        markers: {
+          fillColors: ['#00FF00', '##008ffb', '#CD2F2A']
+        }
       }
     };
 
