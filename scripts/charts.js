@@ -151,8 +151,10 @@ function generateHeatMapData(noDays) {
   },
   tooltip: {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
+      //seriesIndex + '-' + dates[dataPointIndex] + '-' +
+      let today = dates[dataPointIndex].getDate() + '-' + dates[dataPointIndex].getMonth()+1;
       return '<div>' +
-        '<span>' + seriesIndex + '-' + dates[dataPointIndex] + '-' + series[seriesIndex][dataPointIndex] + '</span>' +
+        '<span>' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
         '</div>'
     }
   },
