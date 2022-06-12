@@ -111,14 +111,15 @@ function generateHeatMapData(noDays) {
 
   //generate data
   let chartSeries = [];
+  console.log(curTimesheets);
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
+    console.log(key, emplName);
     let curData = [];
     for (dayDiff = noDays-1; dayDiff >= 0; dayDiff--) {
       let thisDate = new Date();
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
-      console.log(thisDate);
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
       } else {
