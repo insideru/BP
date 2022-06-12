@@ -521,7 +521,32 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
     if (contor == collabIndex) {
       //console.log(curTimesheets[key]);
       //console.log(getDBNameFromId(key, 'collab'));
-      $('#numePontaj').html('Pontaje pentru ' + getDBNameFromId(key, 'collab') + ' in data de ' + dates[dayIndex]);
+      let lunaChar = "";
+      switch (dates[dayIndex].getMonth()+1) {
+        case 1: lunaChar = "Ianuarie"; break;
+        case 2: lunaChar = "Februarie"; break;
+        case 3: lunaChar = "Martie"; break;
+        case 4: lunaChar = "Aprilie"; break;
+        case 5: lunaChar = "Mai"; break;
+        case 6: lunaChar = "Iunie"; break;
+        case 7: lunaChar = "Iulie"; break;
+        case 8: lunaChar = "August"; break;
+        case 9: lunaChar = "Septembrie"; break;
+        case 10: lunaChar = "Octombrie"; break;
+        case 11: lunaChar = "Noiembrie"; break;
+        case 12: lunaChar = "Decembrie"; break;
+      }
+      let ziChar = "";
+      switch (dates[dayIndex].getDay()) {
+        case 1: ziChar = "Luni"; break;
+        case 2: ziChar = "Marti"; break;
+        case 3: ziChar = "Miercuri"; break;
+        case 4: ziChar = "Joi"; break;
+        case 5: ziChar = "Vineri"; break;
+        case 6: ziChar = "Sambata"; break;
+        case 0: ziChar = "Duminica"; break;
+      }
+      $('#numePontaj').html('Pontaje pentru ' + getDBNameFromId(key, 'collab') + ' in data de ${ziChar} ${lunaChar} ${dates[dayIndex].getYear()}');
       $("#pontajDetailChart").html('');
       let data = [];
       let groups = [];
