@@ -115,7 +115,8 @@
           drawProjectsChart();
 
           let curDate = new Date();
-          let wrkDate = `${curDate.getFullYear()}-${Number(curDate.getMonth())+1>10?Number(curDate.getMonth())+1:'0'+Number(curDate.getMonth())+1}-${curDate.getDate()}`;
+          let wrkMonth = Number(curDate.getMonth())+1>10?Number(curDate.getMonth())+1:'0'+Number(curDate.getMonth())+1;
+          let wrkDate = `${curDate.getFullYear()}-${wrkMonth}-${curDate.getDate()}`;
           let amPontat = false;
 
           alltimesheetsObject.forEach(element => {
