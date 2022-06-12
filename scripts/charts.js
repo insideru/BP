@@ -193,7 +193,7 @@ function generateHeatMapData(noDays) {
         case 5: ziChar = "Sambata"; break;
         case 6: ziChar = "Duminica"; break;
       }
-      let today = dates[dataPointIndex].getDate() + ' ' + lunaChar;
+      let today = dates[dayDiff - dataPointIndex].getDate() + ' ' + lunaChar;
       return '<div>' +
         '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
         '</div>'
