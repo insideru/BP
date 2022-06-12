@@ -153,7 +153,7 @@ function drawHeatMap (options) {
     heatMapChart.render();
     updateHeatMap = true;
   } else {
-    heatMapChart.updateSeries ([{data: options.series}], true);
+    heatMapChart.updateSeries ([{series: options.series}], true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
 
   }
