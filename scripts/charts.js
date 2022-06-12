@@ -112,14 +112,18 @@ function generateHeatMapData(noDays) {
   //generate data
   let chartSeries = [];
   let uniq = 0;
+  let categories = [];
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
-    uniq++;
     let curData = [];
     for (dayDiff = noDays-1; dayDiff >= 0; dayDiff--) {
       let thisDate = new Date();
       thisDate.setHours(0, 0, 0);
       thisDate.setDate(thisDate.getDate()-dayDiff);
+      if (!uniq) {
+        let added = thisDate.getDate + "-" + thisDate.getMonth+1;
+        categories.push(added);
+      }
       if (curTimesheets[key][thisDate] === undefined) {
         curData.push(0);
       } else {
@@ -127,15 +131,20 @@ function generateHeatMapData(noDays) {
       }
     }
     chartSeries.push({name: emplName, data: curData});
+    uniq++;
   }
   let options = {
     series: chartSeries,
     chart: {
-    height: uniq = 65 + uniq * 20,
+    height: uniq = 65 + uniq * 40,
     type: 'heatmap',
   },
   dataLabels: {
     enabled: false
+  },
+  xaxis: {
+    type: 'category',
+    categories: categories
   },
   colors: ["#008FFB"],
   title: {
@@ -154,6 +163,7 @@ function drawHeatMap (options) {
     heatMapChart.updateSeries (options.series, true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
     heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);
+    heatMapChart.updateOptions ({xaxis: {categories: options.xaxis.categories}}, true, true, true);
   }
 }
 
