@@ -147,6 +147,13 @@ function generateHeatMapData(noDays) {
     type: 'category',
     categories: categories
   },
+  tooltip: {
+    custom: function({series, seriesIndex, dataPointIndex, w}) {
+      return '<div>' +
+        '<span>' + seriesIndex + '-' + dataPointIndex + '</span>' +
+        '</div>'
+    }
+  },
   colors: ["#008FFB"],
   title: {
     text: 'Pontaje pe ultimele ' + noDays + ' zile'
