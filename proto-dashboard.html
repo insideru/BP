@@ -20,25 +20,27 @@
         <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
         <ul id="nav-mobile" class="left">
           <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-small hide-on-med-and-up"><i class="material-icons large">menu</i></a></li>
-          <li><a class="hide-on-small-only" href="#" id="linkDashboard">Dashboard</a></li>
-          <li><a class="hide-on-small-only" href="#" id="linkCalendar">Calendar</a></li>
-          <?php if ($account->permissions['timesheet']) {echo '<li><a class="hide-on-small-only" href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-          <?php if ($account->permissions['holiday']) {echo '<li><a class="hide-on-small-only" href="#" id="linkConcediu">Concediu</a></li>';}?>
-          <?php if ($account->permissions['admin']) {echo '<li><a class="hide-on-small-only" href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+          <li><a class="hide-on-small-only linkDashboard" href="#">Dashboard</a></li>
+          <li><a class="hide-on-small-only linkCalendar" href="#">Calendar</a></li>
+          <?php if ($account->permissions['timesheet']) {echo '<li><a class="hide-on-small-only linkPontaj" href="#">Ponteaza</a></li>';}?>
+          <?php if ($account->permissions['holiday']) {echo '<li><a class="hide-on-small-only linkConcediu" href="#">Concediu</a></li>';}?>
+          <?php if ($account->permissions['admin']) {echo '<li><a class="hide-on-small-only linkAdmin" href="/?page=admin">Admin</a></li>';}?>
         </ul>
       </div>
     </nav>
 
     <ul id="slide-out" class="sidenav">
-      <h5>Buna <?php echo $account->getFirstName(); ?></h5>
-      <br>
-      <li><a href="#" id="linkDashboard">Dashboard</a></li>
-            <li><a href="#" id="linkCalendar">Calendar</a></li>
-            <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-            <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
-            <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
-            <br>
-      <li><a href="?page=logout">Logout</a></li>
+      <div class="row">
+        <h5>Buna <?php echo $account->getFirstName(); ?></h5>
+        <br>
+        <li><a href="#" class="linkDashboard">Dashboard</a></li>
+              <li><a href="#" class="linkCalendar">Calendar</a></li>
+              <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" class="linkPontaj">Ponteaza</a></li>';}?>
+              <?php if ($account->permissions['holiday']) {echo '<li><a href="#" class="linkConcediu">Concediu</a></li>';}?>
+              <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" class="linkAdmin">Admin</a></li>';}?>
+              <br>
+        <li><a href="?page=logout">Logout</a></li>
+      </div>
     </ul>
 
     <div class="row">

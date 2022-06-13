@@ -953,10 +953,10 @@ function initCalendar() {
 }
 
 function addLinks() {
-  $('#linkDashboard').attr("href", dashboardPage);
-  $('#linkPontaj').attr("href", pontajPage);
-  $('#linkConcediu').attr("href", concediuPage);
-  $('#linkCalendar').attr("href", calendarPage);
+  $('.linkDashboard').attr("href", dashboardPage);
+  $('.linkPontaj').attr("href", pontajPage);
+  $('.linkConcediu').attr("href", concediuPage);
+  $('.linkCalendar').attr("href", calendarPage);
 }
 
 function updateText(ore, minute) {
