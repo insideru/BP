@@ -15,18 +15,35 @@
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
   </head>
-    <body><nav>
-      <div class="nav-wrapper">
-        <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
-        <ul id="nav-mobile" class="left">
-          <li><a href="#" id="linkDashboard">Dashboard</a></li>
-          <li><a href="#" id="linkCalendar">Calendar</a></li>
-          <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-          <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
-          <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
-        </ul>
-      </div>
-    </nav>
+    <body>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
+          <ul id="nav-mobile" class="left">
+            <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-small hide-on-med-and-up"><i class="material-icons large">menu</i></a></li>
+            <li><a class="hide-on-small-only linkDashboard" href="#">Dashboard</a></li>
+            <li><a class="hide-on-small-only linkCalendar" href="#">Calendar</a></li>
+            <?php if ($account->permissions['timesheet']) {echo '<li><a class="hide-on-small-only linkPontaj" href="#">Ponteaza</a></li>';}?>
+            <?php if ($account->permissions['holiday']) {echo '<li><a class="hide-on-small-only linkConcediu" href="#">Concediu</a></li>';}?>
+            <?php if ($account->permissions['admin']) {echo '<li><a class="hide-on-small-only linkAdmin" href="/?page=admin">Admin</a></li>';}?>
+          </ul>
+        </div>
+      </nav>
+  
+      <ul id="slide-out" class="sidenav">
+        <div class="row">
+          <h5 style="padding: 10px;">Buna <?php echo $account->getFirstName(); ?><a href="#" class="right" onclick="$('.sidenav').sidenav('close');"><i class="material-icons">close</i></a></h5>
+          <br>
+          <li><a href="#" class="linkDashboard">Dashboard</a></li>
+                <li><a href="#" class="linkCalendar">Calendar</a></li>
+                <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" class="linkPontaj">Ponteaza</a></li>';}?>
+                <?php if ($account->permissions['holiday']) {echo '<li><a href="#" class="linkConcediu">Concediu</a></li>';}?>
+                <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" class="linkAdmin">Admin</a></li>';}?>
+                <br>
+          <li><a href="?page=logout">Logout</a></li>
+        </div>
+      </ul>
+      
         <div id="container" class="container">
         <div class="row"></div>
         <div class="row">
