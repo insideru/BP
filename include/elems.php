@@ -14,12 +14,13 @@ function addAttendance(string $guid, string $date, string $start, string $end) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
+    global $account;
 
     /* Insert query template */
     $query = 'INSERT INTO '.$schema.'.attendance (collab_id, date, start, end) VALUES (:collab_id, :date, :start, :end)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
     
     /* Execute the query */
     try
@@ -43,12 +44,13 @@ function addTimesheetEntry(string $guid, string $date, int $project_id, int $act
     /* Global $pdo object */
     global $pdo;
     global $schema;
+    global $account;
 
     /* Insert query template */
     $query = 'INSERT INTO '.$schema.'.timesheets (collab_id, date, project_id, activity_id, time) VALUES (:collab_id, :date, :project_id, :activity_id, :time)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':activity_id' => $activity_id, ':time' => $time);
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':activity_id' => $activity_id, ':time' => $time);
     
     /* Execute the query */
     try
@@ -101,9 +103,10 @@ function getPontaje (string $guid) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
+    global $account;
 
 	$query = 'SELECT * FROM '.$schema.'.attendance WHERE (collab_id = :cid)';
-	$values = array(':cid' => getIDfromGUID($guid));
+	$values = array(':cid' => $account->getCollabID());
 	
 	try
 	{
@@ -129,9 +132,10 @@ function getPontaje (string $guid) {
 function deleteTimesheet (string $guid, string $date) {
     global $pdo;
 	global $schema;
+    global $account;
 
 	$query1 = 'DELETE FROM '.$schema.'.timesheets WHERE collab_id = :cid AND date = :date; DELETE FROM '.$schema.'.attendance WHERE collab_id = :cid AND date = :date';
-	$values = array(':cid' => getIDfromGUID($guid), ':date' => date("Y-m-d", strtotime($date)));
+	$values = array(':cid' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)));
 	
 	try
 	{
@@ -154,9 +158,10 @@ function verifyDate(string $guid, string $date):bool {
 	/* Global $pdo object */
     global $pdo;
 	global $schema;
+    global $account;
 
 	$query = 'SELECT date FROM '.$schema.'.attendance WHERE (collab_id = :cid)';
-	$values = array(':cid' => getIDfromGUID($guid));
+	$values = array(':cid' => $account->getCollabID());
 	
 	try
 	{
@@ -237,13 +242,14 @@ function addDaysoff (string $collab_guid, string $startDate, string $endDate, in
 	/* Global $pdo object */
     global $pdo;
     global $schema;
+    global $account;
 	//update accounts set `zile_ramase` = `zile_concediu`-5 where guid="6f0c7834-4a68-433f-bc06-e8e1fd38d33a"
 
     /* Insert query template */
     $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate); UPDATE '.$schema.'.accounts SET zile_ramase = zile_ramase - :number WHERE guid= :guid';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => getIDfromGUID($collab_guid), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)), ':number' => $number, ':guid' => $collab_guid);
+    $values = array(':collab_id' => $account->getCollabID(), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)), ':number' => $number, ':guid' => $collab_guid);
     
     /* Execute the query */
     try
@@ -295,9 +301,10 @@ function deleteDaysoff (string $startDate, int $number) {
 function getDaysoff(string $guid) {
     global $pdo;
 	global $schema;
+    global $account;
 
 	$query = 'SELECT * FROM '.$schema.'.daysoff WHERE (collab_id = :cid)';
-	$values = array(':cid' => getIDfromGUID($guid));
+	$values = array(':cid' => $account->getCollabID());
 	
 	try
 	{
