@@ -9,6 +9,8 @@ class Account {
     private $token;
 	private $guid;
 	public $permissions;
+	private $firstName;
+	private $lastName;
 
     public function __construct() {
         $this->id = NULL;
@@ -19,6 +21,8 @@ class Account {
 		$this->collabID = NULL;
 		$this->guid = NULL;
 		$this->permissions = NULL;
+		$this->firstName = NULL;
+		$this->lastName = NULL;
     }
 
     public function __destruct() {
@@ -394,6 +398,9 @@ public function login(string $username, string $passwd, int $remember): bool
 			$this->collabID = intval($row['collab_id']);
 			$this->username = $username;
 			$this->authenticated = TRUE;
+			$this->firstName = explode(" ", $row['name'])[0];
+			$this->lastName = explode(" ", $row['name'])[1];
+			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet']);
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
 
@@ -484,9 +491,9 @@ public function sessionLogin(): bool
 			Query template to look for the current session ID on the account_sessions table.
 			The query also makes sure the Session is not older than 30 days
 		*/
-		$query = 'SELECT * FROM '.$schema.'.sessions, '.$schema.'.accounts, '.$schema.'.permissions WHERE (sessions.session_id = :sid) ' . 
+		$query = 'SELECT * FROM '.$schema.'.sessions, '.$schema.'.accounts, '.$schema.'.permissions, '.$schema.'.collaborators WHERE (sessions.session_id = :sid) ' . 
 		'AND (sessions.login_time >= (NOW() - INTERVAL 30 DAY)) AND (sessions.account_id = accounts.account_id) ' . 
-		'AND (accounts.account_enabled = 1) AND (permissions.id = accounts.account_group)';
+		'AND (accounts.account_enabled = 1) AND (permissions.id = accounts.account_group) AND (collaborators.id = accounts.collab_id)';
 		
 		/* Values array for PDO */
 		$values = array(':sid' => session_id());
@@ -518,6 +525,8 @@ public function sessionLogin(): bool
 			$this->collabID = intval($row['collab_id']);
 			//echo $this->collabID . '<BR>';
 			$this->guid = $row['guid'];
+			$this->firstName = explode(" ", $row['name'])[0];
+			$this->lastName = explode(" ", $row['name'])[1];
 			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet']);
 			//echo $this->guid . '<BR>';
 			return TRUE;
@@ -598,6 +607,9 @@ public function logout()
 	$this->guid = NULL;
 	$this->authenticated = FALSE;
 	$this->collabID = NULL;
+	$this->firstName = NULL;
+	$this->lastName = NULL;
+	$this->permissions = NULL;
 	
 	/* If there is an open Session, remove it from the account_sessions table */
 	if (session_status() == PHP_SESSION_ACTIVE)
@@ -659,6 +671,14 @@ public function getGroup(): int
 public function getEmail(): string
 {
 	return $this->email;
+}
+
+public function getFirstName(): string {
+	return $this->firstName;
+}
+
+public function getLasttName(): string {
+	return $this->lastName;
 }
 
 public function closeOtherSessions()

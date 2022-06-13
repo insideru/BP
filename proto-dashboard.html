@@ -19,14 +19,28 @@
       <div class="nav-wrapper">
         <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
         <ul id="nav-mobile" class="left">
-          <li><a href="#" id="linkDashboard">Dashboard</a></li>
-          <li><a href="#" id="linkCalendar">Calendar</a></li>
-          <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
-          <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
-          <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+          <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-small hide-on-med-and-up"><i class="material-icons large">menu</i></a></li>
+          <li><a class="hide-on-small-only" href="#" id="linkDashboard">Dashboard</a></li>
+          <li><a class="hide-on-small-only" href="#" id="linkCalendar">Calendar</a></li>
+          <?php if ($account->permissions['timesheet']) {echo '<li><a class="hide-on-small-only" href="#" id="linkPontaj">Ponteaza</a></li>';}?>
+          <?php if ($account->permissions['holiday']) {echo '<li><a class="hide-on-small-only" href="#" id="linkConcediu">Concediu</a></li>';}?>
+          <?php if ($account->permissions['admin']) {echo '<li><a class="hide-on-small-only" href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
         </ul>
       </div>
     </nav>
+
+    <ul id="slide-out" class="sidenav">
+      <h5>Buna <?php echo $account->getFirstName(); ?></h5>
+      <br>
+      <li><a href="#" id="linkDashboard">Dashboard</a></li>
+            <li><a href="#" id="linkCalendar">Calendar</a></li>
+            <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" id="linkPontaj">Ponteaza</a></li>';}?>
+            <?php if ($account->permissions['holiday']) {echo '<li><a href="#" id="linkConcediu">Concediu</a></li>';}?>
+            <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" id="linkAdmin">Admin</a></li>';}?>
+            <br>
+      <li><a href="?page=logout">Logout</a></li>
+    </ul>
+
     <div class="row">
 
       <div class="col s12 m6 l6">
@@ -105,6 +119,7 @@
         addLinks();
         $('.collapsible').collapsible();
         $('.modal').modal();
+        $('.sidenav').sidenav();
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
