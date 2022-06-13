@@ -43,7 +43,7 @@
           <li><a href="?page=logout">Logout</a></li>
         </div>
       </ul>
-      
+
         <div id="container" class="container">
         <div class="row"></div>
         <div class="row">
@@ -537,6 +537,7 @@
 
         $( document ).ready(function() {
           addLinks();
+          $('.sidenav').sidenav();
           calendarSalarii = jSuites.calendar(document.getElementById('calendarSalarii'), {
             type: 'year-month-picker',
             format: 'MM-YYYY',

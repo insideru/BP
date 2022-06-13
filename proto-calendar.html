@@ -66,6 +66,7 @@
         initCalendar();
         $('.collapsible').collapsible();
         $('.modal').modal();
+        $('.sidenav').sidenav();
       })
     </script>
     <?php if ($account->permissions['timesheet']) {echo '<script>addPontajButton=1;</script>';} else {echo '<script>addPontajButton=0;</script>';}?>
