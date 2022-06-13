@@ -13,4 +13,4 @@ ALTER TABLE `permissions`
 ALTER TABLE `permissions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
-INSERT INTO `permissions` (admin, bonus, external, holiday, timesheet) VALUES (1, 0, 1, 0, 0, 1);
+INSERT INTO `permissions` (admin, bonus, external, holiday, timesheet) VALUES (1, 1, 1, 1, 1);

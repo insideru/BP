@@ -612,7 +612,8 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       for (let element of alltimesheetsObject) {
         let curDate = new Date(element.date);
         curDate.setHours(0, 0, 0, 0);
-        if (curDate - dates[dayIndex] == 0) {
+        //console.log(curDate, dates[dayIndex], curDate - dates[dayIndex]);
+        if (curDate - dates[dayIndex] == 0 && element.collab_id == key) {
           newName = getDBNameFromId(element.project_id, 'project');
           data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
           if (oldName!=newName) {
