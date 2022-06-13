@@ -327,8 +327,7 @@ function errorLog() {
 }
 
 function getHolidays() {
-  var guidCookie = getCookie("userGUID");
-  $.get("handler.php?r=holidays&collab_guid="+guidCookie, function(data, status) {
+  $.get("handler.php?r=holidays", function(data, status) {
     rcvData = JSON.parse(data);
     holidaysData = rcvData.holidays;
     daysoffData = rcvData.daysoff;
@@ -823,10 +822,8 @@ function deletePontaj (date) {
   if (!confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
     return;
   }
-  var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteTimesheets',
-    'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'date'              : date
 };
 $.ajax({
@@ -853,10 +850,8 @@ function deleteConcediu (date, days, selDate) {
   if (!confirm("Concediul selectat va fi sters. Continua?")) {
     return;
   }
-  var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'deleteDayoff',
-    'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
     'days'              : days,
     'date'              : date.substring(7)
 };
@@ -921,10 +916,8 @@ function initCalendar() {
     //$('#calendar').evoCalendar('removeCalendarEvent', activeEvent['id']);
   });
   //get pontaje for current user
-  var guidCookie = getCookie("userGUID");
   var formData = {
     'action'            : 'getTimesheets',
-    'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
   };
   $.ajax({
       type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)

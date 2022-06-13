@@ -13,7 +13,7 @@ function newAccount(string $username, string $passwd, int $group, int $collab_id
 
     try
     {
-        $newId = $account->addAccount($username, $passwd, $group, $collab_id, guidv4());
+        $newId = $account->addAccount($username, $passwd, $group, $collab_id);
     }
     catch (Exception $e)
     {

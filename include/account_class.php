@@ -7,7 +7,6 @@ class Account {
 	private $username;
     public $authenticated;
     private $token;
-	private $guid;
 	public $permissions;
 	private $firstName;
 	private $lastName;
@@ -19,7 +18,6 @@ class Account {
         $this->authenticated = FALSE;
         $this->token = NULL;
 		$this->collabID = NULL;
-		$this->guid = NULL;
 		$this->permissions = NULL;
 		$this->firstName = NULL;
 		$this->lastName = NULL;
@@ -29,7 +27,7 @@ class Account {
 		
 	}
 
-public function addAccount(string $username, string $passwd, int $group, int $collab_id, string $guid): int {
+public function addAccount(string $username, string $passwd, int $group, int $collab_id): int {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
@@ -59,13 +57,13 @@ public function addAccount(string $username, string $passwd, int $group, int $co
 	/* Finally, add the new account */
 	
 	/* Insert query template */
-	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id, guid) VALUES (:group, :username, :passwd, :collab_id, :guid)';
+	$query = 'INSERT INTO '.$schema.'.accounts (account_group, account_username, account_passwd, collab_id) VALUES (:group, :username, :passwd, :collab_id)';
 	
 	/* Password hash */
 	$hash = password_hash($passwd, PASSWORD_DEFAULT);
 	
 	/* Values array for PDO */
-	$values = array(':group' => $group, ':username' => $username, ':passwd' => $hash, ':collab_id' => $collab_id, ':guid' => $guid);
+	$values = array(':group' => $group, ':username' => $username, ':passwd' => $hash, ':collab_id' => $collab_id);
 	
 	/* Execute the query */
 	try
@@ -394,7 +392,6 @@ public function login(string $username, string $passwd, int $remember): bool
 			/* Authentication succeeded. Set the class properties (id and group) */
 			$this->id = intval($row['account_id']);
 			$this->group = intval($row['account_group']);
-			$this->guid = $row['guid'];
 			$this->collabID = intval($row['collab_id']);
 			$this->username = $username;
 			$this->authenticated = TRUE;
@@ -409,7 +406,6 @@ public function login(string $username, string $passwd, int $remember): bool
 			// Set Cookie expiration for 1 month
 			$cookie_expiration_time = $current_time + (30 * 24 * 60 * 60);  // for 1 month
 
-			setcookie("userGUID", $this->guid, $cookie_expiration_time);
 			/* Daca e setat remember */
 			if ($remember==1) {
 
@@ -524,11 +520,9 @@ public function sessionLogin(): bool
 			$this->authenticated = TRUE;
 			$this->collabID = intval($row['collab_id']);
 			//echo $this->collabID . '<BR>';
-			$this->guid = $row['guid'];
 			$this->firstName = explode(" ", $row['name'])[0];
 			$this->lastName = explode(" ", $row['name'])[1];
 			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet']);
-			//echo $this->guid . '<BR>';
 			return TRUE;
 		}
 
@@ -604,7 +598,6 @@ public function logout()
 	$this->id = NULL;
 	$this->username = NULL;
 	$this->group = NULL;
-	$this->guid = NULL;
 	$this->authenticated = FALSE;
 	$this->collabID = NULL;
 	$this->firstName = NULL;
@@ -636,10 +629,6 @@ public function logout()
     		unset($_COOKIE['wrkTracker']);
     		setcookie('wrkTracker', '', time() - 3600, '/'); // empty value and old timestamp
 		}
-		if (isset($_COOKIE['userGUID'])) {
-    		unset($_COOKIE['userGUID']);
-    		setcookie('userGUID', '', time() - 3600, '/'); // empty value and old timestamp
-		}
 	}
 }
 
@@ -651,11 +640,6 @@ public function isAuthenticated(): bool
 public function getId(): int
 {
 	return $this->id;
-}
-
-public function getGUID(): string
-{
-	return $this->guid;
 }
 
 public function getCollabID(): int

@@ -73,12 +73,10 @@
         $("#startDate").removeClass("valid invalid");
         $("#endDate").removeClass("valid invalid");
         if (validateConcediu()) {
-          var guidCookie = getCookie("userGUID");
           let sd = getSelectedDate($("#startDate").val());
           let ed = getSelectedDate($("#endDate").val());
           var formData = {
                 'action'            : 'addDaysoff',
-                'collab_guid'       : guidCookie, //trebuie luat din cookie sau cumva
                 'startdate'         : sd,
                 'enddate'           : ed,
                 'number'            : nrZileLibere //getNoDaysOff(new Date(sd.split("-")[2], sd.split("-")[1], sd.split("-")[0]), new Date(ed.split("-")[2], ed.split("-")[1], ed.split("-")[0]))
@@ -133,8 +131,7 @@
                     monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
                 }
             });
-            var guidCookie = getCookie("userGUID");
-            $.get("handler.php?r=concediu&guid=" + guidCookie, function(data, status) {
+            $.get("handler.php?r=concediu", function(data, status) {
             //console.log("Data: " + data + "\nStatus: " + status);
             initData = JSON.parse(data);
             holidayArray = [];

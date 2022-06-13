@@ -10,7 +10,7 @@ if ($account->authenticated || $_POST["action"]=="login") {} else
     die();
 }
 
-function addAttendance(string $guid, string $date, string $start, string $end) {
+function addAttendance(string $date, string $start, string $end) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
@@ -40,7 +40,7 @@ function addAttendance(string $guid, string $date, string $start, string $end) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addTimesheetEntry(string $guid, string $date, int $project_id, int $activity_id, float $time) {
+function addTimesheetEntry(string $date, int $project_id, int $activity_id, float $time) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
@@ -69,7 +69,7 @@ function addTimesheetEntry(string $guid, string $date, int $project_id, int $act
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getTimesheets (string $guid) {
+function getTimesheets () {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
@@ -99,7 +99,7 @@ function getTimesheets (string $guid) {
 	return $fields;
 }
 
-function getPontaje (string $guid) {
+function getPontaje () {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
@@ -129,7 +129,7 @@ function getPontaje (string $guid) {
 	return $fields;
 }
 
-function deleteTimesheet (string $guid, string $date) {
+function deleteTimesheet (string $date) {
     global $pdo;
 	global $schema;
     global $account;
@@ -154,7 +154,7 @@ function deleteTimesheet (string $guid, string $date) {
     echo "Success!";
 }
 
-function verifyDate(string $guid, string $date):bool {
+function verifyDate(string $date):bool {
 	/* Global $pdo object */
     global $pdo;
 	global $schema;
@@ -214,13 +214,14 @@ function addHoliday(string $date, string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getZileLibere(string $guid) {
+function getZileLibere() {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
+    global $account;
 
-	$query = 'SELECT zile_concediu, zile_report, zile_ramase FROM '.$schema.'.accounts WHERE guid = :guid';
-	$values = array(':guid' => $guid);
+	$query = 'SELECT zile_concediu, zile_report, zile_ramase FROM '.$schema.'.accounts WHERE collab_id = :cid';
+	$values = array(':cid' => $account->getCollabID());
 	
 	try
 	{
@@ -238,7 +239,7 @@ function getZileLibere(string $guid) {
 	return $row;
 }
 
-function addDaysoff (string $collab_guid, string $startDate, string $endDate, int $number) {
+function addDaysoff (string $startDate, string $endDate, int $number) {
 	/* Global $pdo object */
     global $pdo;
     global $schema;
@@ -246,10 +247,10 @@ function addDaysoff (string $collab_guid, string $startDate, string $endDate, in
 	//update accounts set `zile_ramase` = `zile_concediu`-5 where guid="6f0c7834-4a68-433f-bc06-e8e1fd38d33a"
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate); UPDATE '.$schema.'.accounts SET zile_ramase = zile_ramase - :number WHERE guid= :guid';
+    $query = 'INSERT INTO '.$schema.'.daysoff (collab_id, startdate, enddate) VALUES (:collab_id, :startdate, :enddate); UPDATE '.$schema.'.accounts SET zile_ramase = zile_ramase - :number WHERE collab_id= :cid';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $account->getCollabID(), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)), ':number' => $number, ':guid' => $collab_guid);
+    $values = array(':collab_id' => $account->getCollabID(), ':startdate' => date("Y-m-d", strtotime($startDate)), ':enddate' => date("Y-m-d", strtotime($endDate)), ':number' => $number, ':cid' => $account->getCollabID());
     
     /* Execute the query */
     try
@@ -298,7 +299,7 @@ function deleteDaysoff (string $startDate, int $number) {
     return "Success!";
 }
 
-function getDaysoff(string $guid) {
+function getDaysoff() {
     global $pdo;
 	global $schema;
     global $account;

@@ -43,21 +43,20 @@ if ($_POST["action"]=="register") {
 }
 
 if ($_POST["action"]=="addTimesheet") {
-    $collabGUID = $_POST["collab_guid"];
     $ziua = date("Y-m-d", strtotime($_POST["ziua"]));
     $oraVenire = $_POST["oraVenire"];
     $oraPlecare = $_POST["oraPlecare"];
     $timesheet = $_POST["timesheet"];
-    if (!verifyDate($collabGUID, $ziua)) {
+    if (!verifyDate($ziua)) {
 		echo "Failure:Pentru data selectata exista deja un pontaj!";
         return 0;
 	}
-    addAttendance($collabGUID, $ziua, $oraVenire, $oraPlecare);
+    addAttendance($ziua, $oraVenire, $oraPlecare);
     foreach ($timesheet as $timesheetProject) {
         $currID = $timesheetProject['id'];
         foreach($timesheetProject as $key => $value) {
             if ($key!="id" && $value!=0.0) {
-                addTimesheetEntry($collabGUID, $ziua, $currID, $key, $value);
+                addTimesheetEntry($ziua, $currID, $key, $value);
             }
         }
     }
@@ -65,7 +64,7 @@ if ($_POST["action"]=="addTimesheet") {
 }
 
 if ($_POST["action"]=="addDaysoff") {
-    echo addDaysoff($_POST["collab_guid"], $_POST["startdate"], $_POST["enddate"], $_POST["number"]);
+    echo addDaysoff($_POST["startdate"], $_POST["enddate"], $_POST["number"]);
 }
 
 if ($_POST["action"]=="reName") {
@@ -73,8 +72,8 @@ if ($_POST["action"]=="reName") {
 }
 
 if ($_POST["action"]=="getTimesheets") {
-    $response["timesheets"] = getTimesheets($_POST["collab_guid"]);
-    $response["daysoff"] = getDaysoff($_POST["collab_guid"]);
+    $response["timesheets"] = getTimesheets();
+    $response["daysoff"] = getDaysoff();
     $response["holidays"] = getHolidays();
     $response["projects"] = getProjects();
     $response["activities"] = getActivities();
@@ -83,7 +82,7 @@ if ($_POST["action"]=="getTimesheets") {
 }
 
 if ($_POST["action"]=="deleteTimesheets") {
-    deleteTimesheet($_POST["collab_guid"], $_POST["date"]);
+    deleteTimesheet($_POST["date"]);
 }
 
 if ($_POST["action"]=="logout") {
@@ -194,10 +193,8 @@ if ($_REQUEST["r"]=="init") {
 if ($_REQUEST["r"]=="holidays") {    
     $response = array();
     $response["holidays"] = getHolidays();
-    if (isset($_GET["collab_guid"])) {
-        $response["daysoff"] = getDaysoff($_GET["collab_guid"]);
-        $response["pontaje"] = getPontaje($_GET["collab_guid"]);
-    }
+    $response["daysoff"] = getDaysoff();
+    $response["pontaje"] = getPontaje();
     echo json_encode($response);
 }
 
@@ -220,9 +217,7 @@ if ($_POST["action"]=="deleteDayoff") {
 if ($_REQUEST["r"]=="concediu") {    
     $response = array();
     $response["holidays"] = getHolidays();
-    if (isset($_GET["guid"])) {
-        $response["concediu"] = getZileLibere($_GET["guid"]);
-    }
+    $response["concediu"] = getZileLibere();
     echo json_encode($response);
 }
 
