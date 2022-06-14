@@ -9,12 +9,12 @@ function buildMonthlyData(month) {
     let adouaParte = hoursWorked(month, 2);
     let markup = '<ul class="collapsible"><li><div class="collapsible-header"><i class="material-icons">timeline</i>Ore lucrate</div><div class="collapsible-body">'+
                   '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody>'+
-                  '<tr><td> ore 2x: ' + primaParte[0] + '</td>'+
-                  '<td> ore 2x: ' + adouaParte[0] + '</td></tr>'+
-                  '<tr><td> ore 1,5x: ' + primaParte[1] + '</td>'+
-                  '<td> ore 1,5x: ' + adouaParte[1] + '</td></tr>'+
-                  '<tr><td> ore 1x: ' + primaParte[2] + '</td>'+
-                  '<td> ore 1x: ' + adouaParte[2] + '</td></tr>'+
+                  '<tr><td>ore in zile de sarbatori legale: ' + primaParte[0] + '</td>'+
+                  '<td>ore in zile de sarbatori legale: ' + adouaParte[0] + '</td></tr>'+
+                  '<tr><td>ore in weekenduri: ' + primaParte[1] + '</td>'+
+                  '<td>ore in weekenduri: ' + adouaParte[1] + '</td></tr>'+
+                  '<tr><td>ore normale: ' + primaParte[2] + '</td>'+
+                  '<td>ore normale: ' + adouaParte[2] + '</td></tr>'+
                   '<tr><td> Total: ' + (primaParte[0]*2 + primaParte[1]*1.5 + primaParte[2]) + ' ore</td>'+
                   '<td> Total: ' + (adouaParte[0]*2 + adouaParte[1]*1.5 + adouaParte[2]) + ' ore</td>'+
                   '</tr></tbody></table></div></li></ul>';
