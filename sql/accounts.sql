@@ -7,6 +7,7 @@ CREATE TABLE `accounts` (
   `account_passwd` varchar(255) NOT NULL,
   `account_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `account_enabled` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `norma` tinyint(2) UNSIGNED NOT NULL DEFAULT '8',
   `zile_concediu` int(10) UNSIGNED NOT NULL DEFAULT '20',
   `zile_report` int(10) NOT NULL DEFAULT '0',
   `zile_ramase` int(10) NOT NULL DEFAULT '20'
