@@ -1716,7 +1716,7 @@ function calculateSalaries(date) {
       if (daysWorked[key] === undefined) {
         daysWorked[key] = new Array;
       }
-      daysWorked[key].push(curdate);
+      daysWorked[key].push(curDate);
 
       if (isInArray(holidayArray, curDate) && ((curDate.getDay()==0 || curDate.getDay()==6))) {
         //e 2x
