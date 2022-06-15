@@ -9,8 +9,8 @@ function buildMonthlyData(month) {
     let adouaParte = hoursWorked(month, 2);
     let markup = '<ul class="collapsible"><li><div class="collapsible-header"><i class="material-icons">timeline</i>Ore lucrate</div><div class="collapsible-body">'+
                   '<table class="striped centered"><thead><tr><th>1-15</th><th>16-'+getLastDayOfMonth(wrkDate[1])+'</th></tr></thead><tbody>'+
-                  '<tr><td>ore in zile de sarbatori legale: ' + primaParte[0] + '</td>'+
-                  '<td>ore in zile de sarbatori legale: ' + adouaParte[0] + '</td></tr>'+
+                  '<tr><td>ore in sarbatori legale: ' + primaParte[0] + '</td>'+
+                  '<td>ore in sarbatori legale: ' + adouaParte[0] + '</td></tr>'+
                   '<tr><td>ore in weekenduri: ' + primaParte[1] + '</td>'+
                   '<td>ore in weekenduri: ' + adouaParte[1] + '</td></tr>'+
                   '<tr><td>ore normale: ' + primaParte[2] + '</td>'+

@@ -22,6 +22,8 @@ salariesObject = [];
 salariesPerCollab = new Object;
 permissionsObject = [];
 permissionsPerCollab = new Object;
+parttimers = new Array;
+norme = new Object;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -285,6 +287,10 @@ function populateHolidays() {
 function populateUsers() {
   $('#usersTable').html('');
   accountsObject.forEach(element => {
+    //vedem ce useri sunt part time
+    if (!Number(element.norma)) {
+      parttimers.push(Number(element.collab_id));
+    }
     let newRow = "";
     checkbox = '<label><input type="checkbox" class="filled-in" id="userNo_' + element.account_id + '" onclick="changeUserState(this.id)"' + (element.account_enabled == "1" ? 'checked="checked" ' : '') +' /><span></span></label>';
 
@@ -1663,6 +1669,9 @@ function calculateSalaries(date) {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
     let bonus = 1;
+    if (parttimers.includes(element.collab_id)) {
+      //e parttimer
+    }
     
     let multiplier = Number(permissionsObject[(permissionsPerCollab[element.collab_id]-1).toString()]['bonus']);
     
@@ -1786,4 +1795,31 @@ function buildSalariesPerCollab() {
     }
     salariesPerCollab[element.collab_id].push({hourly: element.hourly, monthly: element.monthly, date: wrkDate});
   });
+}
+
+function buildNorme() {
+  alltimesheetsObject.forEach(element => {
+    if (parttimers.includes(element.collab_id)) {
+      if (norme[element.collab_id] === undefined) {
+        let tmpDate = new Date(element.date);
+        tmpDate.setHours(0, 0, 0, 0);
+        norme[element.collab_id]['startdate'] = tmpDate;
+        norme[element.collab_id]['ore'] = Number(element.time);
+      } else {
+        norme[element.collab_id]['ore'] += Number(element.time);
+      }
+    }
+  });
+  for (let key in norme){
+    let tmpDate = new Date(norme[key]['startdate']);
+    tmpDate.setHours(0, 0, 0, 0);
+    let curDate = new Date();
+    curDate.setHours(0, 0, 0, 0);
+    var diffTime = curDate.getTime() - tmpDate.getTime();
+    var diffDays = diffTime / (1000 * 3600 * 24);
+    let norma = (diffDays * norme[key]['ore'] * 5) / 7;
+    norme[key]['norma'] = norma;
+  }
+
+  console.log(norma);
 }
