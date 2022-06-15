@@ -1801,7 +1801,7 @@ function buildSalariesPerCollab() {
 function buildNorme() {
   console.log(parttimers);
   alltimesheetsObject.forEach(element => {
-    if (parttimers.includes(element.collab_id).toString()) {
+    if (parttimers.includes(Number(element.collab_id))) {
       if (norme[element.collab_id] === undefined) {
         let tmpDate = new Date(element.date);
         tmpDate.setHours(0, 0, 0, 0);
