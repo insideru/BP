@@ -1805,6 +1805,7 @@ function buildNorme() {
       if (norme[element.collab_id] === undefined) {
         let tmpDate = new Date(element.date);
         tmpDate.setHours(0, 0, 0, 0);
+        norme[element.collab_id] = new Object;
         norme[element.collab_id]['startdate'] = tmpDate;
         norme[element.collab_id]['ore'] = Number(element.time);
       } else {
