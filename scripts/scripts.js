@@ -1684,13 +1684,13 @@ function calculateSalaries(date) {
       wrkTime = wrkTime*2;
     } else if (isInArray(holidayArray, curDate) && ((curDate.getDay()>0 && curDate.getDay()<6))) {
       if (wrkTime >= norma) {
-        wrktime = wrktime * 2;
+        wrkTime = wrkTime * 2;
       } else {
-        wrktime += norma;
+        wrkTime += norma;
       }
     } else if (curDate.getDay()==0 || curDate.getDay()==6) {
       //e 1,5x
-      wrktime = wrktime + wrkTime * 0.5 * multiplier;
+      wrkTime = wrkTime + wrkTime * 0.5 * multiplier;
     }
     
     if (curDate >= wrkDate && curDate<midDate) {
