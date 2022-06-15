@@ -1799,6 +1799,10 @@ function calculateSalaries(date) {
         if (daysWorked[elem.collab_id] === undefined) {
           daysWorked[elem.collab_id] = new Array();
         }
+        let norma = 8;
+        if (parttimers.includes(Number(element.collab_id))) {
+          norma = roundUp(Number(norme[element.collab_id]), 0);
+        }
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
           let norma = 8;
