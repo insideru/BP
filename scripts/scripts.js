@@ -1797,7 +1797,7 @@ function calculateSalaries(date) {
       //e zi libera in luna respectiva
       accountsObject.forEach(elem => {
         console.log(elem.collab_id);
-        if (1, workDate)) {
+        if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
           let norma = 8;
           if (parttimers.includes(Number(elem.collab_id))) {
