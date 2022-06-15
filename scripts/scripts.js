@@ -37,8 +37,8 @@ function arrayRemove(arr, value) {
 }
 
 function roundUp(num, precision) {
-  precision = Math.pow(10, precision);
-  return Math.ceil(num * precision) / precision;
+  let newnumber = Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
+  return newnumber;
 }
 
 function removeProj(id) {
