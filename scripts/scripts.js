@@ -1796,7 +1796,9 @@ function calculateSalaries(date) {
     if (startDate <= workDate && workDate < endDate) {
       //e zi libera in luna respectiva
       accountsObject.forEach(elem => {
-        if (daysWorked[elem.collab_id] !== undefined) {
+        if (daysWorked[elem.collab_id] === undefined) {
+          daysWorked[elem.collab_id].push(workDate);
+        }
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
           let norma = 8;
@@ -1816,7 +1818,6 @@ function calculateSalaries(date) {
 
           }
         }
-      }
       });
     }
   });
