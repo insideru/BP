@@ -1704,6 +1704,7 @@ function calculateSalaries(date) {
       let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1).toString()]['bonus']);
       let wrkTime = Number(addedTimesheets[key][currentDate]);
       if (fluturas[key] === undefined) {
+        fluturas[key] = new Object;
         fluturas[key]['1'] = new Object;
         fluturas[key]['2'] = new Object;
         fluturas[key]['bonus'] = multiplier;
