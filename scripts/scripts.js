@@ -1692,19 +1692,17 @@ function calculateSalaries(date) {
     }
   });
 
-  console.log(addedTimesheets);
-
   //plateste pontajele
   for(let key in addedTimesheets) {
-    for(let curDate in addedTimesheets[key]) {
-    curDate.setHours(0, 0, 0, 0);
-    let bonus = 1;
-    let norma = 8;
-    let cat = "";
+    for(let currentDate in addedTimesheets[key]) {
+      let curDate = new Date(currentDate);
+      curDate.setHours(0, 0, 0, 0);
+      let bonus = 1;
+      let norma = 8;
+      let cat = "";
     
-    /*let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1).toString()]['bonus']);
-    let wrkTime = Number(element.time);
-    if (curDate >= wrkDate && curDate<endDate) {
+      let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1).toString()]['bonus']);
+      let wrkTime = Number(addedTimesheets[key][currentDate]);
       if (fluturas[key] === undefined) {
         fluturas[key]['1'] = new Object;
         fluturas[key]['2'] = new Object;
@@ -1724,6 +1722,7 @@ function calculateSalaries(date) {
         cat = '2x-we';
         wrkTime = wrkTime*2;
       } else if (isInArray(holidayArray, curDate) && ((curDate.getDay()>0 && curDate.getDay()<6))) {
+        cat = '2x-wk'
         if (wrkTime >= norma) {
           wrkTime = wrkTime * 2;
         } else {
@@ -1731,14 +1730,17 @@ function calculateSalaries(date) {
         }
       } else if (curDate.getDay()==0 || curDate.getDay()==6) {
         //e 1,5x
+        cat = '1.5x';
         wrkTime = wrkTime + wrkTime * 0.5 * multiplier;
-    }}
+      } else {
+        cat = '1x';
+      }
     
     if (curDate >= wrkDate && curDate<midDate) {
       if (key in retObject === false ) {
         retObject[key] = new Array;
       }
-      retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 1});
+      retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 1, cat: cat});
 
     }
   
@@ -1746,8 +1748,8 @@ function calculateSalaries(date) {
       if (key in retObject === false ) {
         retObject[key] = new Array;
       }
-      retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 2});
-    }*/
+      retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 2, cat: cat});
+    }
   }
   }
 
@@ -1770,14 +1772,14 @@ function calculateSalaries(date) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array;
           }
-          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1});
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat:'concediu'});
         }
       
         if (workDate >= midDate && workDate<endDate) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array;
           }
-          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2});
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat:'concediu'});
         }
       }
       workDate.setDate(workDate.getDate()+1);
@@ -1803,19 +1805,20 @@ function calculateSalaries(date) {
             if (element.collab_id in retObject === false ) {
               retObject[element.collab_id] = new Array;
             }
-            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, tip: 'holiday'});  
+            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat: 'holiday'});  
           } else {
             if (element.collab_id in retObject === false ) {
               retObject[element.collab_id] = new Array;
             }
-            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, tip: 'holiday'});  
+            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat: 'holiday'});  
 
           }
         }
       });
     }
   });
-
+  console.log(fluturas);
+  console.log(retObject);
   populateSalaries(retObject, fluturas, endDate);
 }
 
