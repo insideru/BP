@@ -1806,16 +1806,15 @@ function calculateSalaries(date) {
             norma = roundUp(Number(norme[elem.collab_id]), 0);
           }
           if (workDate >= startDate && workDate<midDate) {
-            if (element.collab_id in retObject === false ) {
-              retObject[element.collab_id] = new Array;
+            if (elem.collab_id in retObject === false ) {
+              retObject[elem.collab_id] = new Array;
             }
-            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat: 'holiday'});  
+            retObject[elem.collab_id].push({time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 1, cat: 'holiday'});  
           } else {
-            if (element.collab_id in retObject === false ) {
-              retObject[element.collab_id] = new Array;
+            if (elem.collab_id in retObject === false ) {
+              retObject[elem.collab_id] = new Array;
             }
-            retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat: 'holiday'});  
-
+            retObject[elem.collab_id].push({time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 2, cat: 'holiday'});  
           }
         }
       });
