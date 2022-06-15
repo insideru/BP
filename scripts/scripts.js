@@ -37,8 +37,8 @@ function arrayRemove(arr, value) {
 }
 
 function roundUp(num, precision) {
-  precision = Math.pow(10, precision)
-  return Math.ceil(num * precision) / precision
+  precision = Math.pow(10, precision);
+  return Math.ceil(num * precision) / precision;
 }
 
 function removeProj(id) {
@@ -1798,10 +1798,6 @@ function calculateSalaries(date) {
       accountsObject.forEach(elem => {
         if (daysWorked[elem.collab_id] === undefined) {
           daysWorked[elem.collab_id] = new Array();
-        }
-        let norma = 8;
-        if (parttimers.includes(Number(elem.collab_id))) {
-          norma = roundUp(Number(norme[elem.collab_id]), 0);
         }
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
