@@ -1,3 +1,4 @@
 /.DS_Store
 /error_log
 styles/.DS_Store
+include/db.php

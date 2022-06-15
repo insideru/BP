@@ -24,6 +24,7 @@ permissionsObject = [];
 permissionsPerCollab = new Object;
 parttimers = new Array;
 norme = new Object;
+daysOffObject = [];
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -1676,31 +1677,66 @@ function calculateSalaries(date) {
     }
     
     let multiplier = Number(permissionsObject[(permissionsPerCollab[element.collab_id]-1).toString()]['bonus']);
-    let wrkTime = 0;
+    let wrkTime = Number(element.time);
     
-    if (isInArray(holidayArray, curDate)) {
+    if (isInArray(holidayArray, curDate) && ((curDate.getDay()==0 || curDate.getDay()==6))) {
       //e 2x
-      bonus = 1;
+      wrkTime = wrkTime*2;
+    } else if (isInArray(holidayArray, curDate) && ((curDate.getDay()>0 && curDate.getDay()<6))) {
+      if (wrkTime >= norma) {
+        wrktime = wrktime * 2;
+      } else {
+        wrktime += norma;
+      }
     } else if (curDate.getDay()==0 || curDate.getDay()==6) {
       //e 1,5x
-      bonus = 0.5;
-    } else {
-      //e 1x
-      bonus = 0;
+      wrktime = wrktime + wrkTime * 0.5 * multiplier;
     }
     
     if (curDate >= wrkDate && curDate<midDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: Number(element.time), cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: Number(bonus), multiplier: Number(multiplier), half: 1});
+      retObject[element.collab_id].push({time: wrkTime, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), half: 1});
     }
   
     if (curDate >= midDate && curDate<endDate) {
       if (element.collab_id in retObject === false ) {
         retObject[element.collab_id] = new Array;
       }
-      retObject[element.collab_id].push({time: Number(element.time), cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), bonus: Number(bonus), multiplier: Number(multiplier), half: 2});
+      retObject[element.collab_id].push({time: wrkTime, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, curDate), half: 2});
+    }
+  });
+
+  daysOffObject.forEach(element => {
+    let norma = 8;
+    if (parttimers.includes(Number(element.collab_id))) {
+      norma = norme[element.collab_id];
+    }
+    let workDate = new Date();
+    workDate.setHours(0, 0, 0, 0);
+    let startDate = new Date(element.startdate);
+    startDate.setHours(0, 0, 0, 0);
+    let endDate = new Date(element.enddate);
+    endDate.setHours(0, 0, 0, 0);
+    while (startDate <= workDate && endDate >= workDate) {
+      if ((workDate.getDay()>0 && workDate.getDay()<6) && (!isInArray(holidayArray, workDate))) {
+        //zi de concediu platita
+        if (workDate >= wrkDate && workDate<midDate) {
+          if (element.collab_id in retObject === false ) {
+            retObject[element.collab_id] = new Array;
+          }
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1});
+        }
+      
+        if (workDate >= midDate && workDate<endDate) {
+          if (element.collab_id in retObject === false ) {
+            retObject[element.collab_id] = new Array;
+          }
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2});
+        }
+      }
+      workDate.setDate(workDate.getDate()+1);
     }
   });
 
@@ -1722,9 +1758,9 @@ function populateSalaries (salaries, monthlyDate) {
     salaries[key].forEach(element => {
       monthly = Number(element.monthly);
       if (element.half == 1) {
-        h1 += Number(element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier);
+        h1 += Number(element.time*element.cost);
       } else {
-        h2 += Number(element.time*element.cost + element.time*element.cost*element.bonus*element.multiplier);
+        h2 += Number(element.time*element.cost);
       }
     });
     h1total+=h1;
