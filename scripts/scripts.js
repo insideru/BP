@@ -1786,7 +1786,7 @@ function calculateSalaries(date) {
       workDate.setDate(workDate.getDate()+1);
     }
   });
-  console.log(daysWorked);
+
   //plateste zilele libere unde nu s-a pontat
   holidayArray.forEach(element => {
     let workDate = new Date(element);
@@ -1796,7 +1796,7 @@ function calculateSalaries(date) {
     if (startDate <= workDate && workDate < endDate) {
       //e zi libera in luna respectiva
       accountsObject.forEach(elem => {
-        console.log(elem.collab_id);
+        if (daysWorked[elem.collab_id] !== undefined) {
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
           let norma = 8;
@@ -1816,6 +1816,7 @@ function calculateSalaries(date) {
 
           }
         }
+      }
       });
     }
   });
