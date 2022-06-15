@@ -628,7 +628,7 @@
           holidayArray = [];
           holidaysObject.forEach(element => {
             dt = new Date(element.date);
-            dt.setHours(0, 0, 0);
+            dt.setHours(0, 0, 0, 0);
             holidayArray.push(dt);
           });
 
