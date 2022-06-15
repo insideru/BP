@@ -1662,7 +1662,7 @@ function calculateSalaries(date) {
   endDate.setMonth(endDate.getMonth()+1);
 
   let retObject = new Object;
-  
+
   buildNorme();
   buildSalariesPerCollab();
 
@@ -1822,5 +1822,5 @@ function buildNorme() {
     norme[key]['norma'] = norma;
   }
 
-  console.log(norma);
+  console.log(norme);
 }
