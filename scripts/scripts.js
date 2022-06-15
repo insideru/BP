@@ -1673,7 +1673,7 @@ function calculateSalaries(date) {
     let bonus = 1;
     let norma = 8;
     if (parttimers.includes(Number(element.collab_id))) {
-      norma = norme[element.collab_id];
+      norma = Number(norme[element.collab_id]);
     }
     
     let multiplier = Number(permissionsObject[(permissionsPerCollab[element.collab_id]-1).toString()]['bonus']);
@@ -1708,10 +1708,12 @@ function calculateSalaries(date) {
     }
   });
 
+  console.log(daysOffObject);
+
   daysOffObject.forEach(element => {
     let norma = 8;
     if (parttimers.includes(Number(element.collab_id))) {
-      norma = norme[element.collab_id];
+      norma = Number(norme[element.collab_id]);
     }
     let workDate = new Date();
     workDate.setHours(0, 0, 0, 0);
@@ -1861,5 +1863,4 @@ function buildNorme() {
     let norma = ((norme[key]['ore'] / (diffDays - zile_concediu)) * 7) / 5;
     norme[key]['norma'] = norma;
   }
-  console.log(norme);
 }
