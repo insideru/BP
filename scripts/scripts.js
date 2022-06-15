@@ -1799,7 +1799,6 @@ function buildSalariesPerCollab() {
 }
 
 function buildNorme() {
-  console.log(parttimers);
   alltimesheetsObject.forEach(element => {
     if (parttimers.includes(Number(element.collab_id))) {
       if (norme[element.collab_id] === undefined) {
@@ -1820,9 +1819,8 @@ function buildNorme() {
     curDate.setHours(0, 0, 0, 0);
     var diffTime = curDate.getTime() - tmpDate.getTime();
     var diffDays = diffTime / (1000 * 3600 * 24);
-    let norma = (diffDays * norme[key]['ore'] * 5) / 7;
+    let norma = ((norme[key]['ore'] / diffDays) * 7) / 5;
     norme[key]['norma'] = norma;
   }
-
   console.log(norme);
 }
