@@ -1715,13 +1715,12 @@ function calculateSalaries(date) {
     if (parttimers.includes(Number(element.collab_id))) {
       norma = Number(norme[element.collab_id]);
     }
-    let workDate = new Date();
+    let workDate = new Date(element.startdate);
     workDate.setHours(0, 0, 0, 0);
     let startDate = new Date(element.startdate);
     startDate.setHours(0, 0, 0, 0);
     let endDate = new Date(element.enddate);
-    endDate.setHours(0, 0, 0, 0);
-    console.log(workDate,startDate, endDate);
+
     while (startDate <= workDate && endDate >= workDate) {
       if ((workDate.getDay()>0 && workDate.getDay()<6) && (!isInArray(holidayArray, workDate))) {
         //zi de concediu platita
