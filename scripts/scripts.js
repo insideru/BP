@@ -1662,7 +1662,8 @@ function calculateSalaries(date) {
   endDate.setMonth(endDate.getMonth()+1);
 
   let retObject = new Object;
-
+  
+  buildNorme();
   buildSalariesPerCollab();
 
   alltimesheetsObject.forEach(element => {
