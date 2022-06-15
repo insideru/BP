@@ -1670,11 +1670,13 @@ function calculateSalaries(date) {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
     let bonus = 1;
-    if (parttimers.includes(element.collab_id)) {
-      //e parttimer
+    let norma = 8;
+    if (parttimers.includes(Number(element.collab_id))) {
+      norma = norme[element.collab_id];
     }
     
     let multiplier = Number(permissionsObject[(permissionsPerCollab[element.collab_id]-1).toString()]['bonus']);
+    let wrkTime = 0;
     
     if (isInArray(holidayArray, curDate)) {
       //e 2x
@@ -1820,7 +1822,8 @@ function buildNorme() {
     var diffTime = curDate.getTime() - tmpDate.getTime();
     var diffDays = diffTime / (1000 * 3600 * 24);
     let norma = ((norme[key]['ore'] / diffDays) * 7) / 5;
-    norme[key]['norma'] = norma;
+    let zile_concediu = accountsObject[key].zile_concediu;
+    norme[key]['norma'] = norma+(zile_concediu/365)*diffDays;
   }
   console.log(norme);
 }
