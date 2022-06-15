@@ -37,7 +37,7 @@ function arrayRemove(arr, value) {
 }
 
 function roundUp(num, precision) {
-  let newnumber = Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
+  let newnumber = Math.ceil(num);
   return newnumber;
 }
 
