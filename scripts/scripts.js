@@ -39,7 +39,7 @@ function arrayRemove(arr, value) {
 function roundUp(num, precision) {
   let newnumber = 0;
   if (precision >= 1) {
-  newnumber = Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
+    newnumber = Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
   } else {
     newnumber = Math.ceil(num);
   }
@@ -1763,7 +1763,7 @@ function calculateSalaries(date) {
   daysOffObject.forEach(element => {
     let norma = 8;
     if (parttimers.includes(Number(element.collab_id))) {
-      norma = roundUp(Number(norme[element.collab_id]), 0);
+      norma = Math.ceil(Number(norme[element.collab_id]));
     }
     let workDate = new Date(element.startdate);
     workDate.setHours(0, 0, 0, 0);
@@ -1808,7 +1808,7 @@ function calculateSalaries(date) {
           //nu a muncit deci platim
           let norma = 8;
           if (parttimers.includes(Number(elem.collab_id))) {
-            norma = roundUp(Number(norme[elem.collab_id]), 0);
+            norma = Math.ceil(Number(norme[element.collab_id]));
           }
           if (workDate >= startDate && workDate<midDate) {
             if (elem.collab_id in retObject === false ) {
