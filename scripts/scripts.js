@@ -1728,14 +1728,14 @@ function calculateSalaries(date) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array;
           }
-          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1});
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1});
         }
       
         if (workDate >= midDate && workDate<endDate) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array;
           }
-          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, curDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2});
+          retObject[element.collab_id].push({time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2});
         }
       }
       workDate.setDate(workDate.getDate()+1);
