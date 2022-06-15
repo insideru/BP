@@ -1821,9 +1821,9 @@ function buildNorme() {
     curDate.setHours(0, 0, 0, 0);
     var diffTime = curDate.getTime() - tmpDate.getTime();
     var diffDays = diffTime / (1000 * 3600 * 24);
-    let norma = ((norme[key]['ore'] / diffDays) * 7) / 5;
-    let zile_concediu = accountsObject[key].zile_concediu;
-    norme[key]['norma'] = norma+(zile_concediu/365)*diffDays;
+    let zile_concediu = (Number(accountsObject[key].zile_concediu)/365)*diffDays;
+    let norma = ((norme[key]['ore'] / (diffDays - zile_concediu)) * 7) / 5;
+    norme[key]['norma'] = norma;
   }
   console.log(norme);
 }
