@@ -1799,6 +1799,7 @@ function buildSalariesPerCollab() {
 }
 
 function buildNorme() {
+  console.log(parttimers);
   alltimesheetsObject.forEach(element => {
     if (parttimers.includes(element.collab_id)) {
       if (norme[element.collab_id] === undefined) {
