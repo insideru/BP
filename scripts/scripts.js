@@ -1721,8 +1721,8 @@ function calculateSalaries(date) {
     startDate.setHours(0, 0, 0, 0);
     let endDate = new Date(element.enddate);
     endDate.setHours(0, 0, 0, 0);
+    console.log(workDate,startDate, endDate);
     while (startDate <= workDate && endDate >= workDate) {
-      console.log(workDate),startDate, endDate;
       if ((workDate.getDay()>0 && workDate.getDay()<6) && (!isInArray(holidayArray, workDate))) {
         //zi de concediu platita
         if (workDate >= wrkDate && workDate<midDate) {
