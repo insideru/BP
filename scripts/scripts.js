@@ -1797,7 +1797,7 @@ function calculateSalaries(date) {
       //e zi libera in luna respectiva
       accountsObject.forEach(elem => {
         if (daysWorked[elem.collab_id] === undefined) {
-          daysWorked[elem.collab_id].push(workDate);
+          daysWorked[elem.collab_id] = new Array();
         }
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
