@@ -253,7 +253,6 @@ function populateCollabs() {
       if (elem.collab_id==element.id && elem.account_username!="") {
         bool = true;
       }
-
       //facem lista de permisii
       permissionsPerCollab[elem.collab_id] = Number(elem.account_group);
     });
@@ -1697,6 +1696,10 @@ function calculateSalaries(date) {
     }
   });
   //plateste pontajele
+  console.log(addedTimesheets);
+  console.log(permissionsPerCollab);
+  console.log(permissionsObject);
+
   for(let key in addedTimesheets) {
     for(let currentDate in addedTimesheets[key]) {
       let curDate = new Date(currentDate);
@@ -1705,7 +1708,9 @@ function calculateSalaries(date) {
       let norma = 8;
       let cat = "";
 
-      let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1).toString()]['bonus']);
+      let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1)]['bonus']);
+      let concediu = Number(permissionsObject[(permissionsPerCollab[key]-1)]['holiday']);
+      console.log(key, multiplier, concediu);
       let wrkTime = Number(addedTimesheets[key][currentDate]);
 
       norma = parttimers.includes(Number(key))?Number(norme[key]['norma']):8;
@@ -1715,11 +1720,11 @@ function calculateSalaries(date) {
       }
       daysWorked[key].push(curDate);
 
-      if (isInArray(holidayArray, curDate) && ((curDate.getDay()==0 || curDate.getDay()==6))) {
+      if (isInArray(holidayArray, curDate) && ((curDate.getDay()==0 || curDate.getDay()==6)) && concediu) {
         //e 2x
         cat = '2x-we';
         wrkTime = wrkTime*2;
-      } else if (isInArray(holidayArray, curDate) && ((curDate.getDay()>0 && curDate.getDay()<6))) {
+      } else if (isInArray(holidayArray, curDate) && ((curDate.getDay()>0 && curDate.getDay()<6)) && concediu) {
         cat = '2x-wk'
         if (wrkTime >= norma) {
           wrkTime = wrkTime * 2;
@@ -1801,16 +1806,22 @@ function calculateSalaries(date) {
           if (parttimers.includes(Number(elem.collab_id))) {
             norma = Number(norme[elem.collab_id]['norma']);
           }
+          let concediu = Number(permissionsObject[(permissionsPerCollab[elem.collab_id]-1).toString()]['holiday']);
+
           if (workDate >= startDate && workDate<midDate) {
             if (elem.collab_id in retObject === false ) {
               retObject[elem.collab_id] = new Array;
             }
-            retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 1, cat: 'holiday'});  
+            if (concediu) {
+              retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 1, cat: 'holiday'});  
+            }
           } else {
             if (elem.collab_id in retObject === false ) {
               retObject[elem.collab_id] = new Array;
             }
-            retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 2, cat: 'holiday'});  
+            if (concediu) {
+              retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 2, cat: 'holiday'});  
+            }
           }
         }
       });
@@ -1916,13 +1927,6 @@ function buildSalariesPerCollab() {
 
 function buildNorme() {
   norme = new Object;
-  parttimers.forEach(elem => {
-    let tmpDate = new Date();
-        tmpDate.setHours(0, 0, 0, 0);
-        norme[elem] = new Object;
-        norme[elem]['startdate'] = tmpDate;
-        norme[elem]['ore'] = 0;
-  });
   alltimesheetsObject.forEach(element => {
     if (parttimers.includes(Number(element.collab_id))) {
       if (norme[element.collab_id] === undefined) {
@@ -1936,6 +1940,16 @@ function buildNorme() {
       }
     }
   });
+  parttimers.forEach(elem => {
+    if (norme[elem] === undefined) {
+      let tmpDate = new Date();
+      tmpDate.setHours(0, 0, 0, 0);
+      norme[elem] = new Object;
+      norme[elem]['startdate'] = tmpDate;
+      norme[elem]['ore'] = 0;
+    }
+  });
+  console.log(norme);
   for (let key in norme){
     let tmpDate = new Date(norme[key]['startdate']);
     tmpDate.setHours(0, 0, 0, 0);
@@ -1944,13 +1958,17 @@ function buildNorme() {
     var diffTime = curDate.getTime() - tmpDate.getTime();
     var diffDays = diffTime / (1000 * 3600 * 24);
     let zileConcediu = 0;
-    for (let elem in accountsObject) {
+    for (let elem of accountsObject) {
       if (elem.collab_id == key) {
         zileConcediu = elem.zile_concediu;
+        zileConcediu *= permissionsObject[permissionsPerCollab[elem.collab_id-1]]['holiday'];
+        console.log(key, permissionsObject[permissionsPerCollab[elem.collab_id-1]]['holiday']);
       }
     }
     let zile_concediu = (Number(zileConcediu)/365)*diffDays;
-    let norma = roundUp(((norme[key]['ore'] / (diffDays - zile_concediu)) * 7) / 5, 0);
+    console.log(key, zileConcediu);
+    console.log(norme[key]['ore']);
+    let norma = norme[key]['ore']==0?0:roundUp(((norme[key]['ore'] / (diffDays - zile_concediu)) * 7) / 5, 0);
     norme[key]['norma'] = norma;
   }
 }
