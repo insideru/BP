@@ -1696,9 +1696,6 @@ function calculateSalaries(date) {
     }
   });
   //plateste pontajele
-  console.log(addedTimesheets);
-  console.log(permissionsPerCollab);
-  console.log(permissionsObject);
 
   for(let key in addedTimesheets) {
     for(let currentDate in addedTimesheets[key]) {
@@ -1710,7 +1707,6 @@ function calculateSalaries(date) {
 
       let multiplier = Number(permissionsObject[(permissionsPerCollab[key])]['bonus']);
       let concediu = Number(permissionsObject[(permissionsPerCollab[key])]['holiday']);
-      console.log(key, multiplier, concediu);
       let wrkTime = Number(addedTimesheets[key][currentDate]);
 
       norma = parttimers.includes(Number(key))?Number(norme[key]['norma']):8;
@@ -1949,7 +1945,6 @@ function buildNorme() {
       norme[elem]['ore'] = 0;
     }
   });
-  console.log(norme);
   for (let key in norme){
     let tmpDate = new Date(norme[key]['startdate']);
     tmpDate.setHours(0, 0, 0, 0);
@@ -1962,12 +1957,9 @@ function buildNorme() {
       if (elem.collab_id == key) {
         zileConcediu = elem.zile_concediu;
         zileConcediu *= permissionsObject[permissionsPerCollab[elem.collab_id]]['holiday'];
-        console.log(key, permissionsObject[permissionsPerCollab[elem.collab_id]]['holiday']);
       }
     }
     let zile_concediu = (Number(zileConcediu)/365)*diffDays;
-    console.log(key, zileConcediu);
-    console.log(norme[key]['ore']);
     let norma = norme[key]['ore']==0?0:roundUp(((norme[key]['ore'] / (diffDays - zile_concediu)) * 7) / 5, 0);
     norme[key]['norma'] = norma;
   }
