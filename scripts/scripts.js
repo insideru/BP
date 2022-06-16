@@ -1967,25 +1967,27 @@ function buildNorme() {
 
 function popupFluturas(collabID, half) {
   let norma = parttimers.includes(Number(collabID))?Number(norme[collabID]['norma']):8;
-  let popup = "User cu norma " + norma + "\n";
+  let popup = `Salariu ${getDBNameFromId(userID, 'collab')} - norma ${norma} ore`;
   let a=0, b=0, c=0, d=0, e=0, f=0;
+  let av=0, bv=0, cv = 0, dv = 0, ev = 0, fv=0;
   retObject[collabID].forEach (element => {
     if (element.half == half) {
       switch (element.cat) {
-        case '2x-we'    : a+=element.time/2; break;
-        case '2x-wk'    : b+=(element.time/2>norma?element.time:element.time-norma); break;
-        case '1.5x'     : c+=element.time; break;
-        case '1x'       : d+=element.time; break;
-        case 'concediu' : e++; break;
-        case 'holiday'  : f++; break;
+        case '2x-we'    : a+=element.time/2; av+=element.time*element.cost; break;
+        case '2x-wk'    : b+=(element.time/2>norma?element.time:element.time-norma); bv+=element.time*element.cost; break;
+        case '1.5x'     : c+=element.time; cv+=element.time*element.cost; break;
+        case '1x'       : d+=element.time; dv+=element.time*element.cost; break;
+        case 'concediu' : e++; ev+=element.time*element.cost; break;
+        case 'holiday'  : f++; fv+=element.time*element.cost; break;
       }
     }
   });
-  popup += `Ore in zile de sarbatoare in weekend: ${a}\n`;
-  popup += `Ore in zile de sarbatoare in timpul saptamanii: ${b}\n`;
-  popup += `Ore in weekenduri: ${c}\n`;
-  popup += `Ore normale: ${d}\n`;
-  popup += `Zile concediu (plata la norma): ${e}\n`;
-  popup += `Zile libere nelucrate (plata la norma): ${f}\n`;
-  alert(popup);
+  popup += `<tr><td>Ore in zile de sarbatoare in weekend</td><td>${a}</td><td>${av}</td><td></td></tr>`;
+  popup += `<tr><td>Ore in zile de sarbatoare in timpul saptamanii</td><td>${b}</td><td>${bv}</td><td></td></tr>`;
+  popup += `<tr><td>Ore in weekenduri: ${c}</td><td>${cv}</td><td></td></tr>`;
+  popup += `<tr><td>Ore normale: ${d}</td><td>${dv}</td><td></td></tr>`;
+  popup += `<tr><td>Zile concediu (plata la norma): ${e}</td><td>${ev}</td><td></td></tr>`;
+  popup += `<tr><td>Zile libere nelucrate (plata la norma): ${f}</td><td>${fv}</td><td></td></tr>`;
+  popup += `<tr><td></td><td></td><td></td><td>${av+bv+cv+dv+ev+fv}</td></tr>`;
+  $('#fluturasSalariu').modal('open');
 }
