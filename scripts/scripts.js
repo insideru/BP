@@ -1967,7 +1967,7 @@ function buildNorme() {
 
 function popupFluturas(collabID, half) {
   let norma = parttimers.includes(Number(collabID))?Number(norme[collabID]['norma']):8;
-  let popup = `Salariu ${getDBNameFromId(userID, 'collab')} - norma ${norma} ore`;
+  let popup = `Salariu ${getDBNameFromId(collabID, 'collab')} - norma ${norma} ore`;
   let a=0, b=0, c=0, d=0, e=0, f=0;
   let av=0, bv=0, cv = 0, dv = 0, ev = 0, fv=0;
   retObject[collabID].forEach (element => {
