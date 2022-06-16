@@ -1989,5 +1989,6 @@ function popupFluturas(collabID, half) {
   popup += `<tr><td>Zile concediu (plata la norma): ${e}</td><td>${ev}</td><td></td></tr>`;
   popup += `<tr><td>Zile libere nelucrate (plata la norma): ${f}</td><td>${fv}</td><td></td></tr>`;
   popup += `<tr><td></td><td></td><td></td><td>${av+bv+cv+dv+ev+fv}</td></tr>`;
+  $('#salariesBody').html(popup);
   $('#fluturasSalariu').modal('open');
 }
