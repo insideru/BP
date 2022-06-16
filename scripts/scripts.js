@@ -1799,7 +1799,7 @@ function calculateSalaries(date) {
           //nu a muncit deci platim
           let norma = 8;
           if (parttimers.includes(Number(elem.collab_id))) {
-            norma = Math.ceil(Number(norme[elem.collab_id]['norma']));
+            norma = Number(norme[elem.collab_id]['norma']);
           }
           if (workDate >= startDate && workDate<midDate) {
             if (elem.collab_id in retObject === false ) {
@@ -1916,6 +1916,13 @@ function buildSalariesPerCollab() {
 
 function buildNorme() {
   norme = new Object;
+  parttimers.forEach(elem => {
+    let tmpDate = new Date();
+        tmpDate.setHours(0, 0, 0, 0);
+        norme[elem] = new Object;
+        norme[elem]['startdate'] = tmpDate;
+        norme[elem]['ore'] = 0;
+  });
   alltimesheetsObject.forEach(element => {
     if (parttimers.includes(Number(element.collab_id))) {
       if (norme[element.collab_id] === undefined) {
