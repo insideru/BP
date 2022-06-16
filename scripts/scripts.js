@@ -1615,7 +1615,7 @@ function changePermissions(column, row) {
     success     : function(data) {
       if (data.substring(0, 8) == "Success!") {
         //a mers
-        permissionsObject[row-1][column] = permissionsObject[row-1][column] == 0 ? 1 : 0;
+        permissionsObject[row][column] = permissionsObject[row][column] == 0 ? 1 : 0;
       } else {
         M.toast({html: data});
         return;
@@ -1644,7 +1644,7 @@ function addPermissionGroup() {
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'holiday\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'timesheet\', '+data.substring(8)+')"' + ' /><span></span></label></td>'+
         '</tr>');
-        permissionsObject.push({id: data.substring(8), admin: 0, bonus: 0, external: 0, holiday: 0, timesheet: 0});
+        permissionsObject[data.substring(8)] = ({id: data.substring(8), admin: 0, bonus: 0, external: 0, holiday: 0, timesheet: 0});
       } else {
         M.toast({html: data});
         return;
@@ -1708,8 +1708,8 @@ function calculateSalaries(date) {
       let norma = 8;
       let cat = "";
 
-      let multiplier = Number(permissionsObject[(permissionsPerCollab[key]-1)]['bonus']);
-      let concediu = Number(permissionsObject[(permissionsPerCollab[key]-1)]['holiday']);
+      let multiplier = Number(permissionsObject[(permissionsPerCollab[key])]['bonus']);
+      let concediu = Number(permissionsObject[(permissionsPerCollab[key])]['holiday']);
       console.log(key, multiplier, concediu);
       let wrkTime = Number(addedTimesheets[key][currentDate]);
 
@@ -1806,7 +1806,7 @@ function calculateSalaries(date) {
           if (parttimers.includes(Number(elem.collab_id))) {
             norma = Number(norme[elem.collab_id]['norma']);
           }
-          let concediu = Number(permissionsObject[(permissionsPerCollab[elem.collab_id]-1).toString()]['holiday']);
+          let concediu = Number(permissionsObject[permissionsPerCollab[elem.collab_id]]['holiday']);
 
           if (workDate >= startDate && workDate<midDate) {
             if (elem.collab_id in retObject === false ) {
@@ -1961,8 +1961,8 @@ function buildNorme() {
     for (let elem of accountsObject) {
       if (elem.collab_id == key) {
         zileConcediu = elem.zile_concediu;
-        zileConcediu *= permissionsObject[permissionsPerCollab[elem.collab_id-1]]['holiday'];
-        console.log(key, permissionsObject[permissionsPerCollab[elem.collab_id-1]]['holiday']);
+        zileConcediu *= permissionsObject[permissionsPerCollab[elem.collab_id]]['holiday'];
+        console.log(key, permissionsObject[permissionsPerCollab[elem.collab_id]]['holiday']);
       }
     }
     let zile_concediu = (Number(zileConcediu)/365)*diffDays;

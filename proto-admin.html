@@ -593,7 +593,10 @@
           accountsObject = initData.accounts;
           alltimesheetsObject = initData.timesheets;
           salariesObject = initData.salaries;
-          permissionsObject = initData.permissions;
+          let tmpObject = initData.permissions;
+          tmpObject.forEach(elem => {
+            permissionsObject[elem.id] = elem;
+          });
           daysOffObject = initData.daysoff;
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
           drawProjectsChart();
