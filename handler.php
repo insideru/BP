@@ -180,7 +180,7 @@ if ($_REQUEST["r"]=="init") {
         $response["timesheets"] = getAllTimesheets();
         $response["salaries"] = getSalaries();
         $response["permissions"] = getPermissions();
-        $response["daysoff"] = getAllDaysoff();
+        $response["daysoff"] = getAllDaysOff();
     } else {
         $response["collabs"] = getCollabs();
         $response["projects"] = getProjects();

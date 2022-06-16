@@ -611,7 +611,7 @@ function deleteHoliday (string $date) {
     echo "Success!";
 }
 
-function getAllDaysoff() {
+function getAllDaysOff() {
     global $pdo;
 	global $schema;
     global $account;
