@@ -1984,10 +1984,10 @@ function popupFluturas(collabID, half) {
   });
   popup += `<tr><td>Ore in zile de sarbatoare in weekend</td><td>${a}</td><td>${av}</td><td></td></tr>`;
   popup += `<tr><td>Ore in zile de sarbatoare in timpul saptamanii</td><td>${b}</td><td>${bv}</td><td></td></tr>`;
-  popup += `<tr><td>Ore in weekenduri: ${c}</td><td>${cv}</td><td></td></tr>`;
-  popup += `<tr><td>Ore normale: ${d}</td><td>${dv}</td><td></td></tr>`;
-  popup += `<tr><td>Zile concediu (plata la norma): ${e}</td><td>${ev}</td><td></td></tr>`;
-  popup += `<tr><td>Zile libere nelucrate (plata la norma): ${f}</td><td>${fv}</td><td></td></tr>`;
+  popup += `<tr><td>Ore in weekenduri</td><td>${c}</td><td>${cv}</td><td></td></tr>`;
+  popup += `<tr><td>Ore normale</td><td>${d}</td><td>${dv}</td><td></td></tr>`;
+  popup += `<tr><td>Zile concediu (plata la norma)</td><td>${e}</td><td>${ev}</td><td></td></tr>`;
+  popup += `<tr><td>Zile libere nelucrate (plata la norma)</td><td>${f}</td><td>${fv}</td><td></td></tr>`;
   popup += `<tr><td></td><td></td><td></td><td>${av+bv+cv+dv+ev+fv}</td></tr>`;
   $('#fluturasBody').html(popup);
   $('#fluturasSalariu').modal('open');
