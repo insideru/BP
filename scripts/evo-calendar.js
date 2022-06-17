@@ -656,7 +656,7 @@
             _.addEventList(event)
         }
         // IF: no event for the selected date
-        if(!hasEventToday) {
+        if(!hasEventToday || notifyPontaj) {
             markup = '<div class="event-empty">';
             if (_.$active.date === _.$current.date) {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForToday+'</p>';
