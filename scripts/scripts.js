@@ -8,7 +8,6 @@ timesheetsObject = [];
 accountsObject = [];
 alltimesheetsObject = [];
 timesheetsArray = [];
-holidayArray = [];
 daysoffArray = [];
 workedTime = 0;
 pontajeObjectArray = [];
@@ -26,6 +25,7 @@ parttimers = new Array;
 norme = new Object;
 daysOffObject = [];
 var retObject = new Object;
+var holidayArray = new Array;
 
 $.fn.exists = function () {
     return this.length !== 0;

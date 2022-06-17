@@ -126,6 +126,24 @@ function generateHeatMapData(noDays) {
   let chartSeries = [];
   let uniq = 0;
   dates = new Array;
+  let concedii = new Array;
+
+  daysOffObject.forEach(elem => {
+    if (concedii[elem.collab_id] === undefined) {
+      concedii[elem.collab_id] = new Array;
+    }
+    let startDate = new Date(elem.startdate);
+    startDate.setHours(0, 0, 0, 0);
+    let endDate = new Date(elem.enddate);
+    endDate.setHours(0, 0, 0, 0);
+    let tmpDate = new Date(startDate);
+    while (startDate <= tmpDate && tmpDate <= endDate)
+    {
+      concedii[elem.collab_id].push(new Date(tmpDate));
+      tmpDate.setDate(tmpDate.getDate()+1);
+    }
+  });
+
   for(let key in curTimesheets) {
     let emplName = getDBNameFromId(key, 'collab');
     let curData = [];
@@ -137,7 +155,17 @@ function generateHeatMapData(noDays) {
         dates.push(thisDate);
       }
       if (curTimesheets[key][thisDate] === undefined) {
-        curData.push(0);
+        //if (!isInArray(holidayArray, thisDate) && thisDate.getDay()>0 && thisDate.getDay<6 && isInArray(concedii[key], thisDate))
+        if (concedii[key] !== undefined) {
+          if (isInArray(concedii[key], thisDate))
+          {
+            curData.push(20);
+          } else {
+            curData.push(0);
+          }
+        } else {
+          curData.push(0);
+        }
       } else {
         curData.push(curTimesheets[key][thisDate]);
       }
@@ -145,7 +173,9 @@ function generateHeatMapData(noDays) {
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
+  
   //dates.sort((a,b)=>a.getTime()-b.getTime());
+  let colors = generateHeatMapColors(noDays);
   let options = {
     series: chartSeries,
     chart: {
@@ -154,9 +184,41 @@ function generateHeatMapData(noDays) {
     events: {
       click: function(event, chartContext, config) {
         // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-        if (config.globals.series[config.seriesIndex][config.dataPointIndex]>0) {
+        if (config.globals.series[config.seriesIndex][config.dataPointIndex]>0 && config.globals.series[config.seriesIndex][config.dataPointIndex]<20) {
           drawPontajPerCollab(config.seriesIndex, config.dataPointIndex);
         }
+      }
+    }
+  },
+  plotOptions: {
+    heatmap: {
+      radius: 2,
+      shadeIntensity: 0.2,
+      colorScale: {
+        ranges: [{
+          from: 20,
+          to: 20,
+          color: "#b6d7a8",
+          name: "Concedii",
+        },{
+          from: 21,
+          to: 21,
+          color: "#008FFB",
+          name: "Zile normale",
+        },{
+          from: 22,
+          to: 22,
+          color: "#cc0000",
+          name: "Weekend-uri",
+        },{
+          from: 23,
+          to: 23,
+          color: "#8e7cc3",
+          name: "Sarbatori legale",
+      }],
+        inverse: true,
+        min: 0,
+        max: 8
       }
     }
   },
@@ -165,7 +227,7 @@ function generateHeatMapData(noDays) {
   },
   xaxis: {
     type: 'numeric',
-    tickAmount: 'dataPoints',
+    tickAmount: noDays,
     tickPlacement: 'between',
     labels: {
       show: false
@@ -213,12 +275,33 @@ function generateHeatMapData(noDays) {
         '</div>'
     }
   },
-  colors: ["#008FFB"],
+  colors: colors,
   title: {
     text: 'Pontaje pe ultimele ' + noDays + ' zile'
   }};
 
   drawHeatMap(options);
+}
+
+function generateHeatMapColors(days) {
+  //["#FFA500", "#FFA500", "#008FFB", "#008FFB", "#8e7cc3", "#008FFB", "#008FFB", "#008FFB"];
+  let minDate = new Date();
+  minDate.setHours(0, 0, 0, 0);
+  let res = new Array;
+  minDate.setDate(minDate.getDate()-days);
+  for (diff=1;diff<=days;diff++) {
+    minDate.setDate(minDate.getDate()+1);
+    if (isInArray(holidayArray, minDate)) {
+      //e sarbatoare
+      res.push("#8e7cc3");
+    } else if (minDate.getDay()==0 || minDate.getDay() == 6) {
+      //e weekend
+      res.push("#cc0000");
+    } else {
+      res.push("#008FFB");
+    }
+  }
+  return res;
 }
 
 function drawHeatMap (options) {
@@ -229,7 +312,10 @@ function drawHeatMap (options) {
   } else {
     heatMapChart.updateSeries (options.series, true);
     heatMapChart.updateOptions ({title: {text: 'Pontaje pe ultimele ' + $('#heatmapDays').val() + ' zile'}}, true, true, true);
-    heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);  }
+    heatMapChart.updateOptions ({chart: {height: options.chart.height}}, true, true, true);
+    heatMapChart.updateOptions ({colors: options.colors}, true, true, true);
+    heatMapChart.updateOptions ({xaxis: {tickAmount: options.xaxis.tickAmount}}, true, true, true);
+  }
 }
 
 function updateProjectCharts (projID) {
