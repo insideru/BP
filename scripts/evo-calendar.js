@@ -671,7 +671,10 @@
         }
         console.log(hasEventToday, notifyPontaj);
         if (!hasEventToday || notifyPontaj) {
-            if (!hasEventToday) eventListEl.append(markup);
+            if (!hasEventToday) {
+                eventListEl.append(markup);
+                biWeekly.html('');
+            }
             else biWeekly.html(markup);
         } else {
             biWeekly.html('');
