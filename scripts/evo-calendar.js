@@ -630,11 +630,14 @@
         var eventListEl = _.$elements.eventEl.find('.event-list');
         // Clear event list item(s)
         if (eventListEl.children().length > 0) eventListEl.empty();
+        let notifyPontaj = true;
         if (_.options.calendarEvents) {
             for (var i = 0; i < _.options.calendarEvents.length; i++) {
                 if(_.isBetweenDates(_.$active.date, _.options.calendarEvents[i].date)) {
                     eventAdder(_.options.calendarEvents[i]);
-                    console.log(_.options.calendarEvents[i]);
+                    if (_.options.calendarEvents[i].id.substring(0,6) == 'pontaj') {
+                        notifyPontaj = false;
+                    }
                 }
                 else if (_.options.calendarEvents[i].everyYear) {
                     var d = new Date(_.$active.date).getMonth() + 1 + ' ' + new Date(_.$active.date).getDate();
@@ -643,7 +646,6 @@
 
                     if(d==dd) {
                         eventAdder(_.options.calendarEvents[i]);
-                        console.log(_.options.calendarEvents[i]);
                     }
                 }
             };
@@ -653,7 +655,7 @@
             _.addEventList(event)
         }
         // IF: no event for the selected date
-        if(!hasEventToday) {
+        if(!hasEventToday || notifyPontaj) {
             markup = '<div class="event-empty">';
             if (_.$active.date === _.$current.date) {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForToday+'</p>';
