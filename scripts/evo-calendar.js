@@ -628,6 +628,7 @@
         _.$elements.eventEl.find('.event-header > p').text(title);
         // Event list
         var eventListEl = _.$elements.eventEl.find('.event-list');
+        var biWeekly = _.$elements.eventEl.find('.biweekly');
         // Clear event list item(s)
         if (eventListEl.children().length > 0) eventListEl.empty();
         let notifyPontaj = true;
@@ -668,7 +669,11 @@
             }
             markup += '</p></div>';
         }
-        eventListEl.append(markup);
+        if (notifyPontaj) {
+            biWeekly.append(markup);
+        } else {
+            eventListEl.append(markup);
+        }
         //calculatePontaje(_.$active.date);
     }
 
