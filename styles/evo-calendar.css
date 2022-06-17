@@ -344,6 +344,10 @@ tr.calendar-body .calendar-day .day[disabled] {
     margin: 0;
     color: #755eb5;
 }
+.event-list > .biweekly > p {
+    margin: 0;
+    color: #755eb5;
+}
 .event-container {
     position: relative;
     display: flex;
