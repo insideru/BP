@@ -671,7 +671,7 @@
         }
         if (notifyPontaj) {
             biWeekly.append(markup);
-        } else {
+        } else if (!hasEventToday) {
             eventListEl.append(markup);
         }
         //calculatePontaje(_.$active.date);
