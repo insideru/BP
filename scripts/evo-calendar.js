@@ -635,7 +635,7 @@
             for (var i = 0; i < _.options.calendarEvents.length; i++) {
                 if(_.isBetweenDates(_.$active.date, _.options.calendarEvents[i].date)) {
                     eventAdder(_.options.calendarEvents[i]);
-                    if (_.options.calendarEvents[i].id.substring(0,6) == 'pontaj') {
+                    if (_.options.calendarEvents[i].id.substring(0,6) == 'pontaj' || _.options.calendarEvents[i].id.substring(0,6) == 'dayoff') {
                         notifyPontaj = false;
                     }
                 }
