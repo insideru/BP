@@ -656,7 +656,7 @@
             _.addEventList(event)
         }
         // IF: no event for the selected date
-        if(!hasEventToday || notifyPontaj) {
+        if(!hasEventToday) {
             markup = '<div class="event-empty">';
             if (_.$active.date === _.$current.date) {
                 markup += '<p>'+_.initials.dates[_.options.language].noEventForToday+'</p>';
@@ -669,11 +669,7 @@
             }
             markup += '</p></div>';
         }
-        if (notifyPontaj) {
-            biWeekly.append(markup);
-        } else if (!hasEventToday) {
-            eventListEl.append(markup);
-        }
+        eventListEl.append(markup);
         //calculatePontaje(_.$active.date);
     }
 
