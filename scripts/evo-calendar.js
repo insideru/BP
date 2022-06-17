@@ -672,7 +672,7 @@
         console.log(hasEventToday, notifyPontaj);
         if (!hasEventToday || notifyPontaj) {
             if (!hasEventToday) eventListEl.append(markup);
-            else biWeekly.append(markup);
+            else biWeekly.html(markup);
         }
         //calculatePontaje(_.$active.date);
     }
