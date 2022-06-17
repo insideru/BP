@@ -633,7 +633,8 @@
         if (_.options.calendarEvents) {
             for (var i = 0; i < _.options.calendarEvents.length; i++) {
                 if(_.isBetweenDates(_.$active.date, _.options.calendarEvents[i].date)) {
-                    eventAdder(_.options.calendarEvents[i])
+                    eventAdder(_.options.calendarEvents[i]);
+                    console.log(_.options.calendarEvents[i]);
                 }
                 else if (_.options.calendarEvents[i].everyYear) {
                     var d = new Date(_.$active.date).getMonth() + 1 + ' ' + new Date(_.$active.date).getDate();
