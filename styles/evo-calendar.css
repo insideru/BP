@@ -344,7 +344,7 @@ tr.calendar-body .calendar-day .day[disabled] {
     margin: 0;
     color: #755eb5;
 }
-.event-list > .biweekly > p {
+.biweekly > .event-empty > p {
     margin: 0;
     color: #755eb5;
 }
