@@ -641,7 +641,8 @@
                     // var dates = [_.formatDate(_.options.calendarEvents[i].date[0], 'mm/dd'), _.formatDate(_.options.calendarEvents[i].date[1], 'mm/dd')];
 
                     if(d==dd) {
-                        eventAdder(_.options.calendarEvents[i])
+                        eventAdder(_.options.calendarEvents[i]);
+                        console.log(_.options.calendarEvents[i]);
                     }
                 }
             };
