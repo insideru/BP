@@ -335,6 +335,11 @@ tr.calendar-body .calendar-day .day[disabled] {
     background-color: rgba(135,115,193,.15);
     border: 1px solid #8773c1;
 }
+.biweekly > .event-empty {
+    padding: 15px 10px;
+    background-color: rgba(135,115,193,.15);
+    border: 1px solid #8773c1;
+}
 .event-list > .event-empty > p {
     margin: 0;
     color: #755eb5;
