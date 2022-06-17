@@ -161,6 +161,14 @@ html {
 .blueprint .event-list > .event-empty > p {
     color: #ffff;
 }
+
+.blueprint .biweekly > .event-empty {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid #fff;
+}
+.blueprint .biweekly > .event-empty > p {
+    color: #ffff;
+}
 @media screen and (max-width: 768px) {
     .blueprint .calendar-sidebar > .month-list > .calendar-months > li {
         padding: 6px 26px;
