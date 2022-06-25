@@ -164,19 +164,27 @@
             lazyLoading: true,
             oninsert: function(instance, item) {
               if (item == null || item.trim() == '') return 0;
-                jSuites.ajax({
-                    url: 'handler.php',
-                    type: 'POST',
-                    encode: true,
-                    //dataType: 'json',
-                    data: {'action': 'addToDB', 'type': 'addClient', 'name': item.trim() },
-                    success: function(idFromTheServer) {
-                        if (idFromTheServer.substring(0,8) == "Success:") {
-                          // Set the item id from the number sent by the remote server
-                          instance.setId(item, idFromTheServer.substring(8));
-                        }
-                    }
-                });
+              var formData = {
+                'action'            : 'addToDB',
+                'type'              : 'addClient',
+                'name'              : item.trim()
+              };
+              $.ajax({
+                  url: 'handler.php',
+                  type: 'POST',
+                  encode: true,
+                  //dataType: 'json',
+                  data: formData,
+                  success: function(idFromTheServer) {
+                      if (idFromTheServer.substring(0,8) == "Success:") {
+                        // Set the item id from the number sent by the remote server
+                        instance.setId(item, idFromTheServer.substring(8));
+                      }
+                  },
+                  error: function(errData) {
+                    console.log(errData);
+                  }
+              });
             },
             width:'280px',
         });
