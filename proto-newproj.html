@@ -2,13 +2,10 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/evo-calendar.blueprint.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/materialize.css">
-    <script src="scripts/wNumb.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
@@ -99,7 +96,7 @@
                     </div>
                   </td>
                   <td><div id="addDetailType"></div></td>
-                  <td><a class="waves-effect waves-light btn-small">Adauga detaliu</a></td>
+                  <td><a class="waves-effect waves-light btn-small" onclick="addProjDetail();">Adauga detaliu</a></td>
                 </tr>
               </tbody>
             </table>
@@ -127,7 +124,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="scripts/scripts.js"></script>
-    <script type="text/javascript" src="scripts/evo-calendar.js"></script>
     <script>
       $(document).ready(function() {
         addLinks();
@@ -135,8 +131,7 @@
         $('.modal').modal();
         $('.sidenav').sidenav();
         jSuites.dropdown(document.getElementById('addDetailType'), {
-            data: ['text', 'bifa'],
-            width:'280px'});
+            data: ['Text', 'Bifa']});
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
@@ -168,16 +163,19 @@
             autocomplete: true,
             lazyLoading: true,
             oninsert: function(instance, item) {
-                /*jSuites.ajax({
-                    url: '/v4/getId',
+              if (item == null || item.trim() == '') return 0;
+                jSuites.ajax({
+                    url: 'handler.php',
                     type: 'POST',
                     dataType: 'json',
-                    data: { data: item },
+                    data: {action : 'addToDB', type: 'addClient', name: item.trim() },
                     success: function(idFromTheServer) {
-                        // Set the item id from the number sent by the remote server
-                        instance.setId(item, idFromTheServer);
+                        if (idFromTheServer.substring(0,8) == "Success:") {
+                          // Set the item id from the number sent by the remote server
+                          instance.setId(item, idFromTheServer.substring(8));
+                        }
                     }
-                });*/
+                });
             },
             width:'280px',
         });
