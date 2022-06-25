@@ -1996,7 +1996,7 @@ function popupFluturas(collabID, half) {
 }
 
 function addProjDetail() {
-  let detailName = $('#projName').val.trim();
+  let detailName = $('#projName').val().trim();
   let newRow = "";
   if (detailName=="") {
     $('#projName').addClass("invalid");
