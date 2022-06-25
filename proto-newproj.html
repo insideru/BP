@@ -163,7 +163,7 @@
             autocomplete: true,
             lazyLoading: true,
             onchange: function(el,val) {
-              document.getElementById('log').innerHTML = 'Dropdown new value is: ' + val;
+              console.log(val);
             },
             oninsert: function(instance, item) {
               if (item.text == null || item.text.trim() == '') return 0;
