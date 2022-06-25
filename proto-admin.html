@@ -12,6 +12,7 @@
     <style href="styles/styles.css"></style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <script>jSuites.loading.show();</script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
   </head>
     <body>
@@ -151,6 +152,27 @@
                                     </table>
                               </div>
                               </li>
+                              <li>
+                                <div class="collapsible-header"><i class="material-icons">class</i>Sabloane</div>
+                                <div class="collapsible-body">
+                                    <table class="centered highlight">
+                                        <thead>
+                                          <tr>
+                                              <th>Nume</th>
+                                          </tr>
+                                        </thead>x
+                                        <tbody id="projTmpltTable">
+                                        </tbody>
+                                      </table>
+                                      <table class="centered highlight">
+                                        <tbody>
+                                          <tr>
+                                            <td><a class="waves-effect waves-light btn btn-small">Creeaza sablon</a></td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
+                                </li>
                         </ul>
                     </div>
                     <div class="row">
@@ -666,6 +688,7 @@
           let todayString = today.toISOString().replace('T', ' ');
           todayString = todayString.substring(0, todayString.length-5);
           calendarSalarii.setValue(todayString);
+          jSuites.loading.hide();
         });
                 
         $('form').submit(function(event) {

@@ -19,7 +19,7 @@ ALTER TABLE `projects`
 
 -- ----------------------------------------------------------------
 
-  CREATE TABLE `project_types` (
+CREATE TABLE `project_types` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -29,4 +29,65 @@ ALTER TABLE `project_types`
   ADD UNIQUE KEY `name` (`name`);
 
 ALTER TABLE `project_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+  -- --------------------------------------------------
+
+CREATE TABLE `project_phases` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `proj_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `budget` int (10) NOT NULL,
+  `options` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `project_phases`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `project_phases`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+    -- --------------------------------------------------
+
+CREATE TABLE `project_milestones` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `proj_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `project_milestones`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `project_milestones`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+  -- ---------------------------------------------------
+
+CREATE TABLE `project_templates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `options` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `project_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+ALTER TABLE `project_templates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+  -- ---------------------------------------------------
+
+CREATE TABLE `project_info` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `proj_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `project_info`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `project_info`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;

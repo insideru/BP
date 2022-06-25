@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/evo-calendar.blueprint.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/materialize.css">
+    <script src="scripts/wNumb.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="scripts/charts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <?php if ($account->permissions['bonus']) {echo '<script src="scripts/bonus.js"></script>';} else {echo '<script src="scripts/no-bonus.js"></script>';}?>
+    </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="?page=logout" class="right" style="padding-right: 10px;">Logout</a>
+        <ul id="nav-mobile" class="left">
+          <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-small hide-on-med-and-up"><i class="material-icons large">menu</i></a></li>
+          <li><a class="hide-on-small-only linkDashboard" href="#">Dashboard</a></li>
+          <li><a class="hide-on-small-only linkCalendar" href="#">Calendar</a></li>
+          <?php if ($account->permissions['timesheet']) {echo '<li><a class="hide-on-small-only linkPontaj" href="#">Ponteaza</a></li>';}?>
+          <?php if ($account->permissions['holiday']) {echo '<li><a class="hide-on-small-only linkConcediu" href="#">Concediu</a></li>';}?>
+          <?php if ($account->permissions['admin']) {echo '<li><a class="hide-on-small-only linkAdmin" href="/?page=admin">Admin</a></li>';}?>
+        </ul>
+      </div>
+    </nav>
+
+    <ul id="slide-out" class="sidenav">
+      <div class="row">
+        <h5 style="padding: 10px;">Buna <?php echo $account->getFirstName(); ?><a href="#" class="right" onclick="$('.sidenav').sidenav('close');"><i class="material-icons">close</i></a></h5>
+        <br>
+        <li><a href="#" class="linkDashboard">Dashboard</a></li>
+              <li><a href="#" class="linkCalendar">Calendar</a></li>
+              <?php if ($account->permissions['timesheet']) {echo '<li><a href="#" class="linkPontaj">Ponteaza</a></li>';}?>
+              <?php if ($account->permissions['holiday']) {echo '<li><a href="#" class="linkConcediu">Concediu</a></li>';}?>
+              <?php if ($account->permissions['admin']) {echo '<li><a href="/?page=admin" class="linkAdmin">Admin</a></li>';}?>
+              <br>
+        <li><a href="?page=logout">Logout</a></li>
+      </div>
+    </ul>
+
+    <div class="row">
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Informatii de baza</span>
+            <table class="centered highlight">
+              <tbody>
+                <tr>
+                  <td>Nume proiect</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Tip proiect</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Client</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Detalii proiect</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Faze Proiect</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Milestones</span>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+                
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script type="text/javascript" src="scripts/evo-calendar.js"></script>
+    <script>
+      $(document).ready(function() {
+        addLinks();
+        $('.collapsible').collapsible();
+        $('.modal').modal();
+        $('.sidenav').sidenav();
+      })
+    </script>
+    <?php if ($account->permissions['timesheet']) {echo '<script>addPontajButton=1;</script>';} else {echo '<script>addPontajButton=0;</script>';}?>
+  </body>
+</html>
+      
