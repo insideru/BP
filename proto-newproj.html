@@ -47,7 +47,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Informatii de baza</span>
-            <table class="centered highlight">
+            <table class="centered">
               <tbody>
                 <tr>
                   <td>Nume proiect</td>
@@ -121,11 +121,12 @@
           //salariesObject = initData.salaries;
           var projCats = new Array;
           projCatsObject.forEach(element => {
-            projCats.push(element.name);
+            projCats.push({value: element.id, text: element.name});
           });
-          jSuites.picker(document.getElementById('projType'), {
+          jSuites.dropdown(document.getElementById('dropdown'), {
             data: projCats,
-          })
+            width:'280px'});
+
           var projClients = new Array;
           clientsObject.forEach(element => {
             projClients.push({value: element.id, text: element.name});
@@ -133,6 +134,8 @@
           jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
+            autocomplete: true,
+            lazyLoading: true,
             oninsert: function(instance, item) {
                 /*jSuites.ajax({
                     url: '/v4/getId',
