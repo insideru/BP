@@ -163,7 +163,8 @@
             autocomplete: true,
             lazyLoading: true,
             onchange: function(element, index) {
-              console.log(index);
+              console.log(index.value);
+              console.log(`${Object.keys(index.value)[0]}: ${index.value[Object.keys(index.value)[0]]}`);
             },
             oninsert: function(instance, item) {
               if (item.text == null || item.text.trim() == '') return 0;
