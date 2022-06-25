@@ -162,13 +162,15 @@
             newOptions: true,
             autocomplete: true,
             lazyLoading: true,
+            onchange: function(el,val) {
+              document.getElementById('log').innerHTML = 'Dropdown new value is: ' + val;
+            },
             oninsert: function(instance, item) {
-              console.log(item);
-              if (item == null || item.trim() == '') return 0;
+              if (item.text == null || item.text.trim() == '') return 0;
               var formData = {
                 'action'            : 'addToDB',
                 'type'              : 'addClient',
-                'name'              : item.trim()
+                'name'              : item.text.trim()
               };
               $.ajax({
                   url: 'handler.php',
@@ -180,6 +182,7 @@
                       if (idFromTheServer.substring(0,8) == "Success:") {
                         // Set the item id from the number sent by the remote server
                         instance.setId(item, idFromTheServer.substring(8));
+                        clientsObject.push({id: idFromTheServer.substring(8), name: item.text.trim()});
                       }
                   },
                   error: function(errData) {
