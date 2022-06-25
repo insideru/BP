@@ -162,8 +162,8 @@
             newOptions: true,
             autocomplete: true,
             lazyLoading: true,
-            onchange: function(el,val) {
-              console.log(val);
+            onchange: function(element, index) {
+              console.log(index);
             },
             oninsert: function(instance, item) {
               if (item.text == null || item.text.trim() == '') return 0;
