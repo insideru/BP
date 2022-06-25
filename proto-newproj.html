@@ -78,7 +78,31 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Detalii proiect</span>
-            <p></p>
+            <table class="centered">
+              <tbody>
+
+              </tbody>
+            </table>
+            <table class="centered">
+              <thead>
+                <tr>
+                  <td>Nume</td>
+                  <td>Tip</td>
+                  <td>Adauga</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="input-field">
+                    <input type="text" id="projDetailName">
+                    </div>
+                  </td>
+                  <td><div id="addDetailType"></div></td>
+                  <td><a class="waves-effect waves-light btn-small">Adauga detaliu</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -110,6 +134,9 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+        jSuites.dropdown(document.getElementById('addDetailType'), {
+            data: ['text', 'bifa'],
+            width:'280px'});
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
