@@ -74,7 +74,7 @@
       <div class="col s12 m6 l6">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">Detalii proiect</span>
+            <span class="card-title">Detalii proiect<div class="right" id="saveLoad"></div></span>
             <table class="centered">
               <tbody>
 
@@ -132,6 +132,15 @@
         $('.sidenav').sidenav();
         jSuites.dropdown(document.getElementById('addDetailType'), {
             data: ['Text', 'Bifa']});
+        jSuites.picker(document.getElementById('saveLoad'), {
+          data: ['Template 1', 'Template 2', 'Salveaza ca tamplate'],
+          content: 'more_vert',
+          onchange: function(element, instance, reserved, value, key) {
+            // This function will be called whenever the picker value is changed
+            // As this is just an example, I will just print the new picker value on the console
+            console.log(value);
+          }
+        })
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
@@ -151,6 +160,9 @@
           });
           jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
+            onchange: function(element, index) {
+              //idul selectat e Object.keys(index.value)[0];
+            },
             width:'280px'});
 
           var projClients = new Array;
@@ -163,8 +175,7 @@
             autocomplete: true,
             lazyLoading: true,
             onchange: function(element, index) {
-              console.log(index.value);
-              console.log(`${Object.keys(index.value)[0]}: ${index.value[Object.keys(index.value)[0]]}`);
+              //idul selectat e Object.keys(index.value)[0];
             },
             oninsert: function(instance, item) {
               if (item.text == null || item.text.trim() == '') return 0;
