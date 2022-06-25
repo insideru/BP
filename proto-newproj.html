@@ -56,11 +56,15 @@
                 </tr>
                 <tr>
                   <td>Tip proiect</td>
-                  <td></td>
+                  <td><div id="projType"></div></td>
                 </tr>
                 <tr>
                   <td>Client</td>
-                  <td></td>
+                  <td><div id="projClient"></div></td>
+                </tr>
+                <tr>
+                  <td>Proiect extern</td>
+                  <td><label><input type="checkbox" id="extern" checked="checked" /><span></span></label></td>
                 </tr>
               </tbody>
             </table>
@@ -103,6 +107,48 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+        $.get("handler.php?r=init", function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
+          clientsObject = initData.clients;
+          //collabCatsObject = initData.collabCats;
+          projCatsObject = initData.projCats;
+          //collabsObject = initData.collabs;
+          //projectsObject = initData.projects;
+          //activitiesObject = initData.activities;
+          //holidaysObject = initData.holidays;
+          //accountsObject = initData.accounts;
+          //alltimesheetsObject = initData.timesheets;
+          //salariesObject = initData.salaries;
+          var projCats = new Array;
+          projCatsObject.forEach(element => {
+            projCats.push(element.name);
+          });
+          jSuites.picker(document.getElementById('projType'), {
+            data: projCats,
+          })
+          var projClients = new Array;
+          clientsObject.forEach(element => {
+            projClients.push({value: element.id, text: element.name});
+          });
+          jSuites.dropdown(document.getElementById('projClient'), {
+            data: projClients,
+            newOptions: true,
+            oninsert: function(instance, item) {
+                /*jSuites.ajax({
+                    url: '/v4/getId',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { data: item },
+                    success: function(idFromTheServer) {
+                        // Set the item id from the number sent by the remote server
+                        instance.setId(item, idFromTheServer);
+                    }
+                });*/
+            },
+            width:'280px',
+        });
+        });
       })
     </script>
     <?php if ($account->permissions['timesheet']) {echo '<script>addPontajButton=1;</script>';} else {echo '<script>addPontajButton=0;</script>';}?>
