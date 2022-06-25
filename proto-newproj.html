@@ -167,8 +167,9 @@
                 jSuites.ajax({
                     url: 'handler.php',
                     type: 'POST',
-                    dataType: 'json',
-                    data: {action : 'addToDB', type: 'addClient', name: item.trim() },
+                    encode: true,
+                    //dataType: 'json',
+                    data: {'action': 'addToDB', 'type': 'addClient', 'name': item.trim() },
                     success: function(idFromTheServer) {
                         if (idFromTheServer.substring(0,8) == "Success:") {
                           // Set the item id from the number sent by the remote server
