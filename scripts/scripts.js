@@ -26,6 +26,7 @@ norme = new Object;
 daysOffObject = [];
 var retObject = new Object;
 var holidayArray = new Array;
+var detailNumber = 1;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -1995,5 +1996,18 @@ function popupFluturas(collabID, half) {
 }
 
 function addProjDetail() {
-  console.log(document.getElementById('addDetailType').value);
+  let detailName = $('#projName').val.trim();
+  let newRow = "";
+  if (detailName=="") {
+    $('#projName').addClass("invalid");
+  }
+  switch (document.getElementById('addDetailType').value) {
+    case 0: //text
+            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+            break;
+    case 1: //bifa
+            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+            break;
+  }
+  $('#detailsList').append(newRow);
 }
