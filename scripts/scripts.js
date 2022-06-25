@@ -1993,3 +1993,7 @@ function popupFluturas(collabID, half) {
   $('#fluturasBody').html(popup);
   $('#fluturasSalariu').modal('open');
 }
+
+function addProjDetail() {
+  console.log(document.getElementById('addDetailType').value);
+}

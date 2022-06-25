@@ -80,7 +80,7 @@
 
               </tbody>
             </table>
-            <table class="centered">
+            <table class="centered highlight">
               <thead>
                 <tr>
                   <td>Nume</td>
@@ -130,10 +130,10 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
-        jSuites.dropdown(document.getElementById('addDetailType'), {
+        jSuites.picker(document.getElementById('addDetailType'), {
             data: ['Text', 'Bifa']});
         jSuites.picker(document.getElementById('saveLoad'), {
-          data: ['Template 1', 'Template 2', 'Salveaza ca tamplate'],
+          data: ['Template 1', 'Template 2', 'Salveaza ca template'],
           content: 'more_vert',
           onchange: function(element, instance, reserved, value, key) {
             // This function will be called whenever the picker value is changed
