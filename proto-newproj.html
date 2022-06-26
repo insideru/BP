@@ -127,7 +127,29 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Faze Proiect<div class="right"><span data-jq-dropdown="#phasesMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
-            <p></p>
+            <table class="centered">
+              <tbody id="phasesList">
+
+              </tbody>
+            </table>
+            <table class="centered">
+              <thead>
+                <tr>
+                  <td>Nume</td>
+                  <td>Adauga</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="input-field">
+                    <input type="text" id="projPhaseName">
+                    </div>
+                  </td>
+                  <td><a class="waves-effect waves-light btn-small" onclick="addProjPhase();">Adauga faza</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -135,7 +157,30 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Milestones<div class="right"><span data-jq-dropdown="#milestonesMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
-            <p></p>
+            <table class="centered">
+              <tbody id="milestonesList">
+
+              </tbody>
+            </table>
+            <table class="centered">
+              <thead>
+                <tr>
+                  <td>Nume</td>
+                  <td>Tip</td>
+                  <td>Adauga</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="input-field">
+                    <input type="text" id="projMilestoneName">
+                    </div>
+                  </td>
+                  <td><a class="waves-effect waves-light btn-small" onclick="addProjMilestone();">Adauga milestone</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
