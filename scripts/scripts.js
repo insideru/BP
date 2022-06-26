@@ -2052,6 +2052,7 @@ function loadTemplate(tmpltID) {
                   break;
         }
         $('#detailsList').append(newRow);
+        saveTemplateData.push({name: detailName, type: Number(sto.type)});
       });
     }
   });
