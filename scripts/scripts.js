@@ -27,7 +27,7 @@ daysOffObject = [];
 var retObject = new Object;
 var holidayArray = new Array;
 var detailNumber = 1;
-var saveTemplate = new Array;
+var saveTemplateData = new Array;
 var templates = new Array;
 
 $.fn.exists = function () {
@@ -2018,5 +2018,72 @@ function addProjDetail() {
   $('#detailsList').append(newRow);
   $('#projDetailName').val("");
   $('#projDetailName').removeClass("invalid");
-  saveTemplate.push({name: detailName, type: Number($('#addDetailType').val())});
+  saveTemplateData.push({name: detailName, type: Number($('#addDetailType').val())});
+}
+
+function populateTemplatesMenu() {
+  $('#saveLoadMenuItems').html('');
+  templates.forEach(element => {
+    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+  });
+    $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`);
+    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate()">Salveaza ca sablon</a></li>`);
+}
+
+function loadTemplate(tmpltID) {
+  templates.forEach(elem => {
+    if (elem.id == tmpltID) {
+      let tmpltData = JSON.parse(elem.options);
+      detailNumber = 0;
+      tmpltData.forEach(sto => {
+        let newRow = "";
+        let detailName = sto.name;
+        switch (Number(sto.type)) {
+          case 0: //text
+                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+                  break;
+          case 1: //bifa
+                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+                  break;
+          case 2: //textarea
+                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+                  break;
+        }
+        $('#detailsList').append(newRow);
+      });
+    }
+  });
+}
+
+function saveTemplate() {
+  let response = prompt("Introdu un nou nume:");
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || response == "" || saveTemplateData.length < 1) {
+    return 0;
+  }
+  var formData = {
+    'action'  : 'saveTemplate',
+    'name'    : response,
+    'data'    : JSON.stringify(saveTemplateData)
+  };
+  $.ajax({
+    url: 'handler.php',
+    type: 'POST',
+    encode: true,
+    //dataType: 'json',
+    data: formData,
+    success: function(idFromTheServer) {
+      if (idFromTheServer.substring(0,8) == "Success:") {
+        // Set the item id from the number sent by the remote server
+        //instance.setId(item, idFromTheServer.substring(8));
+        //templates.push({name: response, options: JSON.stringify(saveTemplate)});
+        templates.push({id: idFromTheServer.substring(8), name: response, options: JSON.stringify(saveTemplateData)});
+        populateTemplatesMenu();
+        M.toast({html: 'Sablonul a fost salvat cu succes!'});
+      }
+    },
+    error: function(errData) {
+      M.toast({html: errData});
+    }
+  });
 }
