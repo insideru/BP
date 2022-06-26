@@ -44,7 +44,7 @@
     </ul>
 
     <div class="row">
-      <div class="col s12 m6 l6">
+      <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Informatii de baza</span>
@@ -70,12 +70,28 @@
                   <td>Proiect extern</td>
                   <td><label><input type="checkbox" class="filled-in" id="extern" /><span></span></label></td>
                 </tr>
+                <tr>
+                  <td>Buget</td>
+                  <td class="center-align">
+                    <div class="input-field" style="width: 280px; margin: auto;">
+                      <input type="text" id="projBudget">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Data incepere</td>
+                  <td><input style="text-align:center;" type="text" id="projStartDate" class="datepicker"></td>
+                </tr>
+                <tr>
+                  <td>Data predare</td>
+                  <td><input style="text-align:center;" type="text" id="projDeadline" class="datepicker"></td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="col s12 m6 l6">
+      <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Detalii proiect<div class="right"><span data-jq-dropdown="#saveLoadMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
@@ -107,7 +123,7 @@
           </div>
         </div>
       </div>
-      <div class="col s12 m6 l6">
+      <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Faze Proiect</span>
@@ -115,7 +131,7 @@
           </div>
         </div>
       </div>
-      <div class="col s12 m6 l6">
+      <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Milestones</span>
@@ -132,8 +148,26 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+
         jSuites.picker(document.getElementById('addDetailType'), {
             data: ['Text scurt', 'Bifa', 'Text lung']});
+
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        format: 'dd mmmm yyyy',
+        onClose: changeSelectedDate,
+        firstDay: 1,
+        i18n: {
+            weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
+            weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
+            weekdaysAbbrev: ['D','L','M','M','J','V','S'],
+            months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+            monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
+            }
+        });
+
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
