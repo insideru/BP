@@ -132,8 +132,35 @@
         $('.sidenav').sidenav();
         jSuites.picker(document.getElementById('addDetailType'), {
             data: ['Text scurt', 'Bifa', 'Text lung']});
-        jSuites.picker(document.getElementById('saveLoad'), {
-          data: ['Template 1', 'Template 2', 'Salveaza ca template'],
+        $.get("handler.php?r=init", function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
+          clientsObject = initData.clients;
+          //collabCatsObject = initData.collabCats;
+          projCatsObject = initData.projCats;
+          templates = initData.templates;
+          let tmplData = new Array;
+          templates.forEach(element => {
+            tmplData.push(element.name);
+          });
+          tmplData.push('Salveaza ca template');
+          var projCats = new Array;
+          projCatsObject.forEach(element => {
+            projCats.push({value: element.id, text: element.name});
+          });
+          jSuites.dropdown(document.getElementById('projType'), {
+            data: projCats,
+            onchange: function(element, index) {
+              //idul selectat e Object.keys(index.value)[0];
+            },
+            width:'280px'});
+
+          var projClients = new Array;
+          clientsObject.forEach(element => {
+            projClients.push({value: element.id, text: element.name});
+          });
+          jSuites.picker(document.getElementById('saveLoad'), {
+          data: tmplData,
           content: 'more_vert',
           onchange: function(element, instance, reserved, value, key) {
             // This function will be called whenever the picker value is changed
@@ -167,38 +194,15 @@
                   }
               });
             } else {
+              templates.forEach(elem => {
+                if (elem.name == value) {
+                  console.log(JSON.parse(elem.options));
+                }
+              })
               //load template
             }
           }
-        })
-        $.get("handler.php?r=init", function(data, status) {
-          //console.log("Data: " + data + "\nStatus: " + status);
-          initData = JSON.parse(data);
-          clientsObject = initData.clients;
-          //collabCatsObject = initData.collabCats;
-          projCatsObject = initData.projCats;
-          //collabsObject = initData.collabs;
-          //projectsObject = initData.projects;
-          //activitiesObject = initData.activities;
-          //holidaysObject = initData.holidays;
-          //accountsObject = initData.accounts;
-          //alltimesheetsObject = initData.timesheets;
-          //salariesObject = initData.salaries;
-          var projCats = new Array;
-          projCatsObject.forEach(element => {
-            projCats.push({value: element.id, text: element.name});
-          });
-          jSuites.dropdown(document.getElementById('projType'), {
-            data: projCats,
-            onchange: function(element, index) {
-              //idul selectat e Object.keys(index.value)[0];
-            },
-            width:'280px'});
-
-          var projClients = new Array;
-          clientsObject.forEach(element => {
-            projClients.push({value: element.id, text: element.name});
-          });
+        });
           jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,

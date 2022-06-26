@@ -185,6 +185,7 @@ if ($_REQUEST["r"]=="init") {
         $response["salaries"] = getSalaries();
         $response["permissions"] = getPermissions();
         $response["daysoff"] = getAllDaysOff();
+        $response["templates"] = getTemplates();
     } else {
         $response["collabs"] = getCollabs();
         $response["projects"] = getProjects();

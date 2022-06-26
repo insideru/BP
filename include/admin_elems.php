@@ -178,6 +178,33 @@ function saveTemplate (string $name, string $data) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function getTemplates() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.project_templates';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function getClients() {
     /* Global $pdo object */
     global $pdo;
