@@ -2002,7 +2002,6 @@ function addProjDetail() {
     $('#projDetailName').addClass("invalid");
     return 0;
   }
-  console.log($('#addDetailType').val());
   switch ($('#addDetailType').val()) {
     case 0: //text
             newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
@@ -2011,6 +2010,7 @@ function addProjDetail() {
             newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
             break;
   }
+  console.log(newRow);
   $('#detailsList').append(newRow);
   $('#projDetailName').val("");
   $('#projDetailName').removeClass("invalid");
