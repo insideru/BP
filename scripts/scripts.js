@@ -2009,6 +2009,9 @@ function addProjDetail() {
     case 1: //bifa
             newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
             break;
+    case 2: //textarea
+            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+            break;
   }
   console.log(newRow);
   $('#detailsList').append(newRow);
