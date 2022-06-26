@@ -2,6 +2,7 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
@@ -9,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="styles/jquery.dropdown.min.css" />
+    <script type="text/javascript" src="scripts/jquery.dropdown.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     </head>
   <body>
     <nav>
@@ -74,7 +78,7 @@
       <div class="col s12 m6 l6">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">Detalii proiect<div class="right" id="saveLoad" style="font-size: small;"></div></span>
+            <span class="card-title">Detalii proiect<div class="right"><span data-dropdown="#saveLoadMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
             <table class="centered">
               <tbody id="detailsList">
 
@@ -120,8 +124,6 @@
         </div>
       </div>
     </div>
-                
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
@@ -140,10 +142,6 @@
           projCatsObject = initData.projCats;
           templates = initData.templates;
           let tmplData = new Array;
-          templates.forEach(element => {
-            tmplData.push(element.name);
-          });
-          tmplData.push('Salveaza ca template');
           var projCats = new Array;
           projCatsObject.forEach(element => {
             projCats.push({value: element.id, text: element.name});
@@ -159,7 +157,7 @@
           clientsObject.forEach(element => {
             projClients.push({value: element.id, text: element.name});
           });
-          jSuites.picker(document.getElementById('saveLoad'), {
+          /*jSuites.picker(document.getElementById('saveLoad'), {
           data: tmplData,
           content: 'more_vert',
           onchange: function(element, instance, reserved, value, key) {
@@ -168,7 +166,7 @@
             if (value=="Salveaza ca template") {
               let response = prompt("Introdu un nou nume:");
               if (typeof response === 'string') { response = response.trim(); }
-              if (response == null || response == "") {
+              if (response == null || response == "" || saveTemplate.length < 1) {
                 return 0;
               }
               var formData = {
@@ -185,8 +183,11 @@
                   success: function(idFromTheServer) {
                       if (idFromTheServer.substring(0,8) == "Success:") {
                         // Set the item id from the number sent by the remote server
-                        instance.setId(item, idFromTheServer.substring(8));
-                        templates.push({name: response, options: JSON.stringify(saveTemplate)});
+                        //instance.setId(item, idFromTheServer.substring(8));
+                        //templates.push({name: response, options: JSON.stringify(saveTemplate)});
+                        tmplData.pop();
+                        tmplData.push(response);
+                        tmplData.push('Salveaza ca template');
                       }
                   },
                   error: function(errData) {
@@ -202,7 +203,7 @@
               //load template
             }
           }
-        });
+        });*/
           jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
@@ -242,6 +243,17 @@
       })
     </script>
     <?php if ($account->permissions['timesheet']) {echo '<script>addPontajButton=1;</script>';} else {echo '<script>addPontajButton=0;</script>';}?>
+    <div id="saveLoadMenu" class="dropdown dropdown-tip">
+      <ul class="dropdown-menu" id="saveLoadMenuItems">
+          <li><a href="#1">Item 1</a></li>
+          <li><a href="#2">Item 2</a></li>
+          <li><a href="#3">Item 3</a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="#4">Item 4</a></li>
+          <li><a href="#5">Item 5</a></li>
+          <li><a href="#5">Item 6</a></li>
+      </ul>
+  </div>
   </body>
 </html>
       
