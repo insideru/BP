@@ -27,6 +27,7 @@ daysOffObject = [];
 var retObject = new Object;
 var holidayArray = new Array;
 var detailNumber = 1;
+var saveTemplate = new Array;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2017,4 +2018,5 @@ function addProjDetail() {
   $('#detailsList').append(newRow);
   $('#projDetailName').val("");
   $('#projDetailName').removeClass("invalid");
+  saveTemplate.push({name: detailName, type: Number($('#addDetailType').val())});
 }
