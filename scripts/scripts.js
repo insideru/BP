@@ -2023,16 +2023,30 @@ function addProjDetail() {
 
 function populateTemplatesMenu() {
   $('#saveLoadMenuItems').html('');
-  let detailsTemplates = 0;
+  $('#phasesMenuItems').html('');
+  $('#milestonesMenuItems').html('');
+  let detailsTemplates = 0, phasesTemplates = 0, milestonesTemplates = 0;
   templates.forEach(element => {
     if (Number(element.type) == 0) {
       detailsTemplates++;
       $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
     }
+    if (Number(element.type) == 1) {
+      phasesTemplates++;
+      $('#phasesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+    }
+    if (Number(element.type) == 2) {
+      milestonesTemplates++;
+      $('#milestonesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+    }
   });
-  if (Number(element.type) == 0) {
     if (detailsTemplates>0) { $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
-    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`); }
+    if (phasesTemplates>0) { $('#phasesMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
+    if (milestonesTemplates>0) { $('#milestonesMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
+
+    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`);
+    $('#phasesMenuItems').append(`<li><a href="#" onClick="saveTemplate(1)">Salveaza ca sablon</a></li>`);
+    $('#milestonesMenuItems').append(`<li><a href="#" onClick="saveTemplate(2)">Salveaza ca sablon</a></li>`);
 }
 
 function loadTemplate(tmpltID) { 
