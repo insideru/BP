@@ -28,6 +28,7 @@ var retObject = new Object;
 var holidayArray = new Array;
 var detailNumber = 1;
 var saveTemplate = new Array;
+var templates = new Array;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2014,7 +2015,6 @@ function addProjDetail() {
             newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
             break;
   }
-  console.log(newRow);
   $('#detailsList').append(newRow);
   $('#projDetailName').val("");
   $('#projDetailName').removeClass("invalid");

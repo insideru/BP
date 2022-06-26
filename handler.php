@@ -120,6 +120,10 @@ if ($_POST["action"]=="addToDB") {
     }
 }
 
+if ($_POST["action"]=="saveTemplate") {
+    echo saveTemplate($_POST["name"], $_POST["data"]);
+}
+
 if ($_POST["action"]=="changeProjState") {
     echo changeProjectState((int)$_POST["proj_id"]);
 }

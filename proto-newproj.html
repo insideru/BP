@@ -139,7 +139,33 @@
             // This function will be called whenever the picker value is changed
             // As this is just an example, I will just print the new picker value on the console
             if (value=="Salveaza ca template") {
-              console.log(saveTemplate);
+              let response = prompt("Introdu un nou nume:");
+              if (typeof response === 'string') { response = response.trim(); }
+              if (response == null || response == "") {
+                return 0;
+              }
+              var formData = {
+                'action'  : 'saveTemplate',
+                'name'    : response,
+                'data'    : JSON.stringify(saveTemplate)
+              };
+              $.ajax({
+                  url: 'handler.php',
+                  type: 'POST',
+                  encode: true,
+                  //dataType: 'json',
+                  data: formData,
+                  success: function(idFromTheServer) {
+                      if (idFromTheServer.substring(0,8) == "Success:") {
+                        // Set the item id from the number sent by the remote server
+                        instance.setId(item, idFromTheServer.substring(8));
+                        templates.push({name: response, options: JSON.stringify(saveTemplate)});
+                      }
+                  },
+                  error: function(errData) {
+                    M.toast({html: errData});
+                  }
+              });
             } else {
               //load template
             }
@@ -202,7 +228,7 @@
                       }
                   },
                   error: function(errData) {
-                    console.log(errData);
+                    M.toast({html: errData});
                   }
               });
             },

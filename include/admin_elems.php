@@ -150,6 +150,34 @@ function addClient (string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function saveTemplate (string $name, string $data) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.project_templates (name, options) VALUES (:name, :options)';
+    
+    /* Values array for PDO */
+    $values = array(':name' => $name, ':options' => $data);
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error: ".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success:" . $pdo->lastInsertId();
+}
+
 function getClients() {
     /* Global $pdo object */
     global $pdo;
