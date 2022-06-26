@@ -150,16 +150,16 @@ function addClient (string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function saveTemplate (string $name, string $data) {
+function saveTemplate (int $type, string $name, string $data) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.project_templates (name, options) VALUES (:name, :options)';
+    $query = 'INSERT INTO '.$schema.'.project_templates (type, name, options) VALUES (:type, :name, :options)';
     
     /* Values array for PDO */
-    $values = array(':name' => $name, ':options' => $data);
+    $values = array(':type' => $type, ':name' => $name, ':options' => $data);
     
     /* Execute the query */
     try

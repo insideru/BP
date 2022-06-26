@@ -65,6 +65,7 @@ ALTER TABLE `project_milestones`
 
 CREATE TABLE `project_templates` (
   `id` int(10) UNSIGNED NOT NULL,
+  `type` int(2) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `options` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

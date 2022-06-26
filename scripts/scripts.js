@@ -2023,51 +2023,63 @@ function addProjDetail() {
 
 function populateTemplatesMenu() {
   $('#saveLoadMenuItems').html('');
+  let detailsTemplates = 0;
   templates.forEach(element => {
-    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+    if (Number(element.type) == 0) {
+      detailsTemplates++;
+      $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+    }
   });
-    $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`);
-    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate()">Salveaza ca sablon</a></li>`);
+  if (Number(element.type) == 0) {
+    if (detailsTemplates>0) { $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
+    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`); }
 }
 
-function loadTemplate(tmpltID) {
+function loadTemplate(tmpltID) { 
   $('#detailsList').html('');
   saveTemplateData = new Array;
   templates.forEach(elem => {
     if (elem.id == tmpltID) {
-      let tmpltData = JSON.parse(elem.options);
-      detailNumber = 0;
-      tmpltData.forEach(sto => {
-        let newRow = "";
-        let detailName = sto.name;
-        switch (Number(sto.type)) {
-          case 0: //text
-                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
-                  break;
-          case 1: //bifa
-                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
-                  break;
-          case 2: //textarea
-                  newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
-                  break;
-        }
-        $('#detailsList').append(newRow);
-        saveTemplateData.push({name: detailName, type: Number(sto.type)});
-      });
+      if (elem.type == 0) {
+        let tmpltData = JSON.parse(elem.options);
+        detailNumber = 0;
+        tmpltData.forEach(sto => {
+          let newRow = "";
+          let detailName = sto.name;
+          switch (Number(sto.type)) {
+            case 0: //text
+                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+                    break;
+            case 1: //bifa
+                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+                    break;
+            case 2: //textarea
+                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+                    break;
+          }
+          $('#detailsList').append(newRow);
+          saveTemplateData.push({name: detailName, type: Number(sto.type)});
+        });
+      }
     }
   });
 }
 
-function saveTemplate() {
+function saveTemplate(type) {
   let response = prompt("Introdu un nou nume:");
+  let sentData = "";
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || response == "" || saveTemplateData.length < 1) {
     return 0;
   }
+  switch (type) {
+    case 0: sentData = JSON.stringify(saveTemplateData); break;
+  }
   var formData = {
     'action'  : 'saveTemplate',
     'name'    : response,
-    'data'    : JSON.stringify(saveTemplateData)
+    'type'    : type,
+    'data'    : sentData
   };
   $.ajax({
     url: 'handler.php',
@@ -2080,7 +2092,7 @@ function saveTemplate() {
         // Set the item id from the number sent by the remote server
         //instance.setId(item, idFromTheServer.substring(8));
         //templates.push({name: response, options: JSON.stringify(saveTemplate)});
-        templates.push({id: idFromTheServer.substring(8), name: response, options: JSON.stringify(saveTemplateData)});
+        templates.push({id: idFromTheServer.substring(8), type: 0, name: response, options: sentData});
         populateTemplatesMenu();
         M.toast({html: 'Sablonul a fost salvat cu succes!'});
       }
