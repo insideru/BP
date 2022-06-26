@@ -2002,7 +2002,7 @@ function addProjDetail() {
     $('#projDetailName').addClass("invalid");
     return 0;
   }
-  switch ($('#addDetailType').val()) {
+  switch (Number($('#addDetailType').val())) {
     case 0: //text
             newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
             break;
