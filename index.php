@@ -22,6 +22,9 @@ if ($account->authenticated) {
         } else if ($_GET['page']=="admin"){
             require "proto-admin.html";
             die;
+        } else if ($_GET['page']=="newProject"){
+            require "proto-newproj.html";
+            die;
         } else if ($_GET['page']=="logout"){
             logout();
             header("Location: /");
