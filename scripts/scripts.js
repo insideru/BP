@@ -2031,6 +2031,8 @@ function populateTemplatesMenu() {
 }
 
 function loadTemplate(tmpltID) {
+  $('#detailsList').html('');
+  saveTemplateData = new Array;
   templates.forEach(elem => {
     if (elem.id == tmpltID) {
       let tmpltData = JSON.parse(elem.options);
