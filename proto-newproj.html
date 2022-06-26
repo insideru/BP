@@ -133,7 +133,17 @@
         jSuites.picker(document.getElementById('addDetailType'), {
             data: ['Text scurt', 'Bifa', 'Text lung']});
         jSuites.picker(document.getElementById('saveLoad'), {
-          data: ['Template 1', 'Template 2', 'Salveaza ca template'],
+          data: [{ group:'Breads', value:'1', text:'Wholemeal' },
+        { group:'Breads', value:'2', text:'Wholegrain' },
+        { group:'Breads', value:'3', text:'White' },
+        { group:'Breakfast Cereals', value:'4', text:'High fibre (wholegrain) oats' },
+        { group:'Breakfast Cereals', value:'5', text:'Porridge' },
+        { group:'Breakfast Cereals', value:'6', text:'Muesli' },
+        { group:'Grains', value:'7', text:'Rice' },
+        { group:'Grains', value:'8', text:'Barley' },
+        { group:'Grains', value:'9', text:'Corn' },
+        { group:'Other products', value:'10', text:'Pasta' },
+        { group:'Other products', value:'11', text:'Noodles' }],
           content: 'more_vert',
           onchange: function(element, instance, reserved, value, key) {
             // This function will be called whenever the picker value is changed
