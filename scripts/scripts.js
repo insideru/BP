@@ -2116,3 +2116,29 @@ function saveTemplate(type) {
     }
   });
 }
+
+function addProjPhase() {
+  let detailName = $('#projPhaseName').val().trim();
+  let newRow = "";
+  if (detailName=="") {
+    $('#projPhaseName').addClass("invalid");
+    return 0;
+  }
+  newRow = `<tr><td id="phaseName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="phaseValue_${detailNumber++}" type="text"></div></td></tr>`;
+  $('#phasesList').append(newRow);
+  $('#projPhaseName').val("");
+  $('#projPhaseName').removeClass("invalid");
+}
+
+function addProjMilestone() {
+  let detailName = $('#projMilestoneName').val().trim();
+  let newRow = "";
+  if (detailName=="") {
+    $('#projMilestoneName').addClass("invalid");
+    return 0;
+  }
+  newRow = `<tr><td id="phaseName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="phaseValue_${detailNumber++}" type="text"></div></td></tr>`;
+  $('#milestonesList').append(newRow);
+  $('#projMilestoneName').val("");
+  $('#projMilestoneName').removeClass("invalid");
+}
