@@ -156,7 +156,35 @@ function saveTemplate (int $type, string $name, string $data) {
     global $schema;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.project_templates (type, name, options) VALUES (:type, :name, :options)';
+    $query = 'SELECT * FROM '.$schema.'.project_templates WHERE (type = :type) AND (name = :name)';
+    
+    /* Values array for PDO */
+    $values = array(':type' => $type, ':name' => $name);
+
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error: ".$e->getMessage();
+        die();
+    }
+
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    if (sizeof($fields)==0) {
+        /* Insert query template */
+        $query = 'INSERT INTO '.$schema.'.project_templates (type, name, options) VALUES (:type, :name, :options)';
+    } else {
+        $query = 'UPDATE '.$schema.'.project_templates SET options = :options WHERE (type = :type) AND (name = :name)';
+    }
     
     /* Values array for PDO */
     $values = array(':type' => $type, ':name' => $name, ':options' => $data);
@@ -294,7 +322,7 @@ function changeProjectState (int $proj_id) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET active = CASE WHEN active = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $query = 'UPDATE '. $schema . '.projects SET active = CASE WHEN active = 1 THEN 0 ELSE 1 END WHERE id = :id';
     $values = array(":id" => $proj_id);
 
     try
@@ -323,7 +351,7 @@ function changeProjExternal (int $proj_id) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET external = CASE WHEN external = 1 THEN 0 ELSE 1 END WHERE id = :id';
+    $query = 'UPDATE '. $schema . '.projects SET external = CASE WHEN external = 1 THEN 0 ELSE 1 END WHERE id = :id';
     $values = array(":id" => $proj_id);
 
     try
@@ -434,7 +462,7 @@ function setProjectBudget (int $proj_id, int $new_budget) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET budget = :new_budget WHERE id = :proj_id';
+    $query = 'UPDATE '. $schema . '.projects SET budget = :new_budget WHERE id = :proj_id';
     $values = array(':proj_id' => $proj_id, ':new_budget' => $new_budget);
 
     try
@@ -727,7 +755,7 @@ function changePermissionItem(int $rowNo, string $columnName) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.permissions SET '.$columnName.' = CASE WHEN '.$columnName.' = 1 THEN 0 ELSE 1 END WHERE id = :rowNo';
+    $query = 'UPDATE '. $schema . '.permissions SET '.$columnName.' = CASE WHEN '.$columnName.' = 1 THEN 0 ELSE 1 END WHERE id = :rowNo';
     $values = array(":rowNo" => $rowNo);
 
     try

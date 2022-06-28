@@ -2101,6 +2101,12 @@ function saveTemplate(type) {
   if (response == null || response == "" || saveTemplateData.length < 1) {
     return 0;
   }
+  for (let elem of templates) {
+    if (elem.name == response && elem.type == type) {
+      if (!confirm("Numele exista, sigur vrei sa rescrii sablonul?")) return 0;
+    }
+  }
+  
   switch (type) {
     case 0: sentData = JSON.stringify(saveTemplateData); break;
   }

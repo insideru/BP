@@ -71,8 +71,7 @@ CREATE TABLE `project_templates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `project_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `project_templates`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
