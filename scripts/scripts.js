@@ -2124,7 +2124,7 @@ function addProjPhase() {
     $('#projPhaseName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td id="phaseName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="phaseValue_${detailNumber++}" type="text"></div></td></tr>`;
+  newRow = `<tr><td id="phaseName_${detailNumber++}">${detailName}</td></tr>`;
   $('#phasesList').append(newRow);
   $('#projPhaseName').val("");
   $('#projPhaseName').removeClass("invalid");
@@ -2137,7 +2137,7 @@ function addProjMilestone() {
     $('#projMilestoneName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td id="phaseName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="phaseValue_${detailNumber++}" type="text"></div></td></tr>`;
+  newRow = `<tr><td id="phaseName_${detailNumber++}">${detailName}</td></tr>`;
   $('#milestonesList').append(newRow);
   $('#projMilestoneName').val("");
   $('#projMilestoneName').removeClass("invalid");
