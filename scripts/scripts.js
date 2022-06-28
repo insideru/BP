@@ -26,8 +26,12 @@ norme = new Object;
 daysOffObject = [];
 var retObject = new Object;
 var holidayArray = new Array;
-var detailNumber = 1;
+var detailNumber = 0;
+var phaseNumber = 0;
+var milestoneNumber = 0;
 var saveTemplateData = new Array;
+var savePhaseData = new Array;
+var saveMilestoneData = new Array;
 var templates = new Array;
 
 $.fn.exists = function () {
@@ -39,6 +43,17 @@ function arrayRemove(arr, value) {
       return ele.id != value; 
   });
 }
+
+function array_move(arr, old_index, new_index) {
+  if (new_index >= arr.length) {
+      var k = new_index - arr.length + 1;
+      while (k--) {
+          arr.push(undefined);
+      }
+  }
+  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  return arr; // for testing
+};
 
 function roundUp(num, precision) {
   let newnumber = 0;
@@ -2006,13 +2021,13 @@ function addProjDetail() {
   }
   switch (Number($('#addDetailType').val())) {
     case 0: //text
-            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
             break;
     case 1: //bifa
-            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
             break;
     case 2: //textarea
-            newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
             break;
   }
   $('#detailsList').append(newRow);
@@ -2062,13 +2077,13 @@ function loadTemplate(tmpltID) {
           let detailName = sto.name;
           switch (Number(sto.type)) {
             case 0: //text
-                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
                     break;
             case 1: //bifa
-                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
                     break;
             case 2: //textarea
-                    newRow = `<tr><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
                     break;
           }
           $('#detailsList').append(newRow);
@@ -2124,10 +2139,11 @@ function addProjPhase() {
     $('#projPhaseName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td id="phaseName_${detailNumber++}">${detailName}</td></tr>`;
+  newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="phaseName_${phaseNumber++}">${detailName}</td></tr>`;
   $('#phasesList').append(newRow);
   $('#projPhaseName').val("");
   $('#projPhaseName').removeClass("invalid");
+  savePhaseData.push({name: detailName});
 }
 
 function addProjMilestone() {
@@ -2137,8 +2153,10 @@ function addProjMilestone() {
     $('#projMilestoneName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td id="phaseName_${detailNumber++}">${detailName}</td></tr>`;
+  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="milestoneName_${milestoneNumber++}">${detailName}</td></tr>`;
   $('#milestonesList').append(newRow);
   $('#projMilestoneName').val("");
   $('#projMilestoneName').removeClass("invalid");
+  saveMilestoneData.push({name: detailName});
 }
+

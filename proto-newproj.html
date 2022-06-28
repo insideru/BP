@@ -13,6 +13,8 @@
     <link type="text/css" rel="stylesheet" href="styles/jquery.dropdown.css" />
     <script type="text/javascript" src="scripts/jquery.dropdown.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheer" href="styles/styles.css">
+    <script type="text/javascript" src="scripts/RowSorter.js"></script>
     </head>
   <body>
     <nav>
@@ -95,7 +97,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Detalii proiect<div class="right"><span data-jq-dropdown="#saveLoadMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
-            <table class="centered">
+            <table class="centered" id="detailsTable">
               <tbody id="detailsList">
 
               </tbody>
@@ -112,7 +114,7 @@
                 <tr>
                   <td>
                     <div class="input-field">
-                    <input type="text" id="projDetailName">
+                    <input type="text" id="projDetailName" onkeypress="if (event.keyCode==13) addProjDetail();">
                     </div>
                   </td>
                   <td><div id="addDetailType"></div></td>
@@ -127,7 +129,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Faze Proiect<div class="right"><span data-jq-dropdown="#phasesMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
-            <table class="centered">
+            <table class="centered" id="phasesTable">
               <tbody id="phasesList">
 
               </tbody>
@@ -143,7 +145,7 @@
                 <tr>
                   <td>
                     <div class="input-field">
-                    <input type="text" id="projPhaseName">
+                    <input type="text" id="projPhaseName" onkeypress="if (event.keyCode==13) addProjPhase();">
                     </div>
                   </td>
                   <td><a class="waves-effect waves-light btn-small" onclick="addProjPhase();">Adauga faza</a></td>
@@ -157,7 +159,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Milestones<div class="right"><span data-jq-dropdown="#milestonesMenu"><i class="bi bi-three-dots-vertical"></i></span></div></span>
-            <table class="centered">
+            <table class="centered" id="milestonesTable">
               <tbody id="milestonesList">
 
               </tbody>
@@ -173,7 +175,7 @@
                 <tr>
                   <td>
                     <div class="input-field">
-                    <input type="text" id="projMilestoneName">
+                    <input type="text" id="projMilestoneName"  onkeypress="if (event.keyCode==13) addProjMilestone();">
                     </div>
                   </td>
                   <td><a class="waves-effect waves-light btn-small" onclick="addProjMilestone();">Adauga milestone</a></td>
@@ -192,6 +194,34 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+        $('#detailsTable').rowSorter({
+          handler: 'i.sorter',
+          dragClass: 'sorting-row',
+          tableClass: 'sorting-table',
+          onDrop: function(tbody, row, new_index, old_index){
+            array_move(saveTemplateData, old_index, new_index);
+            console.log(saveTemplateData);
+          }
+        });
+        $('#phasesTable').rowSorter({
+          handler: 'i.sorter',
+          dragClass: 'sorting-row',
+          tableClass: 'sorting-table',
+          onDrop: function(tbody, row, new_index, old_index){
+            array_move(savePhaseData, old_index, new_index);
+            console.log(savePhaseData);
+          }
+
+        });
+        $('#milestonesTable').rowSorter({
+          handler: 'i.sorter',
+          dragClass: 'sorting-row',
+          tableClass: 'sorting-table',
+          onDrop: function(tbody, row, new_index, old_index){
+            array_move(saveMilestoneData, old_index, new_index);
+            console.log(saveMilestoneData);
+          }
+        });
 
         jSuites.picker(document.getElementById('addDetailType'), {
             data: ['Text scurt', 'Bifa', 'Text lung']});
