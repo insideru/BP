@@ -2039,6 +2039,7 @@ function populateTemplatesMenu() {
     $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`);
     $('#phasesMenuItems').append(`<li><a href="#" onClick="saveTemplate(1)">Salveaza ca sablon</a></li>`);
     $('#milestonesMenuItems').append(`<li><a href="#" onClick="saveTemplate(2)">Salveaza ca sablon</a></li>`);
+    $('i.tiny').click(function(event){event.preventDefault();deleteTemplate(event.currentTarget.parentNode.innerHTML.split('<')[0], event.currentTarget.parentNode.parentNode.parentNode.id.substring(0,1));});
 }
 
 function loadTemplate(tmpltID) { 

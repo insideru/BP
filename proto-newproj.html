@@ -195,8 +195,6 @@
         $('.modal').modal();
         $('.sidenav').sidenav();
 
-        $('i.tiny').click(function(event){event.preventDefault();deleteTemplate(event.currentTarget.parentNode.innerHTML.split('<')[0], event.currentTarget.parentNode.parentNode.parentNode.id.substring(0,1));});
-
         $('#detailsTable').rowSorter({
           handler: 'i.sorter',
           dragClass: 'sorting-row',
