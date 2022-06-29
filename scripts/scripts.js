@@ -2193,6 +2193,8 @@ function addProjMilestone() {
 
 function deleteTemplate (name, type) {
   if (!confirm("Sigur vrei sa stergi sablonul?")) return 0;
+  console.log(name, type);
+  console.log(templates);
   var formData = {
     'action'  : 'deleteTemplate',
     'name'    : name,
