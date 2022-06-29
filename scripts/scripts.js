@@ -2101,6 +2101,7 @@ function loadTemplate(tmpltID) {
 
 function saveTemplate(type) {
   let defValue = "";
+  let sentData = 0;
   
   switch (type) {
     case 0: (saveTemplateData.length>0?sentData = JSON.stringify(saveTemplateData):sentData = 0); defValue = defDetlTmplt; break;
@@ -2113,7 +2114,6 @@ function saveTemplate(type) {
   }
 
   let response = prompt("Introdu un nou nume:", defValue);
-  let sentData = "";
 
   if (typeof response === 'string') { response = response.trim(); }
   if (response == null || response == "" || saveTemplateData.length < 1) {
