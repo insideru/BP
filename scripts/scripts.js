@@ -2149,7 +2149,7 @@ function saveTemplate(type) {
         //templates.push({name: response, options: JSON.stringify(saveTemplate)});
         if (overwrite) {
           for (let elem of templates) {
-            if (elem.id == idFromTheServer) elem.options = sentData;
+            if (elem.name == response && elem.type == type) { elem.options = sentData; }
           }
         } else {
           templates.push({id: idFromTheServer.substring(8), type: type, name: response, options: sentData});
