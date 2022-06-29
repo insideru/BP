@@ -194,6 +194,9 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+
+        $('i.tiny').click(function(event){event.preventDefault();deleteTemplate(event.currentTarget.parentNode.innerHTML.split('<')[0], event.currentTarget.parentNode.parentNode.parentNode.id.substring(0,1));});
+
         $('#detailsTable').rowSorter({
           handler: 'i.sorter',
           dragClass: 'sorting-row',
@@ -304,9 +307,9 @@
     <?php if ($account->permissions['timesheet']) {echo '<script>addPontajButton=1;</script>';} else {echo '<script>addPontajButton=0;</script>';}?>
     <div id="saveLoadMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right">
       <ul class="jq-dropdown-menu" id="saveLoadMenuItems">
-          <li><a href="#1">Item 1</a></li>
-          <li><a href="#2">Item 2</a></li>
-          <li><a href="#3">Item 3</a></li>
+          <li><a href="#1">Item 1<i class="material-icons tiny right red-text">delete</i></a></li>
+          <li><a href="#2">Item 2<i class="material-icons tiny right red-text">delete</i></a></li>
+          <li><a href="#3">Item 3<i class="material-icons tiny right red-text">delete</i></a></li>
           <li class="jq-dropdown-divider"></li>
           <li><a href="#4">Item 4</a></li>
           <li><a href="#5">Item 5</a></li>
@@ -315,9 +318,9 @@
   </div>
   <div id="phasesMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right">
     <ul class="jq-dropdown-menu" id="phasesMenuItems">
-        <li><a href="#1">Item 1</a></li>
-        <li><a href="#2">Item 2</a></li>
-        <li><a href="#3">Item 3</a></li>
+        <li><a href="#1">Item 1<i class="material-icons tiny right red-text">delete</i></a></li>
+        <li><a href="#2">Item 2<i class="material-icons tiny right red-text">delete</i></a></li>
+        <li><a href="#3">Item 3<i class="material-icons tiny right red-text">delete</i></a></li>
         <li class="jq-dropdown-divider"></li>
         <li><a href="#4">Item 4</a></li>
         <li><a href="#5">Item 5</a></li>
@@ -326,9 +329,9 @@
   </div>
   <div id="milestonesMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right">
     <ul class="jq-dropdown-menu" id="milestonesMenuItems">
-        <li><a href="#1">Item 1</a></li>
-        <li><a href="#2">Item 2</a></li>
-        <li><a href="#3">Item 3</a></li>
+        <li><a href="#1">Item 1<i class="material-icons tiny right red-text">delete</i></a></li>
+        <li><a href="#2">Item 2<i class="material-icons tiny right red-text">delete</i></a></li>
+        <li><a href="#3">Item 3<i class="material-icons tiny right red-text">delete</i></a></li>
         <li class="jq-dropdown-divider"></li>
         <li><a href="#4">Item 4</a></li>
         <li><a href="#5">Item 5</a></li>

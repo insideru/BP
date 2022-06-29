@@ -206,6 +206,28 @@ function saveTemplate (int $type, string $name, string $data) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function deleteTemplate (int $type, string $name) {
+    global $pdo;
+	global $schema;
+
+	$query = 'DELETE FROM '.$schema.'.project_templates WHERE (type = :type) AND (name = :name)';
+	$values = array(':type' => $type, ':name' => name);
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute($values);
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error: ".$e->getMessage();
+        die();
+	}
+
+    echo "Success!";
+}
+
 function getTemplates() {
     /* Global $pdo object */
     global $pdo;

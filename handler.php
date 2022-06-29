@@ -124,6 +124,10 @@ if ($_POST["action"]=="saveTemplate") {
     echo saveTemplate((int)$_POST["type"], $_POST["name"], $_POST["data"]);
 }
 
+if ($_POST["action"]=="deleteTemplate") {
+    echo deleteTemplate((int)$_POST["type"], $_POST["name"]);
+}
+
 if ($_POST["action"]=="changeProjState") {
     echo changeProjectState((int)$_POST["proj_id"]);
 }

@@ -33,6 +33,7 @@ var saveTemplateData = new Array;
 var savePhaseData = new Array;
 var saveMilestoneData = new Array;
 var templates = new Array;
+var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2012,30 +2013,6 @@ function popupFluturas(collabID, half) {
   $('#fluturasSalariu').modal('open');
 }
 
-function addProjDetail() {
-  let detailName = $('#projDetailName').val().trim();
-  let newRow = "";
-  if (detailName=="") {
-    $('#projDetailName').addClass("invalid");
-    return 0;
-  }
-  switch (Number($('#addDetailType').val())) {
-    case 0: //text
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
-            break;
-    case 1: //bifa
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
-            break;
-    case 2: //textarea
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
-            break;
-  }
-  $('#detailsList').append(newRow);
-  $('#projDetailName').val("");
-  $('#projDetailName').removeClass("invalid");
-  saveTemplateData.push({name: detailName, type: Number($('#addDetailType').val())});
-}
-
 function populateTemplatesMenu() {
   $('#saveLoadMenuItems').html('');
   $('#phasesMenuItems').html('');
@@ -2044,15 +2021,15 @@ function populateTemplatesMenu() {
   templates.forEach(element => {
     if (Number(element.type) == 0) {
       detailsTemplates++;
-      $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+      $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
     }
     if (Number(element.type) == 1) {
       phasesTemplates++;
-      $('#phasesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+      $('#phasesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
     }
     if (Number(element.type) == 2) {
       milestonesTemplates++;
-      $('#milestonesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}</a></li>`);
+      $('#milestonesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
     }
   });
     if (detailsTemplates>0) { $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
@@ -2101,15 +2078,20 @@ function saveTemplate(type) {
   if (response == null || response == "" || saveTemplateData.length < 1) {
     return 0;
   }
+  let defValue = "";
+  
+  switch (type) {
+    case 0: sentData = JSON.stringify(saveTemplateData); defValue = defDetlTmplt; break;
+    case 1: sentData = JSON.stringify(savePhaseData); defValue = defPhaseTmplt; break;
+    case 2: sentData = JSON.stringify(saveMilestoneData); defValue = defMlstnTmplt; break;
+  }
+
   for (let elem of templates) {
     if (elem.name == response && elem.type == type) {
       if (!confirm("Numele exista, sigur vrei sa rescrii sablonul?")) return 0;
     }
   }
-  
-  switch (type) {
-    case 0: sentData = JSON.stringify(saveTemplateData); break;
-  }
+
   var formData = {
     'action'  : 'saveTemplate',
     'name'    : response,
@@ -2138,6 +2120,36 @@ function saveTemplate(type) {
   });
 }
 
+function addProjDetail() {
+  let detailName = $('#projDetailName').val().trim();
+  let newRow = "";
+  if (detailName=="") {
+    $('#projDetailName').addClass("invalid");
+    return 0;
+  }
+  for (let detail of saveTemplateData) {
+    if (detail.name.toUpperCase() == detailName.toUpperCase()) {
+      $('#projDetailName').addClass("invalid");
+      return 0;
+    }
+  }
+  switch (Number($('#addDetailType').val())) {
+    case 0: //text
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber++}" type="text"></div></td></tr>`;
+            break;
+    case 1: //bifa
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber++}" /><span></span></label></td></tr>`;
+            break;
+    case 2: //textarea
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber++}" type="textarea" class="materialize-textarea"></textarea></div></td></tr>`;
+            break;
+  }
+  $('#detailsList').append(newRow);
+  $('#projDetailName').val("");
+  $('#projDetailName').removeClass("invalid");
+  saveTemplateData.push({name: detailName, type: Number($('#addDetailType').val())});
+}
+
 function addProjPhase() {
   let detailName = $('#projPhaseName').val().trim();
   let newRow = "";
@@ -2145,7 +2157,13 @@ function addProjPhase() {
     $('#projPhaseName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="phaseName_${phaseNumber++}">${detailName}</td></tr>`;
+  for (let phase of savePhaseData) {
+    if (phase.name.toUpperCase() == detailName.toUpperCase()) {
+      $('#projPhaseName').addClass("invalid");
+      return 0;
+    }
+  }
+  newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber++}">${detailName}</td></tr>`;
   $('#phasesList').append(newRow);
   $('#projPhaseName').val("");
   $('#projPhaseName').removeClass("invalid");
@@ -2159,10 +2177,81 @@ function addProjMilestone() {
     $('#projMilestoneName').addClass("invalid");
     return 0;
   }
-  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="milestoneName_${milestoneNumber++}">${detailName}</td></tr>`;
+  for (let mlstn of saveMilestoneData) {
+    if (mlstn.name.toUpperCase() == detailName.toUpperCase()) {
+      $('#projMilestoneName').addClass("invalid");
+      return 0;
+    }
+  }
+  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber++}">${detailName}</td></tr>`;
   $('#milestonesList').append(newRow);
   $('#projMilestoneName').val("");
   $('#projMilestoneName').removeClass("invalid");
   saveMilestoneData.push({name: detailName});
 }
 
+function deleteTemplate (name, type) {
+  if (!confirm("Sigur vrei sa stergi sablonul?")) return 0;
+  var formData = {
+    'action'  : 'deleteTemplate',
+    'name'    : name,
+    'type'    : type
+  };
+  $.ajax({
+    url: 'handler.php',
+    type: 'POST',
+    encode: true,
+    //dataType: 'json',
+    data: formData,
+    success: function(data) {
+      if (data == "Success!") {
+        // Set the item id from the number sent by the remote server
+        //instance.setId(item, idFromTheServer.substring(8));
+        //templates.push({name: response, options: JSON.stringify(saveTemplate)});
+        for (let i=0; i<templates.length; i++) {
+          if (templates[i].name == name && Number(templates[i].type) == type) {
+            templates.splice(i, 1);
+          }
+        }
+        populateTemplatesMenu();
+        M.toast({html: 'Sablonul a fost sters cu succes!'});
+      }
+    },
+    error: function(errData) {
+      M.toast({html: errData});
+    }
+  });
+}
+
+function renameProjStuff(stuffName, stuffType, stuffNumber) {
+  let response = prompt("Introdu un nou nume:", stuffName);
+
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || response == "" || response == stuffName) {
+    return 0;
+  }
+
+  switch (stuffType) {
+    case 0:
+      $(`#detailName_${stuffNumber}`).html(response);
+      for (let elem of saveTemplateData) {
+        if (elem.name == stuffName) { console.log(elem.name); elem.name = response; }
+      }
+      console.log(saveTemplateData);
+      break;
+    case 1:
+      $(`#phaseName_${stuffNumber}`).html(response);
+      for (let elem of savePhaseData) {
+        if (elem.name == stuffName) { elem.name = response; }
+      }
+      console.log(savePhaseData);
+      break;
+    case 2:
+      $(`#milestoneName_${stuffNumber}`).html(response);
+      for (let elem of saveMilestoneData) {
+        if (elem.name == stuffName) { elem.name = response; }
+      }
+      console.log(saveMilestoneData);
+      break;
+  }
+}
