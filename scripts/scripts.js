@@ -2039,6 +2039,9 @@ function populateTemplatesMenu() {
     $('#detailsMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`);
     $('#phasesMenuItems').append(`<li><a href="#" onClick="saveTemplate(1)">Salveaza ca sablon</a></li>`);
     $('#milestonesMenuItems').append(`<li><a href="#" onClick="saveTemplate(2)">Salveaza ca sablon</a></li>`);
+    $('#detailsMenuItems').append(`<li><a href="#" onClick="resetTemplate(0)">Reseteaza</a></li>`);
+    $('#phasesMenuItems').append(`<li><a href="#" onClick="resetTemplate(1)">Reseteaza</a></li>`);
+    $('#milestonesMenuItems').append(`<li><a href="#" onClick="resetTemplate(2)">Reseteaza</a></li>`);
     $('i.tiny').click(function(event){event.preventDefault();deleteTemplate(event.currentTarget.parentNode.innerHTML.split('<')[0], event.currentTarget.parentNode.parentNode.parentNode.id.substring(0,1));});
 }
 
@@ -2293,5 +2296,27 @@ function renameProjStuff(stuffName, stuffType, stuffNumber) {
       }
       console.log(saveMilestoneData);
       break;
+  }
+}
+
+function resetTemplate(id) {
+  switch (id) {
+    case 0:
+      defDetlTmplt = "";
+      saveTemplateData = new Array;
+      $('#detailsList').html('');
+      detailNumber = 0;
+      break;
+    case 1:
+      defMlstnTmplt = elem.name;
+      saveMilestoneData = new Array;
+      $('#milestonesList').html('');
+      phaseNumber = 0;
+      break;
+    case 2:
+      defMlstnTmplt = elem.name;
+      saveMilestoneData = new Array;
+      $('#milestonesList').html('');
+      milestoneNumber = 0;
   }
 }
