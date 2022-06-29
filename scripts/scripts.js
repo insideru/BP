@@ -2046,6 +2046,7 @@ function loadTemplate(tmpltID) {
   templates.forEach(elem => {
     if (elem.id == tmpltID) {
       if (elem.type == 0) {
+        defDetlTmplt = elem.name;
         saveTemplateData = new Array;
         $('#detailsList').html('');
         let tmpltData = JSON.parse(elem.options);
@@ -2070,6 +2071,7 @@ function loadTemplate(tmpltID) {
       }
       if (elem.type == 1) {
         $('#phasesList').html('');
+        defPhaseTmplt = elem.name;
         savePhaseData = new Array;
         let tmpltData = JSON.parse(elem.options);
         phaseNumber = 0;
@@ -2081,6 +2083,7 @@ function loadTemplate(tmpltID) {
         });
       }
       if (elem.type == 2) {
+        defMlstnTmplt = elem.name;
         $('#milestonesList').html('');
         saveMilestoneData = new Array;
         let tmpltData = JSON.parse(elem.options);
@@ -2097,18 +2100,24 @@ function loadTemplate(tmpltID) {
 }
 
 function saveTemplate(type) {
-  let response = prompt("Introdu un nou nume:");
-  let sentData = "";
-  if (typeof response === 'string') { response = response.trim(); }
-  if (response == null || response == "" || saveTemplateData.length < 1) {
-    return 0;
-  }
   let defValue = "";
   
   switch (type) {
-    case 0: sentData = JSON.stringify(saveTemplateData); defValue = defDetlTmplt; break;
-    case 1: sentData = JSON.stringify(savePhaseData); defValue = defPhaseTmplt; break;
-    case 2: sentData = JSON.stringify(saveMilestoneData); defValue = defMlstnTmplt; break;
+    case 0: (saveTemplateData.length>0?sentData = JSON.stringify(saveTemplateData):sentData = 0); defValue = defDetlTmplt; break;
+    case 1: (savePhaseData.length>0?sentData = JSON.stringify(savePhaseData):sentData=0); defValue = defPhaseTmplt; break;
+    case 2: (saveMilestoneData.length>0?sentData = JSON.stringify(saveMilestoneData):sentData=0); defValue = defMlstnTmplt; break;
+  }
+  if (sentData == 0) {
+    M.toast({html: "Nu exista suficiente date pentru crearea unui sablon!"});
+    return 0;
+  }
+
+  let response = prompt("Introdu un nou nume:", defValue);
+  let sentData = "";
+
+  if (typeof response === 'string') { response = response.trim(); }
+  if (response == null || response == "" || saveTemplateData.length < 1) {
+    return 0;
   }
 
   for (let elem of templates) {
