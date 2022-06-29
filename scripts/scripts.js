@@ -2014,14 +2014,14 @@ function popupFluturas(collabID, half) {
 }
 
 function populateTemplatesMenu() {
-  $('#saveLoadMenuItems').html('');
+  $('#detailsMenuItems').html('');
   $('#phasesMenuItems').html('');
   $('#milestonesMenuItems').html('');
   let detailsTemplates = 0, phasesTemplates = 0, milestonesTemplates = 0;
   templates.forEach(element => {
     if (Number(element.type) == 0) {
       detailsTemplates++;
-      $('#saveLoadMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
+      $('#detailsMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
     }
     if (Number(element.type) == 1) {
       phasesTemplates++;
@@ -2032,11 +2032,11 @@ function populateTemplatesMenu() {
       $('#milestonesMenuItems').append(`<li><a href="#" onClick="loadTemplate(${element.id})">${element.name}<i class="material-icons tiny right red-text">delete</i></a></li>`);
     }
   });
-    if (detailsTemplates>0) { $('#saveLoadMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
+    if (detailsTemplates>0) { $('#detailsMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
     if (phasesTemplates>0) { $('#phasesMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
     if (milestonesTemplates>0) { $('#milestonesMenuItems').append(`<li class="jq-dropdown-divider"></li>`); }
 
-    $('#saveLoadMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`);
+    $('#detailsMenuItems').append(`<li><a href="#" onClick="saveTemplate(0)">Salveaza ca sablon</a></li>`);
     $('#phasesMenuItems').append(`<li><a href="#" onClick="saveTemplate(1)">Salveaza ca sablon</a></li>`);
     $('#milestonesMenuItems').append(`<li><a href="#" onClick="saveTemplate(2)">Salveaza ca sablon</a></li>`);
     $('i.tiny').click(function(event){event.preventDefault();deleteTemplate(event.currentTarget.parentNode.innerHTML.split('<')[0], event.currentTarget.parentNode.parentNode.parentNode.id.substring(0,1));});
@@ -2191,10 +2191,14 @@ function addProjMilestone() {
   saveMilestoneData.push({name: detailName});
 }
 
-function deleteTemplate (name, type) {
+function deleteTemplate (name, firstLetter) {
   if (!confirm("Sigur vrei sa stergi sablonul?")) return 0;
-  console.log(name, type);
-  console.log(templates);
+  let type = 0;
+  switch (firstLetter) {
+    case "d": type = 0; break;
+    case "p": type = 1; break;
+    case "m": type = 2; break;
+  }
   var formData = {
     'action'  : 'deleteTemplate',
     'name'    : name,
