@@ -2043,11 +2043,11 @@ function populateTemplatesMenu() {
 }
 
 function loadTemplate(tmpltID) { 
-  $('#detailsList').html('');
-  saveTemplateData = new Array;
   templates.forEach(elem => {
     if (elem.id == tmpltID) {
       if (elem.type == 0) {
+        saveTemplateData = new Array;
+        $('#detailsList').html('');
         let tmpltData = JSON.parse(elem.options);
         detailNumber = 0;
         tmpltData.forEach(sto => {
@@ -2067,6 +2067,30 @@ function loadTemplate(tmpltID) {
           $('#detailsList').append(newRow);
           saveTemplateData.push({name: detailName, type: Number(sto.type)});
         });
+      }
+      if (elem.type == 1) {
+        $('#phasesList').html('');
+        savePhaseData = new Array;
+        let tmpltData = JSON.parse(elem.options);
+        phaseNumber = 0;
+        tmpltData.forEach(sto => {
+          let detailName = sto.name;
+          let newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber++}">${detailName}</td></tr>`;
+          $('#phasesList').append(newRow);
+        });
+        savePhaseData.push({name: detailName});
+      }
+      if (elem.type == 2) {
+        $('#milestonesList').html('');
+        saveMilestoneData = new Array;
+        let tmpltData = JSON.parse(elem.options);
+        milestoneNumber = 0;
+        tmpltData.forEach(sto => {
+          let detailName = sto.name;
+          let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber++}">${detailName}</td></tr>`;
+          $('#milestonesList').append(newRow);
+        });
+        saveMilestoneData.push({name: detailName});
       }
     }
   });
@@ -2110,7 +2134,7 @@ function saveTemplate(type) {
         // Set the item id from the number sent by the remote server
         //instance.setId(item, idFromTheServer.substring(8));
         //templates.push({name: response, options: JSON.stringify(saveTemplate)});
-        templates.push({id: idFromTheServer.substring(8), type: 0, name: response, options: sentData});
+        templates.push({id: idFromTheServer.substring(8), type: type, name: response, options: sentData});
         populateTemplatesMenu();
         M.toast({html: 'Sablonul a fost salvat cu succes!'});
       }
