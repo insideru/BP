@@ -2122,9 +2122,10 @@ function saveTemplate(type) {
   if (response == null || response == "" || saveTemplateData.length < 1) {
     return 0;
   }
-
+  let overwrite = 0;
   for (let elem of templates) {
     if (elem.name == response && elem.type == type) {
+      overwrite = 1;
       if (!confirm("Numele exista, sigur vrei sa rescrii sablonul?")) return 0;
     }
   }
@@ -2146,7 +2147,13 @@ function saveTemplate(type) {
         // Set the item id from the number sent by the remote server
         //instance.setId(item, idFromTheServer.substring(8));
         //templates.push({name: response, options: JSON.stringify(saveTemplate)});
-        templates.push({id: idFromTheServer.substring(8), type: type, name: response, options: sentData});
+        if (overwrite) {
+          for (let elem of templates) {
+            if (elem.id == idFromTheServer) elem.options = sentData;
+          }
+        } else {
+          templates.push({id: idFromTheServer.substring(8), type: type, name: response, options: sentData});
+        }
         populateTemplatesMenu();
         M.toast({html: 'Sablonul a fost salvat cu succes!'});
       }
