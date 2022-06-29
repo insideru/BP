@@ -2119,10 +2119,11 @@ function saveTemplate(type) {
   let response = prompt("Introdu un nou nume:", defValue);
 
   if (typeof response === 'string') { response = response.trim(); }
-  if (response == null || response == "" || saveTemplateData.length < 1) {
+  if (response == null || response == "") {
     return 0;
   }
   let overwrite = 0;
+
   for (let elem of templates) {
     if (elem.name == response && elem.type == type) {
       overwrite = 1;
