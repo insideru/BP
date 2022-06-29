@@ -2211,7 +2211,6 @@ function deleteTemplate (name, firstLetter) {
     //dataType: 'json',
     data: formData,
     success: function(data) {
-      console.log(data);
       if (data == "Success!") {
         // Set the item id from the number sent by the remote server
         //instance.setId(item, idFromTheServer.substring(8));

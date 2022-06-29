@@ -211,7 +211,7 @@ function deleteTemplate (int $type, string $name) {
 	global $schema;
 
 	$query = 'DELETE FROM '.$schema.'.project_templates WHERE (type = :type) AND (name = :name)';
-	$values = array(':type' => $type, ':name' => name);
+	$values = array(':type' => $type, ':name' => $name);
 	
 	try
 	{
