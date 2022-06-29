@@ -2308,15 +2308,16 @@ function resetTemplate(id) {
       detailNumber = 0;
       break;
     case 1:
-      defMlstnTmplt = elem.name;
-      saveMilestoneData = new Array;
-      $('#milestonesList').html('');
+      defPhaseTmplt = "";
+      savePhaseData = new Array;
+      $('#phasesList').html('');
       phaseNumber = 0;
       break;
     case 2:
-      defMlstnTmplt = elem.name;
+      defMlstnTmplt = "";
       saveMilestoneData = new Array;
       $('#milestonesList').html('');
       milestoneNumber = 0;
+      break;
   }
 }
