@@ -2077,8 +2077,8 @@ function loadTemplate(tmpltID) {
           let detailName = sto.name;
           let newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber++}">${detailName}</td></tr>`;
           $('#phasesList').append(newRow);
+          savePhaseData.push({name: detailName});
         });
-        savePhaseData.push({name: detailName});
       }
       if (elem.type == 2) {
         $('#milestonesList').html('');
@@ -2089,8 +2089,8 @@ function loadTemplate(tmpltID) {
           let detailName = sto.name;
           let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber++}">${detailName}</td></tr>`;
           $('#milestonesList').append(newRow);
+          saveMilestoneData.push({name: detailName});
         });
-        saveMilestoneData.push({name: detailName});
       }
     }
   });
