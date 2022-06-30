@@ -2331,5 +2331,40 @@ function resetTemplate(id) {
 }
 
 function removeItem (type, index) {
-  console.log(type, index);
+  let itemName = "";
+  switch (type) {
+    case 0:
+      itemName = $(`#detailName_${index}`).html();
+      $(`#detailName_${index}`).parent().remove();
+      console.log(itemName);
+      for (let i=0; i<saveTemplateData; i++) {
+        if (saveTemplateData[i].name == itemName) {
+          saveTemplateData.splice(i, 1);
+        }
+      }
+      console.log(saveTemplateData);
+      break;
+    case 1:
+      itemName = $(`#phaseName_${index}`).html();
+      $(`#phaseName_${index}`).parent().remove();
+      console.log(itemName);
+      for (let i=0; i<savePhaseData; i++) {
+        if (savePhaseData[i].name == itemName) {
+          savePhaseData.splice(i, 1);
+        }
+      }
+      console.log(savePhaseData);
+      break;
+    case 1:
+      itemName = $(`#milestoneName_${index}`).html();
+      $(`#milestoneName_${index}`).parent().remove();
+      console.log(itemName);
+      for (let i=0; i<saveMilestoneData; i++) {
+        if (saveMilestoneData[i].name == itemName) {
+          saveTemplateData.splice(i, 1);
+        }
+      }
+      console.log(saveMilestoneData);
+      break;
+  }
 }
