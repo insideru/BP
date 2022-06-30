@@ -205,7 +205,7 @@
         $('.sidenav').sidenav();
 
         $('#projName').change(function() {
-          $('#projNameBig').html($(this).val());
+          $('#projNameBig').val($(this).val());
         });
 
         $('#detailsTable').rowSorter({
@@ -216,6 +216,7 @@
             array_move(saveTemplateData, old_index, new_index);
           }
         });
+
         $('#phasesTable').rowSorter({
           handler: 'i.sorter',
           dragClass: 'sorting-row',
@@ -223,8 +224,8 @@
           onDrop: function(tbody, row, new_index, old_index){
             array_move(savePhaseData, old_index, new_index);
           }
-
         });
+        
         $('#milestonesTable').rowSorter({
           handler: 'i.sorter',
           dragClass: 'sorting-row',
