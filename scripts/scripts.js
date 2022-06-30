@@ -2060,17 +2060,17 @@ function loadTemplate(tmpltID) {
           let detailName = sto.name;
           switch (Number(sto.type)) {
             case 0: //text
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
             case 1: //bifa
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
             case 2: //textarea
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
           }
           $('#detailsList').append(newRow);
-          saveTemplateData.push({name: detailName, type: Number(sto.type)});
+          saveTemplateData.push({name: detailName, type: Number(sto.type), number: detailNumber++});
         });
       }
       if (elem.type == 1) {
@@ -2081,9 +2081,9 @@ function loadTemplate(tmpltID) {
         phaseNumber = 0;
         tmpltData.forEach(sto => {
           let detailName = sto.name;
-          let newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(1, ${phaseNumber++})"></i></td></tr>`;
+          let newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(1, ${phaseNumber})"></i></td></tr>`;
           $('#phasesList').append(newRow);
-          savePhaseData.push({name: detailName});
+          savePhaseData.push({name: detailName, number: phaseNumber++});
         });
       }
       if (elem.type == 2) {
@@ -2094,9 +2094,9 @@ function loadTemplate(tmpltID) {
         milestoneNumber = 0;
         tmpltData.forEach(sto => {
           let detailName = sto.name;
-          let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(2, ${milestoneNumber++})"></i></td></tr>`;
+          let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(2, ${milestoneNumber})"></i></td></tr>`;
           $('#milestonesList').append(newRow);
-          saveMilestoneData.push({name: detailName});
+          saveMilestoneData.push({name: detailName, number: milestoneNumber++});
         });
       }
     }
@@ -2181,19 +2181,19 @@ function addProjDetail() {
   }
   switch (Number($('#addDetailType').val())) {
     case 0: //text
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
             break;
     case 1: //bifa
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
             break;
     case 2: //textarea
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
+            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
             break;
   }
   $('#detailsList').append(newRow);
   $('#projDetailName').val("");
   $('#projDetailName').removeClass("invalid");
-  saveTemplateData.push({name: detailName, type: Number($('#addDetailType').val())});
+  saveTemplateData.push({name: detailName, type: Number($('#addDetailType').val()), number: detailNumber++});
 }
 
 function addProjPhase() {
@@ -2209,11 +2209,11 @@ function addProjPhase() {
       return 0;
     }
   }
-  newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(1, ${phaseNumber++})"></i></td></tr>`;
+  newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(1, ${phaseNumber})"></i></td></tr>`;
   $('#phasesList').append(newRow);
   $('#projPhaseName').val("");
   $('#projPhaseName').removeClass("invalid");
-  savePhaseData.push({name: detailName});
+  savePhaseData.push({name: detailName, number: phaseNumber++});
 }
 
 function addProjMilestone() {
@@ -2229,11 +2229,11 @@ function addProjMilestone() {
       return 0;
     }
   }
-  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick=removeItem"(2, ${milestoneNumber++})"></i></td></tr>`;
+  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick=removeItem"(2, ${milestoneNumber})"></i></td></tr>`;
   $('#milestonesList').append(newRow);
   $('#projMilestoneName').val("");
   $('#projMilestoneName').removeClass("invalid");
-  saveMilestoneData.push({name: detailName});
+  saveMilestoneData.push({name: detailName, number: milestoneNumber++});
 }
 
 function deleteTemplate (name, firstLetter) {
@@ -2368,5 +2368,21 @@ function removeItem (type, index) {
 }
 
 function checkNewProj() {
-  
+  let projName = $('#projName').val();
+  let projType = $('#projType').val();
+  let projClient = $('#projClient').val();
+  let projExtern = $('#projExtern').val();
+  let projBudget = $('#projBudget').val();
+  let projStartDate = $('#projStartDate').val();
+  let projEndDate = $('#projDeadline').val();
+  console.log(projName, projType, projClient, projExtern, projBudget, projStartDate, projEndDate);
+  saveTemplateData.forEach(element => {
+    console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
+  });
+  savePhaseData.forEach(element => {
+    console.log(`Faza: ${element.name}`);
+  });
+  saveMilestoneData.forEach(element => {
+    console.log(`Milestone: ${element.name}`);
+  });
 }

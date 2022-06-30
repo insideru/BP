@@ -46,6 +46,15 @@
     </ul>
 
     <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <div><h5 id="projNameBig"></h5></div>
+            <div class="right"><a class="waves-effect waves-light btn btn-small" onclick="checkNewProj()">Adauga Proiect</a></div>
+          </div>
+        </div>
+      </div>
+
       <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-content">
@@ -70,7 +79,7 @@
                 </tr>
                 <tr>
                   <td width="30%">Proiect extern</td>
-                  <td><label><input type="checkbox" class="filled-in" id="extern" /><span></span></label></td>
+                  <td><label><input type="checkbox" class="filled-in" id="projExtern" /><span></span></label></td>
                 </tr>
                 <tr>
                   <td width="30%">Buget</td>
@@ -194,6 +203,10 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+
+        $('#projName').change(function() {
+          $('#projNameBig').html($(this).val());
+        });
 
         $('#detailsTable').rowSorter({
           handler: 'i.sorter',
