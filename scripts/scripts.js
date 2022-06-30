@@ -2377,7 +2377,11 @@ function checkNewProj() {
   let projEndDate = $('#projDeadline').val();
   console.log(projName, projType, projClient, projExtern, projBudget, projStartDate, projEndDate);
   saveTemplateData.forEach(element => {
-    console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
+    if (element.type == 1) {
+      $('#detailValue_' + Number(element.number)).is(":checked")?console.log(`Detaliu: ${element.name} - 1`):console.log(`Detaliu: ${element.name} - 0`);
+    } else {
+      console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
+    }
   });
   savePhaseData.forEach(element => {
     console.log(`Faza: ${element.name}`);
