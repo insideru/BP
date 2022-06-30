@@ -4,6 +4,7 @@ var updateHeatMap = false;
 var updatePontajDetail = false;
 var dates = [];
 var curTimesheets = {};
+var usersInHeatmap = new Array;
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -173,6 +174,10 @@ function generateHeatMapData(noDays) {
     chartSeries.push({name: emplName, data: curData});
     uniq++;
   }
+
+  chartSeries.forEach(elem => {
+    usersInHeatmap.push(elem.name);
+  });
   
   //dates.sort((a,b)=>a.getTime()-b.getTime());
   let colors = generateHeatMapColors(noDays);
@@ -243,12 +248,14 @@ function generateHeatMapData(noDays) {
     custom: function({series, seriesIndex, dataPointIndex, w}) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
       let luna = dates[dataPointIndex].getMonth()+1;
-      let zi = dates[dataPointIndex].getDay();
+      let zi = dates[dataPointIndex].getDate();
       let an = dates[dataPointIndex].getFullYear();
       let lunaChar = luna.toString();
       let ziChar = zi.toString();
-      let venirePlecare = getUserAttendance(getDBidFromName(series[seriesIndex].name, 'collab'), `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
+      console.log(usersInHeatmap);
+      let venirePlecare = getUserAttendance(getDBidFromName(usersInHeatmap[seriesIndex], 'collab'), `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
       console.log(series, `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
+      zi = dates[dataPointIndex].getDay();
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
         case 2: lunaChar = "Februarie"; break;
@@ -273,9 +280,15 @@ function generateHeatMapData(noDays) {
         case 0: ziChar = "Duminica"; break;
       }
       let today = dates[dataPointIndex].getDate() + ' ' + lunaChar;
-      return '<div>' +
+      if (Array.isArray(venirePlecare)) {
+        return '<div>' +
         '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ` ore</span><br><span>Ora venire: ${venirePlecare[0]} | Ora plecare: ${venirePlecare[1]}</span>` +
-        '</div>'
+        '</div>';
+      } else {
+        return '<div>' +
+        '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ` ore</span> ` +
+        '</div>';
+      }
     }
   },
   colors: colors,
@@ -773,4 +786,5 @@ function getUserAttendance(collab_id, date) {
       return res;
     }
   }
+  return 0;
 }
