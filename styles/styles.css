@@ -3,7 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 table.sorting-table {cursor: move;}
-table tr.sorting-row td {background-color: rgb(244, 255, 215) !important; color: rgb(0, 0, 0); box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);}
+table tr.sorting-row td {background-color: rgb(239, 252, 250) !important; color: rgb(0, 0, 0); box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5);}
+
+table tr.sorting-row td:first-child {
+  border-radius: 5px 0 0 5px;
+  box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5);
+}
+table tr.sorting-row td:last-child {
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5);
+}
 
 .cursor-pointer-hover-red {
   cursor: pointer !important;
