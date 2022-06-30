@@ -53,39 +53,39 @@
             <table class="centered">
               <tbody>
                 <tr>
-                  <td>Nume proiect</td>
+                  <td width="30%">Nume proiect</td>
                   <td class="center-align">
-                    <div class="input-field" style="width: 280px; margin: auto;">
+                    <div class="input-field" style="margin: auto;">
                       <input type="text" id="projName">
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td>Tip proiect</td>
+                  <td width="30%">Tip proiect</td>
                   <td><div id="projType"></div></td>
                 </tr>
                 <tr>
-                  <td>Client</td>
+                  <td width="30%">Client</td>
                   <td><div id="projClient"></div></td>
                 </tr>
                 <tr>
-                  <td>Proiect extern</td>
+                  <td width="30%">Proiect extern</td>
                   <td><label><input type="checkbox" class="filled-in" id="extern" /><span></span></label></td>
                 </tr>
                 <tr>
-                  <td>Buget</td>
+                  <td width="30%">Buget</td>
                   <td class="center-align">
-                    <div class="input-field" style="width: 280px; margin: auto;">
+                    <div class="input-field" style="margin: auto;">
                       <input type="text" id="projBudget">
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td>Data incepere</td>
+                  <td width="30%">Data incepere</td>
                   <td><input style="text-align:center;" type="text" id="projStartDate" class="datepicker"></td>
                 </tr>
                 <tr>
-                  <td>Data predare</td>
+                  <td width="30%">Data predare</td>
                   <td><input style="text-align:center;" type="text" id="projDeadline" class="datepicker"></td>
                 </tr>
               </tbody>
@@ -257,7 +257,8 @@
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
             },
-            width:'280px'});
+            //width:'280px'
+          });
 
           var projClients = new Array;
           clientsObject.forEach(element => {
@@ -297,7 +298,7 @@
                   }
               });
             },
-            width:'280px',
+            //width:'280px',
         });
         });
       })
