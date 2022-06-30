@@ -2369,8 +2369,8 @@ function removeItem (type, index) {
 
 function checkNewProj() {
   let projName = $('#projName').val();
-  let projType = projCatsObject[$('#projType').val()].name;
-  let projClient = clientsObject[$('#projClient').val()].name;
+  let projType = $('#projType').val();
+  let projClient = $('#projClient').val();
   let projExtern = $('#projExtern').is(":checked")?1:0;
   let projBudget = $('#projBudget').val();
   let projStartDate = $('#projStartDate').val();
