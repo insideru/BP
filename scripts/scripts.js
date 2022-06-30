@@ -2371,7 +2371,7 @@ function checkNewProj() {
   let projName = $('#projName').val();
   let projType = $('#projType').val();
   let projClient = $('#projClient').val();
-  let projExtern = $('#projExtern').val();
+  let projExtern = $('#projExtern').is(":checked")?1:0;
   let projBudget = $('#projBudget').val();
   let projStartDate = $('#projStartDate').val();
   let projEndDate = $('#projDeadline').val();
