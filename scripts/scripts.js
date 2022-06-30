@@ -2062,10 +2062,10 @@ function loadTemplate(tmpltID) {
                     newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
                     break;
             case 1: //bifa
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(0, ${detailNumber++}")></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><label><input type="checkbox" class="filled-in" id="detailValue_${detailNumber}" /><span></span></label></td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
                     break;
             case 2: //textarea
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(0, ${detailNumber++}")></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(0, ${detailNumber++})"></i></td></tr>`;
                     break;
           }
           $('#detailsList').append(newRow);
@@ -2093,7 +2093,7 @@ function loadTemplate(tmpltID) {
         milestoneNumber = 0;
         tmpltData.forEach(sto => {
           let detailName = sto.name;
-          let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(2, ${milestoneNumber})"></i></td></tr>`;
+          let newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10><i style="font-size: 8px;" class="bi bi-trash3" onclick="removeItem(2, ${milestoneNumber++})"></i></td></tr>`;
           $('#milestonesList').append(newRow);
           saveMilestoneData.push({name: detailName});
         });
