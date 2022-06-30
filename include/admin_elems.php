@@ -581,6 +581,34 @@ function getAllTimesheets() {
 	return $fields;
 }
 
+function getAttendance() {
+	/* Global $pdo object */
+	global $pdo;
+	global $schema;
+
+	$query = 'SELECT * FROM '.$schema.'.attendance';
+	
+	try
+	{
+		$res = $pdo->prepare($query);
+		$res->execute();
+	}
+	catch (PDOException $e)
+	{
+		/* If there is a PDO exception, throw a standard exception */
+		echo "Database error ".$e->getMessage();
+	}
+
+	$fields=array();
+
+	while ($row = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        array_push($fields, $row);
+	}
+
+	return $fields;
+}
+
 function getPermissions() {
 	/* Global $pdo object */
 	global $pdo;

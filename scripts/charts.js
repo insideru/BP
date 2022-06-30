@@ -244,6 +244,8 @@ function generateHeatMapData(noDays) {
       //seriesIndex + '-' + dates[dataPointIndex] + '-' +
       let luna = dates[dataPointIndex].getMonth()+1;
       let zi = dates[dataPointIndex].getDay();
+      let an = dates[dataPointIndex].getFullYear();
+      let venirePlecare = getUserAttendance(getDBidFromName(series[seriesIndex].name, 'collab'), `${an}-${luna}-${zi}`);
       let lunaChar = "";
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
@@ -271,7 +273,7 @@ function generateHeatMapData(noDays) {
       }
       let today = dates[dataPointIndex].getDate() + ' ' + lunaChar;
       return '<div>' +
-        '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ' ore</span>' +
+        '<span>' + ziChar + ' - ' + today + ' - ' + series[seriesIndex][dataPointIndex] + ` ore</span><br><span>Ora venire: ${venirePlecare[0]} | Ora plecare: ${venirePlecare[1]}</span>` +
         '</div>'
     }
   },
@@ -757,6 +759,17 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
     contor++;
     } else {
       contor++;
+    }
+  }
+}
+
+function getUserAttendance(collab_id, date) {
+  let res = new Array;
+  for (let element of attendanceObject) {
+    if (element.collab_id == collab_id && element.date == date) {
+      res[0] = element.start;
+      res[1] = element.end;
+      return res;
     }
   }
 }

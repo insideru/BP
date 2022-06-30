@@ -7,6 +7,7 @@ activitiesObject = [];
 timesheetsObject = [];
 accountsObject = [];
 alltimesheetsObject = [];
+attendanceObject = [];
 timesheetsArray = [];
 daysoffArray = [];
 workedTime = 0;

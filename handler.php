@@ -190,6 +190,7 @@ if ($_REQUEST["r"]=="init") {
         $response["permissions"] = getPermissions();
         $response["daysoff"] = getAllDaysOff();
         $response["templates"] = getTemplates();
+        $response["attendance"] = getAttendance();
     } else {
         $response["collabs"] = getCollabs();
         $response["projects"] = getProjects();
