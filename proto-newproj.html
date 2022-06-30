@@ -49,7 +49,7 @@
       <div class="col s12">
         <div class="card">
           <div class="card-content">
-            <div><h5 id="projNameBig"></h5></div>
+            <div><h5 id="projNameBig">Proiect nou</h5></div>
             <div class="right"><a class="waves-effect waves-light btn btn-small" onclick="checkNewProj()">Adauga Proiect</a></div>
           </div>
         </div>
@@ -205,7 +205,7 @@
         $('.sidenav').sidenav();
 
         $('#projName').change(function() {
-          $('#projNameBig').val($(this).val());
+          $('#projNameBig').text($(this).val());
         });
 
         $('#detailsTable').rowSorter({
@@ -225,7 +225,7 @@
             array_move(savePhaseData, old_index, new_index);
           }
         });
-        
+
         $('#milestonesTable').rowSorter({
           handler: 'i.sorter',
           dragClass: 'sorting-row',
