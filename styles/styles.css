@@ -5,6 +5,10 @@
 table.sorting-table {cursor: move;}
 table tr.sorting-row td {background-color: #aaa !important; color: #fff; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);}
 
+.cursor-pointer {
+  cursor: pointer !important; 
+}
+
 .valign-wrapper {
   min-height: calc(100vh - 64px);
 }
