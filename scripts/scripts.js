@@ -789,11 +789,11 @@ function changeSelectedTime () {
 }
 
 function buildEventsObject(eventsArray) {
-  var retObject={};
+  let retObj=new Object;
   eventsArray.forEach(element => {
-    retObject[element.date] = (isNaN(Number(retObject[element.date])) ? 0 : Number(retObject[element.date])) + Number(element.time);
+    retObj[element.date] = (isNaN(Number(retObj[element.date])) ? 0 : Number(retObja[element.date])) + Number(element.time);
   });
-  return retObject;
+  return retObj;
 }
 
 function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
@@ -1747,7 +1747,7 @@ function calculateSalaries(date) {
         } else {
           wrkTime += norma;
         }
-      } else if ((curDate.getDay()==0 || curDate.getDay()==6) && !multiplier) {
+      } else if ((curDate.getDay()==0 || curDate.getDay()==6) && multiplier) {
         //e 1,5x
         cat = '1.5x';
         wrkTime = wrkTime + wrkTime * 0.5;
@@ -1996,7 +1996,7 @@ function popupFluturas(collabID, half) {
       switch (element.cat) {
         case '2x-we'    : a+=element.time/2; av+=element.time*element.cost; break;
         case '2x-wk'    : b+=(element.time/2>norma?element.time:element.time-norma); bv+=element.time*element.cost; break;
-        case '1.5x'     : c+=element.time; cv+=element.time*element.cost; break;
+        case '1.5x'     : c+=element.time/1.5; cv+=element.time*element.cost; break;
         case '1x'       : d+=element.time; dv+=element.time*element.cost; break;
         case 'concediu' : e++; ev+=element.time*element.cost; break;
         case 'holiday'  : f++; fv+=element.time*element.cost; break;
@@ -2365,4 +2365,8 @@ function removeItem (type, index) {
       }
       break;
   }
+}
+
+function checkNewProj() {
+  
 }

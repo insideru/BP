@@ -252,9 +252,7 @@ function generateHeatMapData(noDays) {
       let an = dates[dataPointIndex].getFullYear();
       let lunaChar = luna.toString();
       let ziChar = zi.toString();
-      console.log(usersInHeatmap);
       let venirePlecare = getUserAttendance(getDBidFromName(usersInHeatmap[seriesIndex], 'collab'), `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
-      console.log(series, `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
       zi = dates[dataPointIndex].getDay();
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
