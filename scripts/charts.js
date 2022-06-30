@@ -248,7 +248,7 @@ function generateHeatMapData(noDays) {
       let lunaChar = luna.toString();
       let ziChar = zi.toString();
       let venirePlecare = getUserAttendance(getDBidFromName(series[seriesIndex].name, 'collab'), `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
-      console.log(series[seriesIndex].name, `${an}-${luna}-${zi}`);
+      console.log(series, `${an}-${luna>9?luna:'0'+lunaChar}-${zi>9?zi:'0'+ziChar}`);
       switch (luna) {
         case 1: lunaChar = "Ianuarie"; break;
         case 2: lunaChar = "Februarie"; break;
