@@ -4,7 +4,7 @@ var updateHeatMap = false;
 var updatePontajDetail = false;
 var dates = [];
 var curTimesheets = {};
-var usersInHeatmap = new Array;
+var usersInHeatmap = new Array();
 
 function drawProjectsChart () {
     let chartSeriesData = [];
@@ -16,7 +16,7 @@ function drawProjectsChart () {
         let projActualTime = buildProjectWorkHours(element.id, element.budget);
         let projName = element.name;
         let projBudget = Number(element.budget);
-        let projChartData = new Object;
+        let projChartData = new Object();
 
         if (projBudget == 0) {
           projChartData = {
@@ -104,7 +104,7 @@ function generateHeatMapData(noDays) {
   minDate.setDate(minDate.getDate()-noDays);
 
   //generate timesheets list
-  curTimesheets = new Object;
+  curTimesheets = new Object();
   alltimesheetsObject.forEach(element => {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0);
@@ -112,7 +112,7 @@ function generateHeatMapData(noDays) {
     if (curDate > minDate) {
       //nu a mai fost tipul asta, facem un array unde sa adaugam
       if (curTimesheets[element.collab_id] === undefined) {
-        curTimesheets[element.collab_id] = new Object;
+        curTimesheets[element.collab_id] = new Object();
       };
       //exista il bagam, altfel il bagam adaugat
       if (curTimesheets[element.collab_id][curDate] === undefined) {
@@ -126,12 +126,12 @@ function generateHeatMapData(noDays) {
   //generate data
   let chartSeries = [];
   let uniq = 0;
-  dates = new Array;
-  let concedii = new Array;
+  dates = new Array();
+  let concedii = new Array();
 
   daysOffObject.forEach(elem => {
     if (concedii[elem.collab_id] === undefined) {
-      concedii[elem.collab_id] = new Array;
+      concedii[elem.collab_id] = new Array();
     }
     let startDate = new Date(elem.startdate);
     startDate.setHours(0, 0, 0, 0);
@@ -301,7 +301,7 @@ function generateHeatMapColors(days) {
   //["#FFA500", "#FFA500", "#008FFB", "#008FFB", "#8e7cc3", "#008FFB", "#008FFB", "#008FFB"];
   let minDate = new Date();
   minDate.setHours(0, 0, 0, 0);
-  let res = new Array;
+  let res = new Array();
   minDate.setDate(minDate.getDate()-days);
   for (diff=1;diff<=days;diff++) {
     minDate.setDate(minDate.getDate()+1);
@@ -467,11 +467,11 @@ function buildProjectWorkHours (projID, budget) {
 
 function buildProjetTimeline (projID, deadlineID) {
   let projectTimesheets = new Array(activitiesObject.length);
-  let res = new Object;
+  let res = new Object();
   alltimesheetsObject.forEach(element => {
     if (element.project_id == projID) {
       if (typeof projectTimesheets[element.activity_id] === 'undefined') {
-        projectTimesheets[element.activity_id] = new Array;
+        projectTimesheets[element.activity_id] = new Array();
       }
       if (!projectTimesheets[element.activity_id].includes(element.date)) {
         if (chartedProjects[deadlineID].budget > 0) {
@@ -508,7 +508,7 @@ function buildProjetTimeline (projID, deadlineID) {
             iEnd.setDate(iEnd.getDate()+1);
           }
           if (typeof res[getDBNameFromId(index, 'activity')] === 'undefined') {
-            res[getDBNameFromId(index, 'activity')] = new Array;
+            res[getDBNameFromId(index, 'activity')] = new Array();
           }
           res[getDBNameFromId(index, 'activity')].push(iStart, iEnd);
           iStart = new Date(Number(_date[0]), Number(_date[1])-1, Number(_date[2]), 0, 0, 0);
@@ -521,13 +521,13 @@ function buildProjetTimeline (projID, deadlineID) {
         iEnd.setDate(iEnd.getDate()+1);
       }
       if (typeof res[getDBNameFromId(index, 'activity')] === 'undefined') {
-        res[getDBNameFromId(index, 'activity')] = new Array;
+        res[getDBNameFromId(index, 'activity')] = new Array();
       }
       res[getDBNameFromId(index, 'activity')].push(iStart, iEnd);
     }
   })
 
-  let result = new Array;
+  let result = new Array();
   for (const key in res) {
     for (i=0; i<res[key].length; i=i+2) {
       let tempObj = {};
@@ -776,7 +776,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
 }
 
 function getUserAttendance(collab_id, date) {
-  let res = new Array;
+  let res = new Array();
   for (let element of attendanceObject) {
     if (element.collab_id == collab_id && element.date == date) {
       res[0] = element.start;

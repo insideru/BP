@@ -669,7 +669,6 @@
             }
             markup += '</p></div>';
         }
-        console.log(hasEventToday, notifyPontaj);
         if (!hasEventToday || notifyPontaj) {
             if (!hasEventToday) {
                 eventListEl.append(markup);

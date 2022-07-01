@@ -19,21 +19,21 @@ calendarPage = "/?page=calendar";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
-salariesPerCollab = new Object;
+salariesPerCollab = new Object();
 permissionsObject = [];
-permissionsPerCollab = new Object;
-parttimers = new Array;
-norme = new Object;
+permissionsPerCollab = new Object();
+parttimers = new Array();
+norme = new Object();
 daysOffObject = [];
-var retObject = new Object;
-var holidayArray = new Array;
+var retObject = new Object();
+var holidayArray = new Array();
 var detailNumber = 0;
 var phaseNumber = 0;
 var milestoneNumber = 0;
-var saveTemplateData = new Array;
-var savePhaseData = new Array;
-var saveMilestoneData = new Array;
-var templates = new Array;
+var saveTemplateData = new Array();
+var savePhaseData = new Array();
+var saveMilestoneData = new Array();
+var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 
 $.fn.exists = function () {
@@ -789,9 +789,9 @@ function changeSelectedTime () {
 }
 
 function buildEventsObject(eventsArray) {
-  let retObj=new Object;
+  let retObj=new Object();
   eventsArray.forEach(element => {
-    retObj[element.date] = (isNaN(Number(retObj[element.date])) ? 0 : Number(retObja[element.date])) + Number(element.time);
+    retObj[element.date] = (isNaN(Number(retObj[element.date])) ? 0 : Number(retObj[element.date])) + Number(element.time);
   });
   return retObj;
 }
@@ -1690,9 +1690,9 @@ function calculateSalaries(date) {
   midDate.setDate(16);
   let endDate = new Date(tmp[0], tmp[1]-1, 1);
   endDate.setMonth(endDate.getMonth()+1);
-  let daysWorked = new Object;
-  retObject = new Object;
-  let addedTimesheets = new Object;
+  let daysWorked = new Object();
+  retObject = new Object();
+  let addedTimesheets = new Object();
 
   buildNorme();
   buildSalariesPerCollab();
@@ -1705,7 +1705,7 @@ function calculateSalaries(date) {
     if (curDate >= wrkDate && curDate<endDate) {
       //nu a mai fost tipul asta, facem un array unde sa adaugam
       if (addedTimesheets[element.collab_id] === undefined) {
-        addedTimesheets[element.collab_id] = new Object;
+        addedTimesheets[element.collab_id] = new Object();
       };
       //exista il bagam, altfel il bagam adaugat
       if (addedTimesheets[element.collab_id][curDate] === undefined) {
@@ -1732,7 +1732,7 @@ function calculateSalaries(date) {
       norma = parttimers.includes(Number(key))?Number(norme[key]['norma']):8;
       
       if (daysWorked[key] === undefined) {
-        daysWorked[key] = new Array;
+        daysWorked[key] = new Array();
       }
       daysWorked[key].push(curDate);
 
@@ -1758,13 +1758,13 @@ function calculateSalaries(date) {
     
     if (curDate >= wrkDate && curDate<midDate) {
       if (key in retObject === false ) {
-        retObject[key] = new Array;
+        retObject[key] = new Array();
       }
       retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 1, cat: cat});    }
   
     if (curDate >= midDate && curDate<endDate) {
       if (key in retObject === false ) {
-        retObject[key] = new Array;
+        retObject[key] = new Array();
       }
       retObject[key].push({cat: cat, time: wrkTime, cost: getHourlySalary(key, curDate), monthly: getMonthlySalary(key, curDate), half: 2, cat: cat});
     }
@@ -1788,14 +1788,14 @@ function calculateSalaries(date) {
         //zi de concediu platita
         if (workDate >= wrkDate && workDate<midDate) {
           if (element.collab_id in retObject === false ) {
-            retObject[element.collab_id] = new Array;
+            retObject[element.collab_id] = new Array();
           }
           retObject[element.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat:'concediu'});
         }
       
         if (workDate >= midDate && workDate<endDate) {
           if (element.collab_id in retObject === false ) {
-            retObject[element.collab_id] = new Array;
+            retObject[element.collab_id] = new Array();
           }
           retObject[element.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat:'concediu'});
         }
@@ -1814,7 +1814,7 @@ function calculateSalaries(date) {
       //e zi libera in luna respectiva
       accountsObject.forEach(elem => {
         if (daysWorked[elem.collab_id] === undefined) {
-          daysWorked[elem.collab_id] = new Array();
+          daysWorked[elem.collab_id] = new Array()();
         }
         if (!isInArray(daysWorked[elem.collab_id], workDate)) {
           //nu a muncit deci platim
@@ -1826,14 +1826,14 @@ function calculateSalaries(date) {
 
           if (workDate >= startDate && workDate<midDate) {
             if (elem.collab_id in retObject === false ) {
-              retObject[elem.collab_id] = new Array;
+              retObject[elem.collab_id] = new Array();
             }
             if (concediu) {
               retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 1, cat: 'holiday'});  
             }
           } else {
             if (elem.collab_id in retObject === false ) {
-              retObject[elem.collab_id] = new Array;
+              retObject[elem.collab_id] = new Array();
             }
             if (concediu) {
               retObject[elem.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(elem.collab_id, workDate), monthly: getMonthlySalary(elem.collab_id, workDate), half: 2, cat: 'holiday'});  
@@ -1931,24 +1931,24 @@ function getMonthlySalary(collabID, date) {
 }
 
 function buildSalariesPerCollab() {
-  salariesPerCollab = new Object;
+  salariesPerCollab = new Object();
   salariesObject.forEach(element => {
     let wrkDate = new Date(element.date);
     if (element.collab_id in salariesPerCollab === false ) {
-      salariesPerCollab[element.collab_id] = new Array;
+      salariesPerCollab[element.collab_id] = new Array();
     }
     salariesPerCollab[element.collab_id].push({hourly: element.hourly, monthly: element.monthly, date: wrkDate});
   });
 }
 
 function buildNorme() {
-  norme = new Object;
+  norme = new Object();
   alltimesheetsObject.forEach(element => {
     if (parttimers.includes(Number(element.collab_id))) {
       if (norme[element.collab_id] === undefined) {
         let tmpDate = new Date(element.date);
         tmpDate.setHours(0, 0, 0, 0);
-        norme[element.collab_id] = new Object;
+        norme[element.collab_id] = new Object();
         norme[element.collab_id]['startdate'] = tmpDate;
         norme[element.collab_id]['ore'] = Number(element.time);
       } else {
@@ -1960,7 +1960,7 @@ function buildNorme() {
     if (norme[elem] === undefined) {
       let tmpDate = new Date();
       tmpDate.setHours(0, 0, 0, 0);
-      norme[elem] = new Object;
+      norme[elem] = new Object();
       norme[elem]['startdate'] = tmpDate;
       norme[elem]['ore'] = 0;
     }
@@ -2051,7 +2051,7 @@ function loadTemplate(tmpltID) {
     if (elem.id == tmpltID) {
       if (elem.type == 0) {
         defDetlTmplt = elem.name;
-        saveTemplateData = new Array;
+        saveTemplateData = new Array();
         $('#detailsList').html('');
         let tmpltData = JSON.parse(elem.options);
         detailNumber = 0;
@@ -2076,7 +2076,7 @@ function loadTemplate(tmpltID) {
       if (elem.type == 1) {
         $('#phasesList').html('');
         defPhaseTmplt = elem.name;
-        savePhaseData = new Array;
+        savePhaseData = new Array();
         let tmpltData = JSON.parse(elem.options);
         phaseNumber = 0;
         tmpltData.forEach(sto => {
@@ -2089,7 +2089,7 @@ function loadTemplate(tmpltID) {
       if (elem.type == 2) {
         defMlstnTmplt = elem.name;
         $('#milestonesList').html('');
-        saveMilestoneData = new Array;
+        saveMilestoneData = new Array();
         let tmpltData = JSON.parse(elem.options);
         milestoneNumber = 0;
         tmpltData.forEach(sto => {
@@ -2312,19 +2312,19 @@ function resetTemplate(id) {
   switch (id) {
     case 0:
       defDetlTmplt = "";
-      saveTemplateData = new Array;
+      saveTemplateData = new Array();
       $('#detailsList').html('');
       detailNumber = 0;
       break;
     case 1:
       defPhaseTmplt = "";
-      savePhaseData = new Array;
+      savePhaseData = new Array();
       $('#phasesList').html('');
       phaseNumber = 0;
       break;
     case 2:
       defMlstnTmplt = "";
-      saveMilestoneData = new Array;
+      saveMilestoneData = new Array();
       $('#milestonesList').html('');
       milestoneNumber = 0;
       break;
