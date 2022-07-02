@@ -2374,6 +2374,8 @@ function removeItem (type, index) {
 }
 
 function checkNewProj() {
+  let msj = "";
+  let projBasic = new Array();
   let projName = $('#projName').val();
   let projType = $('#projType').val();
   let projClient = $('#projClient').val();
@@ -2381,8 +2383,13 @@ function checkNewProj() {
   let projBudget = $('#projBudget').val();
   let projStartDate = $('#projStartDate').val();
   let projEndDate = $('#projDeadline').val();
+  projBasic.push(projName, projType, projClient, projBudget, projExtern, projStartDate, projEndDate);
+  projBasic.forEach(elem => {
+    if (elem==null || elem == '') {
+      msj += `${elem.name}, `;
+    }
+  });
   console.log(projName, projType, projClient, projExtern, projBudget, projStartDate, projEndDate);
-  let msj = "";
   saveTemplateData.forEach(element => {
     console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
     if ($('#detailValue_' + Number(element.number)).val() == null || $('#detailValue_' + Number(element.number)).val() == '') {
@@ -2392,6 +2399,7 @@ function checkNewProj() {
   });
   if (msj != "") {
     M.toast({html: `Trebuie sa alegi ${msj.substring(0,msj.length - 2)}`});
+    return 0;
   }
   savePhaseData.forEach(element => {
     console.log(`Faza: ${element.name}`);
