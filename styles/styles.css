@@ -14,6 +14,10 @@ table tr.sorting-row td:last-child {
   box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.2);
 }
 
+body {
+  font-family: 'Source Sans Pro';
+}
+
 .cursor-pointer-hover-red {
   cursor: pointer !important;
   font-size: 18px;
