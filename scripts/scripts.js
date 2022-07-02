@@ -2393,9 +2393,8 @@ function checkNewProj() {
   saveTemplateData.forEach(element => {
     console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
     if ($('#detailValue_' + Number(element.number)).val() == null || $('#detailValue_' + Number(element.number)).val() == '') {
-      $('#detailValue_' + Number(element.number)).addClass("invalid");
+      msj += `${element.name}, `;
     }
-    msj += `${element.name}, `;
   });
   if (msj != "") {
     M.toast({html: `Trebuie sa alegi ${msj.substring(0,msj.length - 2)}`});
