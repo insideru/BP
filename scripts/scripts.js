@@ -2060,13 +2060,13 @@ function loadTemplate(tmpltID) {
           let detailName = sto.name;
           switch (Number(sto.type)) {
             case 3: //text
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><input id="detailValue_${detailNumber}" type="text"></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
             case 1: //bifa
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><select class="browser-default" id="detailValue_${detailNumber}"><option value="?" disabled selected>Alege</option><option value="1">Da</option><option value="0">Nu</option></select></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}" id="detailName_${detailNumber}">${detailName}</td><td><select class="browser-default" id="detailValue_${detailNumber}"><option value="?" disabled selected>Alege</option><option value="1">Da</option><option value="0">Nu</option></select></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
             case 0: //textarea
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
+                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
           }
           $('#detailsList').append(newRow);
