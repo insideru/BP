@@ -137,7 +137,7 @@ if ($_POST["action"]=="addToDB") {
                     break;
                 }
             }
-            echo("Succes: {$id}");
+            echo("Success:{$id}");
             break;
         case "addActivity":
             echo addActivity($_POST['name'], $_POST['category']);

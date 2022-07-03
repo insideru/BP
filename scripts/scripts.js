@@ -2464,6 +2464,7 @@ function checkNewProj() {
     success: function(data) {
       if (data.substring(0,8) == "Success:") {
         //great success
+        console.log(data);
       }
     },
     error: function(errData) {
