@@ -2068,9 +2068,6 @@ function loadTemplate(tmpltID) {
             case 0: //textarea
                     newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
                     break;
-            case 2: //textarea
-                    newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
-                    break;
           }
           $('#detailsList').append(newRow);
           saveTemplateData.push({name: detailName, type: Number(sto.type), number: detailNumber++});
@@ -2111,10 +2108,38 @@ function saveTemplate(type) {
   let sentData = 0;
   
   switch (type) {
-    case 0: (saveTemplateData.length>0?sentData = JSON.stringify(saveTemplateData):sentData = 0); defValue = defDetlTmplt; break;
-    case 1: (savePhaseData.length>0?sentData = JSON.stringify(savePhaseData):sentData=0); defValue = defPhaseTmplt; break;
-    case 2: (saveMilestoneData.length>0?sentData = JSON.stringify(saveMilestoneData):sentData=0); defValue = defMlstnTmplt; break;
+    case 0: 
+      let saveTemplateDataTmp = new Array();
+      saveTemplateData.forEach(elem => {
+        let newElem = new Object(elem);
+        delete newElem.number;
+        saveTemplateDataTmp.push(newElem);
+      });
+      saveTemplateDataTmp.length>0?sentData = JSON.stringify(saveTemplateDataTmp):sentData = 0;
+      defValue = defDetlTmplt;
+      break;
+    case 1: 
+      let savePhaseDataTmp = new Array();
+      savePhaseData.forEach(elem => {
+        let newElem = new Object(elem);
+        delete newElem.number;
+        savePhaseDataTmp.push(newElem);
+      });
+      savePhaseDataTmp.length>0?sentData = JSON.stringify(savePhaseDataTmp):sentData=0;
+      defValue = defPhaseTmplt; 
+      break;
+    case 2:
+      let saveMilestoneDataTmp = new Array();
+      saveMilestoneData.forEach(elem => {
+        let newElem = new Object(elem);
+        delete newElem.number;
+        saveMilestoneDataTmp.push(newElem);
+      });
+      saveMilestoneDataTmp.length>0?sentData = JSON.stringify(saveMilestoneDataTmp):sentData=0;
+      defValue = defMlstnTmplt;
+      break;
   }
+  
   if (sentData == 0) {
     M.toast({html: "Nu exista suficiente date pentru crearea unui sablon!"});
     return 0;
@@ -2190,9 +2215,6 @@ function addProjDetail() {
             newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><select class="browser-default" id="detailValue_${detailNumber}"><option value="?" disabled selected>Alege</option><option value="1">Da</option><option value="0">Nu</option></select></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
             break;
     case 0: //textarea
-            newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
-            break;
-    case 2: //textarea
             newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea"></textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
             break;
   }
