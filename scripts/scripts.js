@@ -2139,7 +2139,7 @@ function saveTemplate(type) {
       defValue = defMlstnTmplt;
       break;
   }
-  
+
   if (sentData == 0) {
     M.toast({html: "Nu exista suficiente date pentru crearea unui sablon!"});
     return 0;
@@ -2401,7 +2401,7 @@ function checkNewProj() {
   let projName = $('#projName').val();
   let projType = $('#projType').val();
   let projClient = $('#projClient').val();
-  let projExtern = $('#projExtern').is(":checked")?1:0;
+  let projExtern = $('#projExtern').val();
   let projBudget = $('#projBudget').val();
   let projStartDate = $('#projStartDate').val();
   let projEndDate = $('#projDeadline').val();
