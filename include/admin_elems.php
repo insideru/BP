@@ -310,16 +310,16 @@ function addCollab (string $name, int $id) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addProject (string $name, int $catid, int $clientid) {
+function addProject (array $basicData) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id) VALUES (:name, :client_id, :type_id)';
+    $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id, external, budget, start_date, deadline) VALUES (:name, :client_id, :type_id, :external, :budget, :start_date, :deadline)';
     
     /* Values array for PDO */
-    $values = array(':name' => $name, ":client_id" => $clientid, ":type_id" => $catid);
+    $values = array(':name' => $basicData[0], ":client_id" => (int)$basicData[1], ":type_id" => (int)$basicData[2], ":external" => (int)$basicData[3], ":budget" => (int)$basicData[4], ":start_data" => date("Y-m-d", strtotime($basicData[5])), "deadline" => date("Y-m-d", strtotime($basicData[6])));
     
     /* Execute the query */
     try
@@ -336,6 +336,102 @@ function addProject (string $name, int $catid, int $clientid) {
     
     /* Return the new ID */
     return "Success:" . $pdo->lastInsertId();
+}
+
+function addProjectDetails (int $proj_id, array $detailsData) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.project_info (proj_id, name, type, value) VALUES ';
+
+    foreach ($detailsData as $element) {
+        $query+="({$proj_id}, {$element}['name'], {$element}['type'], {$element}['val']), ";
+    }
+
+    $query = substr($query, 0, strlen($query)-2);
+    $query += ';';
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success!";
+}
+
+function addProjectPhases (int $proj_id, array $phaseData) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.project_phases (proj_id, name) VALUES ';
+
+    foreach ($phaseData as $element) {
+        $query+="({$proj_id}, {$element}['name']), ";
+    }
+
+    $query = substr($query, 0, strlen($query)-2);
+    $query += ';';
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success!";
+}
+
+function addProjectMilestones (int $proj_id, array $milestoneData) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    /* Insert query template */
+    $query = 'INSERT INTO '.$schema.'.project_milestones (proj_id, name) VALUES ';
+
+    foreach ($milestoneData as $element) {
+        $query+="({$proj_id}, {$element}['name']), ";
+    }
+
+    $query = substr($query, 0, strlen($query)-2);
+    $query += ';';
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success!";
 }
 
 function changeProjectState (int $proj_id) {
@@ -508,7 +604,7 @@ function setProjectDeadline (int $proj_id, string $deadline) {
     global $pdo;
     global $schema;
 
-    $query = ' UPDATE '. $schema . '.projects SET deadline = :deadline WHERE id = :proj_id';
+    $query = 'UPDATE '. $schema . '.projects SET deadline = :deadline WHERE id = :proj_id';
     $values = array(':proj_id' => $proj_id, ':deadline' => date("Y-m-d", strtotime($deadline)));
 
     try

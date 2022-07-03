@@ -36,9 +36,7 @@ ALTER TABLE `project_types`
 CREATE TABLE `project_phases` (
   `id` int(10) UNSIGNED NOT NULL,
   `proj_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `budget` int (10) NOT NULL,
-  `options` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `project_phases`

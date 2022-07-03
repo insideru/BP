@@ -2398,6 +2398,7 @@ function removeItem (type, index) {
 function checkNewProj() {
   let msj = "";
   let projBasic = new Array();
+  let projBasicData = new Array();
   let projName = $('#projName').val();
   let projType = $('#projType').val();
   let projClient = $('#projClient').val();
@@ -2406,26 +2407,67 @@ function checkNewProj() {
   let projStartDate = $('#projStartDate').val();
   let projEndDate = $('#projDeadline').val();
   projBasic.push({name: `Nume proiect`, val: projName}, {name: `Categorie proiect`, val: projType}, {name: `Client`, val: projClient}, {name: `Tip proiect`, val: projExtern}, {name: `Buget`, val: projBudget}, {name: `Data incepere`, val: projStartDate}, {name: `Data terminare`, val: projEndDate});
+  
   projBasic.forEach(elem => {
     if (elem.val==null || elem.val == '') {
       msj += `${elem.name}, `;
     }
   });
-  console.log(projName, projType, projClient, projExtern, projBudget, projStartDate, projEndDate);
+
+  let projDetailData = new Array();
   saveTemplateData.forEach(element => {
-    console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
+    //console.log(`Detaliu: ${element.name} - ${$('#detailValue_' + Number(element.number)).val()}`);
     if ($('#detailValue_' + Number(element.number)).val() == null || $('#detailValue_' + Number(element.number)).val() == '') {
       msj += `${element.name}, `;
     }
+    let newElem = new Object(element);
+    delete newElem.number;
+    newElem.val = $('#detailValue_' + Number(element.number)).val();
+    projDetailData.push(newElem);
   });
+
   if (msj != "") {
     M.toast({html: `Trebuie sa alegi ${msj.substring(0,msj.length - 2)}`});
     return 0;
   }
+
+  projBasicData.push(projName, projType, projClient, projExtern, projBudget, getSelectedISODate(projStartDate), getSelectedISODate(projEndDate));
+  
+  let projPhaseData = new Array();
   savePhaseData.forEach(element => {
-    console.log(`Faza: ${element.name}`);
+    let newElem = new Object(element);
+    delete newElem.number;
+    projPhaseData.push(newElem);
   });
+
+  let projMilestoneData = new Array();
   saveMilestoneData.forEach(element => {
-    console.log(`Milestone: ${element.name}`);
+    let newElem = new Object(element);
+    delete newElem.number;
+    projMilestoneData.push(newElem);
+  });
+
+  var formData = {
+    'action'      : 'addToDB',
+    'type'        : 'addProject',
+    'info'        : JSON.stringify(projBasicData),
+    'details'     : Array.isArray(projDetailData)?JSON.stringify(projDetailData):0,
+    'phases'      : Array.isArray(projPhaseData)?JSON.stringify(projPhaseData):0,
+    'milestones'  : Array.isArray(projMilestoneData)?JSON.stringify(projMilestoneData):0
+  };
+  $.ajax({
+    url: 'handler.php',
+    type: 'POST',
+    encode: true,
+    //dataType: 'json',
+    data: formData,
+    success: function(data) {
+      if (data.substring(0,8) == "Success:") {
+        //great success
+      }
+    },
+    error: function(errData) {
+      M.toast({html: errData});
+    }
   });
 }

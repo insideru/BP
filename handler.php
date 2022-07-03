@@ -109,7 +109,35 @@ if ($_POST["action"]=="addToDB") {
             echo addCollab($_POST['name'], $_POST['category']);
             break;
         case "addProject":
-            echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
+            //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
+            $res = addProject(json_decode($_POST('info')));
+            $id = substr($res,8);
+            if (!is_numeric((int)$id)) {
+                echo $res;
+                break;
+            }
+            if ($_POST['details'] != 0) {
+                $res = addProjectDetails((int)$id, json_decode($_POST['details']));
+                if (substr($res, 8) != "Success!") {
+                    echo $res;
+                    break;
+                }
+            }
+            if ($_POST['phases'] != 0) {
+                $res = addProjectPhases((int)$id, json_decode($_POST['phases']));
+                if (substr($res, 8) != "Success!") {
+                    echo $res;
+                    break;
+                }
+            }
+            if ($_POST['milestones'] != 0) {
+                $res = addProjectMilestones((int)$id, json_decode($_POST['milestones']));
+                if (substr($res, 8) != "Success!") {
+                    echo $res;
+                    break;
+                }
+            }
+            echo("Succes: {$id}");
             break;
         case "addActivity":
             echo addActivity($_POST['name'], $_POST['category']);
