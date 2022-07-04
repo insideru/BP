@@ -352,6 +352,8 @@ function addProjectDetails (int $proj_id, array $detailsData) {
     $query = substr($query, 0, strlen($query)-2);
     $query += ';';
     
+    echo $query;
+
     /* Execute the query */
     try
     {
@@ -383,6 +385,8 @@ function addProjectPhases (int $proj_id, array $phaseData) {
 
     $query = substr($query, 0, strlen($query)-2);
     $query += ';';
+
+    echo $query;
     
     /* Execute the query */
     try
@@ -415,6 +419,8 @@ function addProjectMilestones (int $proj_id, array $milestoneData) {
 
     $query = substr($query, 0, strlen($query)-2);
     $query += ';';
+
+    echo $query;
     
     /* Execute the query */
     try
