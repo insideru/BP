@@ -458,12 +458,11 @@ function changeRangeVal(rangeID, rangeValue) {
 
 function calculateHours (id, phase, milestone) {
   var wrkdHours=0;
-  console.log(timesheetsObject);
   for (let element of timesheetsObject) {
     if ((element.id==id && element.phase == phase && element.milestone == milestone) || id=="toate" ? 1 : 0)
     {
       for (const property in element) {
-        if (property!="id" || property!="phase" || property!="milestone") {
+        if (property!="id" && property!="phase" && property!="milestone") {
           wrkdHours+=Number(element[property]);
         }
       }
