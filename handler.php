@@ -119,7 +119,7 @@ if ($_POST["action"]=="addToDB") {
             $details = strlen($_POST['details'])==1?(int)$_POST['details']:json_decode($_POST['details']);
             if ($details !== 0) {
                 $res = addProjectDetails((int)$id, json_decode($_POST['details']));
-                if (substr($res, 8) != "Success!") {
+                if (substr($res, 0, 8) != "Success!") {
                     echo $res;
                     break;
                 }
@@ -127,7 +127,7 @@ if ($_POST["action"]=="addToDB") {
             $phases = strlen($_POST['phases'])==1?(int)$_POST['phases']:json_decode($_POST['phases']);
             if ($phases !== 0) {
                 $res = addProjectPhases((int)$id, json_decode($_POST['phases']));
-                if (substr($res, 8) != "Success!") {
+                if (substr($res, 0, 8) != "Success!") {
                     echo $res;
                     break;
                 }
@@ -135,7 +135,7 @@ if ($_POST["action"]=="addToDB") {
             $milestones = strlen($_POST['milestones'])==1?(int)$_POST['milestones']:json_decode($_POST['milestones']);
             if ($milestones !== 0) {
                 $res = addProjectMilestones((int)$id, json_decode($_POST['milestones']));
-                if (substr($res, 8) != "Success!") {
+                if (substr($res, 0, 8) != "Success!") {
                     echo $res;
                     break;
                 }
