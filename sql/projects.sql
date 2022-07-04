@@ -65,7 +65,7 @@ CREATE TABLE `project_templates` (
   `id` int(10) UNSIGNED NOT NULL,
   `type` int(2) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `options` varchar(255) NOT NULL
+  `options` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `project_templates`
@@ -80,8 +80,8 @@ CREATE TABLE `project_info` (
   `id` int(10) UNSIGNED NOT NULL,
   `proj_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `type` int(10) NOT NULL,
+  `value` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `project_info`
