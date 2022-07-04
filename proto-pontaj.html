@@ -170,21 +170,19 @@
         });
         $('.collapsible').collapsible();
         $.get("handler.php?r=init", function(data, status) {
-        //console.log("Data: " + data + "\nStatus: " + status);
-        initData = JSON.parse(data);
-        collabCatsObject = initData.collabCats;
-        projCatsObject = initData.projCats;
-        collabsObject = initData.collabs;
-        projectsObject = initData.projects;
-        activitiesObject = initData.activities;
-        
+          console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
 
-        //initializare categorii proiect
-        //populateActiveProjects();
-        populateActiveDropdown();
-        $('select').formSelect();
-      });
-    });    
+          collabsObject = initData.collabs;
+          projectsObject = initData.projects;
+          activitiesObject = initData.activities;
+        
+          //initializare categorii proiect
+          //populateActiveProjects();
+          populateActiveDropdown();
+          $('select').formSelect();
+        });
+      });    
     </script>
   </body>
 </html>
