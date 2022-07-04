@@ -40,17 +40,17 @@ function addAttendance(string $date, string $start, string $end) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addTimesheetEntry(string $date, int $project_id, int $activity_id, float $time) {
+function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $milestone_id, int $activity_id, float $time) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
     global $account;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.timesheets (collab_id, date, project_id, activity_id, time) VALUES (:collab_id, :date, :project_id, :activity_id, :time)';
+    $query = 'INSERT INTO '.$schema.'.timesheets (collab_id, date, project_id, phase_id, milestone_id, activity_id, time) VALUES (:collab_id, :date, :project_id, :phase_id, :milestone_id, :activity_id, :time)';
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':activity_id' => $activity_id, ':time' => $time);
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $project_id, ':phase_id' => $phase_id, ':milestone_id' => $milestone_id, ':activity_id' => $activity_id, ':time' => $time);
     
     /* Execute the query */
     try

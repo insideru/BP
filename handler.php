@@ -54,9 +54,11 @@ if ($_POST["action"]=="addTimesheet") {
     addAttendance($ziua, $oraVenire, $oraPlecare);
     foreach ($timesheet as $timesheetProject) {
         $currID = $timesheetProject['id'];
+        $currPhase = $timesheetProject['phase'];
+        $currMilestone = $timesheetProject['milestone'];
         foreach($timesheetProject as $key => $value) {
             if ($key!="id" && $value!=0.0) {
-                addTimesheetEntry($ziua, $currID, $key, $value);
+                addTimesheetEntry($ziua, $currID, $currPhase, $currMilestone, $key, $value);
             }
         }
     }
@@ -241,6 +243,13 @@ if ($_REQUEST["r"]=="holidays") {
 
 if ($_POST["action"]=="changeAccountDetails") {
     echo changeAccountDetails($_POST['id'], $_POST['column'], $_POST['value']);
+}
+
+if ($_POST["action"]=="getPhasesAndMilestones") {
+    $response = array();
+    $response['phases'] = getProjectPhases((int)$_POST['proj_id']);
+    $response['milestones'] = getProjectMilestones((int)$_POST['proj_id']);
+    echo json_encode($response);
 }
 
 if ($_POST["action"]=="getPhases") {

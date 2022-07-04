@@ -498,14 +498,10 @@ function initRange(elemID) {
 
 function selectProject(projName) {
   //console.log('adaug proiectul ' + projName + ' care are idul ' + getDBidFromName(projName, "project"));
-  if ($("#project_" + getDBidFromName(projName, "project")).exists()) {
-      M.toast({html: 'Proiectul este deja adaugat!'});
-      return;
-  }
 
-  //check if project has any phases
+  //check if project has any phases and/or milestones
   var formData = {
-    'action'            : 'getPhases',
+    'action'            : 'getPhasesAndMilestones',
     'proj_id'           : getDBidFromName(projName, "project")
   };
   $.ajax({
@@ -516,37 +512,68 @@ function selectProject(projName) {
       encode      : true,
       success     : function(data) {
         let res=JSON.parse(data);
-        console.log(res);
+        let projPhases = data.phases;
+        let projMilestones = data.milestones;
+        if (projPhases.length == 0 && projMilestones.length == 0) {
+          if ($("#project_" + getDBidFromName(projName, "project") + '_0_0').exists()) {
+            M.toast({html: 'Proiectul este deja adaugat!'});
+            return;
+          }
+          addNewProjTimesheet(projName, "", 0, "", 0);
+        }
+        let contor = 1;
+        if (projPhases.length > 0) {
+          $(`#select${contor}`).html('select id="addProjPhase" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
+          projPhases.forEach(elem => {
+            $('#addProjPhase').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
+          });
+          contor++;
+        }
+        if (projMilestones.length > 0) {
+          $(`#select${contor}`).html('select id="addProjMilestone" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
+          projPhases.forEach(elem => {
+            $('#addProjMilestone').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
+          });
+        }
       }
   });
-
-    //check if project has any milestones
-    var formData = {
-      'action'            : 'getMilestones',
-      'proj_id'           : getDBidFromName(projName, "project")
-    };
-    $.ajax({
-        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url         : 'handler.php', // the url where we want to POST
-        data        : formData, // our data object
-        //dataType    : 'json', // what type of data do we expect back from the server
-        encode      : true,
-        success     : function(data) {
-          let res=JSON.parse(data);
-          console.log(res);
-        }
-    });
-
 }
 
-function addNewProjTimesheet(projName, projPhase, projMilestone) {
-  $('#projTimesheet').append('<li id="project_' + getDBidFromName(projName, "project") + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + projName + '<span class="badge" id="' + getDBidFromName(projName, "project") + "_totalHours" + '">0 ore</span><a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProj(\'' + getDBidFromName(projName, "project") + '\');">remove_circle</i></a></div></li>');
-  $('#project_' + getDBidFromName(projName, "project")).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + "_activities" + '" class="row"></div></div>');
+function validateAddTimesheet() {
+  let projName = $('#addProjDD').val();
+  let phaseName = "";
+  let phaseId = 0;
+  let milestoneName = "";
+  let milestoneId = 0;
+  if ($('#addProjPhase').exists()) {
+    if ($('#addProjPhase').val() == null) {
+      M.toast({html: 'Alege o faza a proiectului!'});
+      return 0;
+    }
+    phaseId = $('#addProjPhase').val().split('_')[0];
+    phaseName = $('#addProjPhase').val().split('_')[1];
+  }
+  if ($('#addProjMilestone').exists()) {
+    if ($('#addProjMilestone').val() == null) {
+      M.toast({html: 'Alege o faza a proiectului!'});
+      return 0;
+    }
+    milestoneId = $('#addProjMilestone').val().split('_')[0];
+    milestoneName = $('#addProjMilestone').val().split('_')[1];
+  }
+
+  addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
+}
+
+function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
+  let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
+  $('#projTimesheet').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<span class="badge" id="' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_totalHours" + '">0 ore</span><a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
+  $('#project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities" + '" class="row"></div></div>');
   projType = getProjectType(projName);
   activitiesObject.forEach(element => {
       if (element.project_type==projType) {
-          $("#project_" + getDBidFromName(projName, "project") + "_activities").append('<div class="section"><h5>' + element.name + '</h5></div><p><div id="' + getDBidFromName(projName, "project") + '_' + element.id + '"></div></p>');
-          initRange(getDBidFromName(projName, "project") + '_' + element.id);
+          $("#project_" + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities").append('<div class="section"><h5>' + element.name + '</h5></div><p><div id="' + getDBidFromName(projName, "project")  + `_${projPhaseId}_${projMilestoneId}` + '_' + element.id + '"></div></p>');
+          initRange(getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '_' + element.id);
       }
   });
   //initialize range sliders
@@ -554,15 +581,18 @@ function addNewProjTimesheet(projName, projPhase, projMilestone) {
   var instance = M.Collapsible.getInstance($('.collapsible'));
   //add timesheet object
   var tmSht = {};
-  tmSht["id"] = getDBidFromName(projName, "project");
+  tmSht['id'] = getDBidFromName(projName, "project");
+  tmSht['phase'] = projPhaseId;
+  tmSht['milestone'] = projMilestoneId;
   timesheetsObject.push(tmSht);
   instance.open(timesheetsObject.length - 1);
   document.getElementById("addProjDD").value = "";
+  $('#select1').html('');
+  $('#select2').html('');
 }
 
 function populateActiveProjects() {
   projectsObject.forEach(element => {
-    isChecked = "";
     if (element.active=="1") {
       $('#addProjDD').append('<li><a href="#!" onclick="addNewProjTimesheet(this.innerHTML)">' + element.name + '</a></li>');
     }
@@ -571,7 +601,6 @@ function populateActiveProjects() {
 
 function populateActiveDropdown() {
   projectsObject.forEach(element => {
-    isChecked = "";
     if (element.active=="1") {
       $('#addProjDD').append('<option value="'+element.name+'">' + element.name + '</option>');
     }
