@@ -266,7 +266,7 @@
           projCatsObject.forEach(element => {
             projCats.push({value: element.id, text: element.name});
           });
-          projCats.sort((a,b)=>a.id-b.id);
+          
           jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
             onchange: function(element, index) {
@@ -279,7 +279,7 @@
           clientsObject.forEach(element => {
             projClients.push({value: element.id, text: element.name});
           });
-          projClients.sort((a,b)=>a.id-b.id);
+          
           jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,

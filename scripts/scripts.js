@@ -2406,7 +2406,8 @@ function checkNewProj() {
   let projBudget = $('#projBudget').val();
   let projStartDate = $('#projStartDate').val();
   let projEndDate = $('#projDeadline').val();
-  projBasic.push({name: `Nume proiect`, val: projName}, {name: `Categorie proiect`, val: projType}, {name: `Client`, val: projClient}, {name: `Tip proiect`, val: projExtern}, {name: `Buget`, val: projBudget}, {name: `Data incepere`, val: projStartDate}, {name: `Data terminare`, val: projEndDate});
+
+  projBasic.push({name: `Nume proiect`, val: projName}, {name: `Client`, val: projClient}, {name: `Categorie proiect`, val: projType}, {name: `Tip proiect`, val: projExtern}, {name: `Buget`, val: projBudget}, {name: `Data incepere`, val: projStartDate}, {name: `Data terminare`, val: projEndDate});
   
   projBasic.forEach(elem => {
     if (elem.val==null || elem.val == '') {
