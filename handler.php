@@ -109,7 +109,6 @@ if ($_POST["action"]=="addToDB") {
             echo addCollab($_POST['name'], $_POST['category']);
             break;
         case "addProject":
-            echo "Hai ca macar e aici!";
             //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
             $res = addProject(json_decode($_POST['info']));
             $id = substr($res,8);
