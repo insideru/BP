@@ -523,14 +523,14 @@ function selectProject(projName) {
         }
         let contor = 1;
         if (projPhases.length > 0) {
-          $(`#select${contor}`).html('select id="addProjPhase" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
+          $(`#select${contor}`).html('<select id="addProjPhase" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
           projPhases.forEach(elem => {
             $('#addProjPhase').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
           });
           contor++;
         }
         if (projMilestones.length > 0) {
-          $(`#select${contor}`).html('select id="addProjMilestone" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
+          $(`#select${contor}`).html('<select id="addProjMilestone" class="browser-default" onchange="validateAddTimesheet();"><option value="" disabled selected>Alege faza</option></select>')
           projPhases.forEach(elem => {
             $('#addProjMilestone').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
           });
