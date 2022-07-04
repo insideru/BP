@@ -117,7 +117,7 @@ if ($_POST["action"]=="addToDB") {
                 break;
             }
             $details = strlen($_POST['details'])==1?(int)$_POST['details']:json_decode($_POST['details']);
-            echo $details;
+            print_r($details);
             if ($details !== 0) {
                 $res = addProjectDetails((int)$id, json_decode($_POST['details']));
                 if (substr($res, 0, 8) != "Success!") {
