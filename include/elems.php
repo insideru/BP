@@ -374,6 +374,33 @@ function renameName (string $table, string $oldName, string $newName) {
 	echo "Success!";
 }
 
+function getActivities() {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    $query = 'SELECT * FROM '. $schema . '.activities ORDER BY name ASC';
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function getProjects() {
     /* Global $pdo object */
     global $pdo;
@@ -411,7 +438,7 @@ function getProjectPhases(int $project_id) {
 
     $query = 'SELECT * FROM '. $schema . '.project_phases WHERE proj_id = :proj_id';
     $values = array(':proj_id' => $project_id);
-    
+
     try
     {
         $res = $pdo->prepare($query);
