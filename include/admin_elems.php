@@ -319,7 +319,7 @@ function addProject (array $basicData) {
     $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id, external, budget, start_date, deadline) VALUES (:name, :client_id, :type_id, :external, :budget, :start_date, :deadline)';
     
     /* Values array for PDO */
-    $values = array(':name' => $basicData[0], ":client_id" => (int)$basicData[1], ":type_id" => (int)$basicData[2], ":external" => (int)$basicData[3], ":budget" => (int)$basicData[4], ":start_data" => date("Y-m-d", strtotime($basicData[5])), ":deadline" => date("Y-m-d", strtotime($basicData[6])));
+    $values = array(':name' => $basicData[0], ":client_id" => $basicData[1], ":type_id" => $basicData[2], ":external" => $basicData[3], ":budget" => $basicData[4], ":start_data" => date("Y-m-d", strtotime($basicData[5])), ":deadline" => date("Y-m-d", strtotime($basicData[6])));
     
     /* Execute the query */
     try
