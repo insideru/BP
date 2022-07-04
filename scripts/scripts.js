@@ -2111,7 +2111,7 @@ function saveTemplate(type) {
     case 0: 
       let saveTemplateDataTmp = new Array();
       saveTemplateData.forEach(elem => {
-        let newElem = new Object(elem);
+        let newElem = Object.assign({}, elem);
         delete newElem.number;
         saveTemplateDataTmp.push(newElem);
       });
@@ -2121,7 +2121,7 @@ function saveTemplate(type) {
     case 1: 
       let savePhaseDataTmp = new Array();
       savePhaseData.forEach(elem => {
-        let newElem = new Object(elem);
+        let newElem = Object.assign({}, elem);
         delete newElem.number;
         savePhaseDataTmp.push(newElem);
       });
@@ -2131,7 +2131,7 @@ function saveTemplate(type) {
     case 2:
       let saveMilestoneDataTmp = new Array();
       saveMilestoneData.forEach(elem => {
-        let newElem = new Object(elem);
+        let newElem = Object.assign({}, elem);
         delete newElem.number;
         saveMilestoneDataTmp.push(newElem);
       });
@@ -2420,7 +2420,7 @@ function checkNewProj() {
     if ($('#detailValue_' + Number(element.number)).val() == null || $('#detailValue_' + Number(element.number)).val() == '') {
       msj += `${element.name}, `;
     }
-    let newElem = new Object(element);
+    let newElem = Object.assign({}, element);
     delete newElem.number;
     newElem.val = $('#detailValue_' + Number(element.number)).val();
     projDetailData.push(newElem);
@@ -2435,14 +2435,14 @@ function checkNewProj() {
   
   let projPhaseData = new Array();
   savePhaseData.forEach(element => {
-    let newElem = new Object(element);
+    let newElem = Object.assign({}, element);
     delete newElem.number;
     projPhaseData.push(newElem);
   });
 
   let projMilestoneData = new Array();
   saveMilestoneData.forEach(element => {
-    let newElem = new Object(element);
+    let newElem = Object.assign({}, element);
     delete newElem.number;
     projMilestoneData.push(newElem);
   });
