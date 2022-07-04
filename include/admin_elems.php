@@ -320,7 +320,8 @@ function addProject (array $basicData) {
     
     /* Values array for PDO */
     $values = array(':name' => $basicData[0], ":client_id" => $basicData[1], ":type_id" => $basicData[2], ":external" => $basicData[3], ":budget" => $basicData[4], ":start_data" => date("Y-m-d", strtotime($basicData[5])), ":deadline" => date("Y-m-d", strtotime($basicData[6])));
-    
+    print_r($basicData);
+    print_r($values);
     /* Execute the query */
     try
     {
