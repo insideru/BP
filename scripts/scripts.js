@@ -2452,9 +2452,9 @@ function checkNewProj() {
     'action'      : 'addToDB',
     'type'        : 'addProject',
     'info'        : JSON.stringify(projBasicData),
-    'details'     : projDetailData.length==0?JSON.stringify(projDetailData):0,
-    'phases'      : projPhaseData.length==0?JSON.stringify(projPhaseData):0,
-    'milestones'  : projMilestoneData==0?JSON.stringify(projMilestoneData):0
+    'details'     : projDetailData.length!=0?JSON.stringify(projDetailData):0,
+    'phases'      : projPhaseData.length!=0?JSON.stringify(projPhaseData):0,
+    'milestones'  : projMilestoneData!=0?JSON.stringify(projMilestoneData):0
   };
   $.ajax({
     url: 'handler.php',
