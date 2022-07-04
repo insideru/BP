@@ -113,7 +113,7 @@ if ($_POST["action"]=="addToDB") {
             $res = addProject(json_decode($_POST['info']));
             $id = substr($res,8);
             if (!is_numeric((int)$id)) {
-                echo $res;
+                echo $id - $res;
                 break;
             }
             if ($_POST['details'] != 0) {
