@@ -79,10 +79,18 @@
                 <ul id='addProjDD' class='dropdown-content'>
                 </ul>
         </div> -->
-        <div class="input-field col s6">
-          <select id="addProjDD" class="browser-default" onchange="addNewProjTimesheet(value);">
-            <option value="" disabled selected>Adauga proiect</option>
-          </select>
+        <div class="row">
+          <div class="input-field col s12 l4">
+            <select id="addProjDD" class="browser-default" onchange="selectProject(value);">
+              <option value="" disabled selected>Alege proiectul</option>
+            </select>
+          </div>
+          <div class="input-field col s12 l4" id="phasesSelect">
+
+          </div>
+          <div class="input-field col s12 l4" id="milestonesSelect">
+            
+          </div>
         </div>
         <div class="row">
           <a class="waves-effect waves-light btn" onclick="ponteaza();">Ponteaza</a>
@@ -169,6 +177,7 @@
         collabsObject = initData.collabs;
         projectsObject = initData.projects;
         activitiesObject = initData.activities;
+        
 
         //initializare categorii proiect
         //populateActiveProjects();

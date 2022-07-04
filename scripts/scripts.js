@@ -3,6 +3,8 @@ collabCatsObject = [];
 projCatsObject = [];
 collabsObject = [];
 projectsObject = [];
+phasesObject = [];
+milestonesObject = [];
 activitiesObject = [];
 timesheetsObject = [];
 accountsObject = [];
@@ -494,12 +496,50 @@ function initRange(elemID) {
 });
 }
 
-function addNewProjTimesheet(projName) {
+function selectProject(projName) {
   //console.log('adaug proiectul ' + projName + ' care are idul ' + getDBidFromName(projName, "project"));
   if ($("#project_" + getDBidFromName(projName, "project")).exists()) {
       M.toast({html: 'Proiectul este deja adaugat!'});
       return;
   }
+
+  //check if project has any phases
+  var formData = {
+    'action'            : 'getPhases',
+    'proj_id'           : getDBidFromName(projName, "project")
+  };
+  $.ajax({
+      type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+      url         : 'handler.php', // the url where we want to POST
+      data        : formData, // our data object
+      //dataType    : 'json', // what type of data do we expect back from the server
+      encode      : true,
+      success     : function(data) {
+        let res=JSON.parse(data);
+        console.log(res);
+      }
+  });
+
+    //check if project has any milestones
+    var formData = {
+      'action'            : 'getMilestones',
+      'proj_id'           : getDBidFromName(projName, "project")
+    };
+    $.ajax({
+        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url         : 'handler.php', // the url where we want to POST
+        data        : formData, // our data object
+        //dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true,
+        success     : function(data) {
+          let res=JSON.parse(data);
+          console.log(res);
+        }
+    });
+
+}
+
+function addNewProjTimesheet(projName, projPhase, projMilestone) {
   $('#projTimesheet').append('<li id="project_' + getDBidFromName(projName, "project") + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + projName + '<span class="badge" id="' + getDBidFromName(projName, "project") + "_totalHours" + '">0 ore</span><a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProj(\'' + getDBidFromName(projName, "project") + '\');">remove_circle</i></a></div></li>');
   $('#project_' + getDBidFromName(projName, "project")).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + "_activities" + '" class="row"></div></div>');
   projType = getProjectType(projName);

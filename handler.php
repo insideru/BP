@@ -228,7 +228,6 @@ if ($_REQUEST["r"]=="init") {
         $response["activities"] = getActivities();
         $response["timesheets"] = getAllTimesheets();
     }
-    
     echo json_encode($response);
 }
 
@@ -242,6 +241,14 @@ if ($_REQUEST["r"]=="holidays") {
 
 if ($_POST["action"]=="changeAccountDetails") {
     echo changeAccountDetails($_POST['id'], $_POST['column'], $_POST['value']);
+}
+
+if ($_POST["action"]=="getPhases") {
+    echo getProjectPhases((int)$_POST['project_id']);
+}
+
+if ($_POST["action"]=="getMilestones") {
+    echo getProjectMilestones((int)$_POST['project_id']);
 }
 
 if ($_POST["action"]=="addSalary") {

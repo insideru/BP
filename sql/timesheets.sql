@@ -3,6 +3,8 @@ CREATE TABLE `timesheets` (
     `collab_id` int(10) UNSIGNED NOT NULL,
     `date` date NOT NULL,
     `project_id` int(10) UNSIGNED NOT NULL,
+    `phase_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `milestone_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
     `activity_id` int(10) UNSIGNED NOT NULL,
     `time` float(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

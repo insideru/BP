@@ -1,6 +1,5 @@
 <?php
 require_once 'db.php';
-require_once 'db_dump.php';
 
 function backUpDBtoFile() {
     global $host;
