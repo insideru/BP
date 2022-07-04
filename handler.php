@@ -110,7 +110,6 @@ if ($_POST["action"]=="addToDB") {
             break;
         case "addProject":
             //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
-            echo($_POST['info']."\n");
             print_r(json_decode($_POST['info']));
             $res = addProject(json_decode($_POST['info']));
             $id = substr($res,8);

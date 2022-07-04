@@ -330,7 +330,8 @@ function addProject (array $basicData) {
     catch (PDOException $e)
     {
         /* If there is a PDO exception, throw a standard exception */
-        echo "{$query} - {$values}\n";
+        print_r($basicData);
+        print_r($values);
         echo "Database error: ".$e->getMessage();
         die();
     }
