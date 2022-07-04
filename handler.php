@@ -116,6 +116,7 @@ if ($_POST["action"]=="addToDB") {
                 echo $id - $res;
                 break;
             }
+            echo ($_POST['details']);
             if ($_POST['details'] != 0) {
                 echo ('am intrat in detalii');
                 $res = addProjectDetails((int)$id, json_decode($_POST['details']));
