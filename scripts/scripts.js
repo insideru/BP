@@ -446,23 +446,23 @@ function getFullDate(selectedDate) {
 
 function changeRangeVal(rangeID, rangeValue) {
   for (let element of timesheetsObject) {
-    if (element.id==rangeID.split('_')[0])
+    if (element.id == rangeID.split('_')[0] && element.phase == rangeID.split('_')[1] && element.milestone == rangeID.split('_')[2])
     {
-      element[rangeID.split('_')[1]] = rangeValue;
-      wrkdHours = calculateHours(rangeID.split('_')[0]);
-      $("#" + rangeID.split('_')[0] + "_totalHours").html(wrkdHours != 1 ? wrkdHours + " ore" : wrkdHours + " ora");
+      element[rangeID.split('_')[3]] = rangeValue;
+      wrkdHours = calculateHours(rangeID.split('_')[0], rangeID.split('_')[1], rangeID.split('_')[2]);
+      $("#" + `${rangeID.split('_')[0]}_${rangeID.split('_')[1]}_${rangeID.split('_')[2]}` + "_totalHours").html(wrkdHours != 1 ? wrkdHours + " ore" : wrkdHours + " ora");
     }
   }
   updatePB();
 }
 
-function calculateHours (id) {
+function calculateHours (id, phase, milestone) {
   var wrkdHours=0;
   for (let element of timesheetsObject) {
-    if (element.id==id || id=="toate" ? 1 : 0)
+    if ((element.id==id && element.phase == phase && element.milestone == milestone) || id=="toate" ? 1 : 0)
     {
       for (const property in element) {
-        if (property!="id") {
+        if (property!="id" || property!="phase" || property!="milestone") {
           wrkdHours+=Number(element[property]);
         }
       }
@@ -498,7 +498,8 @@ function initRange(elemID) {
 
 function selectProject(projName) {
   //console.log('adaug proiectul ' + projName + ' care are idul ' + getDBidFromName(projName, "project"));
-
+  $('#select1').html('');
+  $('#select2').html('');
   //check if project has any phases and/or milestones
   var formData = {
     'action'            : 'getPhasesAndMilestones',
@@ -547,7 +548,6 @@ function validateAddTimesheet() {
   let milestoneId = 0;
   if ($('#addProjPhase').exists()) {
     if ($('#addProjPhase').val() == null) {
-      M.toast({html: 'Alege o faza a proiectului!'});
       return 0;
     }
     phaseId = $('#addProjPhase').val().split('_')[0];
@@ -555,13 +555,15 @@ function validateAddTimesheet() {
   }
   if ($('#addProjMilestone').exists()) {
     if ($('#addProjMilestone').val() == null) {
-      M.toast({html: 'Alege o faza a proiectului!'});
       return 0;
     }
     milestoneId = $('#addProjMilestone').val().split('_')[0];
     milestoneName = $('#addProjMilestone').val().split('_')[1];
   }
-
+  if ($("#project_" + getDBidFromName(projName, "project") + `_${phaseId}_${milestoneId}`).exists()) {
+    M.toast({html: 'Proiectul este deja adaugat!'});
+    return;
+  }
   addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
 }
 
