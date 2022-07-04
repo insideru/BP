@@ -511,9 +511,9 @@ function selectProject(projName) {
       //dataType    : 'json', // what type of data do we expect back from the server
       encode      : true,
       success     : function(data) {
-        let res=JSON.parse(data);
-        let projPhases = data.phases;
-        let projMilestones = data.milestones;
+        let res = JSON.parse(data);
+        let projPhases = res.phases;
+        let projMilestones = res.milestones;
         if (projPhases.length == 0 && projMilestones.length == 0) {
           if ($("#project_" + getDBidFromName(projName, "project") + '_0_0').exists()) {
             M.toast({html: 'Proiectul este deja adaugat!'});
