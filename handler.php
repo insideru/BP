@@ -244,12 +244,12 @@ if ($_POST["action"]=="changeAccountDetails") {
 }
 
 if ($_POST["action"]=="getPhases") {
-    $response = getProjectPhases((int)$_POST['project_id']);
+    $response = getProjectPhases((int)$_POST['proj_id']);
     echo json_encode($response);
 }
 
 if ($_POST["action"]=="getMilestones") {
-    $response = getProjectMilestones((int)$_POST['project_id']);
+    $response = getProjectMilestones((int)$_POST['proj_id']);
     echo json_encode($response);
 }
 
