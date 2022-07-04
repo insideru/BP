@@ -346,7 +346,7 @@ function addProjectDetails (int $proj_id, array $detailsData) {
     $query = 'INSERT INTO '.$schema.'.project_info (proj_id, name, type, value) VALUES ';
 
     foreach ($detailsData as $element) {
-        $query.="({$proj_id}, {$element->name}, {$element->type}, {$element->val}), ";
+        $query.="('{$proj_id}', '{$element->name}', '{$element->type}', '{$element->val}'), ";
     }
 
     $query = substr($query, 0, strlen($query)-2);
@@ -380,7 +380,7 @@ function addProjectPhases (int $proj_id, array $phaseData) {
     $query = 'INSERT INTO '.$schema.'.project_phases (proj_id, name) VALUES ';
 
     foreach ($phaseData as $element) {
-        $query.="({$proj_id}, {$element->name}), ";
+        $query.="('{$proj_id}', '{$element->name}'), ";
     }
 
     $query = substr($query, 0, strlen($query)-2);
@@ -414,7 +414,7 @@ function addProjectMilestones (int $proj_id, array $milestoneData) {
     $query = 'INSERT INTO '.$schema.'.project_milestones (proj_id, name) VALUES ';
 
     foreach ($milestoneData as $element) {
-        $query.="({$proj_id}, {$element->name}), ";
+        $query.="('{$proj_id}', '{$element->name}'), ";
     }
 
     $query = substr($query, 0, strlen($query)-2);
