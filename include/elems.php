@@ -438,7 +438,7 @@ function getProjectPhases(int $project_id) {
 
     if ($project_id == 0) {
         $query = 'SELECT * FROM '. $schema . '.project_phases';
-        $values = '';
+        $values = array();
     } else {
         $query = 'SELECT * FROM '. $schema . '.project_phases WHERE proj_id = :proj_id';
         $values = array(':proj_id' => $project_id);
@@ -471,7 +471,7 @@ function getProjectMilestones(int $project_id) {
 
     if ($project_id == 0) {
         $query = 'SELECT * FROM '. $schema . '.project_milestones';
-        $values = '';
+        $values = array();
     } else {
         $query = 'SELECT * FROM '. $schema . '.project_milestones WHERE proj_id = :proj_id';
         $values = array(':proj_id' => $project_id);
