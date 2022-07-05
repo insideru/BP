@@ -57,7 +57,7 @@ if ($_POST["action"]=="addTimesheet") {
         $currPhase = $timesheetProject['phase'];
         $currMilestone = $timesheetProject['milestone'];
         foreach($timesheetProject as $key => $value) {
-            if ($key!="id" && $value!=0.0) {
+            if ($key!="id" && $key!="phase" && $key!="milestone" && $value!=0.0) {
                 addTimesheetEntry($ziua, $currID, $currPhase, $currMilestone, $key, $value);
             }
         }
