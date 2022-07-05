@@ -624,6 +624,8 @@ function drawPontajChart (date) {
   for (let element of myTimesheets) {
     if (element.date == date) {
       newName = getDBNameFromId(element.project_id, 'project');
+      if (element.phase_id != 0) newName+=` - ${getDBNameFromId(element.phase_id, 'phase')}`;
+      if (element.milestone_id != 0) newName+=` - ${getDBNameFromId(element.milestone_id, 'milestone')}`;
       //console.log(getDBNameFromId(element.project_id, 'project'), getDBNameFromId(element.activity_id, 'activity'), element.time);
       data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
       if (oldName!=newName) {

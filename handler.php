@@ -79,6 +79,8 @@ if ($_POST["action"]=="getTimesheets") {
     $response["holidays"] = getHolidays();
     $response["projects"] = getProjects();
     $response["activities"] = getActivities();
+    $response['phases'] = getProjectPhases(0);
+    $response['milestones'] = getProjectMilestones(0);
     echo json_encode($response);
     
 }

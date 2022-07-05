@@ -123,26 +123,42 @@ function getDBNameFromId (id, cat) {
       for (let element of projCatsObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
     case "projClient":
       for (let element of clientsObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
     case "colabCat":
       for (let element of collabCatsObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
     case "activity":
       for (let element of activitiesObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
     case "project":
       for (let element of projectsObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
     case "collab":
       for (let element of collabsObject) {
         if (element.id==id) { return element.name;}
       }
+      break;
+    case "phase":
+      for (let element of phasesObject) {
+        if (element.id==id) { return element.name;}
+      }
+      break;
+    case "milestone":
+      for (let element of milestonesObject) {
+        if (element.id==id) { return element.name;}
+      }
+      break;
   }
 }
 
@@ -1039,6 +1055,8 @@ function initCalendar() {
           buildCalendarHolidays(rvdData.daysoff, rvdData.holidays);
           activitiesObject = rvdData.activities;
           projectsObject = rvdData.projects;
+          phasesObject = rvdData.phases;
+          milestonesObject = rvdData.milestones;
           //$('#calendar').evoCalendar('selectDate', new Date());
         } else {
           M.toast({html: data.substring(15)});
