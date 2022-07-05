@@ -2546,7 +2546,8 @@ function checkNewProj() {
     'phases'      : projPhaseData.length!=0?JSON.stringify(projPhaseData):0,
     'milestones'  : projMilestoneData!=0?JSON.stringify(projMilestoneData):0
   };
-  $.ajax({
+  console.log(formData);
+  /*$.ajax({
     url: 'handler.php',
     type: 'POST',
     encode: true,
@@ -2562,5 +2563,5 @@ function checkNewProj() {
     error: function(errData) {
       M.toast({html: errData});
     }
-  });
+  });*/
 }
