@@ -431,15 +431,18 @@ function getProjects() {
     return $fields;
 }
 
-function getProjectPhases($project_id) {
+function getProjectPhases(int $project_id) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
-    if ($project_id == 0) $project_id = '*';
-
-    $query = 'SELECT * FROM '. $schema . '.project_phases WHERE proj_id = :proj_id';
-    $values = array(':proj_id' => $project_id);
+    if ($project_id == 0) {
+        $query = 'SELECT * FROM '. $schema . '.project_phases';
+        $values = '';
+    } else {
+        $query = 'SELECT * FROM '. $schema . '.project_phases WHERE proj_id = :proj_id';
+        $values = array(':proj_id' => $project_id);
+    }
 
     try
     {
@@ -461,15 +464,18 @@ function getProjectPhases($project_id) {
     return $fields;
 }
 
-function getProjectMilestones($project_id) {
+function getProjectMilestones(int $project_id) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
-    if ($project_id == 0) $project_id = '*';
-
-    $query = 'SELECT * FROM '. $schema . '.project_milestones WHERE proj_id = :proj_id';
-    $values = array(':proj_id' => $project_id);
+    if ($project_id == 0) {
+        $query = 'SELECT * FROM '. $schema . '.project_milestones';
+        $values = '';
+    } else {
+        $query = 'SELECT * FROM '. $schema . '.project_milestones WHERE proj_id = :proj_id';
+        $values = array(':proj_id' => $project_id);
+    }
 
     try
     {
