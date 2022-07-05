@@ -740,8 +740,7 @@ function validatePontaj () {
       M.toast({html: 'Pontajul depaseste perioada de lucru aleasa!'});
     }
   }
-  //return valid;
-  console.log(timesheetsObject);
+  return valid;
 }
 
 function validateConcediu () {
