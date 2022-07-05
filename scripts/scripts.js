@@ -582,7 +582,7 @@ function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestone
   
   var instance = M.Collapsible.getInstance($('.collapsible'));
   //add timesheet object
-  var tmSht = {};
+  var tmSht = new Object();
   tmSht['id'] = getDBidFromName(projName, "project");
   tmSht['phase'] = projPhaseId;
   tmSht['milestone'] = projMilestoneId;
@@ -740,7 +740,8 @@ function validatePontaj () {
       M.toast({html: 'Pontajul depaseste perioada de lucru aleasa!'});
     }
   }
-  return valid;
+  //return valid;
+  console.log(timesheetsObject);
 }
 
 function validateConcediu () {
