@@ -224,11 +224,15 @@ if ($_REQUEST["r"]=="init") {
         $response["daysoff"] = getAllDaysOff();
         $response["templates"] = getTemplates();
         $response["attendance"] = getAttendance();
+        $response['phases'] = getProjectPhases(0);
+        $response['milestones'] = getProjectMilestones(0);
     } else {
         $response["collabs"] = getCollabs();
         $response["projects"] = getProjects();
         $response["activities"] = getActivities();
         $response["timesheets"] = getAllTimesheets();
+        $response['phases'] = getProjectPhases(0);
+        $response['milestones'] = getProjectMilestones(0);
     }
     echo json_encode($response);
 }
