@@ -2546,8 +2546,8 @@ function checkNewProj() {
     'phases'      : projPhaseData.length!=0?JSON.stringify(projPhaseData):0,
     'milestones'  : projMilestoneData!=0?JSON.stringify(projMilestoneData):0
   };
-  console.log(formData);
-  /*$.ajax({
+
+  $.ajax({
     url: 'handler.php',
     type: 'POST',
     encode: true,
@@ -2557,11 +2557,11 @@ function checkNewProj() {
       console.log(data);
       if (data.substring(0,8) == "Success:") {
         //great success
-        window.location.href = location.protocol + "//" + location.host + adminPage;
+        //window.location.href = location.protocol + "//" + location.host + adminPage;
       }
     },
     error: function(errData) {
       M.toast({html: errData});
     }
-  });*/
+  });
 }
