@@ -18,6 +18,7 @@ pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
 calendarPage = "/?page=calendar";
+adminPage = "/?page=admin";
 nrZileLibere = selProjID = 0;
 myTimesheets = [];
 salariesObject = [];
@@ -2555,6 +2556,7 @@ function checkNewProj() {
       console.log(data);
       if (data.substring(0,8) == "Success:") {
         //great success
+        window.location.href = location.protocol + "//" + location.host + adminPage;
       }
     },
     error: function(errData) {
