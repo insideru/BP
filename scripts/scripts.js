@@ -2554,7 +2554,6 @@ function checkNewProj() {
     //dataType: 'json',
     data: formData,
     success: function(data) {
-      console.log(data);
       if (data.substring(0,8) == "Success:") {
         //great success
         window.location.href = location.protocol + "//" + location.host + adminPage;
