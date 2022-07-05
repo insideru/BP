@@ -717,6 +717,8 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         //console.log(curDate, dates[dayIndex], curDate - dates[dayIndex]);
         if (curDate - dates[dayIndex] == 0 && element.collab_id == key) {
           newName = getDBNameFromId(element.project_id, 'project');
+          if (element.phase_id != 0) newName+=` - ${getDBNameFromId(element.phase_id, 'phase')}`;
+          if (element.milestone_id != 0) newName+=` - ${getDBNameFromId(element.milestone_id, 'milestone')}`;
           data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
           if (oldName!=newName) {
             if (oldName!="") {
