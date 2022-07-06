@@ -717,8 +717,8 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         //console.log(curDate, dates[dayIndex], curDate - dates[dayIndex]);
         if (curDate - dates[dayIndex] == 0 && element.collab_id == key) {
           newName = getDBNameFromId(element.project_id, 'project');
-          if (element.phase_id != 0) newName+=` - ${getDBNameFromId(element.phase_id, 'phase')}`;
-          if (element.milestone_id != 0) newName+=` - ${getDBNameFromId(element.milestone_id, 'milestone')}`;
+          if (element.phase_id != 0) newName+=`{}${getDBNameFromId(element.phase_id, 'phase')}`;
+          if (element.milestone_id != 0) newName+=`{}${getDBNameFromId(element.milestone_id, 'milestone')}`;
           data.push({x: getDBNameFromId(element.activity_id, 'activity'), y: Number(element.time)});
           if (oldName!=newName) {
             if (oldName!="") {
@@ -745,7 +745,12 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
         type: 'category',
         labels: {
           formatter: function(val) {
-            return val
+            let nameArray = val.split('{}');
+            let nameHTML = "";
+            nameArray.forEach(elem => {
+              nameHTML+=elem + "<br>";
+            });
+            return nameHTML.substring(0, nameHTML.length - 4);
           }
         },
         group: {
@@ -759,7 +764,7 @@ function drawPontajPerCollab(collabIndex, dayIndex) {
       tooltip: {
         x: {
           formatter: function(val) {
-            return val
+            return val;
           }  
         }
       },
