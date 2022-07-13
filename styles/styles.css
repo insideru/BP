@@ -10,9 +10,6 @@
   left: 0 !important;
   right: 0 !important;
   height: calc(100vh - 64px) !important;
-  display: flex !important;
-  position: fixed !important;
-  z-index: 100000 !important;
 }
 
 table.sorting-table {cursor: move;}
