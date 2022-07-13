@@ -2,7 +2,7 @@
       <div class="col s12">
         <div class="card">
           <div class="card-content">
-            <span class="card-title" id="projNameBig">Proiect nou<div class="right"><a href="#!" class="modal-close medium"><i class="material-icons">close</i></a></div></span>
+            <span class="card-title" id="projNameBig"><span id="projNameBigSpan">Proiect nou</span><div class="right"><a href="#!" class="modal-close medium"><i class="material-icons">close</i></a></div></span>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
     </div>
     <script>
       $(document).ready(function() {
-        $('#projNameBig').html(viewProjID);
+        $('#projNameBigSpan').html(viewProjID);
       });
         
         /*$.get("handler.php?r=viewproj&id="+viewProjID, function(data, status) {
