@@ -38,6 +38,7 @@ var savePhaseData = new Array();
 var saveMilestoneData = new Array();
 var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
+var viewProjID=0;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -316,7 +317,7 @@ function populateProjects() {
       tableName = '#projTable';
     }
     if (element.external=="1") { isExternal = 'checked="checked" ';}
-    $(tableName).append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">'+element.name+'</td>'+
+    $(tableName).append(`<tr><td><a class="modal-trigger" href="#newPontor"><i class="material-icons" onclick="popupProjInfo(${element.id})">info_outline</i></a></td><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">`+element.name+'</td>'+
     '<td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
     '<td><label><input type="checkbox" class="filled-in" id="projExt_' + element.id + '" onclick="changeProjExternal(this.id)"' + isExternal +' /><span></span></label></td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
@@ -2563,4 +2564,19 @@ function checkNewProj() {
       M.toast({html: errData});
     }
   });
+}
+
+function getParameters(urlString) {
+  let paramString = urlString.split('?')[1];
+  let queryString = new URLSearchParams(paramString);
+  let retObject = new Array();
+  for(let pair of queryString.entries()) {
+      retObject[pair[0]] = pair[1];
+  }
+  return retObject;
+}
+
+function popupProjInfo(proj_id) {
+  viewProjID=proj_id;
+  $("#viewProjBody").load("proto-viewproj.html");
 }

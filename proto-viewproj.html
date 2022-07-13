@@ -1,0 +1,159 @@
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title" id="projNameBig">Proiect nou<div class="right"><a href="#!" class="modal-close medium"><i class="material-icons">close</i></a></div></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Informatii de baza</span>
+            <table class="centered">
+              <tbody>
+                <tr>
+                  <td width="30%">Nume proiect</td>
+                  <td class="center-align">
+                    <div class="input-field" style="margin: auto;">
+                      <input type="text" id="projName">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="30%">Categorie proiect</td>
+                  <td><div id="projType"></div></td>
+                </tr>
+                <tr>
+                  <td width="30%">Client</td>
+                  <td><div id="projClient"></div></td>
+                </tr>
+                <tr>
+                  <td width="30%">Tip proiect</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td width="30%">Buget</td>
+                  <td class="center-align"></td>
+                </tr>
+                <tr>
+                  <td width="30%">Data incepere</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td width="30%">Data terminare</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Detalii proiect</span>
+            <table class="centered" id="detailsTable">
+              <tbody id="detailsList">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Faze Proiect</span>
+            <table class="centered" id="phasesTable">
+              <tbody id="phasesList">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Milestones</span>
+            <table class="centered" id="milestonesTable">
+              <tbody id="milestonesList">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $('#projNameBig').html(viewProjID);
+      });
+        
+        /*$.get("handler.php?r=viewproj&id="+viewProjID, function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          initData = JSON.parse(data);
+          clientsObject = initData.clients;
+          //collabCatsObject = initData.collabCats;
+          projCatsObject = initData.projCats;
+          templates = initData.templates;
+          populateTemplatesMenu();
+          var projCats = new Array;
+          projCatsObject.forEach(element => {
+            projCats.push({value: element.id, text: element.name});
+          });
+          
+          jSuites.dropdown(document.getElementById('projType'), {
+            data: projCats,
+            onchange: function(element, index) {
+              //idul selectat e Object.keys(index.value)[0];
+            },
+            //width:'280px'
+          });
+
+          var projClients = new Array;
+          clientsObject.forEach(element => {
+            projClients.push({value: element.id, text: element.name});
+          });
+          
+          jSuites.dropdown(document.getElementById('projClient'), {
+            data: projClients,
+            newOptions: true,
+            autocomplete: true,
+            lazyLoading: true,
+            onchange: function(element, index) {
+              //idul selectat e Object.keys(index.value)[0];
+            },
+            oninsert: function(instance, item) {
+              if (item.text == null || item.text.trim() == '') return 0;
+              var formData = {
+                'action'            : 'addToDB',
+                'type'              : 'addClient',
+                'name'              : item.text.trim()
+              };
+              $.ajax({
+                  url: 'handler.php',
+                  type: 'POST',
+                  encode: true,
+                  //dataType: 'json',
+                  data: formData,
+                  success: function(idFromTheServer) {
+                      if (idFromTheServer.substring(0,8) == "Success:") {
+                        // Set the item id from the number sent by the remote server
+                        instance.setId(item, idFromTheServer.substring(8));
+                        clientsObject.push({id: idFromTheServer.substring(8), name: item.text.trim()});
+                      }
+                  },
+                  error: function(errData) {
+                    M.toast({html: errData});
+                  }
+              });
+            },
+            //width:'280px',
+        });
+        });
+      })*/
+
+    </script>

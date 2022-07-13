@@ -431,6 +431,39 @@ function getProjects() {
     return $fields;
 }
 
+function getProjectInfo(int $project_id) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    if ($project_id == 0) {
+        $query = 'SELECT * FROM '. $schema . '.project_info';
+        $values = array();
+    } else {
+        $query = 'SELECT * FROM '. $schema . '.project_info WHERE proj_id = :proj_id';
+        $values = array(':proj_id' => $project_id);
+    }
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function getProjectPhases(int $project_id) {
     /* Global $pdo object */
     global $pdo;
@@ -550,4 +583,5 @@ function getCollabs() {
     }
     return $fields;
 }
+
 ?>
