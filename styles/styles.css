@@ -2,11 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-.modal-fullscreen {
-  width: 95% !important ;
-  max-height: 100vh !important;
-}
-
 table.sorting-table {cursor: move;}
 table tr.sorting-row td {background-color: rgb(239, 252, 250) !important; color: rgb(0, 0, 0); box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.2);}
 
