@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .modal-fullscreen {
-  width: 90% !important ;
-  max-height: 90% !important;
+  width: 95% !important ;
+  max-height: 100vh !important;
 }
 
 table.sorting-table {cursor: move;}
