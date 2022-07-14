@@ -21,6 +21,7 @@ table tr.sorting-row td:last-child {
 }
 
 .closeButton {
+  display: inline-block;
   background-color: #bbb;
   border-radius: 50%;
   color: white;
