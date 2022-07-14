@@ -47,7 +47,7 @@ function getProjectBasic(int $project_id) {
         $query = 'SELECT * FROM '. $schema . '.projects';
         $values = array();
     } else {
-        $query = 'SELECT * FROM '. $schema . '.project_info WHERE id = :proj_id';
+        $query = 'SELECT * FROM '. $schema . '.projects WHERE id = :proj_id';
         $values = array(':proj_id' => $project_id);
     }
 
