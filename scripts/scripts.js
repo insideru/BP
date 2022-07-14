@@ -2570,6 +2570,7 @@ function checkNewProj() {
 
 function getParameters(urlString) {
   //let paramString = urlString.split('?')[1];
+  console.log(window.location.search);
   let params = new URLSearchParams(urlString);
   let retObject = new Array();
   console.log(params.entries());
