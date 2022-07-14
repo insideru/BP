@@ -2631,7 +2631,7 @@ function loadEditProjectData(proj_id) {
   projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
   $('#projExtern').val(projBasic.external);
   $('#projBudget').val(projBasic.budget);
-  $('#projStartDate').datepicker(setDate, new Date(projBasic.start_date));
-  $('#projDeadline').datepicker(setDate, new Date(projBasic.deadline));
+  $('#projStartDate').datepicker('setDate', new Date(projBasic.start_date));
+  $('#projDeadline').datepicker('setDate', new Date(projBasic.deadline));
   });
 }
