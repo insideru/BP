@@ -2581,8 +2581,8 @@ function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html");
   for (let project of projectsObject) {
     if (project.id == proj_id) {
-      $("#projType").html(getDBNameFromId(elem.type_id, 'projClient'));
-      $("#projClient").html(getDBNameFromId(elem.type_id, 'projCat'));
+      $("#projType").html(getDBNameFromId(project.type_id, 'projClient'));
+      $("#projClient").html(getDBNameFromId(project.client_id, 'projCat'));
       $("#projExtern").html(project.external==1?"Extern":"Intern");
       $("#projBudget").html(project.budget);
       $("#projStart").html(getFullDate(project.start_date));
