@@ -15,12 +15,18 @@ table tr.sorting-row td:last-child {
 }
 
 .fixedPosition {
-  position: fixed;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
   top: 96;
   right: 32;
-  border: 1px solid #909090;
+}
+
+.closeButton {
   background-color: #bbb;
   border-radius: 50%;
+  color: white;
+  width: 30px;
+  height: 30px;
 }
 
 body {
