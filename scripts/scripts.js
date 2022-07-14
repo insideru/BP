@@ -2587,7 +2587,7 @@ function popupProjInfo(proj_id) {
       $("#projBudget").html(project.budget);
       $("#projStart").html(getFullDate(project.start_date));
       $("#projDeadline").html(getFullDate(project.deadline));
+      break;
     }
-    break;
   }
 }
