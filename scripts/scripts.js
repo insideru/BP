@@ -2583,8 +2583,8 @@ function popupProjInfo(proj_id) {
     for (let project of projectsObject) {
       if (project.id == proj_id) {
         console.log(project);
-        $("#projType").html(getDBNameFromId(project.type_id, 'projClient'));
-        $("#projClient").html(getDBNameFromId(project.client_id, 'projCat'));
+        $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
+        $("#projClient").html(getDBNameFromId(project.client_id, 'projClient'));
         $("#projExtern").html(project.external==1?"Extern":"Intern");
         $("#projBudget").html(project.budget);
         $("#projStart").html(getFullDate(project.start_date));
