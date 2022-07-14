@@ -38,6 +38,7 @@ var savePhaseData = new Array();
 var saveMilestoneData = new Array();
 var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
+var editProject = 0;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2485,7 +2486,7 @@ function removeItem (type, index) {
   }
 }
 
-function checkNewProj() {
+function checkNewProj(proj_id) {
   let msj = "";
   let projBasic = new Array();
   let projBasicData = new Array();
@@ -2543,7 +2544,7 @@ function checkNewProj() {
 
   var formData = {
     'action'      : 'addToDB',
-    'type'        : 'addProject',
+    'type'        : editProject==0?'addProject':'editProject',
     'info'        : JSON.stringify(projBasicData),
     'details'     : projDetailData.length!=0?JSON.stringify(projDetailData):0,
     'phases'      : projPhaseData.length!=0?JSON.stringify(projPhaseData):0,
@@ -2574,7 +2575,6 @@ function getParameters(urlString) {
   let retObject = new Object();
   for (var param of params.entries()) {
       retObject[param[0]] = param[1];
-      console.log(param[0]+ ', '+ param[1]);
   }
   return retObject;
 }
@@ -2613,5 +2613,24 @@ function popupProjInfo(proj_id) {
         $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
       })
     });
+  });
+}
+
+function loadEditProjectData(proj_id) {
+  $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
+    let initData = JSON.parse(data);
+    let projBasic = initData.basic;
+    let projInfo = initData.info;
+    let phasesInfo = initData.phases;
+    let milestoneInfo = initData.milestones;
+
+    //populate basic info
+  $('#projName').val(projBasic.name);
+  projTypeDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
+  projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
+  $('#projExtern').val(projBasic.external);
+  $('#projBudget').val(projBasic.budget);
+  $('#projStartDate').datepicker(setDate, new Date(projBasic.start_date));
+  $('#projDeadline').datepicker(setDate, new Date(projBasic.deadline));
   });
 }

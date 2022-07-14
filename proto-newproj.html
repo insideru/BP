@@ -49,7 +49,7 @@
       <div class="col s12">
         <div class="card">
           <div class="card-content">
-            <a class="waves-effect waves-light btn btn-small right" onclick="checkNewProj()">Adauga Proiect</a>
+            <a id="actionBtn" class="waves-effect waves-light btn btn-small right" onclick="checkNewProj(editProject)">Adauga Proiect</a>
             <span class="card-title" id="projNameBig" style="font-weight: bold;">Proiect nou</span>
           </div>
         </div>
@@ -267,7 +267,7 @@
             projCats.push({value: element.id, text: element.name});
           });
           
-          jSuites.dropdown(document.getElementById('projType'), {
+          var projTypeDropdown = jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
@@ -280,7 +280,7 @@
             projClients.push({value: element.id, text: element.name});
           });
           
-          jSuites.dropdown(document.getElementById('projClient'), {
+          var projClientsDropdown = jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
             autocomplete: true,
@@ -320,8 +320,9 @@
         let URLParams = getParameters(window.location.search);
         if (URLParams['edit'] !== undefined) {
           try {
-            let editProjID = atob(URLParams['edit']);
-            console.log(editProjID);
+            editProject = atob(URLParams['edit']);
+            $('#actionBtn').html('Modifica');
+            loadEditProjectData(editProject);
           }
           catch (err) {
             console.log(err);

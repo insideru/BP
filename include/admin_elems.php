@@ -38,6 +38,39 @@ function addProjCat(string $name) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function getProjectBasic(int $project_id) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+
+    if ($project_id == 0) {
+        $query = 'SELECT * FROM '. $schema . '.projects';
+        $values = array();
+    } else {
+        $query = 'SELECT * FROM '. $schema . '.project_info WHERE id = :proj_id';
+        $values = array(':proj_id' => $project_id);
+    }
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 function getProjCat() {
 	/* Global $pdo object */
 	global $pdo;

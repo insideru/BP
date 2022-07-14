@@ -210,6 +210,7 @@ if ($_POST["action"]=="addNewUser") {
 
 if ($_REQUEST["r"]=="getProjDetails") {
     $response = array();
+    $response["basic"] = getProjectBasic($_REQUEST["proj"]);
     $response["info"] = getProjectInfo($_REQUEST["proj"]);
     $response["phases"] = getProjectPhases($_REQUEST["proj"]);
     $response["milestones"] = getProjectMilestones($_REQUEST["proj"]);
