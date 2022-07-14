@@ -2598,6 +2598,9 @@ function popupProjInfo(proj_id) {
       let milestoneInfo = initData.milestones;
       projInfo.forEach(elem => {
         $('#projDetails').removeClass('hide');
+        if (elem.value.search('\n')>-1) {
+          elem.value.replace(/(\r\n|\r|\n)/g, '<br>');
+        }
         $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value:(elem.value==0?"Nu":"Da")}</td></tr>`)
       })
       phasesInfo.forEach(elem => {
