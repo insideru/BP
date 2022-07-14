@@ -2571,7 +2571,7 @@ function checkNewProj() {
 function getParameters(urlString) {
   let paramString = urlString.split('?')[1];
   let params = new URLSearchParams(paramString);
-  let retObject = new Array();
+  let retObject = new Object();
   for (var param of params.entries()) {
       retObject[param[0]] = param[1];
       console.log(param[0]+ ', '+ param[1]);
