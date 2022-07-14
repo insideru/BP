@@ -2624,14 +2624,15 @@ function loadEditProjectData(proj_id) {
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
-
+    console.log(initData);
+    
     //populate basic info
-  $('#projName').val(projBasic.name);
-  projTypeDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
-  projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
-  $('#projExtern').val(projBasic.external);
-  $('#projBudget').val(projBasic.budget);
-  $('#projStartDate').datepicker('setDate', new Date(projBasic.start_date));
-  $('#projDeadline').datepicker('setDate', new Date(projBasic.deadline));
+    $('#projName').val(projBasic.name);
+    projTypeDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
+    projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
+    $('#projExtern').val(projBasic.external);
+    $('#projBudget').val(projBasic.budget);
+    $('#projStartDate').datepicker('setDate', new Date(projBasic.start_date));
+    $('#projDeadline').datepicker('setDate', new Date(projBasic.deadline));
   });
 }
