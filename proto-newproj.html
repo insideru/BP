@@ -317,7 +317,10 @@
         });
 
         //check if it's edit
-        console.log(getParameters(window.location.search));
+        let URLParams = getParameters(window.location.search);
+        if (URLParams['edit'] !== undefined) {
+          console.log(atob(URLParams['edit']));
+        }
         });
       })
     </script>
