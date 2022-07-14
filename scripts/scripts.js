@@ -2624,8 +2624,8 @@ function loadEditProjectData(proj_id) {
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
-    console.log(initData);
-    
+    console.log(projBasic);
+
     //populate basic info
     $('#projName').val(projBasic.name);
     projTypeDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
