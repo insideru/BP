@@ -2578,7 +2578,7 @@ function getParameters(urlString) {
 function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
-    $('#projNameBigSpan').html(getDBNameFromId (viewProjID, 'project'));
+    $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
     for (let project of projectsObject) {
       if (project.id == proj_id) {
         console.log(project);
