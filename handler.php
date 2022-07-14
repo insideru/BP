@@ -208,6 +208,14 @@ if ($_POST["action"]=="addNewUser") {
     echo json_encode($response);
 }
 
+if ($_REQUEST["r"]=="getProjDetails") {
+    $response = array();
+    $response["info"] = getProjectInfo($_REQUEST["proj"]);
+    $response["phases"] = getProjectPhases($_REQUEST["proj"]);
+    $response["milestones"] = getProjectMilestones($_REQUEST["proj"]);
+    echo json_encode($response);
+}
+
 if ($_REQUEST["r"]=="init") {
     //trimitem toate datele de initalizare tabele
     $response = array();

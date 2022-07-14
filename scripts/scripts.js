@@ -2591,5 +2591,21 @@ function popupProjInfo(proj_id) {
         break;
       }
     }
+    $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
+      //console.log("Data: " + data + "\nStatus: " + status);
+      let initData = JSON.parse(data);
+      let projInfo = initData.info;
+      let phasesInfo = initData.phases;
+      let milestoneInfo = initData.milestones;
+      projInfo.forEach(elem => {
+        $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value:(elem.value==0?"Nu":"Da")}</td></tr>`)
+      })
+      phasesInfo.forEach(elem => {
+        $("#phasesList").append(`<tr><td>${elem.name}</td></tr>`)
+      })
+      milestoneInfo.forEach(elem => {
+        $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
+      })
+    });
   });
 }
