@@ -2581,7 +2581,6 @@ function popupProjInfo(proj_id) {
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
     for (let project of projectsObject) {
       if (project.id == proj_id) {
-        console.log(project);
         $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
         $("#projClient").html(getDBNameFromId(project.client_id, 'projClient'));
         $("#projExtern").html(project.external==1?"Extern":"Intern");
@@ -2598,12 +2597,15 @@ function popupProjInfo(proj_id) {
       let phasesInfo = initData.phases;
       let milestoneInfo = initData.milestones;
       projInfo.forEach(elem => {
+        $('#projDetails').removeClass('hide');
         $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value:(elem.value==0?"Nu":"Da")}</td></tr>`)
       })
       phasesInfo.forEach(elem => {
+        $('#projPhases').removeClass('hide');
         $("#phasesList").append(`<tr><td>${elem.name}</td></tr>`)
       })
       milestoneInfo.forEach(elem => {
+        $('#projMilestones').removeClass('hide');
         $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
       })
     });
