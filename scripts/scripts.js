@@ -2570,12 +2570,11 @@ function checkNewProj() {
 
 function getParameters(urlString) {
   let paramString = urlString.split('?')[1];
-  console.log(paramString);
   let params = new URLSearchParams(paramString);
   let retObject = new Array();
-  console.log(params.entries());
-  for (const param of params.entries()) {
+  for (var param of params.entries()) {
       retObject[param[0]] = param[1];
+      console.log(param[0]+ ', '+ param[1]);
   }
   return retObject;
 }
