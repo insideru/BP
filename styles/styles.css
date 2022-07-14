@@ -15,10 +15,9 @@ table tr.sorting-row td:last-child {
 }
 
 .fixedPosition {
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 96;
-  right: 32;
+  position: fixed;
+  top: 96px;
+  right: 32px;
 }
 
 .closeButton {
