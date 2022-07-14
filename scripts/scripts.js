@@ -2578,17 +2578,19 @@ function getParameters(urlString) {
 
 function popupProjInfo(proj_id) {
   viewProjID=proj_id;
-  $("#viewProjBody").load("proto-viewproj.html");
-  for (let project of projectsObject) {
-    if (project.id == proj_id) {
-      console.log(project);
-      $("#projType").html(getDBNameFromId(project.type_id, 'projClient'));
-      $("#projClient").html(getDBNameFromId(project.client_id, 'projCat'));
-      $("#projExtern").html(project.external==1?"Extern":"Intern");
-      $("#projBudget").html(project.budget);
-      $("#projStart").html(getFullDate(project.start_date));
-      $("#projDeadline").html(getFullDate(project.deadline));
-      break;
+  $("#viewProjBody").load("proto-viewproj.html", function() {
+    /* When load is done */
+    for (let project of projectsObject) {
+      if (project.id == proj_id) {
+        console.log(project);
+        $("#projType").html(getDBNameFromId(project.type_id, 'projClient'));
+        $("#projClient").html(getDBNameFromId(project.client_id, 'projCat'));
+        $("#projExtern").html(project.external==1?"Extern":"Intern");
+        $("#projBudget").html(project.budget);
+        $("#projStart").html(getFullDate(project.start_date));
+        $("#projDeadline").html(getFullDate(project.deadline));
+        break;
+      }
     }
-  }
+  });
 }
