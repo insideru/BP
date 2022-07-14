@@ -319,7 +319,13 @@
         //check if it's edit
         let URLParams = getParameters(window.location.search);
         if (URLParams['edit'] !== undefined) {
-          console.log(atob(URLParams['edit']));
+          try {
+            let editProjID = atob(URLParams['edit']);
+            console.log(editProjID);
+          }
+          catch (err) {
+            console.log(err);
+          }
         }
         });
       })
