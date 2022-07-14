@@ -29,6 +29,13 @@ table tr.sorting-row td:last-child {
   height: 30px;
 }
 
+.middle-align {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 body {
   font-family: 'Source Sans Pro';
 }
