@@ -2544,7 +2544,7 @@ function checkNewProj(proj_id) {
 
   var formData = {
     'action'      : 'addToDB',
-    'type'        : addProject,
+    'type'        : 'addProject',
     'proj_id'     : proj_id,
     'info'        : JSON.stringify(projBasicData),
     'details'     : projDetailData.length!=0?JSON.stringify(projDetailData):0,
