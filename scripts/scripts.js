@@ -2619,7 +2619,7 @@ function popupProjInfo(proj_id) {
 function loadEditProjectData(proj_id) {
   $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
     let initData = JSON.parse(data);
-    let projBasic = initData.basic;
+    let projBasic = initData.basic[0];
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
