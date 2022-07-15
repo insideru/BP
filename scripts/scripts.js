@@ -39,7 +39,6 @@ var saveMilestoneData = new Array();
 var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 var editProject = 0;
-var projTypeDropdown, projClientsDropdown;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2627,8 +2626,10 @@ function loadEditProjectData(proj_id) {
 
     //populate basic info
     $('#projName').val(projBasic.name);
-    projTypeDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
-    projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
+    console.log(getDBNameFromId(projBasic.type_id, "projCat"));
+    document.getElementById('projType').dropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
+    console.log(getDBNameFromId(projBasic.client_id, "projClient"));
+    document.getElementById('projClient').dropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
     $('#projExtern').val(projBasic.external);
     $('#projBudget').val(projBasic.budget);
     M.Datepicker.getInstance(document.querySelector('#projStartDate')).setDate(new Date(projBasic.start_date));
