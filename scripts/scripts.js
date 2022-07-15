@@ -948,7 +948,7 @@ function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDa
 }
 
 function editareWithDate (date) {
-  window.location.href = location.protocol + "//" + location.host + pontajPage + '?edit=' + btoa(date);
+  window.location.href = location.protocol + "//" + location.host + pontajPage + '&edit=' + btoa(date);
 }
 
 function populateEditPontaj (date) {
@@ -1038,7 +1038,7 @@ function vizualizareWithDate(date) {
 }
 
 function ponteazaWithDate(date) {
-  window.location.href = location.protocol + "//" + location.host + pontajPage + '?date=' + btoa(date);
+  window.location.href = location.protocol + "//" + location.host + pontajPage + '&date=' + btoa(date);
 }
 
 function initCalendar() {
