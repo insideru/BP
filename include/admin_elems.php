@@ -343,7 +343,7 @@ function addCollab (string $name, int $id) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addProject (array $basicData, int $proj_id) {
+function addProject (array $basicData, int $proj_id = NULL) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
@@ -716,7 +716,7 @@ function getAllTimesheets() {
 	return $fields;
 }
 
-function getAttendance(string $date) {
+function getAttendance(string $date = NULL) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;

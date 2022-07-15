@@ -69,7 +69,7 @@ function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $mi
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getTimesheets (string $date) {
+function getTimesheets (string $date = NULL) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
