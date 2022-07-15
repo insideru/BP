@@ -322,6 +322,7 @@
           try {
             editProject = atob(URLParams['edit']);
             $('#actionBtn').html('Modifica');
+            $('#projName').val('projBasic.name');
             loadEditProjectData(editProject);
           }
           catch (err) {

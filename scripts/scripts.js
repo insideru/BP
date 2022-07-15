@@ -2624,7 +2624,6 @@ function loadEditProjectData(proj_id) {
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
-    console.log(projBasic);
 
     //populate basic info
     $('#projName').val(projBasic.name);
@@ -2632,7 +2631,7 @@ function loadEditProjectData(proj_id) {
     projClientsDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
     $('#projExtern').val(projBasic.external);
     $('#projBudget').val(projBasic.budget);
-    $('#projStartDate').datepicker('setDate', new Date(projBasic.start_date));
-    $('#projDeadline').datepicker('setDate', new Date(projBasic.deadline));
+    M.Datepicker.getInstance(document.querySelector('#projStartDate')).setDate(new Date(projBasic.start_date));
+    M.Datepicker.getInstance(document.querySelector('#projDeadline')).setDate(new Date(projBasic.deadline));
   });
 }
