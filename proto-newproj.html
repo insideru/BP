@@ -321,12 +321,13 @@
         if (URLParams['edit'] !== undefined) {
           try {
             editProject = atob(URLParams['edit']);
-            $('#actionBtn').html('Modifica');
-            $('#projName').val('projBasic.name');
-            loadEditProjectData(editProject);
           }
           catch (err) {
             console.log(err);
+          }
+          if (editProject>0) {
+            $('#actionBtn').html('Modifica');
+            loadEditProjectData(editProject);
           }
         }
         });
