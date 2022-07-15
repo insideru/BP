@@ -79,7 +79,8 @@ function getTimesheets (string $date = NULL) {
         $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid)";
         $values = array(':cid' => $account->getCollabID());
     } else {
-        $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid) AND (date = {$date})";
+        $sendDate = date("Y-m-d", strtotime($date));
+        $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid) AND (date = {$sendDate})";
         $values = array(':cid' => $account->getCollabID());   
     }
 	
