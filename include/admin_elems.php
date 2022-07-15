@@ -354,7 +354,7 @@ function addProject (array $basicData, int $proj_id) {
         $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id, external, budget, start_date, deadline) VALUES (:name, :client_id, :type_id, :external, :budget, :start_date, :deadline)';
     } else {
         //edit project
-        $query = "UPDATE {$schema}.projects SET name=:name, client_id=:client_id, type_id=:type_id, external=:external, budget=:budget, start_date=:start_date, deadline=:deadline) WHERE id={$proj_id}";
+        $query = "UPDATE {$schema}.projects SET name=:name, client_id=:client_id, type_id=:type_id, external=:external, budget=:budget, start_date=:start_date, deadline=:deadline WHERE id={$proj_id}";
     }
     
     /* Values array for PDO */
