@@ -2654,6 +2654,7 @@ function loadEditProjectData(proj_id) {
       }
       $('#detailsList').append(newRow);
       if (element.type == 1) $(`#detailValue_${detailNumber}`).val(element.value);
+      if (element.value.length>25) $(`#detailValue_${detailNumber}`).redraw();
       saveTemplateData.push({name: detailName, type: element.type, number: detailNumber++});
     });
 
