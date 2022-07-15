@@ -947,6 +947,15 @@ function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDa
   });
 }
 
+function editareWithDate (date) {
+  console.log(date);
+  //window.location.href = location.protocol + "//" + location.host + pontajPage + '?edit=' + btoa(date);
+}
+
+function populateEditPontaj (date) {
+
+}
+
 function deletePontaj (date) {
   if (!confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
     return;
@@ -1010,11 +1019,7 @@ function vizualizareWithDate(date) {
 }
 
 function ponteazaWithDate(date) {
-  if (typeof(Storage) !== "undefined") {
-    // Store
-    localStorage.setItem("dataPontaj", date);
-      window.location.href = location.protocol + "//" + location.host + pontajPage;
-    }
+  window.location.href = location.protocol + "//" + location.host + pontajPage + '?date=' + btoa(date);
 }
 
 function initCalendar() {

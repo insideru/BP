@@ -138,30 +138,32 @@
         addLinks();
         $('.sidenav').sidenav();
         var pontajDate = new Date();
-        if (typeof(Storage) !== "undefined") {
-          // Retrieve
-          if (localStorage.getItem("dataPontaj")!=null) {
-            pontajDate = new Date(localStorage.getItem("dataPontaj"));
-            localStorage.removeItem("dataPontaj");
+        let URLParams = getParameters(window.location.search);
+        if (URLParams['date'] !== undefined) {
+          try {
+            pontajDate = new Date(atob(URLParams['date']));
+          }
+          catch (err) {
+            console.log(err);
           }
         }
-            //$('.datepicker').datepicker();
-            //$('.timepicker').timepicker();
-            //$('.collapsible').collapsible();
-            var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, {
-            defaultDate: pontajDate,    
-            setDefaultDate: true,
-            format: 'dd mmmm yyyy',
-            onClose: changeSelectedDate,
-            firstDay: 1,
-            i18n: {
-                weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
-                weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
-                weekdaysAbbrev: ['D','L','M','M','J','V','S'],
-                months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
-                monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
-            }
+          //$('.datepicker').datepicker();
+          //$('.timepicker').timepicker();
+          //$('.collapsible').collapsible();
+          var elems = document.querySelectorAll('.datepicker');
+          var instances = M.Datepicker.init(elems, {
+          defaultDate: pontajDate,    
+          setDefaultDate: true,
+          format: 'dd mmmm yyyy',
+          onClose: changeSelectedDate,
+          firstDay: 1,
+          i18n: {
+              weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
+              weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
+              weekdaysAbbrev: ['D','L','M','M','J','V','S'],
+              months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+              monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
+          }
         });
         var elems = document.querySelectorAll('.timepicker');
         var instances = M.Timepicker.init(elems, {
@@ -182,6 +184,17 @@
           populateActiveDropdown();
           $('select').formSelect();
         });
+
+        //check if edit
+        if (URLParams['edit'] !== undefined) {
+          try {
+            let editDate = atob(URLParams['date']);
+            populateEditPontaj(atob(editDate));
+          }
+          catch (err) {
+            console.log(err);
+          }
+        }
       });  
     </script>
   </body>
