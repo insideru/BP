@@ -2603,9 +2603,9 @@ function popupProjInfo(proj_id) {
       projInfo.forEach(elem => {
         $('#projDetails').removeClass('hide');
         if (elem.value.length>100){
-          $("#detailsList").append(`<tr><td>${elem.name}</td></tr><tr><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
+          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td></tr><tr><td colspan="2">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
         } else {
-          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td><td colspan="2">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
+          $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
         }
       })
       phasesInfo.forEach(elem => {
