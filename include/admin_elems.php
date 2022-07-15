@@ -725,8 +725,7 @@ function getAttendance(string $date = NULL) {
     if (!isset($date)) {
 	    $query = "SELECT * FROM {$schema}.attendance";
     } else {
-        $sendDate = date("Y-m-d", strtotime($date));
-        $query = "SELECT * FROM {$schema}.attendance WHERE (date = {$sendDate}) AND (collab_id = {$account->getCollabID()})";
+        $query = "SELECT * FROM {$schema}.attendance WHERE (date = '{$date}') AND (collab_id = {$account->getCollabID()})";
     }
 	
 	try
