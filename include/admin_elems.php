@@ -722,7 +722,7 @@ function getAttendance(string $date) {
 	global $schema;
     global $account;
 
-    if (!isset($collab_id)) {
+    if (!isset($date)) {
 	    $query = "SELECT * FROM {$schema}.attendance";
     } else {
         $query = "SELECT * FROM {$schema}.attendance WHERE date = {$date} AND collab_id = {$account->getCollabID()}";

@@ -69,14 +69,19 @@ function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $mi
     return "Success:" . $pdo->lastInsertId();
 }
 
-function getTimesheets () {
+function getTimesheets (string $date) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
     global $account;
 
-	$query = 'SELECT * FROM '.$schema.'.timesheets WHERE (collab_id = :cid)';
-	$values = array(':cid' => $account->getCollabID());
+    if (!isset($date)) {
+        $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid)";
+        $values = array(':cid' => $account->getCollabID());
+    } else {
+        $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid) AND (date = {$date})";
+        $values = array(':cid' => $account->getCollabID());   
+    }
 	
 	try
 	{
@@ -99,19 +104,14 @@ function getTimesheets () {
 	return $fields;
 }
 
-function getPontaje (string $date) {
+function getPontaje () {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
     global $account;
 
-    if (!isset($date)) {
-        $query = "SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid)";
-	    $values = array(':cid' => $account->getCollabID());
-    } else {
-        $query = "SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid) AND (date = {$date})";
-	    $values = array(':cid' => $account->getCollabID());
-    }
+    $query = "SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid)";
+    $values = array(':cid' => $account->getCollabID());
 	
 	try
 	{

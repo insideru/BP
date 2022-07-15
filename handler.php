@@ -188,7 +188,7 @@ if ($_POST["action"]=="addNewUser") {
 if ($_POST["action"]=="getPontajInfo") {
     $response = array();
     $response['attendance'] = getAttendance($_POST['date']);
-    $response['timesheet'] = getPontaje($_POST['date']);
+    $response['timesheet'] = getTimesheets($_POST['date']);
     echo json_encode($response);
 }
 

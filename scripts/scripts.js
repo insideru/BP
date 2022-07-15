@@ -963,8 +963,8 @@ function populateEditPontaj (date) {
     //dataType    : 'json', // what type of data do we expect back from the server
     encode      : true,
     success     : function(data) {
-      console.log(data);
-      
+      console.log(JSON.parse(data));
+
       let rcvData = JSON.parse(data);
       let curAttendance = rcvData.attendance;
       let curTimesheet = rcvData.timesheet;
