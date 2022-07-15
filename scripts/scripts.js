@@ -2646,7 +2646,7 @@ function loadEditProjectData(proj_id) {
         newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><select class="browser-default" id="detailValue_${detailNumber}"><option value="?" disabled selected>Alege</option><option value="1">Da</option><option value="0">Nu</option></select></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
       }
       $('#detailsList').append(newRow);
-      if (element.type == 1) $(`detailValue_${detailNumber}`).val(element.value);
+      if (element.type == 1) $(`#detailValue_${detailNumber}`).val(element.value);
       saveTemplateData.push({name: detailName, type: element.type, number: detailNumber++});
     });
 
