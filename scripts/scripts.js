@@ -2348,7 +2348,7 @@ function addProjMilestone() {
       return 0;
     }
   }
-  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick=removeItem"(2, ${milestoneNumber})"></i></td></tr>`;
+  newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(2, ${milestoneNumber})"></i></td></tr>`;
   $('#milestonesList').append(newRow);
   $('#projMilestoneName').val("");
   $('#projMilestoneName').removeClass("invalid");
@@ -2629,6 +2629,7 @@ function loadEditProjectData(proj_id) {
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
+    detailNumber
 
     //populate basic info
     $('#projNameBig').html(projBasic.name);
@@ -2671,7 +2672,7 @@ function loadEditProjectData(proj_id) {
     milestoneInfo.forEach(element => {
       let newRow = "";
       let detailName = element.name;
-      newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick=removeItem"(2, ${milestoneNumber})"></i></td></tr>`;
+      newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(2, ${milestoneNumber})"></i></td></tr>`;
       $('#milestonesList').append(newRow);
       $('#projMilestoneName').val("");
       $('#projMilestoneName').removeClass("invalid");
