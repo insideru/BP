@@ -948,12 +948,31 @@ function addCalendarEvent(eventID, eventName, eventDescription, startDate, endDa
 }
 
 function editareWithDate (date) {
-  console.log(date);
-  //window.location.href = location.protocol + "//" + location.host + pontajPage + '?edit=' + btoa(date);
+  window.location.href = location.protocol + "//" + location.host + pontajPage + '?edit=' + btoa(date);
 }
 
 function populateEditPontaj (date) {
-
+  var formData = {
+    'action'  : 'getPontajInfo',
+    'date'    : date
+  };
+  $.ajax({
+    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    url         : 'handler.php', // the url where we want to POST
+    data        : formData, // our data object
+    //dataType    : 'json', // what type of data do we expect back from the server
+    encode      : true,
+    success     : function(data) {
+      let rcvData = JSON.parse(data);
+      let curAttendance = rcvData.attendance;
+      let curTimesheet = rcvData.timesheet;
+      console.log(curAttendance);
+      console.log(curTimesheet);
+    },
+    error: function(){
+        //
+    }
+});
 }
 
 function deletePontaj (date) {

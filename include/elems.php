@@ -99,14 +99,19 @@ function getTimesheets () {
 	return $fields;
 }
 
-function getPontaje () {
+function getPontaje (string $date) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
     global $account;
 
-	$query = 'SELECT * FROM '.$schema.'.attendance WHERE (collab_id = :cid)';
-	$values = array(':cid' => $account->getCollabID());
+    if (!isset($date)) {
+        $query = 'SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid)';
+	    $values = array(':cid' => $account->getCollabID());
+    } else {
+        $query = 'SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid) AND (date = {$date})';
+	    $values = array(':cid' => $account->getCollabID());
+    }
 	
 	try
 	{

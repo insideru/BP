@@ -716,12 +716,17 @@ function getAllTimesheets() {
 	return $fields;
 }
 
-function getAttendance() {
+function getAttendance(string $date) {
 	/* Global $pdo object */
 	global $pdo;
 	global $schema;
+    global $account;
 
-	$query = 'SELECT * FROM '.$schema.'.attendance';
+    if (!isset($collab_id)) {
+	    $query = 'SELECT * FROM {$schema}.attendance';
+    } else {
+        $query = 'SELECT * FROM {$schema}.attendance WHERE date = {$date} AND collab_id = {$account->getCollabID()}';
+    }
 	
 	try
 	{
