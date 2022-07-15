@@ -204,6 +204,10 @@
         $('.modal').modal();
         $('.sidenav').sidenav();
 
+        jSuites.dropdown(document.getElementById('addDetailType'), {
+             data: ['text', 'bifa'],
+             width:'280px'});
+
         $('#projName').keyup(function() {
           $('#projNameBig').text($(this).val());
         });
