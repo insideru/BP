@@ -2625,7 +2625,7 @@ function loadEditProjectData(proj_id) {
     let milestoneInfo = initData.milestones;
 
     //populate basic info
-    $('#projNameBig').val(projBasic.name);
+    $('#projNameBig').html(projBasic.name);
     $('#projName').val(projBasic.name);
     document.getElementById('projType').dropdown.setValue(projBasic.type_id);
     document.getElementById('projClient').dropdown.setValue(projBasic.client_id);
