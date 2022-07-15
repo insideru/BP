@@ -2633,6 +2633,8 @@ function loadEditProjectData(proj_id) {
     $('#projExtern').val(projBasic.external);
     $('#projBudget').val(projBasic.budget);
     M.Datepicker.getInstance(document.getElementById('projStartDate')).setDate(new Date(projBasic.start_date.split('-')[0], projBasic.start_date.split('-')[1]-1, projBasic.start_date.split('-')[2]));
-    M.Datepicker.getInstance(document.getElementById('projDeadline')).setDate(new Date(projBasic.deadline));
+    M.Datepicker.getInstance(document.getElementById('projStartDate')).setInputValue();
+    M.Datepicker.getInstance(document.getElementById('projDeadline')).setDate(new Date(projBasic.deadline.split('-')[0], projBasic.deadline.split('-')[1]-1, projBasic.deadline.split('-')[2]));
+    M.Datepicker.getInstance(document.getElementById('projDeadline')).setInputValue();
   });
 }

@@ -314,8 +314,8 @@
         });
 
         tipDropdown.setValue('Publicitate');
-        M.Datepicker.getInstance(document.getElementById('projDeadline')).setDate(new Date('2021', '2', '1'));
-        M.Datepicker.getInstance(document.getElementById('projDeadline')).setInputValue();
+        document.getElementById('projClient').dropdown.open();
+        
         //check if it's edit
         let URLParams = getParameters(window.location.search);
         if (URLParams['edit'] !== undefined) {
