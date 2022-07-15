@@ -188,7 +188,7 @@
         //check if edit
         if (URLParams['edit'] !== undefined) {
           try {
-            let editDate = atob(URLParams['date']);
+            let editDate = atob(URLParams['edit']);
             populateEditPontaj(editDate);
           }
           catch (err) {
