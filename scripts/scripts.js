@@ -2660,7 +2660,7 @@ function loadEditProjectData(proj_id) {
       }
       $('#detailsList').append(newRow);
       if (element.type == 1) $(`#detailValue_${detailNumber}`).val(element.value);
-      if (element.value.length>25) $(`#detailValue_${detailNumber}`).trigger('autoresize'); 
+      if (element.value.length>25) M.textareaAutoResize($(`#detailValue_${detailNumber}`)); 
       saveTemplateData.push({name: detailName, type: element.type, number: detailNumber++});
     });
 
