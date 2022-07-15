@@ -172,7 +172,7 @@
         });
         $('.collapsible').collapsible();
         $.get("handler.php?r=init", function(data, status) {
-          console.log("Data: " + data + "\nStatus: " + status);
+          //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
 
           collabsObject = initData.collabs;
