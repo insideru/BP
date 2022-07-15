@@ -80,7 +80,7 @@ function getTimesheets (string $date = NULL) {
         $values = array(':cid' => $account->getCollabID());
     } else {
         $query = "SELECT * FROM {$schema}.timesheets WHERE (collab_id = :cid) AND (date = '{$date}')";
-        $values = array(':cid' => $account->getCollabID());   
+        $values = array(':cid' => $account->getCollabID());
     }
 	
 	try
