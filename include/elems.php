@@ -102,8 +102,7 @@ function getTimesheets (string $date = NULL) {
 		array_push($fields, $row);
 	}
 
-	//return $fields;
-    return $query;
+	return $fields;
 }
 
 function getPontaje () {
