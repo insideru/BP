@@ -264,7 +264,7 @@
             projCats.push({value: element.id, text: element.name});
           });
           
-          var tipDropdown = jSuites.dropdown(document.getElementById('projType'), {
+          jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
@@ -277,7 +277,7 @@
             projClients.push({value: element.id, text: element.name});
           });
           
-          var clientDropdown = jSuites.dropdown(document.getElementById('projClient'), {
+          jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
             autocomplete: true,
@@ -312,9 +312,6 @@
             },
             //width:'280px',
         });
-
-        tipDropdown.setValue(11);
-        document.getElementById('projClient').dropdown.setValue(2);
         
         //check if it's edit
         let URLParams = getParameters(window.location.search);
@@ -327,7 +324,7 @@
           }
           if (editProject>0) {
             $('#actionBtn').html('Modifica');
-            //loadEditProjectData(editProject);
+            loadEditProjectData(editProject);
           }
         }
         });
