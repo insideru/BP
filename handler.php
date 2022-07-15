@@ -114,11 +114,16 @@ if ($_POST["action"]=="addToDB") {
             break;
         case "addProject":
             //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
-            $res = addProject(json_decode($_POST['info']));
-            $id = substr($res,8);
-            if (!is_numeric((int)$id)) {
-                echo $id - $res;
-                break;
+            if (isset($_POST['proj_id'])) {
+                $res = addProject(json_decode($_POST['info']), $_POST['proj_id']);
+                $id = $_POST['proj_id'];
+            } else {
+                $res = addProject(json_decode($_POST['info']));
+                $id = substr($res,8);
+                if (!is_numeric((int)$id)) {
+                    echo $id - $res;
+                    break;
+                }
             }
             $details = strlen($_POST['details'])==1?(int)$_POST['details']:json_decode($_POST['details']);
             if ($details !== 0) {
@@ -146,38 +151,6 @@ if ($_POST["action"]=="addToDB") {
             }
             echo("Success:{$id}");
             break;
-            case "editProject":
-                //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
-                $res = addProject(json_decode($_POST['info']), $_POST['proj_id']);
-                $id = $_POST['proj_id'];
-
-                $details = strlen($_POST['details'])==1?(int)$_POST['details']:json_decode($_POST['details']);
-                /*if ($details !== 0) {
-                    $res = addProjectDetails((int)$id, $details);
-                    if (substr($res, 0, 8) != "Success!") {
-                        echo $res;
-                        break;
-                    }
-                }
-                $phases = strlen($_POST['phases'])==1?(int)$_POST['phases']:json_decode($_POST['phases']);
-                if ($phases !== 0) {
-                    $res = addProjectPhases((int)$id, $phases);
-                    if (substr($res, 0, 8) != "Success!") {
-                        echo $res;
-                        break;
-                    }
-                }
-                $milestones = strlen($_POST['milestones'])==1?(int)$_POST['milestones']:json_decode($_POST['milestones']);
-                if ($milestones !== 0) {
-                    $res = addProjectMilestones((int)$id, $milestones);
-                    if (substr($res, 0, 8) != "Success!") {
-                        echo $res;
-                        break;
-                    }
-                }
-                echo("Success:{$id}");*/
-                echo $res;
-                break;
         case "addActivity":
             echo addActivity($_POST['name'], $_POST['category']);
             break;
