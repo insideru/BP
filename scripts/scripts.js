@@ -39,7 +39,6 @@ var saveMilestoneData = new Array();
 var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 var editProject = 0;
-var tipDropdown, clientDropdown;
 
 $.fn.exists = function () {
     return this.length !== 0;
