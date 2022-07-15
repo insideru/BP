@@ -2626,6 +2626,7 @@ function loadEditProjectData(proj_id) {
 
     //populate basic info
     $('#projName').val(projBasic.name);
+    console.log(projBasic);
     console.log(getDBNameFromId(projBasic.type_id, "projCat"));
     document.getElementById('projType').dropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
     console.log(getDBNameFromId(projBasic.client_id, "projClient"));
