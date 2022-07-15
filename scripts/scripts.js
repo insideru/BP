@@ -317,7 +317,7 @@ function populateProjects() {
       tableName = '#projTable';
     }
     if (element.external=="1") { isExternal = 'checked="checked" ';}
-    $(tableName).append(`<tr><td><a class="modal-trigger" href="#viewProj"><i class="material-icons" onclick="popupProjInfo(${element.id})">info_outline</i></a></td><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">`+element.name+'</td>'+
+    $(tableName).append(`<tr><td><a class="modal-trigger" href="#viewProj"><i class="material-icons" onclick="popupProjInfo(${element.id})">info_outline</i></a><a href="?page=?page=newProject&edit=${btoa(element.id)}"><i class="material-icons">edit</i></a></td><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'projects\')">`+element.name+'</td>'+
     '<td>'+getDBNameFromId(element.type_id, "projCat")+'</td><td>'+getDBNameFromId(element.client_id, "projClient")+'</td>'+
     '<td><label><input type="checkbox" class="filled-in" id="projExt_' + element.id + '" onclick="changeProjExternal(this.id)"' + isExternal +' /><span></span></label></td>'+
     '<td><div id="projBudget_'+ element.id +'" class="chip tooltipped" data-position="top" data-tooltip="Numar ore bugetate" style="cursor:pointer" onclick="changeProjectBudget(this.id, $(this)[0].childNodes[0].nodeValue)">'+element.budget+'<i class="material-icons tiny" style="padding-left: 5px;">edit</i></div></td>'+
@@ -2602,7 +2602,7 @@ function popupProjInfo(proj_id) {
       let milestoneInfo = initData.milestones;
       projInfo.forEach(elem => {
         $('#projDetails').removeClass('hide');
-        $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value:(elem.value==0?"Nu":"Da")}</td></tr>`)
+        $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`)
       })
       phasesInfo.forEach(elem => {
         $('#projPhases').removeClass('hide');
