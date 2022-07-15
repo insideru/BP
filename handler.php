@@ -190,6 +190,7 @@ if ($_POST["action"]=="getPontajInfo") {
     $response['attendance'] = getAttendance($_POST['date']);
     $response['timesheet'] = getTimesheets($_POST['date']);
     $response['date'] = $_POST['date'];
+    $response['collab_id'] = $account->getCollabID();
     echo json_encode($response);
 }
 
