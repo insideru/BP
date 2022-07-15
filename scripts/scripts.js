@@ -2625,6 +2625,7 @@ function loadEditProjectData(proj_id) {
     let milestoneInfo = initData.milestones;
 
     //populate basic info
+    $('#projNameBig').val(projBasic.name);
     $('#projName').val(projBasic.name);
     document.getElementById('projType').dropdown.setValue(projBasic.type_id);
     document.getElementById('projClient').dropdown.setValue(projBasic.client_id);
@@ -2634,5 +2635,41 @@ function loadEditProjectData(proj_id) {
     M.Datepicker.getInstance(document.getElementById('projStartDate')).setInputValue();
     M.Datepicker.getInstance(document.getElementById('projDeadline')).setDate(new Date(projBasic.deadline.split('-')[0], projBasic.deadline.split('-')[1]-1, projBasic.deadline.split('-')[2]));
     M.Datepicker.getInstance(document.getElementById('projDeadline')).setInputValue();
+
+    //populate detalii
+    projInfo.forEach(element => {
+      let newRow = "";
+      let detailName = element.name;
+      if (element.type == 0) {
+        newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><div class="input-field"><textarea id="detailValue_${detailNumber}" type="textarea" class="materialize-textarea">${element.value}</textarea></div></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
+      } else {
+        newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 0, ${detailNumber})" id="detailName_${detailNumber}">${detailName}</td><td><select class="browser-default" id="detailValue_${detailNumber}"><option value="?" disabled selected>Alege</option><option value="1">Da</option><option value="0">Nu</option></select></td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(0, ${detailNumber})"></i></td></tr>`;
+      }
+      $('#detailsList').append(newRow);
+      if (element.type == 1) $(`detailValue_${detailNumber}`).val(element.value);
+      saveTemplateData.push({name: detailName, type: element.type, number: detailNumber++});
+    });
+
+    //populate phases
+    phasesInfo.forEach(element => {
+      let newRow = "";
+      let detailName = element.name;
+      newRow = `<tr><td class="sorter" width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 1, ${phaseNumber})" id="phaseName_${phaseNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick="removeItem(1, ${phaseNumber})"></i></td></tr>`;
+      $('#phasesList').append(newRow);
+      $('#projPhaseName').val("");
+      $('#projPhaseName').removeClass("invalid");
+      savePhaseData.push({name: detailName, number: phaseNumber++});
+    });
+
+    //populate milestones
+    milestoneInfo.forEach(element => {
+      let newRow = "";
+      let detailName = element.name;
+      newRow = `<tr><td width="20"><i class="bi bi-arrows-move sorter" style="color: gray; cursor: pointer;"></i></td><td onclick="renameProjStuff('${detailName}', 2, ${milestoneNumber})" id="milestoneName_${milestoneNumber}">${detailName}</td><td width="10"><i class="bi bi-trash3 cursor-pointer-hover-red" onclick=removeItem"(2, ${milestoneNumber})"></i></td></tr>`;
+      $('#milestonesList').append(newRow);
+      $('#projMilestoneName').val("");
+      $('#projMilestoneName').removeClass("invalid");
+      saveMilestoneData.push({name: detailName, number: milestoneNumber++});
+    });
   });
 }
