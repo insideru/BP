@@ -446,7 +446,7 @@ function addProjectMilestones (int $proj_id, array $milestoneData) {
     global $schema;
 
     /* Insert query template */
-    $query = "DELETE * FROM {$schema}.project_milestones WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_milestones SET id = @reset:= @reset + 1; INSERT INTO {$schema}.project_milestones (proj_id, name) VALUES ";
+    $query = "DELETE FROM {$schema}.project_milestones WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_milestones SET id = @reset:= @reset + 1; INSERT INTO {$schema}.project_milestones (proj_id, name) VALUES ";
 
     foreach ($milestoneData as $element) {
         $query.="('{$proj_id}', '{$element->name}'), ";
