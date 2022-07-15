@@ -264,7 +264,7 @@
             projCats.push({value: element.id, text: element.name});
           });
           
-          var tipDropdown = jSuites.dropdown(document.getElementById('projType'), {
+          tipDropdown = jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
@@ -277,7 +277,7 @@
             projClients.push({value: element.id, text: element.name});
           });
           
-          var clientDropdown = jSuites.dropdown(document.getElementById('projClient'), {
+          clientDropdown = jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
             autocomplete: true,
