@@ -747,7 +747,8 @@ function getAttendance(string $date = NULL) {
         array_push($fields, $row);
 	}
 
-	return $fields;
+	//return $fields;
+    return $query;
 }
 
 function getPermissions() {

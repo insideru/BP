@@ -968,8 +968,7 @@ function populateEditPontaj (date) {
       let rcvData = JSON.parse(data);
       let curAttendance = rcvData.attendance;
       let curTimesheet = rcvData.timesheet;
-      let curDate = rcvData.date;
-      console.log(curDate);
+
       console.log(curAttendance);
       console.log(curTimesheet);
     },
@@ -1083,7 +1082,6 @@ function initCalendar() {
       //dataType    : 'json', // what type of data do we expect back from the server
       encode      : true,
       success     : function(data) {
-        console.log(data);
         rvdData = JSON.parse(data);
         if (typeof(rvdData) === 'object') {
           myTimesheets = rvdData.timesheets;
