@@ -44,6 +44,12 @@ $.fn.exists = function () {
     return this.length !== 0;
 }
 
+$.fn.redraw = function(){
+  $(this).each(function(){
+    var redraw = this.offsetHeight;
+  });
+};
+
 function arrayRemove(arr, value) { 
   return arr.filter(function(ele){ 
       return ele.id != value; 
