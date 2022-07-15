@@ -106,10 +106,10 @@ function getPontaje (string $date) {
     global $account;
 
     if (!isset($date)) {
-        $query = 'SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid)';
+        $query = "SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid)";
 	    $values = array(':cid' => $account->getCollabID());
     } else {
-        $query = 'SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid) AND (date = {$date})';
+        $query = "SELECT * FROM {$schema}.attendance WHERE (collab_id = :cid) AND (date = {$date})";
 	    $values = array(':cid' => $account->getCollabID());
     }
 	
