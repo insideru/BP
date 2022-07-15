@@ -2626,11 +2626,10 @@ function loadEditProjectData(proj_id) {
 
     //populate basic info
     $('#projName').val(projBasic.name);
-    console.log(projBasic);
-    console.log(getDBNameFromId(projBasic.type_id, "projCat"));
     document.getElementById('projType').dropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
-    console.log(getDBNameFromId(projBasic.client_id, "projClient"));
+    tipDropdown.setValue(getDBNameFromId(projBasic.type_id, "projCat"));
     document.getElementById('projClient').dropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
+    clientDropdown.setValue(getDBNameFromId(projBasic.client_id, "projClient"));
     $('#projExtern').val(projBasic.external);
     $('#projBudget').val(projBasic.budget);
     M.Datepicker.getInstance(document.getElementById('projStartDate')).setDate(new Date(projBasic.start_date.split('-')[0], projBasic.start_date.split('-')[1]-1, projBasic.start_date.split('-')[2]));

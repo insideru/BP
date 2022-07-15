@@ -235,9 +235,6 @@
           }
         });
 
-        jSuites.picker(document.getElementById('addDetailType'), {
-            data: ['Text', 'Da/Nu']});
-
         var elems = document.querySelectorAll('.datepicker');
         var instances = M.Datepicker.init(elems, {
         defaultDate: new Date(),
@@ -267,7 +264,7 @@
             projCats.push({value: element.id, text: element.name});
           });
           
-          jSuites.dropdown(document.getElementById('projType'), {
+          var tipDropdown = jSuites.dropdown(document.getElementById('projType'), {
             data: projCats,
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
@@ -280,7 +277,7 @@
             projClients.push({value: element.id, text: element.name});
           });
           
-          jSuites.dropdown(document.getElementById('projClient'), {
+          var clientDropdown = jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
             autocomplete: true,
