@@ -382,7 +382,7 @@ function addProjectDetails (int $proj_id, array $detailsData) {
     global $schema;
 
     /* Insert query template */
-    $query = "DELETE FROM {$schema}.project_info WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_info SET id = @reset:= @reset + 1; INSERT INTO {$schema}.project_info (proj_id, name, type, value) VALUES ";
+    $query = "DELETE FROM {$schema}.project_info WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_info SET id = @reset:= @reset + 1; ALTER TABLE {$schema}.project_info AUTO_INCREMENT = 1; INSERT INTO {$schema}.project_info (proj_id, name, type, value) VALUES ";
 
     foreach ($detailsData as $element) {
         $query.="('{$proj_id}', '{$element->name}', '{$element->type}', '{$element->val}'), ";
@@ -414,7 +414,7 @@ function addProjectPhases (int $proj_id, array $phaseData) {
     global $schema;
 
     /* Insert query template */
-    $query = "DELETE FROM {$schema}.project_phases WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_phases SET id = @reset:= @reset + 1; INSERT INTO {$schema}.project_phases (proj_id, name) VALUES ";
+    $query = "DELETE FROM {$schema}.project_phases WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_phases SET id = @reset:= @reset + 1; ALTER TABLE {$schema}.project_phases AUTO_INCREMENT = 1; INSERT INTO {$schema}.project_phases (proj_id, name) VALUES ";
 
     foreach ($phaseData as $element) {
         $query.="('{$proj_id}', '{$element->name}'), ";
@@ -446,7 +446,7 @@ function addProjectMilestones (int $proj_id, array $milestoneData) {
     global $schema;
 
     /* Insert query template */
-    $query = "DELETE FROM {$schema}.project_milestones WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_milestones SET id = @reset:= @reset + 1; INSERT INTO {$schema}.project_milestones (proj_id, name) VALUES ";
+    $query = "DELETE FROM {$schema}.project_milestones WHERE proj_id={$proj_id}; SET @reset = 0; UPDATE {$schema}.project_milestones SET id = @reset:= @reset + 1; ALTER TABLE {$schema}.project_milestones AUTO_INCREMENT = 1; INSERT INTO {$schema}.project_milestones (proj_id, name) VALUES ";
 
     foreach ($milestoneData as $element) {
         $query.="('{$proj_id}', '{$element->name}'), ";
