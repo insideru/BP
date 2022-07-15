@@ -343,13 +343,19 @@ function addCollab (string $name, int $id) {
     return "Success:" . $pdo->lastInsertId();
 }
 
-function addProject (array $basicData) {
+function addProject (array $basicData, int $proj_id) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
 
     /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id, external, budget, start_date, deadline) VALUES (:name, :client_id, :type_id, :external, :budget, :start_date, :deadline)';
+    if (!isset($proj_id)) {
+        //new project
+        $query = 'INSERT INTO '.$schema.'.projects (name, client_id, type_id, external, budget, start_date, deadline) VALUES (:name, :client_id, :type_id, :external, :budget, :start_date, :deadline)';
+    } else {
+        //edit project
+        $query = "UPDATE {$schema}.projects SET name=:name, client_id=:client_id, type_id=:type_id, external=:external, budget=:budget, start_date=:start_date, deadline=:deadline) WHERE id={$proj_id}";
+    }
     
     /* Values array for PDO */
     $values = array(':name' => $basicData[0], ":client_id" => (int)$basicData[2], ":type_id" => (int)$basicData[1], ":external" => (int)$basicData[3], ":budget" => (int)$basicData[4], ":start_date" => date("Y-m-d", strtotime($basicData[5])), ":deadline" => date("Y-m-d", strtotime($basicData[6])));

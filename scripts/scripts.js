@@ -2545,6 +2545,7 @@ function checkNewProj(proj_id) {
   var formData = {
     'action'      : 'addToDB',
     'type'        : editProject==0?'addProject':'editProject',
+    'proj_id'     : proj_id,
     'info'        : JSON.stringify(projBasicData),
     'details'     : projDetailData.length!=0?JSON.stringify(projDetailData):0,
     'phases'      : projPhaseData.length!=0?JSON.stringify(projPhaseData):0,
@@ -2558,9 +2559,10 @@ function checkNewProj(proj_id) {
     //dataType: 'json',
     data: formData,
     success: function(data) {
+      console.log(data);
       if (data.substring(0,8) == "Success:") {
         //great success
-        window.location.href = location.protocol + "//" + location.host + adminPage;
+        //window.location.href = location.protocol + "//" + location.host + adminPage;
       }
     },
     error: function(errData) {
