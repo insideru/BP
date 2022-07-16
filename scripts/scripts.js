@@ -999,7 +999,9 @@ function populateEditPontaj (date) {
         if (!$("#project_" + getDBidFromName(projName, "project") + `_${phaseId}_${milestoneId}`).exists()) {
           addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
         }
-        $(`#${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`).noUiSlider.set(element.time);
+        let curSlider = `${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`;
+        console.log(curSlider);
+        //$(`#${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`).noUiSlider.set(element.time);
       });
     },
     error: function(){
