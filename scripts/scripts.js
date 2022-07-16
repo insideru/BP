@@ -972,12 +972,9 @@ function populateEditPontaj (date) {
 
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
-      let wrkDate = new Date(date);
-      wrkDate.setHours = curAttendance.start.split(':')[0];
-      wrkDate.setMinutes = curAttendance.start.split(':')[1];
       let oraVInput = document.getElementById('ora-venire');
       let oraV = M.Timepicker.init(oraVInput, {
-          defaultTime: wrkDate,
+          defaultTime: curAttendance[0].start,
           twelveHour: false,
           onCloseEnd: changeSelectedTime
       });
@@ -985,7 +982,7 @@ function populateEditPontaj (date) {
       oraV.done();
       let oraPInput = document.getElementById('ora-plecare');
       let oraP = M.Timepicker.init(oraPInput, {
-          defaultTime: curAttendance.end,
+          defaultTime: curAttendance[0].end,
           twelveHour: false,
           onCloseEnd: changeSelectedTime
       });
