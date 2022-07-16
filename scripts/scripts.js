@@ -78,10 +78,15 @@ function roundUp(num, precision) {
 }
 
 function removeProj(id) {
-    $('#project_'+id).remove();
-    console.log(id);
-    timesheetsObject = arrayRemove(timesheetsObject, id);
-    updatePB();
+  $('#project_'+id).remove();
+  let projID = id.split('_')[0];
+  let phaseID = id.split('_')[1];
+  let milestoneID = id.split('_')[2];
+  //timesheetsObject = arrayRemove(timesheetsObject, id);
+  timesheetsObject = timesheetsObject.filter(function(elem){ 
+    console.log(elem);
+  });
+  updatePB();
 }
 
 function getProjectType (name) {
