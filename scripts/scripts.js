@@ -967,9 +967,8 @@ function populateEditPontaj (date) {
       let curAttendance = rcvData.attendance;
       let curTimesheet = rcvData.timesheet;
 
-      console.log(curAttendance);
       console.log(curTimesheet);
-
+      //incarca data si orele
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
       let oraVInput = document.getElementById('ora-venire');
@@ -989,6 +988,20 @@ function populateEditPontaj (date) {
       oraP._updateTimeFromInput();
       oraP.done();
       changeSelectedTime();
+
+      //incarca pontajele
+      curTimesheet.forEach(element => {
+        let projName = getDBNameFromId(element.project_id, "proj");
+        let phaseId = element.phase_id;
+        let phaseName = phaseId==0?"":getDBNameFromId(element.phase_id, "phase");
+        let milestoneId = element.milestone_id;
+        let milestoneName = phaseId==0?"":getDBNameFromId(element.milestone_id, "milestone");
+        if (!$("#project_" + getDBidFromName(projName, "project") + `_${phaseId}_${milestoneId}`).exists()) {
+          addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
+        }
+        let curSlider = `${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`;
+        $(`#${curSlider}`).noUiSlider.set(element.time);
+      });
     },
     error: function(){
         //
