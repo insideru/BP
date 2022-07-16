@@ -972,10 +972,23 @@ function populateEditPontaj (date) {
 
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
-      $('#ora-venire').val(curAttendance.start);
-      M.Timepicker.getInstance(document.getElementById('ora-venire'))._updateTimeFromInput();
-      $('#ora-plecare').val(curAttendance.end);
-      M.Timepicker.getInstance(document.getElementById('ora-plecare'))._updateTimeFromInput();
+      let oraVInput = document.getElementById('ora-venire');
+      let oraV = M.Timepicker.init(oraVInput, {
+          defaultTime: curAttendance.start,
+          twelveHour: false,
+          onCloseEnd: changeSelectedTime
+      });
+      oraV._updateTimeFromInput();
+      oraV.done();
+      let oraPInput = document.getElementById('ora-plecare');
+      let oraP = M.Timepicker.init(oraPInput, {
+          defaultTime: curAttendance.end,
+          twelveHour: false,
+          onCloseEnd: changeSelectedTime
+      });
+      oraP._updateTimeFromInput();
+      oraP.done();
+      changeSelectedTime();
     },
     error: function(){
         //

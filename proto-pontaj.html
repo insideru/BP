@@ -165,11 +165,6 @@
               monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
           }
         });
-        var elems = document.querySelectorAll('.timepicker');
-        var instances = M.Timepicker.init(elems, {
-          twelveHour: false,
-          onCloseEnd: changeSelectedTime
-        });
         $('.collapsible').collapsible();
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
@@ -194,6 +189,12 @@
           catch (err) {
             console.log(err);
           }
+        } else {
+        var elems = document.querySelectorAll('.timepicker');
+        var instances = M.Timepicker.init(elems, {
+          twelveHour: false,
+          onCloseEnd: changeSelectedTime
+        });
         }
       });  
     </script>
