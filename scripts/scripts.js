@@ -1001,7 +1001,7 @@ function populateEditPontaj (date) {
         }
         let curSlider = `${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`;
         console.log(curSlider);
-        //$(`#${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`).noUiSlider.set(element.time);
+        $('#'+curSlider).noUiSlider.set(element.time);
       });
     },
     error: function(){
