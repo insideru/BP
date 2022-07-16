@@ -79,6 +79,7 @@ function roundUp(num, precision) {
 
 function removeProj(id) {
     $('#project_'+id).remove();
+    console.log(id);
     timesheetsObject = arrayRemove(timesheetsObject, id);
     updatePB();
 }
