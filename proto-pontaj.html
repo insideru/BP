@@ -104,6 +104,7 @@
         $("#data-pontaj").removeClass("valid invalid");
         $("#ora-venire").removeClass("valid invalid");
         $("#ora-plecare").removeClass("valid invalid");
+        console.log($('#ponteazaBtn').html());
         if (validatePontaj()) {
           var formData = {
                 'action'            : 'addTimesheet',
