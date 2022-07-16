@@ -1004,7 +1004,7 @@ function populateEditPontaj (date) {
         let phaseId = element.phase_id;
         let phaseName = phaseId==0?"":getDBNameFromId(element.phase_id, "phase");
         let milestoneId = element.milestone_id;
-        let milestoneName = phaseId==0?"":getDBNameFromId(element.milestone_id, "milestone");
+        let milestoneName = milestoneName==0?"":getDBNameFromId(element.milestone_id, "milestone");
         if (!$("#project_" + getDBidFromName(projName, "project") + `_${phaseId}_${milestoneId}`).exists()) {
           addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
         }
