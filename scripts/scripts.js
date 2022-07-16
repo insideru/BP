@@ -1000,8 +1000,7 @@ function populateEditPontaj (date) {
           addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
         }
         let curSlider = `${element.project_id}_${element.phase_id}_${element.milestone_id}_${element.activity_id}`;
-        console.log(curSlider);
-        $('#'+curSlider).noUiSlider.set(element.time);
+        document.getElementById(curSlider).noUiSlider.set(element.time);
       });
     },
     error: function(){
