@@ -40,6 +40,32 @@ function addAttendance(string $date, string $start, string $end) {
     return "Success:" . $pdo->lastInsertId();
 }
 
+function deleteTimesheetEntry (string $date) {
+    /* Global $pdo object */
+    global $pdo;
+    global $schema;
+    global $account;
+
+    $query = "DELETE FROM {$schema}.timesheets WHERE collab_id = :collab_id AND date = :date; SET @reset = 0; UPDATE {$schema}.timesheets SET id = @reset:= @reset + 1; ALTER TABLE {$schema}.timesheets AUTO_INCREMENT = 1;";
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)));
+    
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success!";
+}
+
 function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $milestone_id, int $activity_id, float $time) {
     /* Global $pdo object */
     global $pdo;

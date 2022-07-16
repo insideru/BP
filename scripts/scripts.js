@@ -81,6 +81,7 @@ function removeProj(id) {
     $('#project_'+id).remove();
     timesheetsObject = arrayRemove(timesheetsObject, id);
     updatePB();
+    changeSelectedTime();
 }
 
 function getProjectType (name) {

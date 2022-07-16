@@ -24,11 +24,16 @@ if ($_POST["action"]=="addTimesheet") {
     $oraVenire = $_POST["oraVenire"];
     $oraPlecare = $_POST["oraPlecare"];
     $timesheet = $_POST["timesheet"];
-    if (!verifyDate($ziua)) {
+    $editTimesheet = $_POST['edit'];
+    if (!verifyDate($ziua) && !$editTimesheet) {
 		echo "Failure:Pentru data selectata exista deja un pontaj!";
         return 0;
 	}
-    addAttendance($ziua, $oraVenire, $oraPlecare);
+    if (!$editTimesheet) {
+        addAttendance($ziua, $oraVenire, $oraPlecare);
+    } else {
+        deleteTimesheetEntry($_POST["ziua"]);
+    }
     foreach ($timesheet as $timesheetProject) {
         $currID = $timesheetProject['id'];
         $currPhase = $timesheetProject['phase'];

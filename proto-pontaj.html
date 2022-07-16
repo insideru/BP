@@ -108,6 +108,7 @@
           var formData = {
                 'action'            : 'addTimesheet',
                 'ziua'              : getSelectedDate($("#data-pontaj").val()),
+                'edit'              : $('#ponteazaBtn').html()=='Modifica'?1:0,
                 'oraVenire'         : $("#ora-venire").val(),
                 'oraPlecare'        : $("#ora-plecare").val(),
                 'timesheet'         : timesheetsObject
