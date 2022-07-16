@@ -84,7 +84,10 @@ function removeProj(id) {
   let milestoneID = id.split('_')[2];
   //timesheetsObject = arrayRemove(timesheetsObject, id);
   timesheetsObject = timesheetsObject.filter(function(elem){ 
-    console.log(elem);
+    if (elem.id != projID && elem.phase != phaseID && elem.milestone != milestoneID)
+    {
+      return elem;
+    }
   });
   updatePB();
 }
