@@ -969,6 +969,13 @@ function populateEditPontaj (date) {
 
       console.log(curAttendance);
       console.log(curTimesheet);
+
+      M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
+      M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
+      $('#ora-venire').val(curAttendance.start);
+      M.Timepicker.getInstance(document.getElementById('ora-venire'))._updateTimeFromInput();
+      $('#ora-plecare').val(curAttendance.end);
+      M.Timepicker.getInstance(document.getElementById('ora-plecare'))._updateTimeFromInput();
     },
     error: function(){
         //
