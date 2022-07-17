@@ -104,6 +104,16 @@
         $("#data-pontaj").removeClass("valid invalid");
         $("#ora-venire").removeClass("valid invalid");
         $("#ora-plecare").removeClass("valid invalid");
+        let URLParams = getParameters(window.location.search);
+        let isEdit = false;
+        if (URLParams['date'] !== undefined) {
+          try {
+            isEdit = true;
+          }
+          catch (err) {
+            console.log(err);
+          }
+        }
         if (validatePontaj()) {
           var formData = {
                 'action'            : 'addTimesheet',
@@ -125,7 +135,11 @@
                   }
                   if (data.substring(0,8)=="Success:") {
                     //e corecta ma
-                    window.location.href = location.protocol + "//" + location.host + dashboardPage;
+                    if (!isEdit) {
+                      window.location.href = location.protocol + "//" + location.host + pontajPage + '&edit=' + btoa(getSelectedISODate($("#data-pontaj").val()));
+                    } else {
+                      M.toast({html: 'Modificari salvate cu succes!'})
+                    }
                   }
                 },
                 error: function(){
