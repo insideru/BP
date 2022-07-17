@@ -106,7 +106,7 @@
         $("#ora-plecare").removeClass("valid invalid");
         let URLParams = getParameters(window.location.search);
         let isEdit = false;
-        if (URLParams['date'] !== undefined) {
+        if (URLParams['edit'] !== undefined) {
           try {
             isEdit = true;
           }
