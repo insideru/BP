@@ -980,6 +980,7 @@ function populateEditPontaj (date) {
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
       $('#data-pontaj').attr('disabled', 'disabled');
+      
       let oraVInput = document.getElementById('ora-venire');
       let oraV = M.Timepicker.init(oraVInput, {
           defaultTime: curAttendance[0].start,

@@ -32,6 +32,7 @@ if ($_POST["action"]=="addTimesheet") {
     if (!$editTimesheet) {
         addAttendance($ziua, $oraVenire, $oraPlecare);
     } else {
+        addAttendance($ziua, $oraVenire, $oraPlecare, 1);
         deleteTimesheetEntry($_POST["ziua"]);
     }
     foreach ($timesheet as $timesheetProject) {

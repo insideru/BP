@@ -10,17 +10,19 @@ if ($account->authenticated || $_POST["action"]=="login") {} else
     die();
 }
 
-function addAttendance(string $date, string $start, string $end) {
+function addAttendance(string $date, string $start, string $end, int $edit = NULL) {
     /* Global $pdo object */
     global $pdo;
     global $schema;
     global $account;
 
-    /* Insert query template */
-    $query = 'INSERT INTO '.$schema.'.attendance (collab_id, date, start, end) VALUES (:collab_id, :date, :start, :end)';
-    
-    /* Values array for PDO */
-    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
+    if (!isset($edit)) {
+        $query = "INSERT INTO {$schema}.attendance (collab_id, date, start, end) VALUES (:collab_id, :date, :start, :end)";
+        $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
+    } else {
+        $query = "UPDATE {$schema}.attendance SET start=:start, end=:end WHERE collab_id=:collab_id AND date=:date";
+        $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':start' => $start, ':end' => $end);
+    }
     
     /* Execute the query */
     try
