@@ -184,6 +184,13 @@
           $('select').formSelect();
         });
 
+        $("#ora-venire").change(function() {
+          updatePB();
+        });
+        $("##ora-plecare").change(function() {
+          updatePB();
+        });
+
         //check if edit
         if (URLParams['edit'] !== undefined) {
           try {

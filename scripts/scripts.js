@@ -980,7 +980,7 @@ function populateEditPontaj (date) {
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setDate(new Date(date));
       M.Datepicker.getInstance(document.getElementById('data-pontaj')).setInputValue();
       $('#data-pontaj').attr('disabled', 'disabled');
-      
+
       let oraVInput = document.getElementById('ora-venire');
       let oraV = M.Timepicker.init(oraVInput, {
           defaultTime: curAttendance[0].start,
@@ -1157,6 +1157,7 @@ function updateText(ore, minute) {
 function updatePB() {
   var maxCurrentValue = calculateHours("toate") * 60;
   //var PBValue = Math.floor(maxCurrentValue);
+  if (maxCurrentValue==0) return;
   if ($('#maxPontaj').text()!="") {
     document.getElementById("workPB").style.width = Math.floor((maxCurrentValue/workedTime)*100) + '%';
     if (Math.floor((maxCurrentValue/workedTime)*100)>100) {
