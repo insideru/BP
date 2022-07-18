@@ -2767,192 +2767,193 @@ function loadEditProjectData(proj_id) {
 
 function doFormStuff() {
   elemName = "";
-            catID = "";
-            clientID = "";
+  catID = "";
+  clientID = "";
+  console.log(typeNo);
+  switch (typeNo) {
+      case 1: //add project category
+        elemName = $('input[id=addProjCategory]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele categoriei nu poate fi gol!'});
+          return;
+        }
+        if (elemName.trim() == "Toate") {
+          M.toast({html: 'Acest nume nu poate fi folosit!'});
+          return;
+        }
+        $('#addProjCategoryForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addProjCategory';
+        break;
+
+      case 2: //add collaborator category
+        elemName = $('input[id=addCollabCategory]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele categoriei nu poate fi gol!'});
+          return;
+        }
+        $('#addColabCatForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addCollabCategory';
+        break;
+
+        case 3: //add project
+        if (selProjCat == "") {
+          M.toast({html: 'Trebuie aleasa o categorie de proiect!'});
+          return;
+        }
+        if (selClient == "") {
+          M.toast({html: 'Trebuie ales un client!'});
+          return;
+        }
+        elemName = $('input[id=addProjectName]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele proiectului nu poate fi gol!'});
+          return;
+        }
+        catID = getDBidFromName (selProjCat, "projCat");
+        clientID = getDBidFromName (selClient, "projClient");
+        $('#addProjForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addProject';
+        break;
+
+      case 4: //add collaborator
+        if (selCollabCat == "") {
+          M.toast({html: 'Trebuie aleasa o categorie de colaborator!'});
+          return;
+        }
+        elemName = $('input[id=addCollab]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele colaboratorului nu poate fi gol!'});
+          return;
+        }
+        catID = getDBidFromName (selCollabCat, "colabCat");
+        $('#addColabForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addCollab';
+        break;
+
+      case 5: //add client
+        elemName = $('input[id=addClient]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele clientului nu poate fi gol!'});
+          return;
+        }
+        $('#addClientForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addClient';
+        break;
+
+      case 6: //add activity
+        elemName = $('input[id=addActivity]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Numele activititatii nu poate fi gol!'});
+          return;
+        }
+        if (selProjCat2 == "") {
+          M.toast({html: 'Trebuie aleasa o categorie de proiect!'});
+          return;
+        }
+        catID = getDBidFromName (selProjCat2, "projCat");
+        $('#addActivityForm').trigger("reset");
+        //$(':focus').blur();
+        type = 'addActivity';
+        break;
+
+        case 7: //adauga zi libera
+        elemName = $('input[id=addNameDayOff]').val().trim();
+        if (elemName == "") {
+          M.toast({html: 'Ziua trebuie sa aiba un nume!'});
+          return;
+        }
+        date = $('input[id=addDayOff]').val();
+        if (!validateDate(date)) {
+          M.toast({html: 'Ziua nu are un format de data corect!'});
+          return;
+        }
+        $('#addDaysoffForm').trigger("reset");
+        //$(':focus').blur();
+        type = "addHoliday";
+        break;
+  }
+  //reseteaza formul
+  //$('form')[typeNo-1].reset();
+if (typeNo==7) {
+  var formData = {
+      'action'            : 'addToDB',
+      'type'              : type,
+      'name'              : elemName.trim(),
+      'category'          : catID,
+      'client'            : clientID,
+      'data'              : getSelectedDate(date)
+  };
+} else {
+  var formData = {
+      'action'            : 'addToDB',
+      'type'              : type,
+      'name'              : elemName.trim(),
+      'category'          : catID,
+      'client'            : clientID
+  };
+}
+  $.ajax({
+      type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+      url         : 'handler.php', // the url where we want to POST
+      data        : formData, // our data object
+      //dataType    : 'json', // what type of data do we expect back from the server
+      encode      : true,
+      success     : function(data) {
+          if (data.substring(0,8)=="Success:") {
+            dbID=data.substring(8);
             switch (typeNo) {
-                case 1: //add project category
-                  elemName = $('input[id=addProjCategory]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele categoriei nu poate fi gol!'});
-                    return;
-                  }
-                  if (elemName.trim() == "Toate") {
-                    M.toast({html: 'Acest nume nu poate fi folosit!'});
-                    return;
-                  }
-                  $('#addProjCategoryForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addProjCategory';
-                  break;
-
-                case 2: //add collaborator category
-                  elemName = $('input[id=addCollabCategory]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele categoriei nu poate fi gol!'});
-                    return;
-                  }
-                  $('#addColabCatForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addCollabCategory';
-                  break;
-
-                  case 3: //add project
-                  if (selProjCat == "") {
-                    M.toast({html: 'Trebuie aleasa o categorie de proiect!'});
-                    return;
-                  }
-                  if (selClient == "") {
-                    M.toast({html: 'Trebuie ales un client!'});
-                    return;
-                  }
-                  elemName = $('input[id=addProjectName]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele proiectului nu poate fi gol!'});
-                    return;
-                  }
-                  catID = getDBidFromName (selProjCat, "projCat");
-                  clientID = getDBidFromName (selClient, "projClient");
-                  $('#addProjForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addProject';
-                  break;
-
-                case 4: //add collaborator
-                  if (selCollabCat == "") {
-                    M.toast({html: 'Trebuie aleasa o categorie de colaborator!'});
-                    return;
-                  }
-                  elemName = $('input[id=addCollab]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele colaboratorului nu poate fi gol!'});
-                    return;
-                  }
-                  catID = getDBidFromName (selCollabCat, "colabCat");
-                  $('#addColabForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addCollab';
-                  break;
-
-                case 5: //add client
-                  elemName = $('input[id=addClient]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele clientului nu poate fi gol!'});
-                    return;
-                  }
-                  $('#addClientForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addClient';
-                  break;
-
-                case 6: //add activity
-                  elemName = $('input[id=addActivity]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Numele activititatii nu poate fi gol!'});
-                    return;
-                  }
-                  if (selProjCat2 == "") {
-                    M.toast({html: 'Trebuie aleasa o categorie de proiect!'});
-                    return;
-                  }
-                  catID = getDBidFromName (selProjCat2, "projCat");
-                  $('#addActivityForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = 'addActivity';
-                  break;
-
-                  case 7: //adauga zi libera
-                  elemName = $('input[id=addNameDayOff]').val().trim();
-                  if (elemName == "") {
-                    M.toast({html: 'Ziua trebuie sa aiba un nume!'});
-                    return;
-                  }
-                  date = $('input[id=addDayOff]').val();
-                  if (!validateDate(date)) {
-                    M.toast({html: 'Ziua nu are un format de data corect!'});
-                    return;
-                  }
-                  $('#addDaysoffForm').trigger("reset");
-                  //$(':focus').blur();
-                  type = "addHoliday";
-                  break;
+              case 1: //add project category
+                $('#projCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'project_types\')">'+elemName+"</td></tr>");
+                $('#dropdown_categorie_proiect').html($('#dropdown_categorie_proiect').html()+'<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+elemName+'</a></li>');
+                $('#dropdown_categorie_proiect2').html($('#dropdown_categorie_proiect2').html()+'<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+elemName+'</a></li>');
+                addedItem = {id: dbID, name: elemName};
+                projCatsObject.push(addedItem);
+                break;
+              case 2: //add collaborator category
+                $('#colabCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'collab_groups\')">'+elemName+"</td></tr>");
+                $('#dropdown_categorie_colaborator').html($('#dropdown_categorie_colaborator').html()+'<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+elemName+'</a></li>');
+                addedItem = {id: dbID, name: elemName};
+                collabCatsObject.push(addedItem);
+                break;
+              case 3: //add project
+                $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+elemName+'</td><td>'+getDBNameFromId(catID, "projCat")+'</td><td>'+getDBNameFromId(clientID, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + dbID + '" onclick="changeProjState(this.id)" checked="checked" /><span></span></label></td></tr>');
+                addedItem = {id: dbID, name: elemName, type_id: catID, client_id: clientID, active: "1"};
+                projectsObject.push(addedItem);
+                break;
+              case 4: //add collaborator
+                $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + dbID +'">Adauga user</a></td></tr>');
+                addedItem = {id: dbID, name: elemName, collabCatID: catID};
+                collabsObject.push(addedItem);
+                break;
+              case 5: //add client
+                $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+elemName+"</td></tr>");
+                $('#dropdown_client_proiect').html($('#dropdown_client_proiect').html()+'<li><a href="#!" onclick="changeClient(this.innerHTML)">'+elemName+'</a></li>');
+                addedItem = {id: dbID, name: elemName};
+                clientsObject.push(addedItem);
+                break;
+              case 6: //add activity
+                $('#activityTable').append('<tr><td onclick="renameName(this.innerHTML, \'activities\')">'+elemName+'</td></td><td>'+getDBNameFromId(catID, "projCat")+'</td></tr>');
+                addedItem = {id: dbID, name: elemName, project_type: catID};
+                activitiesObject.push(addedItem);
+                break;
+              case 7: //add holiday
+                $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedISODate(date) + '\')">delete_forever</i></td></tr>');
+                addedItem = {id: dbID, name: elemName, date: date};
+                holidaysObject.push(addedItem);
+                break;
             }
-            //reseteaza formul
-            //$('form')[typeNo-1].reset();
-          if (typeNo==7) {
-            var formData = {
-                'action'            : 'addToDB',
-                'type'              : type,
-                'name'              : elemName.trim(),
-                'category'          : catID,
-                'client'            : clientID,
-                'data'              : getSelectedDate(date)
-            };
-          } else {
-            var formData = {
-                'action'            : 'addToDB',
-                'type'              : type,
-                'name'              : elemName.trim(),
-                'category'          : catID,
-                'client'            : clientID
-            };
           }
-            $.ajax({
-                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : 'handler.php', // the url where we want to POST
-                data        : formData, // our data object
-                //dataType    : 'json', // what type of data do we expect back from the server
-                encode      : true,
-                success     : function(data) {
-                    if (data.substring(0,8)=="Success:") {
-                      dbID=data.substring(8);
-                      switch (typeNo) {
-                        case 1: //add project category
-                          $('#projCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'project_types\')">'+elemName+"</td></tr>");
-                          $('#dropdown_categorie_proiect').html($('#dropdown_categorie_proiect').html()+'<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+elemName+'</a></li>');
-                          $('#dropdown_categorie_proiect2').html($('#dropdown_categorie_proiect2').html()+'<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+elemName+'</a></li>');
-                          addedItem = {id: dbID, name: elemName};
-                          projCatsObject.push(addedItem);
-                          break;
-                        case 2: //add collaborator category
-                          $('#colabCatTable').append('<tr><td onclick="renameName(this.innerHTML, \'collab_groups\')">'+elemName+"</td></tr>");
-                          $('#dropdown_categorie_colaborator').html($('#dropdown_categorie_colaborator').html()+'<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+elemName+'</a></li>');
-                          addedItem = {id: dbID, name: elemName};
-                          collabCatsObject.push(addedItem);
-                          break;
-                        case 3: //add project
-                          $('#projTable').append('<tr><td onclick="renameName(this.innerHTML, \'projects\')">'+elemName+'</td><td>'+getDBNameFromId(catID, "projCat")+'</td><td>'+getDBNameFromId(clientID, "projClient")+'</td><td><label><input type="checkbox" id="projNo_' + dbID + '" onclick="changeProjState(this.id)" checked="checked" /><span></span></label></td></tr>');
-                          addedItem = {id: dbID, name: elemName, type_id: catID, client_id: clientID, active: "1"};
-                          projectsObject.push(addedItem);
-                          break;
-                        case 4: //add collaborator
-                          $('#collabsTable').append('<tr><td onclick="renameName(this.innerHTML, \'collaborators\')">'+elemName+"</td><td>"+getDBNameFromId(catID, "colabCat")+'</td><td><a class="waves-effect waves-light btn modal-trigger btn-small" href="#newPontor" onclick="addNewUserID=' + dbID +'">Adauga user</a></td></tr>');
-                          addedItem = {id: dbID, name: elemName, collabCatID: catID};
-                          collabsObject.push(addedItem);
-                          break;
-                        case 5: //add client
-                          $('#clientsTable').append('<tr><td onclick="renameName(this.innerHTML, \'clients\')">'+elemName+"</td></tr>");
-                          $('#dropdown_client_proiect').html($('#dropdown_client_proiect').html()+'<li><a href="#!" onclick="changeClient(this.innerHTML)">'+elemName+'</a></li>');
-                          addedItem = {id: dbID, name: elemName};
-                          clientsObject.push(addedItem);
-                          break;
-                        case 6: //add activity
-                          $('#activityTable').append('<tr><td onclick="renameName(this.innerHTML, \'activities\')">'+elemName+'</td></td><td>'+getDBNameFromId(catID, "projCat")+'</td></tr>');
-                          addedItem = {id: dbID, name: elemName, project_type: catID};
-                          activitiesObject.push(addedItem);
-                          break;
-                        case 7: //add holiday
-                          $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedISODate(date) + '\')">delete_forever</i></td></tr>');
-                          addedItem = {id: dbID, name: elemName, date: date};
-                          holidaysObject.push(addedItem);
-                          break;
-                      }
-                    }
-                    if (data.substring(0,14)=="Database error") {
-                      M.toast({html: data.substring(14)});
-                    }
-                },
-                error: function(){
-                    //
-                }
-            });
+          if (data.substring(0,14)=="Database error") {
+            M.toast({html: data.substring(14)});
+          }
+      },
+      error: function(){
+          //
+      }
+  });
 }
