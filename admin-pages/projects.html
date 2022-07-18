@@ -47,12 +47,6 @@
         $('.modal').modal();
         populateProjects();
         $('.collapsible:not(.expandable)').collapsible();
-        $('#newProjectDeadline').change(function() {
-          setProjectDeadline($(this).val());
-        });
-        $('#newProjectStartDate').change(function() {
-          setProjectStartDate($(this).val());
-        });
         var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
             defaultDate: new Date(),
