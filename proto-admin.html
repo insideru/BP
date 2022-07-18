@@ -76,11 +76,11 @@
       </ul> -->
 
       <ul id="sideBar" class="sidenav sidenav-fixed">
-        <li><a class="genLista" onclick="loadMainBody(this)">Dashboard</a></li>
         <!--<li><a href="#!">First Sidebar Link</a></li>-->
         <li class="no-padding">
           <img width="300" src="img/admin-header.jpg">
           <ul class="collapsible expandable">
+            <li class="active"><a class="genLista" onclick="loadMainBody(this)">Dashboard</a></li>
             <li class="active">
               <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_right</i></a>
               <div class="collapsible-body">
@@ -192,7 +192,7 @@
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
         $('div.collapsible-body>ul>li').removeClass('active');
-        $('ul.sidenav>li>a').removeClass('genLista');
+        $('ul.expandable>li>a').removeClass('genLista');
         if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
           $(elem).addClass('genLista');
         } else {
