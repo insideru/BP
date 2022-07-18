@@ -76,7 +76,7 @@
       </ul> -->
 
       <ul id="sideBar" class="sidenav sidenav-fixed">
-        <a onclick="loadMainBody(this)">Dashboard</a>
+        <li><a class="genLista" onclick="loadMainBody(this)">Dashboard</a></li>
         <!--<li><a href="#!">First Sidebar Link</a></li>-->
         <li class="no-padding">
           <img width="300" src="img/admin-header.jpg">
@@ -192,7 +192,7 @@
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
         $('div.collapsible-body>ul>li').removeClass('active');
-        $('body>ul>a').removeClass('genLista');
+        $('ul.sidenav>li>a').removeClass('genLista');
         if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
           $(elem).addClass('genLista');
         } else {
