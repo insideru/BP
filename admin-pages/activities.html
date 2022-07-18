@@ -9,7 +9,6 @@
     </tbody>
   </table>
   <table class="centered highlight">
-    
     <tbody>
       <tr>
           <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_proiect2' id="actProjCat">Categorie proiect</a></td>
@@ -29,13 +28,13 @@
     <ul id='dropdown_categorie_proiect2' class='dropdown-content'>
     </ul>
   <script>
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $('.dropdown-trigger').dropdown();
         populateActivities();
         populateProjCat();
         $('form').submit(function(event) {
-            console.log('debug');
-          doFormStuff();
+          console.log('debug');
+          //doFormStuff();
           event.preventDefault();
         });
     });

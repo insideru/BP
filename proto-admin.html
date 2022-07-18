@@ -209,7 +209,12 @@
             $("#frameContent").load("admin-pages/proj-cats.html", function() {});
             break;
           case 'Activitati':
-            $("#frameContent").load("admin-pages/activities.html", function() {});
+            $("#frameContent").load("admin-pages/activities.html", function() {
+              $('form').submit(function(event) {
+              console.log('debug');
+              event.preventDefault();
+                });
+              });
             break;
           case 'Pontaje':
             $("#frameContent").load("admin-pages/heatmap.html", function() {});
