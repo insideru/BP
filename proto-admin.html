@@ -191,8 +191,8 @@
 
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
-        $('div.collapsible-body>ul>li').removeClass('active');
-        $('ul.expandable>li>a').removeClass('genLista');
+        //$('div.collapsible-body>ul>li').removeClass('active');
+        //$('ul.expandable>li>a').removeClass('genLista');
         if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
           $(elem).addClass('genLista');
         } else {
