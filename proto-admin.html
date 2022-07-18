@@ -168,12 +168,6 @@
 
           $('.tooltipped').tooltip();
 
-          let today = new Date();
-          today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
-          let todayString = today.toISOString().replace('T', ' ');
-          todayString = todayString.substring(0, todayString.length-5);
-          calendarSalarii.setValue(todayString);
-
           $("#frameContent").load("admin-pages/dashboard.html", function() {
 
           });
