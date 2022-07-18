@@ -46,7 +46,7 @@
     $( document ).ready(function() {
         $('.modal').modal();
         populateProjects();
-        $('.collapsible:not(expandable)').collapsible();
+        $('.collapsible:not(.expandable)').collapsible();
         $('#newProjectDeadline').change(function() {
           setProjectDeadline($(this).val());
         });
