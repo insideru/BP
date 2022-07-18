@@ -189,7 +189,7 @@
         $('#frameTitle').text(($(elem).justText()));
         $('.collapsible-body>ul>li').removeClass('active');
         $('.genLista').removeClass('genLista');
-        if (elem.nodeName == "A") {
+        if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
           $(elem).addClass('genLista');
         } else {
           $(elem).parent().addClass('active');
