@@ -2946,7 +2946,7 @@ if (typeNo==7) {
                 activitiesObject.push(addedItem);
                 break;
               case 7: //add holiday
-                $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedISODate(date) + '\')">delete_forever</i></td></tr>');
+                $('#daysoffTable').append('<tr><td onclick="renameName(this.innerHTML, \'holidays\')">'+elemName+'</td></td><td>'+ date +'</td><td><a><i class="material-icons red-text" style="cursor:pointer" onClick="deleteHoliday(\'' + getSelectedISODate(date) + '\')">delete_forever</i><a></td></tr>');
                 addedItem = {id: dbID, name: elemName, date: date};
                 holidaysObject.push(addedItem);
                 break;
