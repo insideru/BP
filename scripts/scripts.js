@@ -2774,7 +2774,6 @@ function doFormStuff() {
   elemName = "";
   catID = "";
   clientID = "";
-  console.log(typeNo);
   switch (typeNo) {
       case 1: //add project category
         elemName = $('input[id=addProjCategory]').val().trim();

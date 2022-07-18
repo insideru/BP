@@ -79,8 +79,10 @@
         <!--<li><a href="#!">First Sidebar Link</a></li>-->
         <li class="no-padding">
           <img width="300" src="img/admin-header.jpg">
-          <a href="#!" class="genLista" onclick="loadMainBody(this)">Dashboard</a>
           <ul class="collapsible expandable">
+            <li class="genLista">
+              <a href="#!" onclick="loadMainBody(this)">Dashboard</a>
+            </li>
             <li class="active">
               <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_right</i></a>
               <div class="collapsible-body">
@@ -192,9 +194,9 @@
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
         $('div.collapsible-body>ul>li').removeClass('active');
-        $('.genLista').removeClass('genLista');
+        $('ul.expandable>li').removeClass('genLista');
         if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
-          $(elem).addClass('genLista');
+          $(elem).parent().addClass('genLista');
         } else {
           $(elem).parent().addClass('active');
         }
