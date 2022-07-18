@@ -44,6 +44,10 @@
       background-color: #328dcc !important;
       color: #fff !important;
     }
+
+    .genLista .material-icons {
+      color: #fff !important;
+    }
     </style>
   </head>
     <body>
@@ -192,10 +196,8 @@
 
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
-        //$('div.collapsible-body>ul>li').removeClass('active');
         $('a').removeClass('genLista');
         $(elem).addClass('genLista');
-
         switch ($(elem).justText()) {
           case 'Dashboard':
             $("#frameContent").load("admin-pages/dashboard.html", function() {});
