@@ -25,5 +25,9 @@
   <script>
     $( document ).ready(function() {
         populateProjCat();
+        $('form').submit(function(event) {
+          doFormStuff();
+          event.preventDefault();
+        });
     });
   </script>
