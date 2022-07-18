@@ -49,6 +49,18 @@
   <script>
     var calendarSalarii;
     $(document).ready(function () {
+        calendarSalarii = jSuites.calendar(document.getElementById('calendarSalarii'), {
+            type: 'year-month-picker',
+            format: 'MM-YYYY',
+            months: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'],
+            monthsFull: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
+            textDone: 'OK',
+            textReset: 'Reset',
+            textUpdate: 'Update',
+            onchange: function(instance, value) {
+              calculateSalaries(value);
+            }
+          });
         $('.modal').modal();
         let today = new Date();
         today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
