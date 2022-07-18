@@ -50,6 +50,15 @@ $.fn.redraw = function(){
   });
 };
 
+$.fn.justText = function() {
+  
+	return $(this)  .clone()
+			.children()
+			.remove()
+			.end()
+			.text();
+};
+
 function arrayRemove(arr, value) { 
   return arr.filter(function(ele){ 
       return ele.id != value; 
