@@ -24,11 +24,14 @@
       </tr>
     </tbody>
   </table>
+    <!-- Dropdown Structure -->
+    <ul id='dropdown_categorie_proiect2' class='dropdown-content'>
+    </ul>
   <script>
     $( document ).ready(function() {
+        $('.dropdown-trigger').dropdown();
         populateActivities();
         populateProjCat();
-        $('.dropdown-trigger').dropdown();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
