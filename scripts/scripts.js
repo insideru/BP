@@ -271,14 +271,14 @@ function changeUserState(proj_id) {
 }
 
 function populateProjCat() {
-  if ($('#projCatTable').exists()) $('#projCatTable').html('');
-  if ($('#dropdown_categorie_proiect').exists()) $('#dropdown_categorie_proiect').html('');
-  if ($('#dropdown_categorie_proiect2').exists()) $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>');
+  if ($('#projCatTable').exists()) { $('#projCatTable').html(''); }
+  if ($('#dropdown_categorie_proiect').exists()) { $('#dropdown_categorie_proiect').html(''); }
+  if ($('#dropdown_categorie_proiect2').exists()) { $('#dropdown_categorie_proiect2').html('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">Toate</a></li>'); }
   projCatsObject.forEach(element => {
-    if ($('#projCatTable').exists()) $('#projCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>');
+    if ($('#projCatTable').exists()) { $('#projCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'project_types\')">'+element.name+'</td></tr>'); }
     //initializare dropdown categorii proiecte
-    if ($('#dropdown_categorie_proiect').exists()) $('#dropdown_categorie_proiect').append('<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+element.name+'</a></li>');
-    if ($('#dropdown_categorie_proiect2').exists()) $('#dropdown_categorie_proiect2').append('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+element.name+'</a></li>');
+    if ($('#dropdown_categorie_proiect').exists()) { $('#dropdown_categorie_proiect').append('<li><a href="#!" onclick="changeProjectCategory(this.innerHTML)">'+element.name+'</a></li>'); }
+    if ($('#dropdown_categorie_proiect2').exists()) { $('#dropdown_categorie_proiect2').append('<li><a href="#!" onclick="changeProjectCategory2(this.innerHTML)">'+element.name+'</a></li>'); }
   });
 }
 
