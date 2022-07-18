@@ -1,0 +1,35 @@
+<table class="centered highlight">
+    <thead>
+      <tr>
+          <th>Nume</th>
+          <th>Categorie</th>
+      </tr>
+    </thead>
+    <tbody id="activityTable">
+    </tbody>
+  </table>
+  <table class="centered highlight">
+    <tbody>
+      <tr>
+        <form id="addActivityForm">
+          <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_proiect2' id="actProjCat">Categorie proiect</a></td>
+            <td>
+                <div class="input-field">
+                    <i class="material-icons prefix">add</i>
+                    <input type="text" id="addActivity" onclick="typeNo=6;" required>
+                    <label for="addActivity">Adauga activitate noua</label>
+                </div>
+            </td>
+        </form>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+        $( document ).ready(function() {
+        populateActivities();
+        $('form').submit(function(event) {
+          doFormStuff();
+          event.preventDefault();
+        });
+    });
+  </script>
