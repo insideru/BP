@@ -27,6 +27,7 @@
   <script>
         $( document ).ready(function() {
         populateActivities();
+        $('.dropdown-trigger').dropdown();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
