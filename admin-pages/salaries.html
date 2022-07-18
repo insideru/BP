@@ -62,6 +62,7 @@
             }
           });
         $('.modal').modal();
+        populateCollabs();
         let today = new Date();
         today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 );
         let todayString = today.toISOString().replace('T', ' ');

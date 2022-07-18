@@ -314,7 +314,7 @@ function populateClients() {
 }
 
 function populateCollabs() {
-  $('#collabsTable').html('');
+  if ($('#collabsTable').exists()) $('#collabsTable').html('');
   collabsObject.forEach(element => {
     var bool = false;
     accountsObject.forEach(elem => {
@@ -324,6 +324,7 @@ function populateCollabs() {
       //facem lista de permisii
       permissionsPerCollab[elem.collab_id] = Number(elem.account_group);
     });
+    if (!$('#collabsTable').exists()) return;
     if (bool) {
       //e adaugat user
       $('#collabsTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collaborators\')">'+element.name+'</td><td>'+getDBNameFromId(element.collabCatID, "colabCat")+'</td><td></td></tr>');
