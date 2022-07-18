@@ -80,19 +80,19 @@
         <li class="no-padding">
           <img width="300" src="img/admin-header.jpg">
           <ul class="collapsible expandable">
-            <li class="active"><a class="genLista" onclick="loadMainBody(this)">Dashboard</a></li>
+            <li class="active"><a href="#!" class="genLista" onclick="loadMainBody(this)">Dashboard</a></li>
             <li class="active">
-              <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_right</i></a>
+              <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">list</i>Proiecte</a></li>
-                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">library_add</i>Categorii de proiecte</a></li>
-                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">library_books</i>Activitati</a></li>
+                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">list</i>Proiecte</a></li>
+                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_add</i>Categorii de proiecte</a></li>
+                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_books</i>Activitati</a></li>
                 </ul>
               </div>
             </li>
             <li class="active">
-              <a class="collapsible-header" onclick="changeArrow(this)">Interne<i class="material-icons">keyboard_arrow_right</i></a>
+              <a class="collapsible-header" onclick="changeArrow(this)">Interne<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">playlist_add</i>Pontaje</a></li>
@@ -102,7 +102,7 @@
               </div>
             </li>
             <li class="active">
-              <a class="collapsible-header" onclick="changeArrow(this)">Colaboratori<i class="material-icons">keyboard_arrow_right</i></a>
+              <a class="collapsible-header" onclick="changeArrow(this)">Colaboratori<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">group</i>Colaboratori</a></li>
@@ -136,7 +136,6 @@
     <script>
       $(document).ready(function(){
         $('.sidenav').sidenav();
-        $('.collapsible').collapsible();
         var elem = document.querySelector('.collapsible.expandable');
         var instance = M.Collapsible.init(elem, {
           accordion: false
@@ -194,7 +193,7 @@
         //$('div.collapsible-body>ul>li').removeClass('active');
         $('a').removeClass('genLista');
         $(elem).addClass('genLista');
-        
+
         switch ($(elem).justText()) {
           case 'Dashboard':
             $("#frameContent").load("admin-pages/dashboard.html", function() {});
