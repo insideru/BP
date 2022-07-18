@@ -76,20 +76,18 @@
       </ul> -->
 
       <ul id="sideBar" class="sidenav sidenav-fixed">
+        <a onclick="loadMainBody(this)">Dashboard</a>
         <!--<li><a href="#!">First Sidebar Link</a></li>-->
         <li class="no-padding">
           <img width="300" src="img/admin-header.jpg">
           <ul class="collapsible expandable">
-            <li class="genLista">
-              <a href="#!" onclick="loadMainBody(this)">Dashboard</a>
-            </li>
             <li class="active">
               <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_right</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">list</i>Proiecte</a></li>
-                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_add</i>Categorii de proiecte</a></li>
-                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_books</i>Activitati</a></li>
+                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">list</i>Proiecte</a></li>
+                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">library_add</i>Categorii de proiecte</a></li>
+                  <li><a onclick="loadMainBody(this)"><i class="material-icons tiny">library_books</i>Activitati</a></li>
                 </ul>
               </div>
             </li>
@@ -194,9 +192,9 @@
       function loadMainBody(elem) {
         $('#frameTitle').text(($(elem).justText()));
         $('div.collapsible-body>ul>li').removeClass('active');
-        $('ul.expandable>li').removeClass('genLista');
+        $('body>ul>a').removeClass('genLista');
         if (!hasSomeParentTheClass(elem, 'collapsible-body')) {
-          $(elem).parent().addClass('genLista');
+          $(elem).addClass('genLista');
         } else {
           $(elem).parent().addClass('active');
         }
