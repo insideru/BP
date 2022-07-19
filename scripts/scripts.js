@@ -39,6 +39,7 @@ var saveMilestoneData = new Array();
 var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 var editProject = 0;
+var isAdmin = false;
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -2678,12 +2679,18 @@ function popupProjInfo(proj_id) {
         $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
         $("#projClient").html(getDBNameFromId(project.client_id, 'projClient'));
         $("#projExtern").html(project.external==1?"Extern":"Intern");
-        $("#projBudget").html(project.budget);
+        $("#projBudget").html(project.budget + " ore");
         $("#projStart").html(getFullDate(project.start_date));
         $("#projDeadline").html(getFullDate(project.deadline));
         break;
       }
     }
+
+    if (!isAdmin) {
+      $("#projType").remove();
+      $("#projClient").remove();
+    }
+    
     $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
       //console.log("Data: " + data + "\nStatus: " + status);
       let initData = JSON.parse(data);

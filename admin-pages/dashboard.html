@@ -1,3 +1,10 @@
+<div id="viewProj" class="modal">
+    <div class="modal-content">
+      <div id="viewProjBody">
+          
+      </div>
+    </div>
+  </div>
 <div class="row">
     <div id="projectsChartDiv">
         <div id="projectsChart"></div>
@@ -29,9 +36,12 @@
 
 <script>
     $(document).ready(function(){
+        $('.modal').modal();
         drawProjectsChart();
         $('tspan').on('click', function(evt) {
-            alert(evt.target.innerHTML);
+            //alert(evt.target.innerHTML);
+            let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
+            popupProjInfo(proj_id);
         });
         $('tspan').css('cursor', 'pointer');
     });

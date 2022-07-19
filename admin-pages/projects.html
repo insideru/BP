@@ -1,48 +1,47 @@
 <div class="row">
-    <div id="viewProj" class="modal">
-      <div class="modal-content">
-        <div id="viewProjBody">
-            
-        </div>
+  <div id="viewProj" class="modal">
+    <div class="modal-content">
+      <div id="viewProjBody">
       </div>
     </div>
-      <table class="centered highlight">
-          <thead>
-            <tr>
-                <th>Info</th>
-                <th>Nume</th>
-                <th>Categorie</th>
-                <th>Client</th>
-                <th>Extern</th>
-                <th>Buget</th>
-                <th>Data incepere</th>
-                <th>Deadline</th>
-                <th>Activ</th>
-            </tr>
-          </thead>
-          <tbody id="projTable">
-          </tbody>
-        </table>
-        <ul class="collapsible">
-          <li>
-            <div class="collapsible-header"><i class="material-icons">layers_clear</i>Proiecte inactive</div>
-            <div class="collapsible-body">
-              <table class="centered highlight">
-                <tbody id="projInactiveTable">
-                </tbody>
-              </table>
-            </div>
-          </li>
-        </ul>
-        <table class="centered highlight">
-          <tbody>
-            <tr class="center-align">
-              <td><a class="waves-effect waves-green btn" href="#!" onclick="$('#frameContent').load('admin-pages/newproj.html', function() {});">Adauga Proiect nou</a></td>
-            </tr>
-          </tbody>
-        </table>
-        <input type="hidden" id="newProjectStartDate" class="datepicker">
-        <input type="hidden" id="newProjectDeadline" class="datepicker">
+  </div>
+    <table class="centered highlight">
+      <thead>
+        <tr>
+          <th>Info</th>
+          <th>Nume</th>
+          <th>Categorie</th>
+          <th>Client</th>
+          <th>Extern</th>
+          <th>Buget</th>
+          <th>Data incepere</th>
+          <th>Deadline</th>
+          <th>Activ</th>
+        </tr>
+      </thead>
+      <tbody id="projTable">
+      </tbody>
+    </table>
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">layers_clear</i>Proiecte inactive</div>
+        <div class="collapsible-body">
+          <table class="centered highlight">
+            <tbody id="projInactiveTable">
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <table class="centered highlight">
+      <tbody>
+        <tr class="center-align">
+          <td><a class="waves-effect waves-green btn" href="#!" onclick="$('#frameContent').load('admin-pages/newproj.html', function() {});">Adauga Proiect nou</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <input type="hidden" id="newProjectStartDate" class="datepicker">
+    <input type="hidden" id="newProjectDeadline" class="datepicker">
   </div>
   <script>
     $('#nav-bar').html(`<nav>
@@ -63,7 +62,7 @@
         populateProjects();
         $('.collapsible:not(.expandable)').collapsible();
         var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, {
+          var instances = M.Datepicker.init(elems, {
             defaultDate: new Date(),
             setDefaultDate: true,
             format: 'dd mmmm yyyy',
@@ -76,6 +75,7 @@
                 months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
                 monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
             }
-        });
+          });
     });
   </script>
+  <?php if ($account->permissions['admin']) {echo '<script>isAdmin=true;</script>';} else {echo '<script>isAdmin=false;</script>';}?>

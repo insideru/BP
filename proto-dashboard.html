@@ -122,6 +122,7 @@
         $('.collapsible').collapsible();
         $('.modal').modal();
         $('.sidenav').sidenav();
+        
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
@@ -135,7 +136,12 @@
           //console.log(phasesObject, milestonesObject);
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
           drawProjectsChart();
-
+          $('tspan').on('click', function(evt) {
+            //alert(evt.target.innerHTML);
+            let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
+            popupProjInfo(proj_id);
+          });
+          $('tspan').css('cursor', 'pointer');
           let curDate = new Date();
           let wrkMonth = Number(curDate.getMonth())+1;
           let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
