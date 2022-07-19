@@ -100,6 +100,7 @@ function drawProjectsChart () {
 }
 
 function generateHeatMapData(noDays) {
+  console.log(noDays);
   let minDate = new Date();
   minDate.setDate(minDate.getDate()-noDays);
 
