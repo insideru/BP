@@ -63,17 +63,7 @@ function drawProjectsChart () {
             click: function(event, chartContext, config) {
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                 if (config.dataPointIndex>-1) updateProjectCharts(config.dataPointIndex);
-                $('tspan').on('click', function(evt) {
-                  //alert(evt.target.innerHTML);
-                  let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
-                  if (proj_id != undefined) {
-                      popupProjInfo(proj_id);
-                      let instance = M.Modal.getInstance($('#viewProj'));
-                      instance.open();
-                      evt.preventDefault();
-                      $('tspan').css('cursor', 'pointer');
-                  }
-                });
+                $('tspan').css('cursor', 'pointer');
             }
           },
       },
