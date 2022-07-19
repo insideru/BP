@@ -107,6 +107,7 @@
               <a class="collapsible-header" onclick="changeArrow(this)">Colaboratori<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
+                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">group</i>Clienti</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">group</i>Colaboratori</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">format_list_bulleted</i>Categorii de colaboratori</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">check_box</i>Grupuri de permisii</a></li>
@@ -217,6 +218,21 @@
             break;
           case 'Zile libere':
             $("#frameContent").load("admin-pages/holidays.html", function() {});
+            break;
+          case 'Colaboratori':
+            $("#frameContent").load("admin-pages/collabs.html", function() {});
+            break;
+          case 'Categorii de colaboratori':
+            $("#frameContent").load("admin-pages/collab-cats.html", function() {});
+            break;
+          case 'Grupuri de permisii':
+            $("#frameContent").load("admin-pages/permissions.html", function() {});
+            break;
+          case 'Utilizatori pontaj':
+            $("#frameContent").load("admin-pages/users.html", function() {});
+            break;
+          case 'Clienti':
+            $("#frameContent").load("admin-pages/clients.html", function() {});
             break;
         }
       }
