@@ -41,23 +41,26 @@
       <table class="centered highlight">
         <tbody>
           <tr>
-                <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_colaborator' id="colabCat">Alege categorie</a></td>
-                <td>
-                  <div class="input-field">
-                      <i class="material-icons prefix">add</i>
-                      <input type="text" id="addCollab" onclick="typeNo=4;" required>
-                      <label for="addCollab">Adauga colaborator nou</label>
-                  </div>
-              </td>
+            <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_colaborator' id="colabCat">Alege categorie</a></td>
+            <td>
+                <div class="input-field">
+                    <i class="material-icons prefix">add</i>
+                    <input type="text" id="addCollab" onclick="typeNo=4;" required>
+                    <label for="addCollab">Adauga colaborator nou</label>
+                </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </form>
+    <!-- Dropdown Structure -->
+    <ul id='dropdown_categorie_colaborator' class='dropdown-content'>
+    </ul>
     <script>
     selCollabCat = "";
     $(document).ready(function() {
-        populateCollabs();
         $('.dropdown-trigger').dropdown();
+        populateCollabs();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
