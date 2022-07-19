@@ -40,12 +40,12 @@
         drawProjectsChart();
         $('tspan').on('click', function(evt) {
             //alert(evt.target.innerHTML);
+            console.log(evt.target.nodeName);
             let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
             if (proj_id != undefined) {
                 popupProjInfo(proj_id);
                 let instance = M.Modal.getInstance($('#viewProj'));
                 instance.open();
-                evt.preventDefault();
             }
         });
         $('tspan').css('cursor', 'pointer');
