@@ -129,8 +129,9 @@
       <a href="#" data-target="sideBar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
     <main>
+      <div id="nav-bar"></div>
       <div class="container wideContainer">
-        <div class="row" id="nav-bar"></div>
+        <div class="row"></div>
         <div class="card">
           <div class="card-content">
             <span class="card-title" id="frameTitle" style="font-weight: bold;">Dashboard</span>
@@ -202,6 +203,8 @@
         $('#frameTitle').text(($(elem).justText()));
         $('a').removeClass('genLista');
         $(elem).addClass('genLista');
+        $('#nav-bar').html();
+        editProject = 0;
         switch ($(elem).justText()) {
           case 'Dashboard':
             $("#frameContent").load("admin-pages/dashboard.html", function() {});

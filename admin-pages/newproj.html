@@ -156,6 +156,15 @@
         $('.modal').modal();
         $('.sidenav').sidenav();
 
+        $('#nav-bar').html(`<nav>
+          <div class="nav-wrapper">
+            <div class="col s12">
+              <a class="breadcrumb" onclick="$('#frameContent').load('admin-pages/newproj.html', function() {});">Proiecte</a>
+              <a class="breadcrumb">Proiect nou</a>
+            </div>
+          </div>
+        </nav>`);
+
         jSuites.picker(document.getElementById('addDetailType'), {
           data: ['Text', 'Da/Nu']});
 
@@ -269,18 +278,17 @@
         });
         
         //check if it's edit
-        let URLParams = getParameters(window.location.search);
-        if (URLParams['edit'] !== undefined) {
-          try {
-            editProject = atob(URLParams['edit']);
-          }
-          catch (err) {
-            console.log(err);
-          }
-          if (editProject>0) {
-            $('#actionBtn').html('Modifica');
-            loadEditProjectData(editProject);
-          }
+        if (editProject>0) {
+          $('#actionBtn').html('Modifica');
+          $('#nav-bar').html(`<nav>
+          <div class="nav-wrapper">
+            <div class="col s12">
+              <a class="breadcrumb" onclick="$('#frameContent').load('admin-pages/newproj.html', function() {});">Proiecte</a>
+              <a class="breadcrumb">Modifica proiect</a>
+            </div>
+          </div>
+        </nav>`);
+          loadEditProjectData(editProject);
         }
         });
       })
