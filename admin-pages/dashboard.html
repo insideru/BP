@@ -43,7 +43,7 @@
             let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
             if (proj_id != undefined) {
                 popupProjInfo(proj_id);
-                var instance = M.Modal.getInstance($('.viewProj'));
+                let instance = M.Modal.getInstance($('#viewProj'));
                 instance.open();
                 evt.preventDefault();
             }
