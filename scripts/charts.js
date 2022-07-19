@@ -293,8 +293,7 @@ function generateHeatMapData(noDays) {
   title: {
     text: 'Pontaje pe ultimele ' + noDays + ' zile'
   }};
-  
-  console.log(options);
+
   drawHeatMap(options);
 }
 
@@ -320,7 +319,7 @@ function generateHeatMapColors(days) {
 }
 
 function drawHeatMap (options) {
-  if (!updateHeatMap) {
+  if ($('#heatMapChart'.html()=='')) {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
     updateHeatMap = true;
