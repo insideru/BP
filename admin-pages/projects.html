@@ -45,15 +45,22 @@
         <input type="hidden" id="newProjectDeadline" class="datepicker">
   </div>
   <script>
-    $( document ).ready(function() {
+    $('#nav-bar').html(`<nav>
+      <div class="nav-wrapper">
+        <div class="col s12">
+          <a class="breadcrumb">Proiecte</a>
+        </div>
+      </div>
+    </nav>`);
+    $('#newProjectDeadline').change(function() {
+      setProjectDeadline($(this).val());
+    });
+    $('#newProjectStartDate').change(function() {
+      setProjectStartDate($(this).val());
+    });
+    $(document).ready(function() {
         $('.modal').modal();
         populateProjects();
-        $('#newProjectDeadline').change(function() {
-          setProjectDeadline($(this).val());
-        });
-        $('#newProjectStartDate').change(function() {
-          setProjectStartDate($(this).val());
-        });
         $('.collapsible:not(.expandable)').collapsible();
         var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {

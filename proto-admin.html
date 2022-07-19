@@ -13,6 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <script type="text/javascript" src="scripts/RowSorter.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles/jquery.dropdown.css" />
     <style>
       header, main, footer {
       padding-left: 300px !important;
@@ -107,7 +109,7 @@
               <a class="collapsible-header" onclick="changeArrow(this)">Colaboratori<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">group</i>Clienti</a></li>
+                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">recent_actors</i>Clienti</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">group</i>Colaboratori</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">format_list_bulleted</i>Categorii de colaboratori</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">check_box</i>Grupuri de permisii</a></li>
@@ -118,14 +120,17 @@
           </ul>
         </li>
         <li>
-          <a href="#!" onclick="loadMainBody(this)">Logout</a>
+          <a href="?page=dashboard">Pagina user</a>
+        </li>
+        <li>
+          <a href="?page=logout">Logout</a>
         </li>
       </ul>
       <a href="#" data-target="sideBar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
     <main>
       <div class="container wideContainer">
-        <div class="row"></div>
+        <div class="row" id="nav-bar"></div>
         <div class="card">
           <div class="card-content">
             <span class="card-title" id="frameTitle" style="font-weight: bold;">Dashboard</span>
