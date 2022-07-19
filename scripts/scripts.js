@@ -2692,7 +2692,7 @@ function popupProjInfo(proj_id) {
       console.log('nu sunt admin');
       $("#rowCategory").remove();
       $("#rowClient").remove();
-      $("#projExtern").remove();
+      $("#rowExtern").remove();
     }
 
     $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
