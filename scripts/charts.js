@@ -319,7 +319,7 @@ function generateHeatMapColors(days) {
 }
 
 function drawHeatMap (options) {
-  if ($('#heatMapChart'.html()=='')) {
+  if ($('#heatMapChart').html()=='') {
     heatMapChart = new ApexCharts(document.querySelector("#heatMapChart"), options);
     heatMapChart.render();
     updateHeatMap = true;
