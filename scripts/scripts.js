@@ -2689,8 +2689,9 @@ function popupProjInfo(proj_id) {
     }
 
     if (!isAdmin) {
-      $("#projType").remove();
-      $("#projClient").remove();
+      $("#rowCategory").remove();
+      $("#rowClient").remove();
+      $("#projExtern").remove();
     }
 
     $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
