@@ -30,5 +30,8 @@
 <script>
     $(document).ready(function(){
         drawProjectsChart();
+        $('title').on('click', function(evt) {
+            alert(evt.target.tagName);
+        });
     });
 </script>
