@@ -28,11 +28,11 @@
     <ul id='dropdown_categorie_proiect2' class='dropdown-content'>
     </ul>
   <script>
+    selProjCat2 = "";
     $(document).ready(function() {
         $('.dropdown-trigger').dropdown();
         populateActivities();
         populateProjCat();
-        selProjCat2 = "";
     });
     $('form').submit(function(event) {
         doFormStuff();
