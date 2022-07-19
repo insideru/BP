@@ -57,7 +57,7 @@
     selCollabCat = "";
     $(document).ready(function() {
         populateCollabs();
-        $('.collapsible:not(.expandable)').collapsible();
+        $('.dropdown-trigger').dropdown();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
