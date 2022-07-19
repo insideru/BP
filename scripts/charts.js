@@ -65,16 +65,16 @@ function drawProjectsChart () {
               if (config.dataPointIndex>-1) {
                 updateProjectCharts(config.dataPointIndex);
               }
-              $('tspan').css('cursor', 'pointer');
               $('tspan').off('click');
               $('tspan').on('click', function(evt) {
                 //alert(evt.target.innerHTML);
-                let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
+                let target = evt.target;
+                let parent = target.parentElement;
+                let proj_id = getDBidFromName(parent.children[1].innerHTML, 'project');
                 if (proj_id != undefined) {
-                    popupProjInfo(proj_id);
-                    let instance = M.Modal.getInstance($('#viewProj'));
-                    instance.open();
-                    evt.preventDefault();
+                  popupProjInfo(proj_id);
+                  let instance = M.Modal.getInstance($('#viewProj'));
+                  instance.open();
                 }
               });
             }

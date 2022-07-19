@@ -2672,10 +2672,19 @@ function getParameters(urlString) {
   return retObject;
 }
 
+function modProj(proj_id) {
+  $("#viewProjBody").load("proto-viewproj.html", function() {
+    let instance = M.Modal.getInstance($('#viewProj'));
+    instance.close();
+    openEditProject(proj_id);
+  });
+}
+
 function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
+    if (isAdmin) $('#prjBtn').html(`<a class="right waves-effect waves-green btn" onclick="modProj(${proj_id})">Modifica proiect</a>`);
     for (let project of projectsObject) {
       if (project.id == proj_id) {
         $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
@@ -2707,15 +2716,17 @@ function popupProjInfo(proj_id) {
         } else {
           $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
         }
-      })
+      });
+
       phasesInfo.forEach(elem => {
         $('#projPhases').removeClass('hide');
         $("#phasesList").append(`<tr><td>${elem.name}</td></tr>`)
-      })
+      });
+
       milestoneInfo.forEach(elem => {
         $('#projMilestones').removeClass('hide');
         $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
-      })
+      });
     });
   });
 }

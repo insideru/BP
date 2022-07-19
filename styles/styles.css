@@ -20,6 +20,10 @@ table tr.sorting-row td:last-child {
   right: 32px;
 }
 
+text > tspan {
+  cursor: pointer !important;
+}
+
 .closeButton {
   display: inline-block;
   background-color: #bbb;
