@@ -152,9 +152,7 @@
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
       $(document).ready(function() {
-        $('.collapsible').collapsible();
         $('.modal').modal();
-        $('.sidenav').sidenav();
 
         $('#nav-bar').html(`<nav>
           <div class="nav-wrapper">
@@ -218,9 +216,9 @@
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
-          clientsObject = initData.clients;
+          //clientsObject = initData.clients;
           //collabCatsObject = initData.collabCats;
-          projCatsObject = initData.projCats;
+          //projCatsObject = initData.projCats;
           templates = initData.templates;
           populateTemplatesMenu();
           var projCats = new Array;
@@ -278,6 +276,7 @@
         });
         
         //check if it's edit
+        console.log(editProject);
         if (editProject>0) {
           $('#actionBtn').html('Modifica');
           $('#nav-bar').html(`<nav>
