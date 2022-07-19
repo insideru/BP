@@ -2676,9 +2676,9 @@ function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
-    $('#detailsList').html();
-    $('#phasesList').html();
-    $('#milestonesList').html();
+    $('#detailsList').html('');
+    $('#phasesList').html('');
+    $('#milestonesList').html('');
     for (let project of projectsObject) {
       if (project.id == proj_id) {
         $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
