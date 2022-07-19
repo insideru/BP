@@ -139,7 +139,12 @@
           $('tspan').on('click', function(evt) {
             //alert(evt.target.innerHTML);
             let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
-            popupProjInfo(proj_id);
+            if (proj_id != undefined) {
+                popupProjInfo(proj_id);
+                var instance = M.Modal.getInstance($('.viewProj'));
+                instance.open();
+                evt.preventDefault();
+            }
           });
           $('tspan').css('cursor', 'pointer');
           let curDate = new Date();

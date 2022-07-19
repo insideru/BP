@@ -143,6 +143,7 @@ function getDBidFromName (name, cat) {
               return element.id;}
           }
     }
+    return undefined;
   }
 
 function getDBNameFromId (id, cat) {
@@ -191,6 +192,7 @@ function getDBNameFromId (id, cat) {
       }
       break;
   }
+  return undefined;
 }
 
 function changeProjectCategory(name) {
@@ -2690,7 +2692,7 @@ function popupProjInfo(proj_id) {
       $("#projType").remove();
       $("#projClient").remove();
     }
-    
+
     $.get(`handler.php?r=getProjDetails&proj=${proj_id}`, function(data, status) {
       //console.log("Data: " + data + "\nStatus: " + status);
       let initData = JSON.parse(data);
