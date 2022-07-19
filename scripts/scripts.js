@@ -2689,7 +2689,6 @@ function popupProjInfo(proj_id) {
     }
 
     if (!isAdmin) {
-      console.log('nu sunt admin');
       $("#rowCategory").remove();
       $("#rowClient").remove();
       $("#rowExtern").remove();
