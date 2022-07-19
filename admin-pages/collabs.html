@@ -37,10 +37,10 @@
         <tbody id="collabsTable">
         </tbody>
       </table>
+      <form id="addColabForm">
       <table class="centered highlight">
         <tbody>
           <tr>
-            <form id="addColabForm">
                 <td><a class='dropdown-trigger btn' href='#' data-target='dropdown_categorie_colaborator' id="colabCat">Alege categorie</a></td>
                 <td>
                   <div class="input-field">
@@ -49,13 +49,14 @@
                       <label for="addCollab">Adauga colaborator nou</label>
                   </div>
               </td>
-            </form>
           </tr>
         </tbody>
       </table>
+    </form>
       <script>
     $(document).ready(function() {
         populateCollabs();
+        $('.collapsible:not(.expandable)').collapsible();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();

@@ -62,6 +62,7 @@
     <script>
     $(document).ready(function() {
         populateUsers();
+        $('.modal').modal();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
