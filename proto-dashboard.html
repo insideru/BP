@@ -138,8 +138,8 @@
           alltimesheetsObject = initData.timesheets;
           phasesObject = initData.phases;
           milestonesObject = initData.milestones;
-          clientsObject = initData.clients;
-          projCatsObject = initData.projCats;
+          if (initData.hasOwnProperty('clients')) clientsObject = initData.clients;
+          if (initData.hasOwnProperty('projCats')) projCatsObject = initData.projCats;
 
           //console.log(phasesObject, milestonesObject);
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
