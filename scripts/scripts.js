@@ -294,12 +294,12 @@ function populateActivities() {
 }
 
 function populateColabCat() {
-  $('#colabCatTable').html('');
-  $('#dropdown_categorie_colaborator').html('');
+  if ($('#colabCatTable').exists()) $('#colabCatTable').html('');
+  if ($('#dropdown_categorie_colaborator').exists()) $('#dropdown_categorie_colaborator').html('');
   collabCatsObject.forEach(element => {
-    $('#colabCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collab_groups\')">'+element.name+"</td></tr>");
+    if ($('#colabCatTable').exists()) $('#colabCatTable').append('<tr><td class="tooltipped" data-position="top" data-tooltip="Apasa pentru redenumire" style="cursor:pointer" onclick="renameName(this.innerHTML, \'collab_groups\')">'+element.name+"</td></tr>");
     //initializare dropdown clienti
-    $('#dropdown_categorie_colaborator').append('<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+element.name+'</a></li>');
+    if ($('#dropdown_categorie_colaborator').exists()) $('#dropdown_categorie_colaborator').append('<li><a href="#!" onclick="changeColabCategory(this.innerHTML)">'+element.name+'</a></li>');
   });
 }
 

@@ -61,6 +61,7 @@
     $(document).ready(function() {
         $('.dropdown-trigger').dropdown();
         populateCollabs();
+        populateColabCat();
         $('form').submit(function(event) {
           doFormStuff();
           event.preventDefault();
