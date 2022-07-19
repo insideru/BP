@@ -41,11 +41,19 @@
             </tr>
           </tbody>
         </table>
+        <input type="hidden" id="newProjectStartDate" class="datepicker">
+        <input type="hidden" id="newProjectDeadline" class="datepicker">
   </div>
   <script>
     $( document ).ready(function() {
         $('.modal').modal();
         populateProjects();
+        $('#newProjectDeadline').change(function() {
+          setProjectDeadline($(this).val());
+        });
+        $('#newProjectStartDate').change(function() {
+          setProjectStartDate($(this).val());
+        });
         $('.collapsible:not(.expandable)').collapsible();
         var elems = document.querySelectorAll('.datepicker');
             var instances = M.Datepicker.init(elems, {
