@@ -2652,7 +2652,7 @@ function checkNewProj(proj_id) {
     success: function(data) {
       if (data.substring(0,8) == "Success:") {
         //great success
-        //window.location.href = location.protocol + "//" + location.host + adminPage;
+        window.location.href = location.protocol + "//" + location.host + adminPage;
       }
     },
     error: function(errData) {
