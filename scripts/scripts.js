@@ -2711,23 +2711,33 @@ function popupProjInfo(proj_id) {
       let projInfo = initData.info;
       let phasesInfo = initData.phases;
       let milestoneInfo = initData.milestones;
+      let badgeNu = `<div class="badge red darken-4">
+        <div class="badge-wrap">
+          <span class="badge-text white-text bold">LIVE</span>
+        </div>
+      </div>`;
+      let badgeDa = `<div class="badge teal darken-4">
+        <div class="badge-wrap">
+          <span class="badge-text white-text bold">LIVE</span>
+        </div>
+      </div>`;
       projInfo.forEach(elem => {
         $('#projDetails').removeClass('hide');
         if (elem.value.length>100){
-          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td></tr><tr><td colspan="2">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
+          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td></tr><tr><td colspan="2">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?badgeNu:badgeDa)}</td></tr>`);
         } else {
-          $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?"Nu":"Da")}</td></tr>`);
+          $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>")}</td></tr>`);
         }
       });
 
       phasesInfo.forEach(elem => {
         $('#projPhases').removeClass('hide');
-        $("#phasesList").append(`<tr><td>${elem.name}</td></tr>`)
+        $("#phasesList").append(`<tr><td class="bold">${elem.name}</td></tr>`)
       });
 
       milestoneInfo.forEach(elem => {
         $('#projMilestones').removeClass('hide');
-        $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
+        $("#milestonesList").append(`<tr><td class="bold">${elem.name}</td></tr>`)
       });
     });
   });

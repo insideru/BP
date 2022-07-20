@@ -13,11 +13,50 @@ table tr.sorting-row td:last-child {
   border-radius: 0 5px 5px 0;
   box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.2);
 }
-
 .fixedPosition {
   position: fixed;
   top: 96px;
   right: 32px;
+}
+.bold {
+  font-weight:600 !important;
+}
+.infoBorder {
+  line-height: 16px;
+  border: #797979;
+  border-radius: 4px;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.badge-wrap {
+  display: flex;
+  align-items: center;
+}
+.badge-icon {
+  position: relative;
+  display: inline-flex;
+  margin-right: 2px;
+}
+.badge-icon-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  will-change: opacity;
+  -webkit-animation: ani-breath 1.8s ease infinite;
+          animation: ani-breath 1.8s ease infinite;
+}
+.badge-icon svg {
+  fill: currentColor;
+}
+.badge-text {
+  display: inline-flex;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 text > tspan {
@@ -44,7 +83,8 @@ text > tspan {
 }
 
 body {
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
 }
 
 .cursor-pointer-hover-red {
