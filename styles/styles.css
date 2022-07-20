@@ -27,26 +27,26 @@ table tr.sorting-row td:last-child {
   border-radius: 4px;
 }
 .badge {
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 4px;
+  display: inline-block !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
 }
 .badge-wrap {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
 }
 .badge-icon {
-  position: relative;
-  display: inline-flex;
-  margin-right: 2px;
+  position: relative !important;
+  display: inline-flex !important;
+  margin-right: 2px !important;
 }
 .badge-icon-inner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  will-change: opacity;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  will-change: opacity !important;
   -webkit-animation: ani-breath 1.8s ease infinite;
           animation: ani-breath 1.8s ease infinite;
 }
@@ -54,8 +54,8 @@ table tr.sorting-row td:last-child {
   fill: currentColor;
 }
 .badge-text {
-  display: inline-flex;
-  font-size: 14px;
+  display: inline-flex !important;
+  font-size: 14px !important;
   line-height: 16px;
 }
 
