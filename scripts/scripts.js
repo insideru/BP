@@ -2716,7 +2716,7 @@ function popupProjInfo(proj_id) {
           <span class="badge-text white-text bold">Nu</span>
         </div>
       </div>`;
-      let badgeDa = `<div class="badge teal darken-4">
+      let badgeDa = `<div class="badge teal darken-3">
         <div class="badge-wrap">
           <span class="badge-text white-text bold">Da</span>
         </div>
