@@ -2751,7 +2751,7 @@ function loadEditProjectData(proj_id) {
     let projInfo = initData.info;
     let phasesInfo = initData.phases;
     let milestoneInfo = initData.milestones;
-    detailNumber
+    detailNumber = 0; phaseNumber = 0; milestoneNumber = 0;
 
     //populate basic info
     $('#projNameBig').html(projBasic.name);
