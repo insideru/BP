@@ -2643,6 +2643,8 @@ function checkNewProj(proj_id) {
     'milestones'  : projMilestoneData!=0?JSON.stringify(projMilestoneData):0
   };
 
+  console.log(formData);
+
   $.ajax({
     url: 'handler.php',
     type: 'POST',
