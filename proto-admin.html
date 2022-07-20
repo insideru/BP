@@ -94,7 +94,7 @@
               <a class="collapsible-header" onclick="changeArrow(this)">Proiecte<i class="material-icons">keyboard_arrow_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">list</i>Proiecte</a></li>
+                  <li><a href="#!" onclick="loadMainBody(this)" id="projectMenu"><i class="material-icons tiny">list</i>Proiecte</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_add</i>Categorii de proiecte</a></li>
                   <li><a href="#!" onclick="loadMainBody(this)"><i class="material-icons tiny">library_books</i>Activitati</a></li>
                 </ul>
@@ -186,10 +186,7 @@
           });
 
           $('.tooltipped').tooltip();
-
-          $("#frameContent").load("admin-pages/dashboard.html", function() {
-
-          });
+          $("#frameContent").load("admin-pages/dashboard.html", function() {});
         });
       });
 

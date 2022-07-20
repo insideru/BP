@@ -144,16 +144,7 @@
           //console.log(phasesObject, milestonesObject);
           //console.log(projectsObject, alltimesheetsObject, collabsObject);
           drawProjectsChart();
-          $('tspan').on('click', function(evt) {
-            //alert(evt.target.innerHTML);
-            let proj_id = getDBidFromName(evt.target.innerHTML, 'project');
-            if (proj_id != undefined) {
-                popupProjInfo(proj_id);
-                let instance = M.Modal.getInstance($('#viewProj'));
-                instance.open();
-            }
-          });
-          $('tspan').css('cursor', 'pointer');
+ 
           let curDate = new Date();
           let wrkMonth = Number(curDate.getMonth())+1;
           let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;

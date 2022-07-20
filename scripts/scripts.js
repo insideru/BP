@@ -2676,6 +2676,8 @@ function modProj(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     let instance = M.Modal.getInstance($('#viewProj'));
     instance.close();
+    $('a').removeClass('genLista');
+    $('#projectMenu').addClass('genLista');
     openEditProject(proj_id);
   });
 }
