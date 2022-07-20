@@ -2686,7 +2686,7 @@ function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
-    if (location.search.substring(1,10) == 'page=admin') $('#prjBtn').html(`<a class="right waves-effect waves-green btn" onclick="modProj(${proj_id})">Modifica proiect</a>`);
+    if (window.location.search.substring(1,10) == 'page=admin') $('#prjBtn').html(`<a class="right waves-effect waves-green btn" onclick="modProj(${proj_id})">Modifica proiect</a>`);
     for (let project of projectsObject) {
       if (project.id == proj_id) {
         $("#projType").html(getDBNameFromId(project.type_id, 'projCat'));
