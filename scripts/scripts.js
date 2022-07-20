@@ -2724,20 +2724,20 @@ function popupProjInfo(proj_id) {
       projInfo.forEach(elem => {
         $('#projDetails').removeClass('hide');
         if (elem.value.length>100){
-          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td></tr><tr><td colspan="2">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?badgeNu:badgeDa)}</td></tr>`);
+          $("#detailsList").append(`<tr><td colspan="2" class="centered">${elem.name}</td></tr><tr><td colspan="2" class="bold">${elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>")}</td></tr>`);
         } else {
-          $("#detailsList").append(`<tr><td>${elem.name}</td><td>${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?badgeNu:badgeDa)}</td></tr>`);
+          $("#detailsList").append(`<tr><td>${elem.name}</td><td class="bold">${elem.type==0?elem.value.replace(/(?:\r\n|\r|\n)/g, "<br>"):(elem.value==0?badgeNu:badgeDa)}</td></tr>`);
         }
       });
 
       phasesInfo.forEach(elem => {
         $('#projPhases').removeClass('hide');
-        $("#phasesList").append(`<tr><td>${elem.name}</td></tr>`)
+        $("#phasesList").append(`<tr><td class="bold">${elem.name}</td></tr>`)
       });
 
       milestoneInfo.forEach(elem => {
         $('#projMilestones').removeClass('hide');
-        $("#milestonesList").append(`<tr><td>${elem.name}</td></tr>`)
+        $("#milestonesList").append(`<tr><td class="bold">${elem.name}</td></tr>`)
       });
     });
   });

@@ -20,7 +20,6 @@ table tr.sorting-row td:last-child {
 }
 .bold {
   font-weight: 600 !important;
-  font-weight: bold;
 }
 .infoBorder {
   line-height: 16px;
