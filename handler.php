@@ -93,8 +93,8 @@ if ($_POST["action"]=="addToDB") {
             break;
         case "addProject":
             //echo addProject($_POST['name'], $_POST['category'], $_POST['client']);
-            if ($_POST['proj_id'] != '0') {
-                $res = addProject(json_decode($_POST['info']), $_POST['proj_id']);
+            if ((int)$_POST['proj_id'] != 0) {
+                $res = addProject(json_decode($_POST['info']), (int)$_POST['proj_id']);
                 $id = $_POST['proj_id'];
             } else {
                 $res = addProject(json_decode($_POST['info']));
