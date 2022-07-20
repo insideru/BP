@@ -19,7 +19,8 @@ table tr.sorting-row td:last-child {
   right: 32px;
 }
 .bold {
-  font-weight:600 !important;
+  font-weight: 600 !important;
+  font-weight: bold;
 }
 .infoBorder {
   line-height: 16px;

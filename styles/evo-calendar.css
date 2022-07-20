@@ -30,7 +30,7 @@ html, body {
     margin: 0;
 }
 body {
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', sans-serif;
 }
 input:focus, textarea:focus, button:focus {
     outline: none;
