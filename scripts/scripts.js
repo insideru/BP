@@ -2686,6 +2686,7 @@ function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
+    console.log(location.search);
     if (location.search.substring(1,11) == '?page=admin') $('#prjBtn').html(`<a class="right waves-effect waves-green btn" onclick="modProj(${proj_id})">Modifica proiect</a>`);
     for (let project of projectsObject) {
       if (project.id == proj_id) {
