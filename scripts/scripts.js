@@ -2713,12 +2713,12 @@ function popupProjInfo(proj_id) {
       let milestoneInfo = initData.milestones;
       let badgeNu = `<div class="badge red darken-4">
         <div class="badge-wrap">
-          <span class="badge-text white-text bold">LIVE</span>
+          <span class="badge-text white-text bold">Nu</span>
         </div>
       </div>`;
       let badgeDa = `<div class="badge teal darken-4">
         <div class="badge-wrap">
-          <span class="badge-text white-text bold">LIVE</span>
+          <span class="badge-text white-text bold">Da</span>
         </div>
       </div>`;
       projInfo.forEach(elem => {
