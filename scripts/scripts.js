@@ -2643,8 +2643,6 @@ function checkNewProj(proj_id) {
     'milestones'  : projMilestoneData!=0?JSON.stringify(projMilestoneData):0
   };
 
-  console.log(formData);
-
   $.ajax({
     url: 'handler.php',
     type: 'POST',
@@ -2652,7 +2650,6 @@ function checkNewProj(proj_id) {
     //dataType: 'json',
     data: formData,
     success: function(data) {
-      console.log(data);
       if (data.substring(0,8) == "Success:") {
         //great success
         //window.location.href = location.protocol + "//" + location.host + adminPage;
