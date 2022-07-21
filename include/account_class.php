@@ -1,15 +1,15 @@
 <?php
 
 class Account {
-    private $id;
-	private $collabID;
-    private $group;
+    private int $id;
+	private int $collabID;
+    private int $group;
 	private $username;
     public $authenticated;
     private $token;
 	public $permissions;
-	private $firstName;
-	private $lastName;
+	private string $firstName;
+	private string $lastName;
 
     public function __construct() {
         $this->id = NULL;
@@ -187,7 +187,7 @@ public function changePassword(int $id, string $passwd)
 	$hash = password_hash($passwd, PASSWORD_DEFAULT);
 	
 	/* Int value for the $enabled variable (0 = false, 1 = true) */
-	$intEnabled = $enabled ? 1 : 0;
+	//$intEnabled = $enabled ? 1 : 0;
 	
 	/* Values array for PDO */
 	$values = array(':passwd' => $hash, ':id' => $id);
@@ -243,10 +243,10 @@ public function changeEnabled(int $id, bool $enabled)
     global $pdo;
     global $schema;
 	
-	/* Trim the strings to remove extra spaces */
+	/* Trim the strings to remove extra spaces 
 	$email = trim($email);
 	$name = trim($name);
-	$passwd = trim($passwd);
+	$passwd = trim($passwd); */
 	
 	/* Check if the ID is valid */
 	if (!$this->isIdValid($id))
@@ -397,7 +397,7 @@ public function login(string $username, string $passwd, int $remember): bool
 			$this->authenticated = TRUE;
 			$this->firstName = explode(" ", $row['name'])[0];
 			$this->lastName = explode(" ", $row['name'])[1];
-			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet']);
+			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet'], 'raport' => $row['raport']);
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
 

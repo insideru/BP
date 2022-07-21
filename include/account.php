@@ -31,7 +31,7 @@ function editAccount($id, $newEmail, $newName, $newPass) {
 
      try
     {
-        $account->editAccount($id, $newEmail, $newName, $newPass, TRUE);
+        //$account->editAccount($id, $newEmail, $newName, $newPass, TRUE);
     }
     catch (Exception $e)
     {
@@ -42,7 +42,7 @@ function editAccount($id, $newEmail, $newName, $newPass) {
     echo 'Account edit successful.';
 }
 
-function deleteAccount($id) {
+function deleteAccount($accountId) {
     
     global $account;
 
@@ -155,10 +155,10 @@ function closeAllSessions() {
         }
 }
 
-function buildAccountObject():bool {
-        global $pdo;
-        global $schema;
-}
+//function buildAccountObject():bool {
+//        global $pdo;
+//        global $schema;
+//}
 
 function guidv4($data = null) {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
