@@ -29,6 +29,7 @@ class Account {
 
 public function addAccount(string $username, string $passwd, int $group, int $collab_id): int {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -125,6 +126,7 @@ public function isPasswdValid(string $passwd): bool
 public function getIdFromUsername(string $username): ?int
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -166,6 +168,7 @@ public function getIdFromUsername(string $username): ?int
 public function changePassword(int $id, string $passwd)
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -208,6 +211,7 @@ public function changePassword(int $id, string $passwd)
 public function changeGroup(int $id, int $newGroup)
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -240,6 +244,7 @@ public function changeGroup(int $id, int $newGroup)
 public function changeEnabled(int $id, bool $enabled)
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -296,6 +301,7 @@ public function isIdValid(int $id): bool
 public function deleteAccount(int $id)
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -345,6 +351,7 @@ public function deleteAccount(int $id)
 public function login(string $username, string $passwd, int $remember): bool
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;	
 	
@@ -397,7 +404,6 @@ public function login(string $username, string $passwd, int $remember): bool
 			$this->authenticated = TRUE;
 			$this->firstName = explode(" ", $row['name'])[0];
 			$this->lastName = explode(" ", $row['name'])[1];
-			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet'], 'raport' => $row['raport']);
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
 
@@ -447,6 +453,7 @@ public function login(string $username, string $passwd, int $remember): bool
 private function registerLoginSession()
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
 	global $pdo;
     global $schema;
     
@@ -477,6 +484,7 @@ private function registerLoginSession()
 public function sessionLogin(): bool
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
@@ -522,7 +530,7 @@ public function sessionLogin(): bool
 			//echo $this->collabID . '<BR>';
 			$this->firstName = explode(" ", $row['name'])[0];
 			$this->lastName = explode(" ", $row['name'])[1];
-			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet']);
+			$this->permissions = array('admin' => $row['admin'], 'bonus' => $row['bonus'], 'external' => $row['external'], 'holiday' => $row['holiday'], 'timesheet' => $row['timesheet'], 'raport' => $row['raport']);
 			return TRUE;
 		}
 
@@ -585,6 +593,7 @@ public function saveSession() {
 public function logout()
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;	
 	
@@ -637,17 +646,17 @@ public function isAuthenticated(): bool
 	return $this->authenticated;
 }
 
-public function getId(): int
+public function getId()
 {
 	return $this->id;
 }
 
-public function getCollabID(): int
+public function getCollabID()
 {
 	return $this->collabID;
 }
 
-public function getGroup(): int
+public function getGroup()
 {
 	return $this->group;
 }
@@ -657,17 +666,18 @@ public function getEmail(): string
 	return $this->email;
 }
 
-public function getFirstName(): string {
+public function getFirstName() {
 	return $this->firstName;
 }
 
-public function getLasttName(): string {
+public function getLasttName() {
 	return $this->lastName;
 }
 
 public function closeOtherSessions()
 {
 	/* Global $pdo object */
+	/** @var object $pdo */
     global $pdo;
     global $schema;
 	
