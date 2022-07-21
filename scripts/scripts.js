@@ -14,6 +14,7 @@ timesheetsArray = [];
 daysoffArray = [];
 workedTime = 0;
 pontajeObjectArray = [];
+raportPage = "/?page=reports";
 pontajPage = "/?page=ponteaza";
 dashboardPage = "/";
 concediuPage = "/?page=concediu";
@@ -1165,6 +1166,7 @@ function addLinks() {
   $('.linkPontaj').attr("href", pontajPage);
   $('.linkConcediu').attr("href", concediuPage);
   $('.linkCalendar').attr("href", calendarPage);
+  $('.linkRaport').attr("href", raportPage);
 }
 
 function updateText(ore, minute) {
@@ -1798,6 +1800,7 @@ function populatePermissions () {
     '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'bonus\', '+element.id+')"' + (element.bonus==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
     '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'holiday\', '+element.id+')"' + (element.holiday==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
     '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'timesheet\', '+element.id+')"' + (element.timesheet==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
+    '<td><label><input type="checkbox" class="filled-in" onclick="changePermissions(\'raport\', '+element.id+')"' + (element.raport==1 ? ' checked="checked""' : '') +' /><span></span></label></td>'+
     '</tr>');  
   });
 }

@@ -60,36 +60,8 @@
     </ul>
 
       <div class="container">
-        <div class="row"></div>
         <div class="row">
-          <div class="input-field">
-            <input id="data-pontaj" type="text" class="datepicker" onclick="getHolidays();">
-            <label for="data-pontaj">Ziua</label>
-            <span class="helper-text" data-error="Alege o data corecta" data-success="">Alege ziua pentru care vrei sa pontezi</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="ora-venire" type="text" class="timepicker">
-            <label for="ora-venire">Ora venire</label>
-            <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incepere a programului</span>
-          </div>
-          <div class="input-field col s6">
-            <input id="ora-plecare" type="text" class="timepicker">
-            <label for="ora-plecare">Ora plecare</label>
-            <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incheiere a programului</span>
-          </div>
-        </div>
-        <div class="row">
-          <h6 id="maxPontaj"></h6>
-        </div>
-        <div class="row sticky">
-          <div class="progress taller" id="workPBMain">
-            <div id="workPB" class="determinate" style="width: 0%"></div>
-          </div>
-        </div>
-        <div class="row">
-        <ul id="projTimesheet" class="collapsible">
+        <ul id="projProgress" class="collapsible">
         </ul>
         </div>
         <!-- <div class="row">
@@ -111,28 +83,16 @@
           </div>
         </div>
         <div class="row">
-          <a id="ponteazaBtn" class="waves-effect waves-light btn" onclick="ponteaza();">Ponteaza</a>
+          <a id="raporteazateazaBtn" class="waves-effect waves-light btn" onclick="raporteaza();">Ponteaza</a>
         </div>
                 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script>
-      function ponteaza() {
-        $("#data-pontaj").removeClass("valid invalid");
-        $("#ora-venire").removeClass("valid invalid");
-        $("#ora-plecare").removeClass("valid invalid");
-        let URLParams = getParameters(window.location.search);
-        let isEdit = false;
-        if (URLParams['edit'] !== undefined) {
-          try {
-            isEdit = true;
-          }
-          catch (err) {
-            console.log(err);
-          }
-        }
-        if (validatePontaj()) {
+      function raporteaza() {
+
+        if (0) {
           var formData = {
                 'action'            : 'addTimesheet',
                 'ziua'              : getSelectedDate($("#data-pontaj").val()),
@@ -170,34 +130,7 @@
       $(document).ready(function(){
         addLinks();
         $('.sidenav').sidenav();
-        var pontajDate = new Date();
-        let URLParams = getParameters(window.location.search);
-        if (URLParams['date'] !== undefined) {
-          try {
-            pontajDate = new Date(atob(URLParams['date']));
-          }
-          catch (err) {
-            console.log(err);
-          }
-        }
-          //$('.datepicker').datepicker();
-          //$('.timepicker').timepicker();
-          //$('.collapsible').collapsible();
-          var elems = document.querySelectorAll('.datepicker');
-          var instances = M.Datepicker.init(elems, {
-          defaultDate: pontajDate,    
-          setDefaultDate: true,
-          format: 'dd mmmm yyyy',
-          onClose: changeSelectedDate,
-          firstDay: 1,
-          i18n: {
-              weekdays: ['Duminica','Luni','Marti','Miercuri','Joi','Vineri','Sambata'],
-              weekdaysShort: ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'],
-              weekdaysAbbrev: ['D','L','M','M','J','V','S'],
-              months: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
-              monthsShort: ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec']
-          }
-        });
+        var reportDate = new Date();
         $('.collapsible').collapsible();
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
@@ -215,30 +148,6 @@
           $('select').formSelect();
         });
 
-        $("#ora-venire").change(function() {
-          updatePB();
-        });
-        $("#ora-plecare").change(function() {
-          updatePB();
-        });
-
-        //check if edit
-        if (URLParams['edit'] !== undefined) {
-          try {
-            let editDate = atob(URLParams['edit']);
-            $('#ponteazaBtn').html('Modifica');
-            populateEditPontaj(editDate);
-          }
-          catch (err) {
-            console.log(err);
-          }
-        } else {
-        var elems = document.querySelectorAll('.timepicker');
-        var instances = M.Timepicker.init(elems, {
-          twelveHour: false,
-          onCloseEnd: changeSelectedTime
-        });
-        }
       });  
     </script>
   </body>

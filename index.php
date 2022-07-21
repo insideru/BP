@@ -25,6 +25,9 @@ if ($account->authenticated) {
         } else if ($_GET['page']=="newProject"){
             require "proto-newproj.html";
             die;
+        } else if ($_GET['page']=="reports"){
+            require "proto-raport.html";
+            die;
         } else if ($_GET['page']=="logout"){
             logout();
             header("Location: /");
