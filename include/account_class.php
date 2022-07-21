@@ -1,15 +1,15 @@
 <?php
 
 class Account {
-    private int $id;
-	private int $collabID;
-    private int $group;
+    private $id;
+	private $collabID;
+    private $group;
 	private $username;
     public $authenticated;
     private $token;
 	public $permissions;
-	private string $firstName;
-	private string $lastName;
+	private $firstName;
+	private $lastName;
 
     public function __construct() {
         $this->id = NULL;
