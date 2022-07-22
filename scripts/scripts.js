@@ -1695,14 +1695,15 @@ function getLastDayOfMonth(month) {
 function hoursWorked(month, part) {
   let wrkDate = getSelectedDate("01 " + month).split('-');
   let res = [0, 0, 0];
+  let intervalStart, intervalEnd;
   if (part==1) {
     //1-15
-    let intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
-    let intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 15, 0, 0, 0);
+    intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
+    intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 15, 0, 0, 0);
   } else {
     //16-31
-    let intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
-    let intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1]), 0, 0, 0);
+    intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
+    intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1]), 0, 0, 0);
   }
   pontajeObjectArray.forEach(element => {
     if (element.date>=intervalStart && element.date<=intervalEnd) {
