@@ -81,7 +81,7 @@ function addReport (string $date, int $currID, int $currPhase, int $currMileston
     $query = "SELECT * FROM {$schema}.progress WHERE (project_id = :project_id) AND (phase_id = :phase_id) AND (milestone_id = :milestone_id) AND (date = :date)";
     
     /* Values array for PDO */
-    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $currID, ':phase_id' => $currPhase, ':milestone_id' => $currMilestone);
+    $values = array(':date' => date("Y-m-d", strtotime($date)), ':project_id' => $currID, ':phase_id' => $currPhase, ':milestone_id' => $currMilestone);
 
     /* Execute the query */
     try

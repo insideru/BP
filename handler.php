@@ -277,13 +277,11 @@ if ($_POST["action"]=="addSalary") {
 
 if ($_POST["action"]=="addReport") {
     $reports = $_POST['report'];
-    echo $_POST["date"];
     foreach ($reports as $report) { 
         $currID = $report['id'];
         $currPhase = $report['phase'];
         $currMilestone = $report['milestone'];
         $curProgress = substr($report['progress'], 0, strlen($report['progress'])-1);
-        echo $curProgress;
         echo addReport(date("Y-m-d", strtotime($_POST["date"])), $currID, $currPhase, $currMilestone, $curProgress);
     }
 }
