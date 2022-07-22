@@ -276,7 +276,7 @@ if ($_POST["action"]=="addSalary") {
 }
 
 if ($_POST["action"]=="addReport") {
-    $reports = json_decode($_POST['report']);
+    $reports = $_POST['report'];
     foreach ($reports as $report) {
         $currID = $report['id'];
         $currPhase = $report['phase'];
