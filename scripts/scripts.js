@@ -514,7 +514,7 @@ function changeRangeVal(rangeID, rangeValue) {
   for (let element of timesheetsObject) {
     if (element.id == rangeID.split('_')[0] && element.phase == rangeID.split('_')[1] && element.milestone == rangeID.split('_')[2])
     {
-      element[rangeID.split('_')[3]] = rangeValue;
+      element[rangeID.split('_')[3]] = rangeValue.substring(0, rangeValue.length-4);
       wrkdHours = calculateHours(rangeID.split('_')[0], rangeID.split('_')[1], rangeID.split('_')[2]);
       $("#" + `${rangeID.split('_')[0]}_${rangeID.split('_')[1]}_${rangeID.split('_')[2]}` + "_totalHours").html(wrkdHours != 1 ? wrkdHours + " ore" : wrkdHours + " ora");
     }
@@ -586,7 +586,7 @@ function initPercentageRange(elemID) {
     for (let element of reportObject) {
       if (element.id == slider.id.split('_')[0] && element.phase == slider.id.split('_')[1] && element.milestone == slider.id.split('_')[2])
       {
-        element['progress'] = values[handle];
+        element['progress'] = values[handle].substring(0, values[handle].length-1);
       }
     }
   });
