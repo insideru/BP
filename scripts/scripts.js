@@ -554,7 +554,7 @@ function initRange(elemID) {
         values: [0, 3, 6, 9, 12, 15],
         density: 6
   },
-  format: wNumb( { decimals: 1 })
+  format: wNumb( { decimals: 1, suffix: ' ore' })
   });
 
   slider.noUiSlider.on('update', function (values, handle) {
@@ -579,7 +579,7 @@ function initPercentageRange(elemID) {
         values: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         density: 11
   },
-  format: wNumb( { decimals: 1 })
+  format: wNumb( { decimals: 0, suffix: '%' })
   });
 
   slider.noUiSlider.on('update', function (values, handle) {
