@@ -126,7 +126,7 @@ function addReport (string $date, int $currID, int $currPhase, int $currMileston
     }
     
     /* Return the new ID */
-    return "Success:" . $pdo->lastInsertId();
+    echo "Success:" . $pdo->lastInsertId();
 }
 
 function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $milestone_id, int $activity_id, float $time) {
