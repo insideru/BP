@@ -104,7 +104,7 @@ function addReport (string $date, int $currID, int $currPhase, int $currMileston
 	}
 
 	if (count($fields)>0) {
-        $query = "UPDATE {$schema}.progress SET (collab_id = :collab_id) AND (progress = :progress) WHERE (project_id = :project_id) AND (phase_id = :phase_id) AND (milestone_id = :milestone_id) AND (date = :date)";
+        $query = "UPDATE {$schema}.progress SET collab_id = :collab_id, progress = :progress WHERE (project_id = :project_id) AND (phase_id = :phase_id) AND (milestone_id = :milestone_id) AND (date = :date)";
     } else {
         $query = "INSERT INTO {$schema}.progress (collab_id, project_id, phase_id, milestone_id, date, progress) VALUES (:collab_id, :project_id, :phase_id, :milestone_id, :date, :progress)";
     }
