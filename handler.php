@@ -275,6 +275,17 @@ if ($_POST["action"]=="addSalary") {
     echo addSalary((int)$_POST['collab_id'], (int)$_POST['hourly'], (int)$_POST['monthly'], $_POST['date']);
 }
 
+if ($_POST["action"]=="addReport") {
+    $reports = json_decode($_POST['report']);
+    foreach ($report as $reports) {
+        $currID = $report['id'];
+        $currPhase = $report['phase'];
+        $currMilestone = $report['milestone'];
+        $curProgress = substr($report['progress'], 0, strlen($report['progress'])-1);
+        addReport($_POST['date'], $currID, $currPhase, $currMilestone, $curProgress);
+    }
+}
+
 if ($_POST["action"]=="modifySalary") {
     echo modifySalary((int)$_POST['id'], (int)$_POST['hourly'], (int)$_POST['monthly'], $_POST['date']);
 }

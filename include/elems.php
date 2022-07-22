@@ -70,6 +70,65 @@ function deleteTimesheetEntry (string $date) {
     return "Success!";
 }
 
+function addReport (string $date, int $currID, int $currPhase, int $currMilestone, int $curProgress) {
+    /* Global $pdo object */
+    /** @var object $pdo */
+    global $pdo;
+    global $schema;
+    global $account;
+
+    /* Insert query template */
+    $query = "SELECT * FROM {$schema}.progress WHERE (project_id = :project_id) AND (phase_id = :phase_id) AND (milestone_id = :milestone_id) AND (date = :date)";
+    
+    /* Values array for PDO */
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $currID, ':phase_id' => $currPhase, ':milestone_id' => $currMilestone);
+
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+
+    $fields=array();
+
+	while ($row = $res->fetch(PDO::FETCH_ASSOC)) 
+    {
+		array_push($fields, $row);
+	}
+
+	if (count($fields)>0) {
+        $query = "UPDATE {$schema}.progress SET (collab_id = :collab_id) AND (progress = :progress) WHERE (project_id = :project_id) AND (phase_id = :phase_id) AND (milestone_id = :milestone_id) AND (date = :date)";
+    } else {
+        $query = "INSERT INTO {$schema}.progress (collab_id, project_id, phase_id, milestone_id, date, progress) VALUES (:collab_id, :project_id, :phase_id, :milestone_id, :date, :progress)";
+    }
+    
+    /* Values array for PDO */    
+    $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $currID, ':phase_id' => $currPhase, ':milestone_id' => $currMilestone, ':progress' => $curProgress);
+
+    /* Execute the query */
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute($values);
+    }
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    
+    /* Return the new ID */
+    return "Success:" . $pdo->lastInsertId();
+}
+
 function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $milestone_id, int $activity_id, float $time) {
     /* Global $pdo object */
     /** @var object $pdo */
