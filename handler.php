@@ -207,6 +207,10 @@ if ($_REQUEST["r"]=="getProjDetails") {
     echo json_encode($response);
 }
 
+if ($_REQUEST["r"]=="getProjReports") {
+    echo getProjectProgressReport($_REQUEST["proj"], $_REQUEST["phase"], $_REQUEST["milestone"]);
+}
+
 if ($_REQUEST["r"]=="init") {
     //trimitem toate datele de initalizare tabele
     $response = array();

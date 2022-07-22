@@ -12,6 +12,7 @@ if ($account->authenticated || $_POST["action"]=="login") {} else
 
 function addAttendance(string $date, string $start, string $end, int $edit = NULL) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -44,6 +45,7 @@ function addAttendance(string $date, string $start, string $end, int $edit = NUL
 
 function deleteTimesheetEntry (string $date) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -70,6 +72,7 @@ function deleteTimesheetEntry (string $date) {
 
 function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $milestone_id, int $activity_id, float $time) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -99,6 +102,7 @@ function addTimesheetEntry(string $date, int $project_id, int $phase_id, int $mi
 
 function getTimesheets (string $date = NULL) {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
     global $account;
@@ -134,6 +138,7 @@ function getTimesheets (string $date = NULL) {
 
 function getPontaje () {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
     global $account;
@@ -163,6 +168,7 @@ function getPontaje () {
 }
 
 function deleteTimesheet (string $date) {
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
     global $account;
@@ -189,6 +195,7 @@ function deleteTimesheet (string $date) {
 
 function verifyDate(string $date):bool {
 	/* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
     global $account;
@@ -221,6 +228,7 @@ function verifyDate(string $date):bool {
 
 function addHoliday(string $date, string $name) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -249,6 +257,7 @@ function addHoliday(string $date, string $name) {
 
 function getZileLibere() {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
     global $account;
@@ -274,6 +283,7 @@ function getZileLibere() {
 
 function addDaysoff (string $startDate, string $endDate, int $number) {
 	/* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -304,6 +314,7 @@ function addDaysoff (string $startDate, string $endDate, int $number) {
 
 function deleteDaysoff (string $startDate, int $number) {
 	/* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -333,6 +344,7 @@ function deleteDaysoff (string $startDate, int $number) {
 }
 
 function getDaysoff() {
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
     global $account;
@@ -363,6 +375,7 @@ function getDaysoff() {
 
 function getIDfromGUID (string $guid) {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -387,6 +400,7 @@ function getIDfromGUID (string $guid) {
 
 function renameName (string $table, string $oldName, string $newName) {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -409,6 +423,7 @@ function renameName (string $table, string $oldName, string $newName) {
 
 function getActivities() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -434,8 +449,37 @@ function getActivities() {
     return $fields;
 }
 
+function getProjectProgressReport(int $proj, int $phase, int $milestone) {
+    /* Global $pdo object */
+    /** @var object $pdo */
+    global $pdo;
+    global $schema;
+
+    $query = "SELECT TOP 1 progress FROM ${schema}.progress WHERE (project_id = {$proj} AND phase_id = {$phase} AND milestone_id = {$milestone}) ORDER BY date DESC";
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $retVal = 0;
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        $retVal = $row['progress'];
+    }
+    return $retVal;
+}
+
 function getProjects() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
     global $account;
@@ -466,6 +510,7 @@ function getProjects() {
 
 function getProjectInfo(int $project_id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -499,6 +544,7 @@ function getProjectInfo(int $project_id) {
 
 function getProjectPhases(int $project_id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -532,6 +578,7 @@ function getProjectPhases(int $project_id) {
 
 function getProjectMilestones(int $project_id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -565,6 +612,7 @@ function getProjectMilestones(int $project_id) {
 
 function getHolidays() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -592,6 +640,7 @@ function getHolidays() {
 
 function getCollabs() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 

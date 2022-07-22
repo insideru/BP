@@ -2,6 +2,7 @@
 require_once 'db.php';
 require_once 'account.php';
 
+/** @var object $account */
 global $account;
 $account->sessionLogin();
 
@@ -12,6 +13,7 @@ if (($account->authenticated) || $_POST["action"]=="login") { //&& $account->get
 
 function addProjCat(string $name) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -40,6 +42,7 @@ function addProjCat(string $name) {
 
 function getProjectBasic(int $project_id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -73,6 +76,7 @@ function getProjectBasic(int $project_id) {
 
 function getProjCat() {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -102,6 +106,7 @@ function getProjCat() {
 
 function addCollabCat(string $name) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -130,6 +135,7 @@ function addCollabCat(string $name) {
 
 function getCollabCat() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -157,6 +163,7 @@ function getCollabCat() {
 
 function addClient (string $name) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -185,6 +192,7 @@ function addClient (string $name) {
 
 function saveTemplate (int $type, string $name, string $data) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -240,6 +248,7 @@ function saveTemplate (int $type, string $name, string $data) {
 }
 
 function deleteTemplate (int $type, string $name) {
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
 
@@ -263,6 +272,7 @@ function deleteTemplate (int $type, string $name) {
 
 function getTemplates() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -290,6 +300,7 @@ function getTemplates() {
 
 function getClients() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -317,6 +328,7 @@ function getClients() {
 
 function addCollab (string $name, int $id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -345,6 +357,7 @@ function addCollab (string $name, int $id) {
 
 function addProject (array $basicData, int $proj_id = NULL) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -378,6 +391,7 @@ function addProject (array $basicData, int $proj_id = NULL) {
 
 function addProjectDetails (int $proj_id, array $detailsData) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -410,6 +424,7 @@ function addProjectDetails (int $proj_id, array $detailsData) {
 
 function addProjectPhases (int $proj_id, array $phaseData) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -442,6 +457,7 @@ function addProjectPhases (int $proj_id, array $phaseData) {
 
 function addProjectMilestones (int $proj_id, array $milestoneData) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -474,8 +490,8 @@ function addProjectMilestones (int $proj_id, array $milestoneData) {
 }
 
 function changeProjectState (int $proj_id) {
-
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -503,8 +519,8 @@ function changeProjectState (int $proj_id) {
 }
 
 function changeProjExternal (int $proj_id) {
-
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -532,8 +548,8 @@ function changeProjExternal (int $proj_id) {
 }
 
 function changeAccountDetails (string $accID, string $column, int $value) {
-
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -558,8 +574,8 @@ function changeAccountDetails (string $accID, string $column, int $value) {
 }
 
 function changeUserState (int $user_id) {
-
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -588,6 +604,7 @@ function changeUserState (int $user_id) {
 
 function addActivity (string $name, int $id) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -616,6 +633,7 @@ function addActivity (string $name, int $id) {
 
 function setProjectBudget (int $proj_id, int $new_budget) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -640,6 +658,7 @@ function setProjectBudget (int $proj_id, int $new_budget) {
 
 function setProjectDeadline (int $proj_id, string $deadline) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -664,6 +683,7 @@ function setProjectDeadline (int $proj_id, string $deadline) {
 
 function setProjectStartDate (int $proj_id, string $startdate) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -688,6 +708,8 @@ function setProjectStartDate (int $proj_id, string $startdate) {
 
 function getAllTimesheets() {
 	/* Global $pdo object */
+    /** @var object $account */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -718,6 +740,7 @@ function getAllTimesheets() {
 
 function getAttendance(string $date = NULL) {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
     global $account;
@@ -751,6 +774,7 @@ function getAttendance(string $date = NULL) {
 
 function getPermissions() {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -779,6 +803,7 @@ function getPermissions() {
 
 function getSalaries() {
 	/* Global $pdo object */
+    /** @var object $pdo */
 	global $pdo;
 	global $schema;
 
@@ -807,6 +832,7 @@ function getSalaries() {
 
 function addSalary(int $collab_id, int $hourly, int $monthly, string $date) {
         /* Global $pdo object */
+        /** @var object $pdo */
         global $pdo;
         global $schema;
     
@@ -836,6 +862,7 @@ function addSalary(int $collab_id, int $hourly, int $monthly, string $date) {
 
 function modifySalary(int $id, int $hourly, int $monthly, string $date) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -863,6 +890,7 @@ function modifySalary(int $id, int $hourly, int $monthly, string $date) {
 }
 
 function deleteHoliday (string $date) {
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
 
@@ -885,6 +913,7 @@ function deleteHoliday (string $date) {
 }
 
 function getAllDaysOff() {
+    /** @var object $pdo */
     global $pdo;
 	global $schema;
     global $account;
@@ -915,6 +944,7 @@ function getAllDaysOff() {
 
 function getAccounts () {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -942,6 +972,7 @@ function getAccounts () {
 
 function changePermissionItem(int $rowNo, string $columnName) {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 
@@ -966,6 +997,7 @@ function changePermissionItem(int $rowNo, string $columnName) {
 
 function addPermissionsGroup() {
     /* Global $pdo object */
+    /** @var object $pdo */
     global $pdo;
     global $schema;
 

@@ -29,6 +29,7 @@ permissionsPerCollab = new Object();
 parttimers = new Array();
 norme = new Object();
 daysOffObject = [];
+var reportObject = new Array();
 var retObject = new Object();
 var holidayArray = new Array();
 var detailNumber = 0;
@@ -48,7 +49,7 @@ $.fn.exists = function () {
 
 $.fn.redraw = function(){
   $(this).each(function(){
-    var redraw = this.offsetHeight;
+    let redraw = this.offsetHeight;
   });
 };
 
@@ -73,7 +74,7 @@ function arrayRemove(arr, value) {
 
 function array_move(arr, old_index, new_index) {
   if (new_index >= arr.length) {
-      var k = new_index - arr.length + 1;
+      let k = new_index - arr.length + 1;
       while (k--) {
           arr.push(undefined);
       }
@@ -93,6 +94,21 @@ function roundUp(num, precision) {
 }
 
 function removeProj(id) {
+  $('#project_'+id).remove();
+  let projID = id.split('_')[0];
+  let phaseID = id.split('_')[1];
+  let milestoneID = id.split('_')[2];
+  //timesheetsObject = arrayRemove(timesheetsObject, id);
+  timesheetsObject = timesheetsObject.filter(function(elem){ 
+    if (elem.id != projID && elem.phase != phaseID && elem.milestone != milestoneID)
+    {
+      return elem;
+    }
+  });
+  updatePB();
+}
+
+function removeProgressProj(id) {
   $('#project_'+id).remove();
   let projID = id.split('_')[0];
   let phaseID = id.split('_')[1];
@@ -217,7 +233,7 @@ function changeColabCategory(name) {
 }
 
 function changeProjState(proj_id) {
-  var formData = {
+  let formData = {
         'action'            : 'changeProjState',
         'proj_id'           : proj_id.substring(7)
     };
@@ -241,7 +257,7 @@ function changeProjState(proj_id) {
 }
 
 function changeProjExternal(proj_id) {
-  var formData = {
+  let formData = {
         'action'            : 'changeProjExternal',
         'proj_id'           : proj_id.substring(8)
     };
@@ -262,7 +278,7 @@ function changeProjExternal(proj_id) {
 }
 
 function changeUserState(proj_id) {
-  var formData = {
+  let formData = {
         'action'            : 'changeUserState',
         'user_id'           : proj_id.substring(7)
     };
@@ -320,7 +336,7 @@ function populateClients() {
 function populateCollabs() {
   if ($('#collabsTable').exists()) $('#collabsTable').html('');
   collabsObject.forEach(element => {
-    var bool = false;
+    let bool = false;
     accountsObject.forEach(elem => {
       if (elem.collab_id==element.id && elem.account_username!="") {
         bool = true;
@@ -508,7 +524,7 @@ function changeRangeVal(rangeID, rangeValue) {
 }
 
 function calculateHours (id, phase, milestone) {
-  var wrkdHours=0;
+  let wrkdHours=0;
   for (let element of timesheetsObject) {
     if ((element.id==id && element.phase == phase && element.milestone == milestone) || id=="toate" ? 1 : 0)
     {
@@ -523,7 +539,7 @@ function calculateHours (id, phase, milestone) {
 }
 
 function initRange(elemID) {
-  var slider = document.getElementById(elemID);
+  let slider = document.getElementById(elemID);
   noUiSlider.create(slider, {
   start: 0,
   step: 0.5,
@@ -547,6 +563,27 @@ function initRange(elemID) {
 });
 }
 
+function initPercentageRange(elemID) {
+  let slider = document.getElementById(elemID);
+  noUiSlider.create(slider, {
+  start: 0,
+  step: 1,
+  tooltips: true,
+  range: {
+      'min': 0,
+      'max': 100
+  },
+  connect: 'lower',
+  behaviour: 'none',
+  pips: {
+    mode: 'values',
+        values: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        density: 11
+  },
+  format: wNumb( { decimals: 1 })
+  });
+}
+
 function selectProject(projName) {
   //console.log('adaug proiectul ' + projName + ' care are idul ' + getDBidFromName(projName, "project"));
   $('#select1').html('');
@@ -565,7 +602,7 @@ function selectProject(projName) {
   if (page == "reports") fnctToCall = "validateAddReport";
   if (page == "ponteaza") fnctToCall = "validateAddTimesheet";
   //check if project has any phases and/or milestones
-  var formData = {
+  let formData = {
     'action'            : 'getPhasesAndMilestones',
     'proj_id'           : getDBidFromName(projName, "project")
   };
@@ -584,7 +621,8 @@ function selectProject(projName) {
             M.toast({html: 'Proiectul este deja adaugat!'});
             return;
           }
-          addNewProjTimesheet(projName, "", 0, "", 0);
+          if (page == "reports") addNewProjTimesheet(projName, "", 0, "", 0);
+          if (page == "ponteaza") addNewProjTimesheet(projName, "", 0, "", 0);
         }
         let contor = 1;
         if (projPhases.length > 0) {
@@ -604,7 +642,7 @@ function selectProject(projName) {
   });
 }
 
-function validateAddTimesheet() {
+function validateAdd() {
   let projName = $('#addProjDD').val();
   let phaseName = "";
   let phaseId = 0;
@@ -626,9 +664,56 @@ function validateAddTimesheet() {
   }
   if ($("#project_" + getDBidFromName(projName, "project") + `_${phaseId}_${milestoneId}`).exists()) {
     M.toast({html: 'Proiectul este deja adaugat!'});
-    return;
+    return 0;
   }
-  addNewProjTimesheet(projName, phaseName, phaseId, milestoneName, milestoneId);
+  return {
+    projName: projName,
+    phaseName: phaseName,
+    phaseId: phaseId,
+    milestoneName: milestoneName,
+    milestoneId: milestoneId
+  };
+}
+
+function validateAddReport() {
+  let det = validateAdd();
+  if (det.hasOwnProperty('projName')) {
+    addNewReport(det.projName, det.phaseName, det.phaseId, det.milestoneName, det.milestoneId);
+  }
+}
+
+function addNewReport(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
+  $.get(`handler.php?r=getProjReports&proj=${getDBidFromName(projName, "project")}&phase=${projPhaseId}&milestone=${projMilestoneId}`, function(data, status) {
+    console.log(data);
+    let curPrgrs = data;
+    let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
+    $('#projProgress').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProgressProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
+    $('#project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities" + '" class="row"></div></div>');
+    $("#project_" + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities").append('<div class="section"><h5>Procent terminare</h5></div><p><div id="' + getDBidFromName(projName, "project")  + `_${projPhaseId}_${projMilestoneId}` + '"></div></p>');
+    //initialize range slider
+    initPercentageRange(getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`);
+    let curSlider = `${getDBidFromName(projName, "project")}_${projPhaseId}_${projMilestoneId}`;
+    document.getElementById(curSlider).noUiSlider.set(curPrgrs);
+
+    let instance = M.Collapsible.getInstance($('.collapsible'));
+    //add report object
+    let tmSht = new Object();
+    tmSht['id'] = getDBidFromName(projName, "project");
+    tmSht['phase'] = projPhaseId;
+    tmSht['milestone'] = projMilestoneId;
+    reportObject.push(tmSht);
+    instance.open(reportObject.length - 1);
+    document.getElementById("addProjDD").value = "";
+    $('#select1').html('');
+    $('#select2').html('');
+  });
+}
+
+function validateAddTimesheet() {
+  let det = validateAdd();
+  if (det.hasOwnProperty('projName')) {
+    addNewProjTimesheet(det.projName, det.phaseName, det.phaseId, det.milestoneName, det.milestoneId);
+  }
 }
 
 function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
@@ -644,9 +729,9 @@ function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestone
   });
   //initialize range sliders
   
-  var instance = M.Collapsible.getInstance($('.collapsible'));
+  let instance = M.Collapsible.getInstance($('.collapsible'));
   //add timesheet object
-  var tmSht = new Object();
+  let tmSht = new Object();
   tmSht['id'] = getDBidFromName(projName, "project");
   tmSht['phase'] = projPhaseId;
   tmSht['milestone'] = projMilestoneId;
@@ -754,22 +839,22 @@ function validateDate (data) {
 }
 
 function validatePontaj () {
-  var data = $("#data-pontaj").val();
-  var valid = true;
+  let data = $("#data-pontaj").val();
+  let valid = true;
   if (!validateDate(data)) {
     valid = false;
     $("#data-pontaj").addClass("invalid");
   } else {
     $("#data-pontaj").addClass("valid");
   }
-  var oraVenire = $("#ora-venire").val();
+  let oraVenire = $("#ora-venire").val();
   if (!validateTime(oraVenire)) {
     valid = false;
     $("#ora-venire").addClass("invalid");
   } else {
     $("#ora-venire").addClass("valid");
   }
-  var oraPlecare = $("#ora-plecare").val();
+  let oraPlecare = $("#ora-plecare").val();
   if (!validateTime(oraPlecare)) {
     valid = false;
     $("#ora-plecare").addClass("invalid");
@@ -808,7 +893,7 @@ function validatePontaj () {
 }
 
 function validateConcediu () {
-  var valid = true;
+  let valid = true;
   if (!validateDate($("#startDate").val())) {
     valid = false;
     $("#startDate").addClass("invalid");
@@ -850,7 +935,7 @@ function validateConcediu () {
         return false;
       }
     }
-    var overlap = false;
+    let overlap = false;
     timesheetsArray.forEach(element => {
       if (compareDateRanges(d1, d2, element, element)) {
         overlap = true;
@@ -864,30 +949,11 @@ function validateConcediu () {
   return valid;
 }
 
-function getVars () {
-  var $_GET = {};
-    if(document.location.toString().indexOf('?') !== -1) {
-        var query = document.location
-                      .toString()
-                      // get the query string
-                      .replace(/^.*?\?/, '')
-                      // and remove any existing hash string (thanks, @vrijdenker)
-                      .replace(/#.*$/, '')
-                      .split('&');
-
-        for(var i=0, l=query.length; i<l; i++) {
-          var aux = decodeURIComponent(query[i]).split('=');
-          $_GET[aux[0]] = aux[1];
-        }
-    }
-  return $_GET;
-}
-
 function getNoDaysOff(data1, data2) {
-  var zileLibere = 0;
+  let zileLibere = 0;
   data1.setHours(0, 0, 0);
   data2.setHours(0, 0, 0);
-  for (var d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
+  for (let d = data1; d <= data2; d.setDate(d.getDate() + 1)) {
     if (d.getDay()>0 && d.getDay()<6 && !isInArray(holidayArray, d)) {
       zileLibere = zileLibere + 1;
     }
@@ -908,16 +974,16 @@ function changeSelectedDate() {
 }
 
 function changeSelectedTime () {
-  var oraVenire = $('#ora-venire').val();
-  var oraPlecare = $('#ora-plecare').val();
+  let oraVenire = $('#ora-venire').val();
+  let oraPlecare = $('#ora-plecare').val();
   if (validateTime(oraVenire) && validateTime(oraPlecare)) {
-    var d1 = new Date();
-    var d2 = new Date();
+    let d1 = new Date();
+    let d2 = new Date();
     d1.setHours(oraVenire.split(":")[0], oraVenire.split(":")[1], 0, 0);
     d2.setHours(oraPlecare.split(":")[0], oraPlecare.split(":")[1], 0, 0);
     if (d1>d2) { d2.setDate(d2.getDate() + 1); }
-    var wrkHours = Math.floor((d2-d1)/3600000);
-    var wrkMinutes = Math.floor(((d2-d1)-(wrkHours*3600000))/60000);
+    let wrkHours = Math.floor((d2-d1)/3600000);
+    let wrkMinutes = Math.floor(((d2-d1)-(wrkHours*3600000))/60000);
     workedTime = wrkHours * 60 + wrkMinutes;
     updateText(wrkHours, wrkMinutes);
   }
@@ -932,7 +998,7 @@ function buildEventsObject(eventsArray) {
 }
 
 function buildTimesheetCalendarEvents(eventsArray, projectsArray) {
-  var eventsObject = buildEventsObject(eventsArray);
+  let eventsObject = buildEventsObject(eventsArray);
   for(let key in eventsObject){
     let datedDate = new Date(key);
     datedDate.setHours(0, 0, 0);
@@ -992,7 +1058,7 @@ function editareWithDate (date) {
 }
 
 function populateEditPontaj (date) {
-  var formData = {
+  let formData = {
     'action'  : 'getPontajInfo',
     'date'    : date
   };
@@ -1054,7 +1120,7 @@ function deletePontaj (date) {
   if (!confirm("Orele pontate pentru aceasta zi vor fi sterse. Continua?")) {
     return;
   }
-  var formData = {
+  let formData = {
     'action'            : 'deleteTimesheets',
     'date'              : date
 };
@@ -1082,7 +1148,7 @@ function deleteConcediu (date, days, selDate) {
   if (!confirm("Concediul selectat va fi sters. Continua?")) {
     return;
   }
-  var formData = {
+  let formData = {
     'action'            : 'deleteDayoff',
     'days'              : days,
     'date'              : date.substring(7)
@@ -1144,7 +1210,7 @@ function initCalendar() {
     //$('#calendar').evoCalendar('removeCalendarEvent', activeEvent['id']);
   });
   //get pontaje for current user
-  var formData = {
+  let formData = {
     'action'            : 'getTimesheets',
   };
   $.ajax({
@@ -1187,7 +1253,7 @@ function updateText(ore, minute) {
 }
 
 function updatePB() {
-  var maxCurrentValue = calculateHours("toate") * 60;
+  let maxCurrentValue = calculateHours("toate") * 60;
   //var PBValue = Math.floor(maxCurrentValue);
   if (maxCurrentValue==0) return;
   if ($('#maxPontaj').text()!="") {
@@ -1201,10 +1267,10 @@ function updatePB() {
 }
 
 function validateAdduser () {
-  var newUsername = $("#userAdd").val();
-  var newPass1 = $("#userPass1").val();
-  var newPass2 = $("#userPass2").val();
-  var newRights = $("#userRights").val();
+  let newUsername = $("#userAdd").val();
+  let newPass1 = $("#userPass1").val();
+  let newPass2 = $("#userPass2").val();
+  let newRights = $("#userRights").val();
 
   if (newPass1!=newPass2) {
     $("#addUserError").html('Parolele nu sunt identice!');
@@ -1226,7 +1292,7 @@ function validateAdduser () {
     return;
   }
 
-  var formData = {
+  let formData = {
     'action'            : 'addNewUser',
     'collab_id'         : addNewUserID, 
     'username'          : newUsername,
@@ -1245,7 +1311,7 @@ function validateAdduser () {
       rcvData = JSON.parse(data);
       if (rcvData.newAccount.substring(0, 21) == "The new account ID is") {
         //a mers
-        var modalInstance = M.Modal.getInstance($('#newPontor'));
+        let modalInstance = M.Modal.getInstance($('#newPontor'));
         modalInstance.close();
         accountsObject = rcvData.accounts;
         $('#collabsTable').html("");
@@ -1268,7 +1334,7 @@ function validateAdduser () {
 function getCookie(cookiename) 
   {
   // Get name followed by anything except a semicolon
-  var cookiestring=RegExp(cookiename+"=[^;]+").exec(document.cookie);
+  let cookiestring=RegExp(cookiename+"=[^;]+").exec(document.cookie);
   // Return everything after the equal sign, or an empty string if the cookie name not found
   return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
   }
@@ -1281,7 +1347,7 @@ function renameName (curName, curTable) {
     return "Fail";
   }
   //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
-  var formData = {
+  let formData = {
     'action'        : 'reName',
     'table'         : curTable, 
     'oldname'       : curName,
@@ -1342,7 +1408,7 @@ function changePass (userID) {
     return "Fail";
   }
   //console.log("a bagat ceva! voi redenumi " + curName + " in " + response + " in tabela " + curTable);
-  var formData = {
+  let formData = {
     'action'        : 'changePass',
     'userid'        : userID, 
     'newpass'       : response
@@ -1380,7 +1446,7 @@ function changeConcediu (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  var formData = {
+  let formData = {
     'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_concediu",
@@ -1412,7 +1478,7 @@ function changeReport (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  var formData = {
+  let formData = {
     'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_report",
@@ -1444,7 +1510,7 @@ function changeRamase (accID, oldValue) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  var formData = {
+  let formData = {
     'action'    : 'changeAccountDetails',
     'id'        : accID, 
     'column'    : "zile_ramase",
@@ -1477,7 +1543,7 @@ function changeGroup (accID, oldValue) {
     return 0;
   }
   if (response > 0 && response <= permissionsObject.length) {
-    var formData = {
+    let formData = {
       'action'    : 'changeAccountDetails',
       'id'        : accID, 
       'column'    : "account_group",
@@ -1534,7 +1600,7 @@ function changeProjectBudget(projID, projBudget) {
     //a dat cancel sau a bagat fix acelasi lucru
     return "Fail";
   }
-  var formData = {
+  let formData = {
     'action'      : 'setProjectBudget',
     'proj_id'     : project_dbid, 
     'new_budget'  : response
@@ -1574,7 +1640,7 @@ function changeProjectStartDate (projID, projOldDate) {
 }
 
 function setProjectDeadline (newDate) {
-  var formData = {
+  let formData = {
     'action'      : 'setProjectDeadline',
     'proj_id'     : selProjID,
     'deadline'    : getSelectedDate(newDate)
@@ -1598,7 +1664,7 @@ function setProjectDeadline (newDate) {
 }
 
 function setProjectStartDate (newDate) {
-  var formData = {
+  let formData = {
     'action'      : 'setProjectStartDate',
     'proj_id'     : selProjID,
     'startdate'    : getSelectedDate(newDate)
@@ -1631,12 +1697,12 @@ function hoursWorked(month, part) {
   let res = [0, 0, 0];
   if (part==1) {
     //1-15
-    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 15, 0, 0, 0);
+    let intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 1, 0, 0, 0);
+    let intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, 15, 0, 0, 0);
   } else {
     //16-31
-    var intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
-    var intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1]), 0, 0, 0);
+    let intervalStart = new Date(wrkDate[2], Number(wrkDate[1])-1, 16, 0, 0, 0);
+    let intervalEnd = new Date(wrkDate[2], Number(wrkDate[1])-1, getLastDayOfMonth(wrkDate[1]), 0, 0, 0);
   }
   pontajeObjectArray.forEach(element => {
     if (element.date>=intervalStart && element.date<=intervalEnd) {
@@ -1663,7 +1729,7 @@ function resetSalaryForm() {
   $('#addMonthlySalary').removeClass("invalid");
   $('#addHourlySalary').val('');
   $('#addMonthlySalary').val('');
-  var instance = M.Datepicker.getInstance($('#addSalaryDate'));
+  let instance = M.Datepicker.getInstance($('#addSalaryDate'));
   instance.setDate(new Date());
   $('#addSalaryDate').val(instance.toString());
   populateSalaryTable(userID);
@@ -1689,7 +1755,7 @@ function addNewSalary(user_id) {
     $('#addMonthlySalary').removeClass("invalid");
   }
   
-  var formData = {
+  let formData = {
     'action'    : 'addSalary',
     'collab_id' : user_id, 
     'hourly'    : newHS,
@@ -1729,9 +1795,9 @@ function populateSalaryTable(user_id) {
         '<td class="input-field">'+
           '<input style="text-align:center;" type="text" id="modifySalaryDate_'+element.id+'_'+ contor +'" class="datepicker"></td>)'+
         '<td><a class="waves-effect waves-light btn btn-small" onclick="modifiySalary('+element.id+', '+ contor +')">Modifica</a></td>');
-        var elems = $('#modifySalaryDate_'+element.id+'_'+ contor++);
+        let elems = $('#modifySalaryDate_'+element.id+'_'+ contor++);
         let tmpDate = element.date.split('-');
-        var instances = M.Datepicker.init(elems, {
+        let instances = M.Datepicker.init(elems, {
         defaultDate: new Date(tmpDate[0], tmpDate[1]-1, tmpDate[2]),    
         setDefaultDate: true,
         format: 'dd mmmm yyyy',
@@ -1768,7 +1834,7 @@ function modifiySalary(id, contor) {
     $('#monthlySalary_'+id+'_'+contor).removeClass("invalid");
   }
   
-  var formData = {
+  let formData = {
     'action'    : 'modifySalary',
     'id'        : id,
     'hourly'    : newHS,
@@ -1819,7 +1885,7 @@ function populatePermissions () {
 }
 
 function changePermissions(column, row) {
-  var formData = {
+  let formData = {
     'action'    : 'changePermissionItem',
     'row'       : row, 
     'column'    : column
@@ -1843,7 +1909,7 @@ function changePermissions(column, row) {
 }
 
 function addPermissionGroup() {
-  var formData = {
+  let formData = {
     'action'    : 'addPermissionsGroup'
   };
   $.ajax({
@@ -2168,8 +2234,8 @@ function buildNorme() {
     tmpDate.setHours(0, 0, 0, 0);
     let curDate = new Date();
     curDate.setHours(0, 0, 0, 0);
-    var diffTime = curDate.getTime() - tmpDate.getTime();
-    var diffDays = diffTime / (1000 * 3600 * 24);
+    let diffTime = curDate.getTime() - tmpDate.getTime();
+    let diffDays = diffTime / (1000 * 3600 * 24);
     let zileConcediu = 0;
     for (let elem of accountsObject) {
       if (elem.collab_id == key) {
@@ -2358,7 +2424,7 @@ function saveTemplate(type) {
     }
   }
 
-  var formData = {
+  let formData = {
     'action'  : 'saveTemplate',
     'name'    : response,
     'type'    : type,
@@ -2470,7 +2536,7 @@ function deleteTemplate (name, firstLetter) {
     case "p": type = 1; break;
     case "m": type = 2; break;
   }
-  var formData = {
+  let formData = {
     'action'  : 'deleteTemplate',
     'name'    : name,
     'type'    : type
@@ -2649,7 +2715,7 @@ function checkNewProj(proj_id) {
     projMilestoneData.push(newElem);
   });
 
-  var formData = {
+  let formData = {
     'action'      : 'addToDB',
     'type'        : 'addProject',
     'proj_id'     : proj_id,
@@ -2681,7 +2747,7 @@ function getParameters(urlString) {
   let paramString = urlString.split('?')[1];
   let params = new URLSearchParams(paramString);
   let retObject = new Object();
-  for (var param of params.entries()) {
+  for (let param of params.entries()) {
       retObject[param[0]] = param[1];
   }
   return retObject;
@@ -2933,7 +2999,7 @@ function doFormStuff() {
   //reseteaza formul
   //$('form')[typeNo-1].reset();
 if (typeNo==7) {
-  var formData = {
+  let formData = {
       'action'            : 'addToDB',
       'type'              : type,
       'name'              : elemName.trim(),
@@ -2942,7 +3008,7 @@ if (typeNo==7) {
       'data'              : getSelectedDate(date)
   };
 } else {
-  var formData = {
+  let formData = {
       'action'            : 'addToDB',
       'type'              : type,
       'name'              : elemName.trim(),

@@ -61,7 +61,7 @@
 
       <div class="container">
         <div class="row">
-        <ul id="projProgress" class="collapsible">
+        <ul id="projProgress" class="collapsible expandable">
         </ul>
         </div>
         <!-- <div class="row">
@@ -130,8 +130,11 @@
       $(document).ready(function(){
         addLinks();
         $('.sidenav').sidenav();
-        var reportDate = new Date();
-        $('.collapsible').collapsible();
+        let reportDate = new Date();
+        let elem = document.querySelector('.collapsible.expandable');
+        let instance = M.Collapsible.init(elem, {
+          accordion: false
+        });
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
           initData = JSON.parse(data);
