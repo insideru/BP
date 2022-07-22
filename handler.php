@@ -282,7 +282,7 @@ if ($_POST["action"]=="addReport") {
         $currPhase = $report['phase'];
         $currMilestone = $report['milestone'];
         $curProgress = substr($report['progress'], 0, strlen($report['progress'])-1);
-        addReport(date("Y-m-d", strtotime($_POST["date"])), $currID, $currPhase, $currMilestone, $curProgress);
+        echo addReport(date("Y-m-d", strtotime($_POST["date"])), $currID, $currPhase, $currMilestone, $curProgress);
     }
 }
 
