@@ -109,7 +109,7 @@ function addReport (string $date, int $currID, int $currPhase, int $currMileston
         $query = "INSERT INTO {$schema}.progress (collab_id, project_id, phase_id, milestone_id, date, progress) VALUES (:collab_id, :project_id, :phase_id, :milestone_id, :date, :progress)";
     }
     
-    /* Values array for PDO */    
+    /* Values array for PDO */
     $values = array(':collab_id' => $account->getCollabID(), ':date' => date("Y-m-d", strtotime($date)), ':project_id' => $currID, ':phase_id' => $currPhase, ':milestone_id' => $currMilestone, ':progress' => $curProgress);
 
     /* Execute the query */

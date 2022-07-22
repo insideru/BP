@@ -692,7 +692,6 @@ function validateAddReport() {
 
 function addNewReport(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
   $.get(`handler.php?r=getProjReports&proj=${getDBidFromName(projName, "project")}&phase=${projPhaseId}&milestone=${projMilestoneId}`, function(data, status) {
-    console.log(data);
     let curPrgrs = data;
     let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
     $('#projProgress').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<a href="#!" class="secondary-content"><span class="badge" id="15_0_0_totalHours">0 ore</span><i class="material-icons red-text" onclick="removeProgressProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
