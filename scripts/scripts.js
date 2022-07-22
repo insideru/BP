@@ -110,6 +110,7 @@ function removeProj(id) {
 
 function removeProgressProj(id) {
   $('#project_'+id).remove();
+  console.log(id);
   let projID = id.split('_')[0];
   let phaseID = id.split('_')[1];
   let milestoneID = id.split('_')[2];
