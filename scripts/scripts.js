@@ -114,13 +114,12 @@ function removeProgressProj(id) {
   let phaseID = id.split('_')[1];
   let milestoneID = id.split('_')[2];
   //timesheetsObject = arrayRemove(timesheetsObject, id);
-  timesheetsObject = timesheetsObject.filter(function(elem){ 
+  reportObject = reportObject.filter(function(elem){ 
     if (elem.id != projID && elem.phase != phaseID && elem.milestone != milestoneID)
     {
       return elem;
     }
   });
-  updatePB();
 }
 
 function getProjectType (name) {
@@ -560,7 +559,7 @@ function initRange(elemID) {
 
   slider.noUiSlider.on('update', function (values, handle) {
     changeRangeVal(slider.id, values[handle]);
-});
+  });
 }
 
 function initPercentageRange(elemID) {
@@ -581,6 +580,15 @@ function initPercentageRange(elemID) {
         density: 11
   },
   format: wNumb( { decimals: 1 })
+  });
+
+  slider.noUiSlider.on('update', function (values, handle) {
+    for (let element of reportObject) {
+      if (element.id == slider.id.split('_')[0] && element.phase == slider.id.split('_')[1] && element.milestone == slider.id.split('_')[2])
+      {
+        element['progress'] = values[handle];
+      }
+    }
   });
 }
 
@@ -621,7 +629,7 @@ function selectProject(projName) {
             M.toast({html: 'Proiectul este deja adaugat!'});
             return;
           }
-          if (page == "reports") addNewProjTimesheet(projName, "", 0, "", 0);
+          if (page == "reports") addNewReport(projName, "", 0, "", 0);
           if (page == "ponteaza") addNewProjTimesheet(projName, "", 0, "", 0);
         }
         let contor = 1;
@@ -687,7 +695,7 @@ function addNewReport(projName, projPhaseName, projPhaseId, projMilestoneName, p
     console.log(data);
     let curPrgrs = data;
     let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
-    $('#projProgress').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProgressProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
+    $('#projProgress').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<a href="#!" class="secondary-content"><span class="badge"></span><i class="material-icons red-text" onclick="removeProgressProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
     $('#project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities" + '" class="row"></div></div>');
     $("#project_" + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities").append('<div class="section"><h5>Procent terminare</h5></div><p><div id="' + getDBidFromName(projName, "project")  + `_${projPhaseId}_${projMilestoneId}` + '"></div></p>');
     //initialize range slider
