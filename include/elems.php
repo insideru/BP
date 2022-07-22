@@ -455,7 +455,7 @@ function getProjectProgressReport(int $proj, int $phase, int $milestone) {
     global $pdo;
     global $schema;
 
-    $query = "SELECT TOP 1 progress FROM ${schema}.progress WHERE (project_id = {$proj} AND phase_id = {$phase} AND milestone_id = {$milestone}) ORDER BY date DESC";
+    $query = "SELECT progress FROM ${schema}.progress WHERE (project_id = {$proj} AND phase_id = {$phase} AND milestone_id = {$milestone}) ORDER BY date DESC LIMIT 1";
 
     try
     {
