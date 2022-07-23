@@ -181,8 +181,8 @@
   drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, "Executie");
   drawProjectProgressChart(`prjBuget_${prj.id}`, budgetUsed, "Bugetare");
   let pbraport = progressCompleted/budgetUsed;
-  if (pbraport>0,8 && pbraport<1) $(`proj_card_${prj.id}`).addClass('amber lighten-3');
-  if (pbraport<0,8) $(`proj_card_${prj.id}`).addClass('red lighten-3');
+  if (pbraport>0,8 && pbraport<1) $(`#proj_card_${prj.id}`).addClass('amber lighten-3');
+  if (pbraport<0,8) $(`#proj_card_${prj.id}`).addClass('red lighten-3');
       });
     });
   });
