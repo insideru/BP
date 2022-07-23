@@ -61,6 +61,7 @@ table tr.sorting-row td:last-child {
 .align-bottom {
   position: absolute;
   bottom: 0;
+  display: block;
 }
 
 .card .rounded {
