@@ -65,7 +65,7 @@
       let progressTotal = Math.ceil(res/prjList.length);
 
       $('#progressPBLabel').html(`${progressTotal}%`);
-      $('#progressPBLabel').css("width", progressTotal+"%");
+      $('#progressPB').css("width", `${progressTotal}%`);
     });
   });
 </script>
