@@ -153,10 +153,10 @@
   let progressCompleted = Math.floor(Math.random() * 100);
   let budgetUsed = Math.floor(Math.random() * 100);
   let barColor = '#008000';
+  let pbraport = progressCompleted/budgetUsed;
   if (pbraport>0.8 && pbraport<1) barColor = '#ffa500';
   if (pbraport<0.8) barColor = '#cc0000';
   drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, budgetUsed, "Executie", barColor);
-  let pbraport = progressCompleted/budgetUsed;
       });
     });
   }); 
