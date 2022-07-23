@@ -57,6 +57,8 @@
         progressReport[prj.id] = ({progress: prjProgress, multiplier: phaseNo * milestoneNo});
       });
 
+      console.log(progressReport);
+
       let res = 0;
       progressReport.forEach(element => {
         res+=element.progress/element.multiplier;
