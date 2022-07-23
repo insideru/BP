@@ -247,6 +247,9 @@
             $("#frameContent").load("admin-pages/clients.html", function() {});
             break;
         }
+        if (screen.width < 993) {
+          $('.sidenav').sidenav('close');
+        }
       }
 
       /*jSuites.loading.show();
