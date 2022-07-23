@@ -33,7 +33,7 @@
 <script>
   function drawProjectProgressChart(elemid, progress, label) {
     var options = {
-          series: [progress],
+      series: [progress],
           chart: {
           type: 'radialBar',
           offsetY: -20,
@@ -45,78 +45,45 @@
           radialBar: {
             startAngle: -90,
             endAngle: 90,
-             hollow: {
-              margin: 0,
-              size: '70%',
-              background: '#fff',
-              image: undefined,
-              imageOffsetX: 0,
-              imageOffsetY: 0,
-              position: 'front',
-              dropShadow: {
-                enabled: false,
-                top: 3,
-                left: 0,
-                blur: 4,
-                opacity: 0.24
-              }
-            },
             track: {
               background: "#e7e7e7",
               strokeWidth: '97%',
               margin: 5, // margin is in pixels
+              dropShadow: {
+                enabled: true,
+                top: 2,
+                left: 0,
+                color: '#999',
+                opacity: 1,
+                blur: 2
+              }
             },
-        
             dataLabels: {
-              show: true,
               name: {
-                offsetY: -10,
-                show: true,
-                color: '#888',
-                fontSize: '10px'
+                show: true
               },
               value: {
-                formatter: function(val) {
-                  return parseInt(val);
-                },
-                color: '#111',
-                fontSize: '20px',
-                show: true,
+                offsetY: -2,
+                fontSize: '22px'
               }
             }
+          }
+        },
+        grid: {
+          padding: {
+            top: -10
           }
         },
         fill: {
           type: 'gradient',
           gradient: {
-            shade: 'dark',
-            type: 'horizontal',
-            shadeIntensity: 0.5,
-            colorStops: [
-              {
-                offset: 0,
-                color: "#008000",
-                opacity: 1
-              },
-              {
-                offset: 50,
-                color: "#ffa500",
-                opacity: 1
-              },
-              {
-                offset: 100,
-                color: "#cc0000",
-                opacity: 1
-              }
-            ],
+            shade: 'light',
+            shadeIntensity: 0.4,
             inverseColors: false,
             opacityFrom: 1,
             opacityTo: 1,
-            stops: [0, 100]
-          }
-        },
-        stroke: {
-          lineCap: 'round'
+            stops: [0, 50, 53, 91]
+          },
         },
         labels: [label],
         };
