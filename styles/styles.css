@@ -59,9 +59,8 @@ table tr.sorting-row td:last-child {
   line-height: 16px;
 }
 .align-bottom {
-  position: absolute;
+  position: relative;
   bottom: 0;
-  width: 80%;
 }
 
 .card .rounded {
