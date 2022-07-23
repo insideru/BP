@@ -231,6 +231,7 @@ if ($_REQUEST["r"]=="init") {
         $response["attendance"] = getAttendance();
         $response['phases'] = getProjectPhases(0);
         $response['milestones'] = getProjectMilestones(0);
+        $response['progress'] = getProgress();
     } else {
         $response["collabs"] = getCollabs();
         $response["projects"] = getProjects();
