@@ -50,8 +50,8 @@
         if (milestoneNo == 0) milestoneNo = 1;
 
         let progress = 0;
-        prjProgress.forEach(progress => {
-          if (progress.project_id == prj.id) progress+=prjProgress.progress;
+        prjProgress.forEach(progElem => {
+          if (progElem.project_id == prj.id) progress+=progElem.progress;
         });
 
         progressReport[prj.id] = ({progress: prjProgress, multiplier: phaseNo * milestoneNo});
