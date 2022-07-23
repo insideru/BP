@@ -59,7 +59,7 @@ table tr.sorting-row td:last-child {
   line-height: 16px;
 }
 .align-bottom {
-  position: relative;
+  position: absolute;
   bottom: 0;
 }
 
