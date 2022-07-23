@@ -58,6 +58,10 @@ table tr.sorting-row td:last-child {
   font-size: 14px !important;
   line-height: 16px;
 }
+.align-bottom {
+  position: absolute;
+  bottom: 0;
+}
 
 .card .rounded {
   border-radius: 5px;
