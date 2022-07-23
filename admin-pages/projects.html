@@ -35,7 +35,7 @@
     var options = {
           series: [progress],
           chart: {
-          height: 80,
+          height: 160,
           type: 'radialBar',
           toolbar: {
             show: false
@@ -165,12 +165,12 @@
         <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
         <p></p><br>
         <div id="prj_${prj.id}"></div>
-        <div class=align-bottom>
+        <!-- <div class=align-bottom>
           <div>Progres<span class="right"">${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%</span></div>
           <div class="progress taller">
             <div class="determinate" style="width: ${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%"></div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>`);
