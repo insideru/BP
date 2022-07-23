@@ -731,8 +731,11 @@ function getProgress(int $project_id = NULL) {
     global $pdo;
     global $schema;
 
-    $project_id==NULL?$query = "SELECT * FROM $schema.progress ORDER BY date ASC":$query="SELECT * FROM $schema.progress WHERE project_id = $project_id ORDER BY date ASC";
-
+    if (!isset($project_id)) {
+        $query = "SELECT * FROM $schema.progress ORDER BY date ASC";
+    } else {
+        $query = "SELECT * FROM $schema.progress WHERE project_id = $project_id ORDER BY date ASC";
+    }
     try
     {
         $res = $pdo->prepare($query);
