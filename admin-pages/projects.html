@@ -31,61 +31,41 @@
 
 
 <script>
-  function drawProjectProgressChart(elemid, progress, label) {
+  function drawProjectProgressChart(elemid, progress, buget, label) {
     var options = {
-      series: [progress],
+      series: [{
+          data: [progress]
+        }, {
+          data: [buget]
+        }],
           chart: {
-          type: 'radialBar',
-          offsetY: -20,
-          sparkline: {
-            enabled: true
-          }
+          type: 'bar',
         },
         plotOptions: {
-          radialBar: {
-            startAngle: -90,
-            endAngle: 90,
-            track: {
-              background: "#e7e7e7",
-              strokeWidth: '97%',
-              margin: 5, // margin is in pixels
-              dropShadow: {
-                enabled: true,
-                top: 2,
-                left: 0,
-                color: '#999',
-                opacity: 1,
-                blur: 2
-              }
-            },
+          bar: {
+            horizontal: true,
             dataLabels: {
-              name: {
-                show: true
-              },
-              value: {
-                offsetY: -2,
-                fontSize: '22px'
-              }
-            }
+              position: 'top',
+            },
           }
         },
-        grid: {
-          padding: {
-            top: -10
+        dataLabels: {
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: '12px',
+            colors: ['#fff']
           }
         },
-        fill: {
-          type: 'gradient',
-          gradient: {
-            shade: 'light',
-            shadeIntensity: 0.4,
-            inverseColors: false,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [0, 50, 53, 91]
-          },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ['#fff']
         },
-        labels: [label],
+        tooltip: {
+          shared: true,
+          intersect: false
+        }
         };
 
         var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
@@ -155,12 +135,11 @@
   //let progressCompleted = Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier);
   let progressCompleted = Math.floor(Math.random() * 100);
   let budgetUsed = Math.floor(Math.random() * 100);
-  drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, "Executie");
-  drawProjectProgressChart(`prjBuget_${prj.id}`, budgetUsed, "Bugetare");
+  drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, budgetUsed, "Executie");
   let pbraport = progressCompleted/budgetUsed;
-  if (pbraport>0.8 && pbraport<1) $(`#proj_card_${prj.id}`).addClass('amber lighten-3');
-  if (pbraport<0.8) $(`#proj_card_${prj.id}`).addClass('red lighten-3');
+  /* if (pbraport>0.8 && pbraport<1) $(`#proj_card_${prj.id}`).addClass('amber lighten-3');
+  if (pbraport<0.8) $(`#proj_card_${prj.id}`).addClass('red lighten-3');*/
       });
     });
-  });
+  }); 
 </script>
