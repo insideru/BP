@@ -34,12 +34,15 @@
   function drawProjectProgressChart(elemid, progress, buget, label) {
     var options = {
       series: [{
-          data: [progress]
-        }, {
           data: [buget]
+        }, {
+          data: [progress]
         }],
           chart: {
           type: 'bar',
+          sparkline: {
+            enabled: true
+          }
         },
         plotOptions: {
           bar: {
@@ -65,7 +68,10 @@
         tooltip: {
           shared: true,
           intersect: false
-        }
+        },
+        xaxis: {
+          categories: ['Buget', 'Terminat'],
+        },
         };
 
         var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
