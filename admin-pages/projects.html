@@ -54,10 +54,8 @@
           if (progElem.project_id == prj.id) progress+=progElem.progress;
         });
 
-        progressReport[prj.id] = ({progress: prjProgress, multiplier: phaseNo * milestoneNo});
+        progressReport[prj.id] = ({progress: progress, multiplier: phaseNo * milestoneNo});
       });
-
-      console.log(progressReport);
 
       let res = 0;
       progressReport.forEach(element => {
