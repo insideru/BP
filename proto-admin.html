@@ -248,7 +248,8 @@
             break;
         }
         if (screen.width < 993) {
-          $('.sidenav').sidenav('close');
+          let sideBarInstance = M.Sidenav.getInstance($('.sidenav'));
+          sideBarInstance.close();
         }
       }
 
