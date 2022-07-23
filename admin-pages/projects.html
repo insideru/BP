@@ -31,7 +31,7 @@
 
 
 <script>
-  function drawProjectProgressChart(elemid, progress) {
+  function drawProjectProgressChart(elemid, progress, label) {
     var options = {
           series: [progress],
           chart: {
@@ -80,14 +80,14 @@
                 offsetY: -10,
                 show: true,
                 color: '#888',
-                fontSize: '17px'
+                fontSize: '10px'
               },
               value: {
                 formatter: function(val) {
                   return parseInt(val);
                 },
                 color: '#111',
-                fontSize: '36px',
+                fontSize: '20px',
                 show: true,
               }
             }
@@ -109,7 +109,7 @@
         stroke: {
           lineCap: 'round'
         },
-        labels: ['Percent'],
+        labels: [label],
         };
 
         var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
@@ -164,8 +164,8 @@
       <div class="card-content">
         <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
         <div class="row">
-          <div id="prjProgress_${prj.id}" class="col s6"></div>
           <div id="prjBuget_${prj.id}" class="col s6"></div>
+          <div id="prjProgress_${prj.id}" class="col s6"></div>
           <!-- <div class=align-bottom>
             <div>Progres<span class="right"">${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%</span></div>
             <div class="progress taller">
@@ -176,8 +176,8 @@
       </div>
     </div>
   </div>`);
-  drawProjectProgressChart(`prjProgress_${prj.id}`, Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier));
-  drawProjectProgressChart(`prjBuget_${prj.id}`, Math.floor(Math.random() * 100));
+  drawProjectProgressChart(`prjProgress_${prj.id}`, Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier), "Executie");
+  drawProjectProgressChart(`prjBuget_${prj.id}`, Math.floor(Math.random() * 100), "Bugetare");
       });
     });
   });
