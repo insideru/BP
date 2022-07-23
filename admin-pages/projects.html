@@ -163,14 +163,16 @@
     <div class="card rounded">
       <div class="card-content">
         <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
-        <div id="prjProgress_${prj.id}"></div>
-        <div id="prjBuget_${prj.id}"></div>
-        <!-- <div class=align-bottom>
-          <div>Progres<span class="right"">${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%</span></div>
-          <div class="progress taller">
-            <div class="determinate" style="width: ${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%"></div>
-          </div>
-        </div> -->
+        <div class="row">
+          <div id="prjProgress_${prj.id}" class="col s6"></div>
+          <div id="prjBuget_${prj.id}" class="col s6"></div>
+          <!-- <div class=align-bottom>
+            <div>Progres<span class="right"">${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%</span></div>
+            <div class="progress taller">
+              <div class="determinate" style="width: ${Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier)}%"></div>
+            </div>
+          </div> -->
+        </div>
       </div>
     </div>
   </div>`);
