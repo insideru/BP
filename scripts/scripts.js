@@ -735,7 +735,6 @@ function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestone
       }
   });
   //initialize range sliders
-  
   let instance = M.Collapsible.getInstance($('.collapsible'));
   //add timesheet object
   let tmSht = new Object();

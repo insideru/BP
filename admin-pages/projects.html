@@ -1,18 +1,71 @@
 <div class="row">
   <div class="card col s12 m4">
     <div class="card-content">
-      <span class="card-title bold" id="activeProjects">14</span>
-      <p>Proiecte active</p>
-      <div id="projectsProgressBar"><span class="right">24%</span></div>
+      <span class="card-title bold" id="activeProjects"></span>
+      <p id="activeProjectsLabel"></p>
+      <div id="projectsProgressBar"><span class="right" id="progressPBLabel"></span></div>
       <div class="progress taller" id="workPBMain">
-        <div id="workPB" class="determinate" style="width: 24%"></div>
+        <div id="progressPB" class="determinate" style="width: 0%"></div>
       </div>
+    </div>
+  </div>
+  <div class="card col s12 m4">
+    <div class="card-content">
+      <span class="card-title bold" id="">Placeholder</span>
+      <div id=""></div>
+    </div>
+  </div>
+  <div class="card col s12 m4">
+    <div class="card-content">
+      <span class="card-title bold" id="">Placeholder</span>
+      <div id=""></div>
     </div>
   </div>
 </div>
 
+
 <script>
   $(document).ready(function() {
+    $.get("handler.php?r=init", function(data, status) {
+      initData = JSON.parse(data);
+      let prjList = initData.projects;
+      let prjPhases = initData.phases;
+      let prjMilestones = initData.milestones;
+      let prjProgress = initData.prjProgress;
+      let progressReport = new Array();
 
+      $('#activeProjects').html(prjList.length);
+      prjList.length == 1?$('#activeProjectsLabel').html('Proiect activ'):$('#activeProjectsLabel').html('Proiecte active');
+      prjList.forEach(prj => {
+        let phaseNo = 0;
+        prjPhases.forEach(phase => {
+          if (phase.proj_id == prj.id) phaseNo++;
+        });
+        if (phaseNo == 0) phaseNo = 1;
+
+        let milestoneNo = 0;
+        prjMilestones.forEach(milestone => {
+          if (milestone.proj_id == prj.id) milestoneNo++;
+        });
+        if (milestoneNo == 0) milestoneNo = 1;
+
+        let progress = 0;
+        prjProgress.forEach(progress => {
+          if (progress.project_id == prj.id) progress+=prjProgress.progress;
+        });
+
+        progressReport[prj.id] = ({progress: prjProgress, multiplier: phaseNo * milestoneNo});
+      });
+
+      let res = 0;
+      progressReport.forEach(element => {
+        res+=element.progress/element.multiplier;
+      });
+
+      let progressTotal = Math.ceil(res/prjList.length);
+
+      $('#progressPBLabel').html(`${progressTotal}%`);
+      $('#progressPBLabel').css('width', `${progressTotal}%`)
+    });
   });
 </script>

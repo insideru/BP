@@ -725,4 +725,32 @@ function getCollabs() {
     return $fields;
 }
 
+function getProgress(int $project_id = NULL) {
+    /* Global $pdo object */
+    /** @var object $pdo */
+    global $pdo;
+    global $schema;
+
+    $project_id==NULL?$query = "SELECT * FROM $schema.progress ORDER BY date ASC":$query="SELECT * FROM $schema.progress WHERE project_id = $project_id ORDER BY date ASC";
+
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 ?>

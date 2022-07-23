@@ -238,6 +238,7 @@ if ($_REQUEST["r"]=="init") {
         $response["timesheets"] = getAllTimesheets();
         $response['phases'] = getProjectPhases(0);
         $response['milestones'] = getProjectMilestones(0);
+        $response['progress'] = getProgress();
     }
     echo json_encode($response);
 }
