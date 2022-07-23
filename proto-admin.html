@@ -247,8 +247,8 @@
             $("#frameContent").load("admin-pages/clients.html", function() {});
             break;
         }
-        console.log(screen.availWidth);
-        if (screen.availWidth < 993) {
+        console.log(window.innerWidth);
+        if (window.innerWidth < 993) {
           let sideBarInstance = M.Sidenav.getInstance($('.sidenav'));
           sideBarInstance.close();
         }
