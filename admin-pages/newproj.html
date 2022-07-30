@@ -236,7 +236,7 @@
             projClients.push({value: element.id, text: element.name});
           });
           
-          jSuites.dropdown(document.getElementById('projClient'), {
+          let DD = jSuites.dropdown(document.getElementById('projClient'), {
             data: projClients,
             newOptions: true,
             autocomplete: true,
@@ -262,6 +262,7 @@
                         // Set the item id from the number sent by the remote server
                         instance.setId(item, idFromTheServer.substring(8));
                         clientsObject.push({id: idFromTheServer.substring(8), name: item.text.trim()});
+                        DD.setValue(idFromTheServer.substring(8));
                       }
                   },
                   error: function(errData) {

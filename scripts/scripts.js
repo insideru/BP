@@ -2695,8 +2695,10 @@ function checkNewProj(proj_id) {
     let newElem = Object.assign({}, element);
     delete newElem.number;
     newElem.val = $('#detailValue_' + Number(element.number)).val();
-    if (newElem.val.search('\n')>-1) {
-      newElem.val.replace(/(\r\n|\r|\n)/g, '<br>');
+    if (typeof (newElem.val) === String) {
+      if (newElem.val.search('\n')>-1) {
+        newElem.val.replace(/(\r\n|\r|\n)/g, '<br>');
+      }
     }
     projDetailData.push(newElem);
   });
