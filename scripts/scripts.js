@@ -1973,7 +1973,7 @@ function calculateSalaries(date) {
     let curDate = new Date(element.date);
     curDate.setHours(0, 0, 0, 0);
     //verificam daca e in range
-    if (curDate >= wrkDate && curDate<endDate) {
+    if (curDate >= wrkDate && curDate<endDate && element.activity_id!=36) {
       //nu a mai fost tipul asta, facem un array unde sa adaugam
       if (addedTimesheets[element.collab_id] === undefined) {
         addedTimesheets[element.collab_id] = new Object();
@@ -1992,7 +1992,6 @@ function calculateSalaries(date) {
     for(let currentDate in addedTimesheets[key]) {
       let curDate = new Date(currentDate);
       curDate.setHours(0, 0, 0, 0);
-      let bonus = 1;
       let norma = 8;
       let cat = "";
 
@@ -2050,25 +2049,25 @@ function calculateSalaries(date) {
     }
     let workDate = new Date(element.startdate);
     workDate.setHours(0, 0, 0, 0);
-    let startDate = new Date(element.startdate);
-    startDate.setHours(0, 0, 0, 0);
-    let endDate = new Date(element.enddate);
+    let DOStartDate = new Date(element.startdate);
+    DOStartDate.setHours(0, 0, 0, 0);
+    let DOEndDate = new Date(element.enddate);
 
-    while (startDate <= workDate && endDate >= workDate) {
+    while (DOStartDate <= workDate && DOEndDate >= workDate) {
       if ((workDate.getDay()>0 && workDate.getDay()<6) && (!isInArray(holidayArray, workDate))) {
         //zi de concediu platita
         if (workDate >= wrkDate && workDate<midDate) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array();
           }
-          retObject[element.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat:'concediu'});
+          retObject[element.collab_id].push({date: new Date(workDate), time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 1, cat:'concediu'});
         }
       
         if (workDate >= midDate && workDate<endDate) {
           if (element.collab_id in retObject === false ) {
             retObject[element.collab_id] = new Array();
           }
-          retObject[element.collab_id].push({date: workDate, time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat:'concediu'});
+          retObject[element.collab_id].push({date: new Date(workDate), time: norma, cost: getHourlySalary(element.collab_id, workDate), monthly: getMonthlySalary(element.collab_id, workDate), half: 2, cat:'concediu'});
         }
       }
       workDate.setDate(workDate.getDate()+1);
@@ -2119,6 +2118,7 @@ function calculateSalaries(date) {
 }
 
 function populateSalaries (salaries, monthlyDate) {
+  console.log(salaries);
   let collabsAdded = [];
   const keys = Object.keys(salaries);
   let h1total = 0;

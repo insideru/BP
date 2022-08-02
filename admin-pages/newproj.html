@@ -212,7 +212,7 @@
 
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
-          initData = JSON.parse(data);
+          let initData = JSON.parse(data);
           //clientsObject = initData.clients;
           //collabCatsObject = initData.collabCats;
           //projCatsObject = initData.projCats;
@@ -227,6 +227,15 @@
             data: projCats,
             onchange: function(element, index) {
               //idul selectat e Object.keys(index.value)[0];
+              //numele selectat e index.value[Object.keys(index.value)[0]]
+              templates.forEach(element => {
+                if (element.name == index.value[Object.keys(index.value)[0]]) 
+                { 
+                  loadTemplate(element.id);
+                } else {
+                  resetTemplate(0);
+                }
+              });
             },
             //width:'280px'
           });
