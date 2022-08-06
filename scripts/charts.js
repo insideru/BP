@@ -16,7 +16,7 @@ function drawProjectsChart () {
         let projActualTime = buildProjectWorkHours(element.id, element.budget);
         let projName = element.name;
         let projBudget = Number(element.budget);
-        let projChartData = new Object();
+        let projChartData = {};
 
         if (projBudget == 0) {
           projChartData = {

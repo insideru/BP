@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$user = 'r52771bric_worktracker';
-$passwd = '43ypT]EhQY!i';
-$schema = 'r52771bric_bp';
+$user = 'localhost';
+$passwd = 'localhost-pass';
+$schema = 'bp';
 $pdo = NULL;
 $dsn = 'mysql:host=' . $host . ';dbname=' . $schema;
 

@@ -402,8 +402,6 @@ public function login(string $username, string $passwd, int $remember): bool
 			$this->collabID = intval($row['collab_id']);
 			$this->username = $username;
 			$this->authenticated = TRUE;
-			$this->firstName = explode(" ", $row['name'])[0];
-			$this->lastName = explode(" ", $row['name'])[1];
 			/* Register the current Sessions on the database */
 			$this->registerLoginSession();
 

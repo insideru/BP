@@ -712,6 +712,7 @@ function getAllTimesheets() {
     /** @var object $pdo */
 	global $pdo;
 	global $schema;
+    global $account;
 
 	$query = 'SELECT * FROM '.$schema.'.timesheets ORDER BY date ASC';
 	
@@ -730,7 +731,7 @@ function getAllTimesheets() {
 
 	while ($row = $res->fetch(PDO::FETCH_ASSOC))
     {
-        if (($account->permissions['external'] && $row['external']) || ($account->permissions['admin']) || (!$row['external'])) {
+        if (($account->permissions['external']??0 && $row['external'])??0 || ($account->permissions['admin'])??0 || (!$row['external']??0)) {
 		    array_push($fields, $row);
         }
 	}
