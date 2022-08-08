@@ -57,7 +57,7 @@ function drawProjectsChart () {
         }
       ],
         chart: {
-        height: chartHeight>100?chartHeight:100,
+        height: chartHeight>140?chartHeight:140,
         type: 'bar',
         toolbar: {
           show: false
