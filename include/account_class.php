@@ -94,11 +94,12 @@ public function isNameValid(string $name): bool {
 	{
 		$valid = FALSE;
 	}
+	
+	/* You can add more checks here 
 	if (!ctype_alnum($name)) {
 		$valid = FALSE;
 	}
-	
-	/* You can add more checks here */
+	*/
 	
 	return $valid;
 }
