@@ -4,3 +4,4 @@ styles/.DS_Store
 include/db.php
 .idea
 .gitignore
+admin.php

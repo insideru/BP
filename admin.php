@@ -1,8 +1,8 @@
 <?php
 require_once './include/account.php';
 
-$username = 'adrian';
-$passwd = 'barbosu2022';
+$username = 'admin';
+$passwd = 'erp_brickart';
 $group = 0;
 $collab_id = 0;
 

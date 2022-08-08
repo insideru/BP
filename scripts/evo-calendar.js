@@ -803,8 +803,9 @@
         if(_.options.calendarEvents != null) { // For event indicator (dots)
             _.buildEventIndicator();
         }
-
-        buildMonthlyData(title);
+        if (settingsElement.arataOreLucrate == 1) {
+            buildMonthlyData(title);
+        }
         $('.day').each(function(i, obj) {
             if ($(this).find('.type-Predari').length !== 0) {
               $(this).addClass('predare');

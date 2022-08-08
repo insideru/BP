@@ -42,6 +42,7 @@ var templates = new Array();
 var defDetlTmplt ="", defPhaseTmplt = "", defMlstnTmplt = "";
 var editProject = 0;
 var isAdmin = false;
+var settingsElement = {};
 
 $.fn.exists = function () {
     return this.length !== 0;
@@ -105,6 +106,7 @@ function removeProj(id) {
       return elem;
     }
   });
+  if (document.getElementById("projTimesheet").children.length == 0) $('#timesheetsRow').addClass('hide');
   updatePB();
 }
 
@@ -120,6 +122,7 @@ function removeProgressProj(id) {
       return elem;
     }
   });
+  if (document.getElementById("projProgress").children.length == 0) $('#reportRow').addClass('hide');
 }
 
 function getProjectType (name) {
@@ -491,18 +494,18 @@ function getFullDate(selectedDate) {
 
   //luna o transformam in numar
   switch (dateArray[1].slice(0,3)) {
-      case '01'  : luna = "Ianuarie"; break;
-      case '02'  : luna = "Februarie"; break;
-      case '03'  : luna = "Martie"; break;
-      case '04'  : luna = "Aprilie"; break;
-      case '05'  : luna = "Mai"; break;
-      case '06'  : luna = "Iunie"; break;
-      case '07'  : luna = "Iulie"; break;
-      case '08'  : luna = "August"; break;
-      case '09'  : luna = "Septembrie"; break;
-      case '10'  : luna = "Octombrie"; break;
-      case '11'  : luna = "Noiembrie"; break;
-      case '12'  : luna = "Decembrie"; break;
+    case '01'  : luna = "Ianuarie"; break;
+    case '02'  : luna = "Februarie"; break;
+    case '03'  : luna = "Martie"; break;
+    case '04'  : luna = "Aprilie"; break;
+    case '05'  : luna = "Mai"; break;
+    case '06'  : luna = "Iunie"; break;
+    case '07'  : luna = "Iulie"; break;
+    case '08'  : luna = "August"; break;
+    case '09'  : luna = "Septembrie"; break;
+    case '10'  : luna = "Octombrie"; break;
+    case '11'  : luna = "Noiembrie"; break;
+    case '12'  : luna = "Decembrie"; break;
   }
 
   //anul e ultima
@@ -540,21 +543,21 @@ function calculateHours (id, phase, milestone) {
 function initRange(elemID) {
   let slider = document.getElementById(elemID);
   noUiSlider.create(slider, {
-  start: 0,
-  step: 0.5,
-  tooltips: true,
-  range: {
+    start: 0,
+    step: 0.5,
+    tooltips: true,
+    range: {
       'min': 0,
       'max': 15
-  },
-  connect: 'lower',
-  behaviour: 'none',
-  pips: {
-    mode: 'values',
-        values: [0, 3, 6, 9, 12, 15],
-        density: 6
-  },
-  format: wNumb( { decimals: 1, suffix: ' ore' })
+      },
+    connect: 'lower',
+    behaviour: 'none',
+    pips: {
+      mode: 'values',
+      values: [0, 3, 6, 9, 12, 15],
+      density: 6
+      },
+    format: wNumb({ decimals: 1, suffix: ' ore' })
   });
 
   slider.noUiSlider.on('update', function (values, handle) {
@@ -629,8 +632,14 @@ function selectProject(projName) {
             M.toast({html: 'Proiectul este deja adaugat!'});
             return;
           }
-          if (page == "reports") addNewReport(projName, "", 0, "", 0);
-          if (page == "ponteaza") addNewProjTimesheet(projName, "", 0, "", 0);
+          if (page == "reports") {
+            addNewReport(projName, "", 0, "", 0);
+            $('#reportRow').removeClass('hide');
+          }
+          if (page == "ponteaza") {
+            addNewProjTimesheet(projName, "", 0, "", 0);
+            $('#timesheetsRow').removeClass('hide');
+          }
         }
         let contor = 1;
         if (projPhases.length > 0) {
@@ -724,6 +733,7 @@ function validateAddTimesheet() {
 }
 
 function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
+  $('#timesheetsRow').removeClass('hide');
   let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
   $('#projTimesheet').append('<li id="project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '"><div class="collapsible-header"><i class="material-icons">filter_drama</i>' + titleName + '<span class="badge" id="' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_totalHours" + '">0 ore</span><a href="#!" class="secondary-content"><i class="material-icons red-text" onclick="removeProj(\'' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '\');">remove_circle</i></a></div></li>');
   $('#project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities" + '" class="row"></div></div>');
@@ -853,20 +863,24 @@ function validatePontaj () {
   } else {
     $("#data-pontaj").addClass("valid");
   }
-  let oraVenire = $("#ora-venire").val();
-  if (!validateTime(oraVenire)) {
-    valid = false;
-    $("#ora-venire").addClass("invalid");
-  } else {
-    $("#ora-venire").addClass("valid");
+
+  if (settingsElement.cereOrar == 1) {
+    let oraVenire = $("#ora-venire").val();
+    if (!validateTime(oraVenire)) {
+      valid = false;
+      $("#ora-venire").addClass("invalid");
+    } else {
+      $("#ora-venire").addClass("valid");
+    }
+    let oraPlecare = $("#ora-plecare").val();
+    if (!validateTime(oraPlecare)) {
+      valid = false;
+      $("#ora-plecare").addClass("invalid");
+    } else {
+      $("#ora-plecare").addClass("valid");
+    }
   }
-  let oraPlecare = $("#ora-plecare").val();
-  if (!validateTime(oraPlecare)) {
-    valid = false;
-    $("#ora-plecare").addClass("invalid");
-  } else {
-    $("#ora-plecare").addClass("valid");
-  }
+
   if (validateDate(data)) {
     daysoffArray.forEach(element => {
       dt = new Date(data);
@@ -890,9 +904,11 @@ function validatePontaj () {
       valid = false;
       M.toast({html: 'Alege cel putin o activitate la care ai lucrat!'});
     }
-    if (calculateHours("toate") * 60 > workedTime) {
-      valid = false;
-      M.toast({html: 'Pontajul depaseste perioada de lucru aleasa!'});
+    if (settingsElement.cereOrar == 1) {
+      if (calculateHours("toate") * 60 > workedTime) {
+        valid = false;
+        M.toast({html: 'Pontajul depaseste perioada de lucru aleasa!'});
+      }
     }
   }
   return valid;

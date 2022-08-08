@@ -8,8 +8,11 @@ try {
     $account->sessionLogin();
 } catch (Exception $e) {
 }
-
-if (!$account->authenticated && $_POST["action"]!="login") die ();
+$isLogin = false;
+if (isset($_POST['action'])) {
+    if ($_POST['action']=='login') { $isLogin = true; }
+}
+if (!$account->authenticated && !$isLogin) { die (); }
 
 if (isset($_POST['action'])) {
     if ($_POST['action']=="login") {
@@ -244,68 +247,75 @@ if (isset($_POST['action'])) {
     }
 }
 
-if ($_REQUEST["r"]=="getProjDetails") {
-    $response = array();
-    $response["basic"] = getProjectBasic($_REQUEST["proj"]);
-    $response["info"] = getProjectInfo($_REQUEST["proj"]);
-    $response["phases"] = getProjectPhases($_REQUEST["proj"]);
-    $response["milestones"] = getProjectMilestones($_REQUEST["proj"]);
-    echo json_encode($response);
-}
+if (isset($_REQUEST["r"])) {
 
-if ($_REQUEST["r"]=="getProjReports") {
-    echo getProjectProgressReport($_REQUEST["proj"], $_REQUEST["phase"], $_REQUEST["milestone"]);
-}
-
-if ($_REQUEST["r"]=="init") {
-    //trimitem toate datele de initalizare tabele
-    $response = array();
-    if ($account->permissions['admin']) {
-        $response["clients"] = getClients();
-        $response["collabCats"] = getCollabCat();
-        $response["projCats"] = getProjCat();
-        $response["collabs"] = getCollabs();
-        $response["projects"] = getProjects();
-        $response["activities"] = getActivities();
-        $response["holidays"] = getHolidays();
-        $response["accounts"] = getAccounts();
-        $response["timesheets"] = getAllTimesheets();
-        $response["salaries"] = getSalaries();
-        $response["permissions"] = getPermissions();
-        $response["daysoff"] = getAllDaysOff();
-        $response["templates"] = getTemplates();
-        $response["attendance"] = getAttendance();
-        $response['phases'] = getProjectPhases(0);
-        $response['milestones'] = getProjectMilestones(0);
-        $response['progress'] = getProgress();
-    } else {
-        $response["collabs"] = getCollabs();
-        $response["projects"] = getProjects();
-        $response["activities"] = getActivities();
-        $response["timesheets"] = getAllTimesheets();
-        $response['phases'] = getProjectPhases(0);
-        $response['milestones'] = getProjectMilestones(0);
-        $response['progress'] = getProgress();
+    if ($_REQUEST["r"]=="getProjDetails") {
+        $response = array();
+        $response["basic"] = getProjectBasic($_REQUEST["proj"]);
+        $response["info"] = getProjectInfo($_REQUEST["proj"]);
+        $response["phases"] = getProjectPhases($_REQUEST["proj"]);
+        $response["milestones"] = getProjectMilestones($_REQUEST["proj"]);
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
-if ($_REQUEST["r"]=="holidays") {    
-    $response = array();
-    $response["holidays"] = getHolidays();
-    $response["daysoff"] = getDaysoff();
-    $response["pontaje"] = getPontaje();
-    echo json_encode($response);
-}
+    if ($_REQUEST["r"]=="getProjReports") {
+        echo getProjectProgressReport($_REQUEST["proj"], $_REQUEST["phase"], $_REQUEST["milestone"]);
+    }
 
-if ($_REQUEST["r"]=="concediu") {    
-    $response = array();
-    $response["holidays"] = getHolidays();
-    $response["concediu"] = getZileLibere();
-    echo json_encode($response);
-}
+    if ($_REQUEST["r"]=="init") {
+        //trimitem toate datele de initalizare tabele
+        $response = array();
+        if ($account->permissions['admin']) {
+            $response["clients"] = getClients();
+            $response["collabCats"] = getCollabCat();
+            $response["projCats"] = getProjCat();
+            $response["collabs"] = getCollabs();
+            $response["projects"] = getProjects();
+            $response["activities"] = getActivities();
+            $response["holidays"] = getHolidays();
+            $response["accounts"] = getAccounts();
+            $response["timesheets"] = getAllTimesheets();
+            $response["salaries"] = getSalaries();
+            $response["permissions"] = getPermissions();
+            $response["daysoff"] = getAllDaysOff();
+            $response["templates"] = getTemplates();
+            $response["attendance"] = getAttendance();
+            $response['phases'] = getProjectPhases(0);
+            $response['milestones'] = getProjectMilestones(0);
+            $response['progress'] = getProgress();
+        } else {
+            $response["collabs"] = getCollabs();
+            $response["projects"] = getProjects();
+            $response["activities"] = getActivities();
+            $response["timesheets"] = getAllTimesheets();
+            $response['phases'] = getProjectPhases(0);
+            $response['milestones'] = getProjectMilestones(0);
+            $response['progress'] = getProgress();
+        }
+        echo json_encode($response);
+    }
 
-if ($_REQUEST["r"]=="deleteHoliday") {    
-    $date=$_GET['date'];
-    echo deleteHoliday($date);
+    if ($_REQUEST["r"]=="holidays") {    
+        $response = array();
+        $response["holidays"] = getHolidays();
+        $response["daysoff"] = getDaysoff();
+        $response["pontaje"] = getPontaje();
+        echo json_encode($response);
+    }
+
+    if ($_REQUEST["r"]=="concediu") {    
+        $response = array();
+        $response["holidays"] = getHolidays();
+        $response["concediu"] = getZileLibere();
+        echo json_encode($response);
+    }
+
+    if ($_REQUEST["r"]=="deleteHoliday") {    
+        $date=$_GET['date'];
+        echo deleteHoliday($date);
+    }
+
+    if ($_REQUEST["r"]=="getSettings") {
+        echo json_encode(getSettings());
+    }
 }

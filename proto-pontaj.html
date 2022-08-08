@@ -5,11 +5,11 @@
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link rel="stylesheet" href="styles/materialize.css">
     <link href="styles/nouislider.css" rel="stylesheet">
-    <script src="scripts/nouislider.min.js"></script>
+    <script src="scripts/nouislider.min?v=1000.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-    <script src="scripts/wNumb.min.js"></script>
+    <script src="scripts/wNumb.min?v=1000.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
   <body>
@@ -68,7 +68,7 @@
             <span class="helper-text" data-error="Alege o data corecta" data-success="">Alege ziua pentru care vrei sa pontezi</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="cereOrar">
           <div class="input-field col s6">
             <input id="ora-venire" type="text" class="timepicker">
             <label for="ora-venire">Ora venire</label>
@@ -80,15 +80,15 @@
             <span class="helper-text" data-error="Alege o ora corecta" data-success="">Alege ora de incheiere a programului</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="maxPontajRow">
           <h6 id="maxPontaj"></h6>
         </div>
-        <div class="row sticky">
+        <div class="row sticky" id="pontajPB">
           <div class="progress taller" id="workPBMain">
             <div id="workPB" class="determinate" style="width: 0%"></div>
           </div>
         </div>
-        <div class="row">
+        <div class="row hide" id="timesheetsRow">
         <ul id="projTimesheet" class="collapsible">
         </ul>
         </div>
@@ -116,7 +116,7 @@
                 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script type="text/javascript" src="scripts/scripts?v=1000.js"></script>
     <script>
       function ponteaza() {
         $("#data-pontaj").removeClass("valid invalid");
@@ -133,12 +133,20 @@
           }
         }
         if (validatePontaj()) {
-          var formData = {
+          let oraVenire, oraPlecare;
+          if (settingsElement.cereOrar == 1) {
+            oraVenire = $("#ora-venire").val();
+            oraPlecare = $("#ora-plecare").val();
+          } else {
+            oraVenire = '10:30';
+            oraPlecare = '19:30';
+          }
+          const formData = {
                 'action'            : 'addTimesheet',
                 'ziua'              : getSelectedDate($("#data-pontaj").val()),
                 'edit'              : $('#ponteazaBtn').html().substring(0,8)=='Modifica'?1:0,
-                'oraVenire'         : $("#ora-venire").val(),
-                'oraPlecare'        : $("#ora-plecare").val(),
+                'oraVenire'         : oraVenire,
+                'oraPlecare'        : oraPlecare,
                 'timesheet'         : timesheetsObject
             };
             $.ajax({
@@ -199,9 +207,31 @@
           }
         });
         $('.collapsible').collapsible();
+        $.get("handler.php?r=getSettings", function(data, status) {
+          //console.log("Data: " + data + "\nStatus: " + status);
+          try {
+            let initData = JSON.parse(data);
+            initData.forEach(element => {
+              settingsElement[element.name] = element.value;
+            });
+            if (settingsElement.cereOrar == 0) {
+              $('#cereOrar').addClass('hide');
+              $('#maxPontajRow').addClass('hide');
+              $('#pontajPB').addClass('hide');
+            }
+          } catch (e) {
+            M.toast({html: e});
+          }
+        });
+
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
-          initData = JSON.parse(data);
+          let initData;
+          try {
+            initData = JSON.parse(data);;
+          } catch (e) {
+            M.toast({html: e});
+          }
 
           collabsObject = initData.collabs;
           projectsObject = initData.projects;

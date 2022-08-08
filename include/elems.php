@@ -756,4 +756,31 @@ function getProgress(int $project_id = NULL) {
     return $fields;
 }
 
+function getSettings() {
+    /* Global $pdo object */
+    /** @var object $pdo */
+    global $pdo;
+    global $schema;
+
+    $query = "SELECT name, value FROM $schema.settings";
+    try
+    {
+        $res = $pdo->prepare($query);
+        $res->execute();
+    }
+
+    catch (PDOException $e)
+    {
+        /* If there is a PDO exception, throw a standard exception */
+        echo "Database error".$e->getMessage();
+        die();
+    }
+    $fields=array();
+
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+        array_push($fields, $row);
+    }
+    return $fields;
+}
+
 ?>

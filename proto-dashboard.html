@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/materialize.css">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/wNumb.min.js"></script>
+    <script src="scripts/wNumb.min?v=1000.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="scripts/charts.js"></script>
+    <script src="scripts/charts?v=1000.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <?php if ($account->permissions['bonus']) {echo '<script src="scripts/bonus.js"></script>';} else {echo '<script src="scripts/no-bonus.js"></script>';}?>
+    <?php if ($account->permissions['bonus']) {echo '<script src="scripts/bonus?v=1000.js"></script>';} else {echo '<script src="scripts/no-bonus?v=1000.js"></script>';}?>
     </head>
   <body>
     <nav>
@@ -138,8 +138,8 @@
                 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="scripts/scripts.js"></script>
-    <script type="text/javascript" src="scripts/evo-calendar.js"></script>
+    <script type="text/javascript" src="scripts/scripts?v=1000.js"></script>
+    <script type="text/javascript" src="scripts/evo-calendar?v=1000.js"></script>
     <?php echo '<script>var myID='.$account->getCollabID().';</script>'; ?>
     <?php echo '<script>var potPonta='.($account->permissions['timesheet']?1:0).';</script>'; ?>
     <script>
