@@ -57,8 +57,11 @@ function drawProjectsChart () {
         }
       ],
         chart: {
-        height: chartHeight,
+        height: 'auto',//chartHeight,
         type: 'bar',
+        toolbar: {
+          show: false
+        },
         events: {
             click: function(event, chartContext, config) {
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
