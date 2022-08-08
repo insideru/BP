@@ -161,6 +161,7 @@
         //initializare tabele
         $.get("handler.php?r=init", function(data, status) {
           //console.log("Data: " + data + "\nStatus: " + status);
+          try {
           initData = JSON.parse(data);
           clientsObject = initData.clients;
           collabCatsObject = initData.collabCats;
@@ -187,6 +188,10 @@
             dt.setHours(0, 0, 0, 0);
             holidayArray.push(dt);
           });
+        }
+        catch (e) {
+          M.toast({html: e});
+        }
 
           $('.tooltipped').tooltip();
           $("#frameContent").load("admin-pages/dashboard.html", function() {});
