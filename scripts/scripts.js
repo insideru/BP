@@ -3023,8 +3023,9 @@ function doFormStuff() {
   }
   //reseteaza formul
   //$('form')[typeNo-1].reset();
+  let formData;
 if (typeNo==7) {
-  let formData = {
+  formData = {
       'action'            : 'addToDB',
       'type'              : type,
       'name'              : elemName.trim(),
@@ -3033,7 +3034,7 @@ if (typeNo==7) {
       'data'              : getSelectedDate(date)
   };
 } else {
-  let formData = {
+  formData = {
       'action'            : 'addToDB',
       'type'              : type,
       'name'              : elemName.trim(),

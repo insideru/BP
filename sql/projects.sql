@@ -5,7 +5,7 @@ CREATE TABLE `projects` (
   `type_id` int(10) NOT NULL,
   `external` tinyint(1) NOT NULL DEFAULT 1,
   `budget` INT(10) NOT NULL DEFAULT '100',
-  `date_added` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
+  `start_date` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
   `deadline` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
