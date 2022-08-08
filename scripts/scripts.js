@@ -739,7 +739,7 @@ function addNewProjTimesheet(projName, projPhaseName, projPhaseId, projMilestone
   $('#project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}`).append('<div class="collapsible-body"><div id="' + 'project_' + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities" + '" class="row"></div></div>');
   projType = getProjectType(projName);
   activitiesObject.forEach(element => {
-      if (element.project_type==projType) {
+      if (element.project_type==projType || element.project_type==0) {
           $("#project_" + getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + "_activities").append('<div class="section"><h5>' + element.name + '</h5></div><p><div id="' + getDBidFromName(projName, "project")  + `_${projPhaseId}_${projMilestoneId}` + '_' + element.id + '"></div></p>');
           initRange(getDBidFromName(projName, "project") + `_${projPhaseId}_${projMilestoneId}` + '_' + element.id);
       }
