@@ -700,6 +700,7 @@ function validateAddReport() {
 }
 
 function addNewReport(projName, projPhaseName, projPhaseId, projMilestoneName, projMilestoneId) {
+  $('#reportRow').removeClass('hide');
   $.get(`handler.php?r=getProjReports&proj=${getDBidFromName(projName, "project")}&phase=${projPhaseId}&milestone=${projMilestoneId}`, function(data, status) {
     let curPrgrs = data;
     let titleName = (projPhaseName == "" && projMilestoneName == "")?projName:(projPhaseName == ""?(projName+' - '+projMilestoneName):(projMilestoneName == ""?(projName+' - '+projPhaseName):projName+' - '+projPhaseName+' - '+projMilestoneName));
