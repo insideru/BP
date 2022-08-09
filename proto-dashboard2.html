@@ -257,9 +257,9 @@
         }
 
       if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
-        timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
+        timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = Number(ts.time);
       } else {
-          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
+          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += Number(ts.time);
       }
       if (prjBudget[ts.project_id] === undefined) {
         prjBudget[ts.project_id] = Number(ts.time);
@@ -267,8 +267,6 @@
         prjBudget[ts.project_id] += Number(ts.time);
       }
     });
-
-    console.log(prjBudget, timeSpent);
 
       if (amPontat) {
         drawPontajChart(wrkDate);
@@ -300,7 +298,7 @@
 
     let progressProj = 0;
     prjProgress.forEach(progElem => {
-      if (progElem.project_id == prj.id) progressProj+=progElem.progress;
+      if (progElem.project_id == prj.id) progressProj+=Number(progElem.progress);
     });
 
     progressReport[prj.id] = ({progress: progressProj, multiplier: phaseNo * milestoneNo});
@@ -349,7 +347,7 @@
   } else {
     budgetUsed = 0;
   }
-  console.log(prjBudget[prj.id], prj.budget);
+
   let barColor = '#008000';
   let pbraport = 0;
   if (progressCompleted>0) {
