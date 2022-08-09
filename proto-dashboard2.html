@@ -247,7 +247,7 @@
       let wrkMonth = Number(curDate.getMonth())+1;
       let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
       let amPontat = false;
-
+      console.log(alltimesheetsObject);
       alltimesheetsObject.forEach(ts => {
         if (ts.collab_id == myID) {
           myTimesheets.push(ts);
