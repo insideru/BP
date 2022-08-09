@@ -147,190 +147,190 @@
     <script type="text/javascript" src="scripts/evo-calendar.js?v=1000"></script>
     <?php echo '<script>var myID='.$account->getCollabID().';</script>'; ?>
     <?php echo '<script>var potPonta='.($account->permissions['timesheet']?1:0).';</script>'; ?>
-    <script>
-      function drawProjectProgressChart(elemid, progress, buget, label, barColor) {
-    var options = {
-      series: [{
-          data: [buget, progress]
-        }],
-          chart: {
-            type: 'bar',
-            height: '100px',
-            toolbar: {
-              show: false
-            }
-        },
-        plotOptions: {
-          bar: {
-            barHeight: '100%',
-            distributed: true,
-            horizontal: true,
-            dataLabels: {
-              position: 'top',
-            },
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: '12px',
-            colors: ['#fff']
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ['#fff']
-        },
-        tooltip: {
-          shared: true,
-          intersect: false
-        },
-        xaxis: {
-          categories: [`Buget (${buget}%)`, `Executat (${progress}%)`],
-          labels: {
-            show: false
-          },
-          axisBorder: {
-            show: false,
-          },
-          axisTicks: {
-            show: false
-          },
-          crosshairs: {
-            show: false
-          }
-        },
-        legend: {
+<script>
+  function drawProjectProgressChart(elemid, progress, buget, label, barColor) {
+  var options = {
+  series: [{
+      data: [buget, progress]
+    }],
+      chart: {
+        type: 'bar',
+        height: '100px',
+        toolbar: {
           show: false
+        }
+    },
+    plotOptions: {
+      bar: {
+        barHeight: '100%',
+        distributed: true,
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
         },
-        colors: [barColor, '#3d85c6'],
-        tooltip: {
-          custom: function({series, seriesIndex, dataPointIndex, w}) {
-            return w.globals.tooltip.tooltipTitle.outerHTML;
-          }
-        }
-        };
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      offsetX: -6,
+      style: {
+        fontSize: '12px',
+        colors: ['#fff']
+      }
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['#fff']
+    },
+    tooltip: {
+      shared: true,
+      intersect: false
+    },
+    xaxis: {
+      categories: [`Buget (${buget}%)`, `Executat (${progress}%)`],
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false
+      },
+      crosshairs: {
+        show: false
+      }
+    },
+    legend: {
+      show: false
+    },
+    colors: [barColor, '#3d85c6'],
+    tooltip: {
+      custom: function({series, seriesIndex, dataPointIndex, w}) {
+        return w.globals.tooltip.tooltipTitle.outerHTML;
+      }
+    }
+    };
 
-        var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
-        chart.render();
+    var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
+    chart.render();
   }
-      $(document).ready(function() {
-        let prjBudget = [];
-        addLinks();
-        $('.collapsible').collapsible();
-        $('.modal').modal();
-        $('.sidenav').sidenav();
-        
-        $.get("handler.php?r=init", function(data, status) {
-          initData = JSON.parse(data);
-          collabsObject = initData.collabs;
-          projectsObject = initData.projects;
-          activitiesObject = initData.activities;
-          milestonesObject = initData.milestones;
-          if (initData.hasOwnProperty('clients')) clientsObject = initData.clients;
-          if (initData.hasOwnProperty('projCats')) projCatsObject = initData.projCats;
+  $(document).ready(function() {
+    let prjBudget = [];
+    addLinks();
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+    $('.sidenav').sidenav();
+    
+    $.get("handler.php?r=init", function(data, status) {
+      initData = JSON.parse(data);
+      collabsObject = initData.collabs;
+      projectsObject = initData.projects;
+      activitiesObject = initData.activities;
+      milestonesObject = initData.milestones;
+      if (initData.hasOwnProperty('clients')) clientsObject = initData.clients;
+      if (initData.hasOwnProperty('projCats')) projCatsObject = initData.projCats;
 
-          phasesObject = initData.phases;
-          milestonesObject = initData.milestones;
-          let prjProgress = initData.progress;
-          alltimesheetsObject = initData.timesheets;
-          let timeSpent = {};
-          let progressReport = new Array();
+      phasesObject = initData.phases;
+      milestonesObject = initData.milestones;
+      let prjProgress = initData.progress;
+      alltimesheetsObject = initData.timesheets;
+      let timeSpent = {};
+      let progressReport = new Array();
 
-          //console.log(phasesObject, milestonesObject);
-          //console.log(projectsObject, alltimesheetsObject, collabsObject);
-          //drawProjectsChart();
- 
-          let curDate = new Date();
-          let wrkMonth = Number(curDate.getMonth())+1;
-          let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
-          let amPontat = false;
+      //console.log(phasesObject, milestonesObject);
+      //console.log(projectsObject, alltimesheetsObject, collabsObject);
+      //drawProjectsChart();
 
-          alltimesheetsObject.forEach(element => {
-            if (element.collab_id == myID) {
-              myTimesheets.push(element);
-              if (element.date == wrkDate) {
-                amPontat = true;
-              }
-            }
-          });
+      let curDate = new Date();
+      let wrkMonth = Number(curDate.getMonth())+1;
+      let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
+      let amPontat = false;
 
-          if (amPontat) {
-            drawPontajChart(wrkDate);
-          } else {
-            let markup = '<p>Nu ai pontat astazi</p><br>';
-            markup+='<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+wrkDate+'\')">Adauga pontaj</a>';
-            if (potPonta) {
-              $("#viewPontajChart").html(markup);
-            }
+      alltimesheetsObject.forEach(element => {
+        if (element.collab_id == myID) {
+          myTimesheets.push(element);
+          if (element.date == wrkDate) {
+            amPontat = true;
           }
-          $('.tooltipped').tooltip();
-
-          alltimesheetsObject.forEach(ts => {
-        if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
-          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
-        } else {
-          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
-        }
-        if (prjBudget[ts.project_id] === undefined) {
-          prjBudget[ts.project_id] = ts.time;
-        } else {
-          prjBudget[ts.project_id] += ts.time;
         }
       });
 
-      let activeProjects = 0;
-      projectsObject.forEach(prj => {
-        if (prj.active == 0) return;
-        activeProjects++;
-        let phaseNo = 0;
-        phasesObject.forEach(phase => {
-          if (phase.proj_id == prj.id) phaseNo++;
-        });
-        if (phaseNo == 0) phaseNo = 1;
+      if (amPontat) {
+        drawPontajChart(wrkDate);
+      } else {
+        let markup = '<p>Nu ai pontat astazi</p><br>';
+        markup+='<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+wrkDate+'\')">Adauga pontaj</a>';
+        if (potPonta) {
+          $("#viewPontajChart").html(markup);
+        }
+      }
+      $('.tooltipped').tooltip();
 
-        let milestoneNo = 0;
-        milestonesObject.forEach(milestone => {
-          if (milestone.proj_id == prj.id) milestoneNo++;
-        });
-        if (milestoneNo == 0) milestoneNo = 1;
+      alltimesheetsObject.forEach(ts => {
+    if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
+      timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
+    } else {
+      timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
+    }
+    if (prjBudget[ts.project_id] === undefined) {
+      prjBudget[ts.project_id] = ts.time;
+    } else {
+      prjBudget[ts.project_id] += ts.time;
+    }
+  });
 
-        let progressProj = 0;
-        prjProgress.forEach(progElem => {
-          if (progElem.project_id == prj.id) progressProj+=progElem.progress;
-        });
+  let activeProjects = 0;
+  projectsObject.forEach(prj => {
+    if (prj.active == 0) return;
+    activeProjects++;
+    let phaseNo = 0;
+    phasesObject.forEach(phase => {
+      if (phase.proj_id == prj.id) phaseNo++;
+    });
+    if (phaseNo == 0) phaseNo = 1;
 
-        progressReport[prj.id] = ({progress: progressProj, multiplier: phaseNo * milestoneNo});
-      });
+    let milestoneNo = 0;
+    milestonesObject.forEach(milestone => {
+      if (milestone.proj_id == prj.id) milestoneNo++;
+    });
+    if (milestoneNo == 0) milestoneNo = 1;
 
-      $('#activeProjects').html(activeProjects);
-      activeProjects == 1?$('#activeProjectsLabel').html('Proiect activ'):$('#activeProjectsLabel').html('Proiecte active');
+    let progressProj = 0;
+    prjProgress.forEach(progElem => {
+      if (progElem.project_id == prj.id) progressProj+=progElem.progress;
+    });
 
-      let res = 0;
-      progressReport.forEach(element => {
-        res+=element.progress/element.multiplier;
-      });
+    progressReport[prj.id] = ({progress: progressProj, multiplier: phaseNo * milestoneNo});
+  });
 
-      let progressTotal = Math.ceil(res/activeProjects);
+  $('#activeProjects').html(activeProjects);
+  activeProjects == 1?$('#activeProjectsLabel').html('Proiect activ'):$('#activeProjectsLabel').html('Proiecte active');
 
-      $('#progressPBLabel').html(`${progressTotal}%`);
-      $('#progressPB').css("width", `${progressTotal}%`);
+  let res = 0;
+  progressReport.forEach(element => {
+    res+=element.progress/element.multiplier;
+  });
 
-      projectsObject.forEach(prj => {
-        if (prj.active == 0) return;
-        $('#rowList').append(`
-          <div class="col s12 m6 l4" id="proj_div_${prj.id}" onclick="zoomProj(this.id)">
-            <div id="proj_card_${prj.id}" class="card rounded flexer">
-              <div class="card-content">
-                <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
-                  <div id="prjProgress_${prj.id}" class="col s9"></div>
-                  <div id="prjEstimate_${prj.id}" class="col s3 valign-wrapper flexer" style="min-height: 115px;"></div>
-                  <div id="prjTimeSpent_${prj.id}" class="col s12 hide"><div>
-              </div>
-            </div>
-          </div>`);
+  let progressTotal = Math.ceil(res/activeProjects);
+
+  $('#progressPBLabel').html(`${progressTotal}%`);
+  $('#progressPB').css("width", `${progressTotal}%`);
+
+  projectsObject.forEach(prj => {
+    if (prj.active == 0) return;
+    $('#rowList').append(`
+      <div class="col s12 m6 l4" id="proj_div_${prj.id}" onclick="zoomProj(this.id)">
+        <div id="proj_card_${prj.id}" class="card rounded flexer">
+          <div class="card-content">
+            <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
+              <div id="prjProgress_${prj.id}" class="col s9"></div>
+              <div id="prjEstimate_${prj.id}" class="col s3 valign-wrapper flexer" style="min-height: 115px;"></div>
+              <div id="prjTimeSpent_${prj.id}" class="col s12 hide"><div>
+          </div>
+        </div>
+      </div>`);
   let progressCompleted;
   if (progressReport[prj.id].progress === undefined) {
     progressCompleted=0;
@@ -347,6 +347,7 @@
   } else {
     budgetUsed = 0;
   }
+  console.log(budgetUsed, prj.budget);
   let barColor = '#008000';
   let pbraport = 0;
   if (progressCompleted>0) {
