@@ -228,16 +228,15 @@
           //console.log("Data: " + data + "\nStatus: " + status);
           let initData;
           try {
-            initData = JSON.parse(data);;
+            initData = JSON.parse(data);
+            collabsObject = initData.collabs;
+            projectsObject = initData.projects;
+            activitiesObject = initData.activities;
+            phasesObject = initData.phases;
+            milestonesObject = initData.milestones;
           } catch (e) {
             M.toast({html: e});
           }
-
-          collabsObject = initData.collabs;
-          projectsObject = initData.projects;
-          activitiesObject = initData.activities;
-          phasesObject = initData.phases;
-          milestonesObject = initData.milestones;
         
           //initializare categorii proiect
           //populateActiveProjects();
