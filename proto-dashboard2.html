@@ -227,8 +227,9 @@
     $('.sidenav').sidenav();
     
     $.get("handler.php?r=init", function(data, status) {
-      initData = JSON.parse(data);
       console.log(data);
+      initData = JSON.parse(data);
+
       collabsObject = initData.collabs;
       projectsObject = initData.projects;
       activitiesObject = initData.activities;
