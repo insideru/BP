@@ -1122,7 +1122,6 @@ function populateEditPontaj (date) {
       changeSelectedTime();
 
       //incarca pontajele
-      console.log(curTimesheet);
       curTimesheet.forEach(element => {
         let projName = getDBNameFromId(element.project_id, "project");
         let phaseId = element.phase_id;
