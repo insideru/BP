@@ -353,7 +353,6 @@ function updateProjectCharts (projID) {
     $('.hide').removeClass("hide");
     if (projID == -1) { return; }
     let wrkData = getActivitiesAndCollabs (chartedProjects[projID].id, projID);
-
     //graficul de timeline
     let tmlData = buildProjetTimeline (chartedProjects[projID].id, projID);
     let uniq = 0;

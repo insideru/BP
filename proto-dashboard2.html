@@ -2,6 +2,7 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.blueprint.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
@@ -328,7 +329,7 @@
         <div class="card-content">
           <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
             <div id="prjProgress_${prj.id}" class="col s9"></div>
-            <div id="prjEstimate_${prj.id}" class="col s3 valign-wrapper flexer" style="min-height: 115px;"></div>
+            <div id="prjEstimate_${prj.id}" class="col s3 valign-wrapper flexer center-align" style="min-height: 115px;"></div>
             <div id="prjTimeSpent_${prj.id}" class="col s12 hide"><div>
         </div>
       </div>
@@ -395,7 +396,15 @@
         let projNum = projTime.split('-')[0];
         let phaseNum = projTime.split('-')[1];
         let milestoneNum  = projTime.split('-')[2];
-        if (phaseNum == 0 && milestoneNum == 0) continue;
+        if (phaseNum == 0 && milestoneNum == 0) {
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">General</div>
+            <div class="progress taller col s7">
+            <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
+          </div>
+            <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
+          </div>`);
+          continue;
+        }
         if (phaseNum==0) {
           $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(milestoneNum, 'milestone')}</div>
             <div class="progress taller col s7">
