@@ -2,13 +2,14 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.css"/>
     <link rel="stylesheet" type="text/css" href="styles/evo-calendar.blueprint.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/materialize.css">
-    <link rel="stylesheet" href="styles/styles?v=1000">
+    <link rel="stylesheet" href="styles/styles.css?v=1000">
     <script src="scripts/wNumb.min.js?v=1000"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="scripts/charts.js?v=1000"></script>
@@ -89,16 +90,32 @@
         </div>
       </div>
 
-      <div class="col s12 m12 l12">
+      <div class="col s12 m12 l12 hide-on-small-and-down">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">Status proiecte active</span>
+            <span class="card-title">Status proiecte active<span class="right" id="prjEditPtnj"></span></span>
             <p><div id="projectsChart"></div></p>
           </div>
         </div>
       </div>
 
-      <div class="col s12 m12 l12 hide">
+      <div class="row hide-on-med-and-up" id="rowList">
+        <div class="col s12 m4">
+          <div class="card rounded fixedHeight">
+            <div class="card-content">
+              <span class="card-title bold" id="activeProjects"></span>
+              <p id="activeProjectsLabel"></p><br>
+              <div id="projectsProgressBar">Progres<span class="right" id="progressPBLabel"></span></div>
+              <div class="progress taller" id="workPBMain">
+                <div id="progressPB" class="determinate" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col s12 m12 l12 hide hide-on-small-only">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Timeline Proiecte</span>
@@ -107,7 +124,7 @@
         </div>
       </div>
 
-      <div class="col s12 m6 l6 hide">
+      <div class="col s12 m6 l6 hide hide-on-small-only">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Activitati</span>
@@ -116,7 +133,7 @@
         </div>
       </div>
 
-      <div class="col s12 m6 l6 hide">
+      <div class="col s12 m6 l6 hide hide-on-small-only">
         <div class="card">
           <div class="card-content">
             <span class="card-title">Useri</span>
@@ -124,16 +141,7 @@
           </div>
         </div>
       </div>
-
-      <div class="col s12 m6 l6 hide-on-small-only hide-on-med-and-up">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Pontaje</span>
-            <p></p>
-          </div>
-        </div>
-      </div>
-
+ 
     </div>
                 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -142,120 +150,287 @@
     <script type="text/javascript" src="scripts/evo-calendar.js?v=1000"></script>
     <?php echo '<script>var myID='.$account->getCollabID().';</script>'; ?>
     <?php echo '<script>var potPonta='.($account->permissions['timesheet']?1:0).';</script>'; ?>
-    <script>
-      function drawProjectProgressChart(elemid, progress, buget, label, barColor) {
-    var options = {
-      series: [{
-          data: [buget, progress]
-        }],
-          chart: {
-            type: 'bar',
-            height: '100px',
-            toolbar: {
-              show: false
-            }
-        },
-        plotOptions: {
-          bar: {
-            barHeight: '100%',
-            distributed: true,
-            horizontal: true,
-            dataLabels: {
-              position: 'top',
-            },
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: '12px',
-            colors: ['#fff']
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ['#fff']
-        },
-        tooltip: {
-          shared: true,
-          intersect: false
-        },
-        xaxis: {
-          categories: [`Buget (${buget}%)`, `Executat (${progress}%)`],
-          labels: {
-            show: false
-          },
-          axisBorder: {
-            show: false,
-          },
-          axisTicks: {
-            show: false
-          },
-          crosshairs: {
-            show: false
-          }
-        },
-        legend: {
+<script>
+  function drawProjectProgressChart(elemid, progress, buget, label, barColor) {
+  var options = {
+  series: [{
+      data: [buget, progress]
+    }],
+      chart: {
+        type: 'bar',
+        height: '100px',
+        toolbar: {
           show: false
+        }
+    },
+    plotOptions: {
+      bar: {
+        barHeight: '100%',
+        distributed: true,
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
         },
-        colors: [barColor, '#3d85c6'],
-        tooltip: {
-          custom: function({series, seriesIndex, dataPointIndex, w}) {
-            return w.globals.tooltip.tooltipTitle.outerHTML;
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      offsetX: -6,
+      style: {
+        fontSize: '12px',
+        colors: ['#fff']
+      }
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['#fff']
+    },
+    tooltip: {
+      shared: true,
+      intersect: false
+    },
+    xaxis: {
+      categories: [`Buget (${buget}%)`, `Executat (${progress}%)`],
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false
+      },
+      crosshairs: {
+        show: false
+      }
+    },
+    legend: {
+      show: false
+    },
+    colors: [barColor, '#3d85c6'],
+    tooltip: {
+      custom: function({series, seriesIndex, dataPointIndex, w}) {
+        return w.globals.tooltip.tooltipTitle.outerHTML;
+      }
+    }
+    };
+
+    var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
+    chart.render();
+  }
+  $(document).ready(function() {
+    var prjBudget = [];
+    addLinks();
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+    $('.sidenav').sidenav();
+    
+    $.get("handler.php?r=init", function(data, status) {
+      console.log(data);
+      initData = JSON.parse(data);
+
+      collabsObject = initData.collabs;
+      projectsObject = initData.projects;
+      activitiesObject = initData.activities;
+      milestonesObject = initData.milestones;
+      if (initData.hasOwnProperty('clients')) clientsObject = initData.clients;
+      if (initData.hasOwnProperty('projCats')) projCatsObject = initData.projCats;
+
+      phasesObject = initData.phases;
+      milestonesObject = initData.milestones;
+      let prjProgress = initData.progress;
+      alltimesheetsObject = initData.timesheets;
+      let timeSpent = {};
+      let progressReport = new Array();
+
+      //console.log(phasesObject, milestonesObject);
+      //console.log(projectsObject, alltimesheetsObject, collabsObject);
+      drawProjectsChart();
+
+      let curDate = new Date();
+      let wrkMonth = Number(curDate.getMonth())+1;
+      let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
+      let amPontat = false;
+      
+      alltimesheetsObject.forEach(ts => {
+        if (ts.collab_id == myID) {
+          myTimesheets.push(ts);
+          if (ts.date == wrkDate) {
+            amPontat = true;
           }
         }
-        };
 
-        var chart = new ApexCharts(document.querySelector(`#${elemid}`), options);
-        chart.render();
+      if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
+        timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = Number(ts.time);
+      } else {
+          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += Number(ts.time);
+      }
+      if (prjBudget[ts.project_id] === undefined) {
+        prjBudget[ts.project_id] = Number(ts.time);
+      } else {
+        prjBudget[ts.project_id] += Number(ts.time);
+      }
+    });
+
+      if (amPontat) {
+        drawPontajChart(wrkDate);
+        $("#prjEditPtnj").html(`<a class="waves-effect waves-light btn" onclick="editareWithDate(${wrkDate})">Editare pontaj</a>`);
+      } else {
+        let markup = '<p>Nu ai pontat astazi</p><br>';
+        markup+='<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+wrkDate+'\')">Adauga pontaj</a>';
+        if (potPonta) {
+          $("#viewPontajChart").html(markup);
+        }
+      }
+      $('.tooltipped').tooltip();
+
+  let activeProjects = 0;
+  projectsObject.forEach(prj => {
+    if (prj.active == 0) return;
+    if (prj.type_id == 3) return;
+    activeProjects++;
+    let phaseNo = 0;
+    phasesObject.forEach(phase => {
+      if (phase.proj_id == prj.id) phaseNo++;
+    });
+    if (phaseNo == 0) phaseNo = 1;
+
+    let milestoneNo = 0;
+    milestonesObject.forEach(milestone => {
+      if (milestone.proj_id == prj.id) milestoneNo++;
+    });
+    if (milestoneNo == 0) milestoneNo = 1;
+
+    let progressProj = 0;
+    prjProgress.forEach(progElem => {
+      if (progElem.project_id == prj.id) progressProj+=Number(progElem.progress);
+    });
+
+    progressReport[prj.id] = ({progress: progressProj, multiplier: phaseNo * milestoneNo});
+  });
+
+  $('#activeProjects').html(activeProjects);
+  activeProjects == 1?$('#activeProjectsLabel').html('Proiect activ'):$('#activeProjectsLabel').html('Proiecte active');
+
+  let res = 0;
+  progressReport.forEach(element => {
+    res+=element.progress/element.multiplier;
+  });
+
+  let progressTotal = Math.ceil(res/activeProjects);
+
+  $('#progressPBLabel').html(`${progressTotal}%`);
+  $('#progressPB').css("width", `${progressTotal}%`);
+
+  projectsObject.forEach(prj => {
+  if (prj.active == 0) return;
+  if (prj.type_id == 3) return;
+  $('#rowList').append(`
+    <div class="col s12 m6 l4" id="proj_div_${prj.id}" onclick="zoomProj(this.id)">
+      <div id="proj_card_${prj.id}" class="card rounded flexer">
+        <div class="card-content">
+          <span class="card-title bold">${getDBNameFromId(prj.id, "project")}</span>
+            <div id="prjProgress_${prj.id}" class="col s9"></div>
+            <div id="prjEstimate_${prj.id}" class="col s3 valign-wrapper flexer center-align" style="min-height: 115px;"></div>
+            <div id="prjTimeSpent_${prj.id}" class="col s12 hide"><div>
+        </div>
+      </div>
+    </div>`);
+  let progressCompleted;
+  if (progressReport[prj.id].progress === undefined) {
+    progressCompleted=0;
+  } else {
+    progressCompleted=Math.ceil(progressReport[prj.id].progress/progressReport[prj.id].multiplier);
   }
-      $(document).ready(function() {
-        addLinks();
-        $('.collapsible').collapsible();
-        $('.modal').modal();
-        $('.sidenav').sidenav();
-        
-        $.get("handler.php?r=init", function(data, status) {
-          initData = JSON.parse(data);
-          collabsObject = initData.collabs;
-          projectsObject = initData.projects;
-          activitiesObject = initData.activities;
-          alltimesheetsObject = initData.timesheets;
-          phasesObject = initData.phases;
-          milestonesObject = initData.milestones;
-          if (initData.hasOwnProperty('clients')) clientsObject = initData.clients;
-          if (initData.hasOwnProperty('projCats')) projCatsObject = initData.projCats;
+  //let progressCompleted = Math.floor(Math.random() * 100);
+  //let budgetUsed = Math.floor(Math.random() * 100);
+  let budgetUsed = 0;
+  if (prjBudget[prj.id] !== undefined) {
+    if (prj.budget>0) {
+      budgetUsed = Math.ceil(prjBudget[prj.id]/prj.budget*100);
+    }
+  } else {
+    budgetUsed = 0;
+  }
 
-          //console.log(phasesObject, milestonesObject);
-          //console.log(projectsObject, alltimesheetsObject, collabsObject);
-          drawProjectsChart();
- 
-          let curDate = new Date();
-          let wrkMonth = Number(curDate.getMonth())+1;
-          let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
-          let amPontat = false;
+  let barColor = '#008000';
+  let pbraport = 0;
+  if (progressCompleted>0) {
+    pbraport = progressCompleted/budgetUsed;
+    let projEstimate = Math.floor((100 * budgetUsed/progressCompleted));
+  if (projEstimate<prj.budget) {
+    $(`#prjEstimate_${prj.id}`).html(`<div class="badge green accent-1 center-align">
+        <div class="badge-wrap">
+          <span class="badge-text green-text text-darken-1 bold">
+            <i class="bi bi-arrow-up-short"></i>
+            ${prj.budget-projEstimate} ${prj.budget-projEstimate==1?'ora':'ore'}
+          </span>
+        </div>
+      </div>`);
+  } else {
+    $(`#prjEstimate_${prj.id}`).html(`<div class="badge red lighten-4 center-align">
+        <div class="badge-wrap">
+          <span class="badge-text red-text red-darken-1 bold">
+            <i class="bi bi-arrow-down-short"></i>
+            ${projEstimate-prj.budget} ${projEstimate-prj.budget==1?'ora':'ore'}
+          </span>
+        </div>
+      </div>`);  }
+  }
 
-          alltimesheetsObject.forEach(element => {
-            if (element.collab_id == myID) {
-              myTimesheets.push(element);
-              if (element.date == wrkDate) {
-                amPontat = true;
-              }
-            }
-          });
-
-          if (amPontat) {
-            drawPontajChart(wrkDate);
-          } else {
-            let markup = '<p>Nu ai pontat astazi</p><br>';
-            markup+='<a class="waves-effect waves-light btn" onclick="ponteazaWithDate(\''+wrkDate+'\')">Adauga pontaj</a>';
-            if (potPonta) {
-              $("#viewPontajChart").html(markup);
-            }
-          }
-          $('.tooltipped').tooltip();
+  if (progressCompleted==0 && budgetUsed>0) {
+    $(`#prjEstimate_${prj.id}`).html('Raporteaza executia pentru estimari');
+  }
+  if (pbraport>0.8 && pbraport<1) {
+    barColor = '#ffa500';  
+  }
+  if (pbraport<0.8) {
+    barColor = '#cc0000';
+  };
+  //console.log(progressCompleted, budgetUsed);
+  if (progressCompleted==0 && budgetUsed==0) {
+    $(`#prjProgress_${prj.id}`).html('Nu exista date introduse pentru acest proiect');
+  } else {
+    drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, budgetUsed, "Executie", barColor);
+  }
+      });
+      for (let projTime in timeSpent) {
+        let projNum = projTime.split('-')[0];
+        let phaseNum = projTime.split('-')[1];
+        let milestoneNum  = projTime.split('-')[2];
+        if (phaseNum == 0 && milestoneNum == 0) {
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">General</div>
+            <div class="progress taller col s7">
+            <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
+          </div>
+            <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
+          </div>`);
+          continue;
+        }
+        if (phaseNum==0) {
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(milestoneNum, 'milestone')}</div>
+            <div class="progress taller col s7">
+            <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
+          </div>
+            <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
+          </div>`);
+        } else if (milestoneNum==0) {
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(phaseNum, 'phase')}</div>
+            <div class="progress taller col s7">
+            <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
+          </div>
+            <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
+          </div>`);
+        } else {
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(phaseNum, 'phase')} - ${getDBNameFromId(milestoneNum, 'milestone')}</div>
+            <div class="progress taller col s7">
+            <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
+          </div>
+            <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
+          </div>`);
+        }
+      }
         });
       })
     </script>

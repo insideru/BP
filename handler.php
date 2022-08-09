@@ -295,7 +295,7 @@ if (isset($_REQUEST["r"])) {
         echo json_encode($response);
     }
 
-    if ($_REQUEST["r"]=="holidays") {    
+    if ($_REQUEST["r"]=="holidays") {
         $response = array();
         $response["holidays"] = getHolidays();
         $response["daysoff"] = getDaysoff();

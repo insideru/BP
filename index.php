@@ -8,7 +8,7 @@ if ($account->authenticated) {
     //user e logat
     if (isset($_GET['page'])) {
         if ($_GET['page']=="dashboard"){
-            require 'proto-dashboard2.html';
+            require 'proto-dashboard.html';
             die;
         } else if ($_GET['page']=="calendar"){
             require 'proto-calendar.html';
@@ -34,7 +34,7 @@ if ($account->authenticated) {
             die;
         }
     }
-    require 'proto-dashboard2.html';
+    require 'proto-dashboard.html';
     }
     else {
         //echo "Nu exista user logat";
