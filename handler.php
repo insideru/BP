@@ -265,8 +265,7 @@ if (isset($_REQUEST["r"])) {
     if ($_REQUEST["r"]=="init") {
         //trimitem toate datele de initalizare tabele
         $response = array();
-        //$account->permissions['admin']
-        if (1) {
+        if ($account->permissions['admin']) {
             $response["clients"] = getClients();
             $response["collabCats"] = getCollabCat();
             $response["projCats"] = getProjCat();
