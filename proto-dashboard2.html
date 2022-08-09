@@ -217,7 +217,7 @@
     chart.render();
   }
   $(document).ready(function() {
-    let prjBudget = [];
+    var prjBudget = [];
     addLinks();
     $('.collapsible').collapsible();
     $('.modal').modal();
@@ -248,14 +248,25 @@
       let wrkDate = `${curDate.getFullYear()}-${wrkMonth>9?wrkMonth:'0'+wrkMonth}-${curDate.getDate()>9?curDate.getDate():'0'+curDate.getDate().toString()}`;
       let amPontat = false;
 
-      alltimesheetsObject.forEach(element => {
-        if (element.collab_id == myID) {
-          myTimesheets.push(element);
-          if (element.date == wrkDate) {
+      alltimesheetsObject.forEach(ts => {
+        if (ts.collab_id == myID) {
+          myTimesheets.push(ts);
+          if (ts.date == wrkDate) {
             amPontat = true;
           }
         }
-      });
+
+      if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
+        timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
+      } else {
+          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
+      }
+      if (prjBudget[ts.project_id] === undefined) {
+        prjBudget[ts.project_id] = ts.time;
+      } else {
+        prjBudget[ts.project_id] += ts.time;
+      }
+    });
 
       if (amPontat) {
         drawPontajChart(wrkDate);
@@ -267,19 +278,6 @@
         }
       }
       $('.tooltipped').tooltip();
-
-      alltimesheetsObject.forEach(ts => {
-    if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
-      timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
-    } else {
-      timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
-    }
-    if (prjBudget[ts.project_id] === undefined) {
-      prjBudget[ts.project_id] = ts.time;
-    } else {
-      prjBudget[ts.project_id] += ts.time;
-    }
-  });
 
   let activeProjects = 0;
   projectsObject.forEach(prj => {
