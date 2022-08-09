@@ -395,22 +395,22 @@
         let milestoneNum  = projTime.split('-')[2];
         if (phaseNum == 0 && milestoneNum == 0) continue;
         if (phaseNum==0) {
-          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s3">${getDBNameFromId(milestoneNum, 'milestone')}</div>
-            <div class="progress taller col s8">
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(milestoneNum, 'milestone')}</div>
+            <div class="progress taller col s7">
             <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
           </div>
             <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
           </div>`);
         } else if (milestoneNum==0) {
-          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s3">${getDBNameFromId(phaseNum, 'phase')}</div>
-            <div class="progress taller col s8">
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(phaseNum, 'phase')}</div>
+            <div class="progress taller col s7">
             <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
           </div>
             <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
           </div>`);
         } else {
-          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s3">${getDBNameFromId(phaseNum, 'phase')} - ${getDBNameFromId(milestoneNum, 'milestone')}</div>
-            <div class="progress taller col s8">
+          $(`#prjTimeSpent_${projNum}`).append(`<div class="col s4">${getDBNameFromId(phaseNum, 'phase')} - ${getDBNameFromId(milestoneNum, 'milestone')}</div>
+            <div class="progress taller col s7">
             <div class="determinate" style="width: ${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%"></div>
           </div>
             <div class="col s1 center">${Math.ceil(timeSpent[projTime]/prjBudget[projNum]*100)}%
