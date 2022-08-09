@@ -116,14 +116,14 @@
 
       alltimesheetsObject.forEach(ts => {
         if (timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] === undefined) {
-          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = ts.time;
+          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] = Number(ts.time);
         } else {
-          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += ts.time;
+          timeSpent[`${ts.project_id}-${ts.phase_id}-${ts.milestone_id}`] += Number(ts.time);
         }
         if (prjBudget[ts.project_id] === undefined) {
-          prjBudget[ts.project_id] = ts.time;
+          prjBudget[ts.project_id] = Number(ts.time);
         } else {
-          prjBudget[ts.project_id] += ts.time;
+          prjBudget[ts.project_id] += Number(ts.time);
         }
       });
 
