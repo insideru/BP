@@ -3108,3 +3108,17 @@ function openEditProject(proj_id) {
   editProject = proj_id;
   $("#frameContent").load("admin-pages/newproj.html", function() {});
 }
+
+function zoomProj(proj_id) {
+  if ($(`#${proj_id}`).hasClass('m6')) {
+    $(`#${proj_id}`).removeClass('m6 l4');
+    $(`#prjTimeSpent_${proj_id.split('_')[2]}`).removeClass('hide');
+    //$(`#proj_card_${proj_id.split('_')[2]}`).removeClass('fixedHeight');
+    //$(`#proj_card_${proj_id.split('_')[2]}`).addClass('flexer');
+  } else {
+    $(`#${proj_id}`).addClass('m6 l4');
+    $(`#prjTimeSpent_${proj_id.split('_')[2]}`).addClass('hide');
+    //$(`#proj_card_${proj_id.split('_')[2]}`).addClass('fixedHeight');
+    //$(`#proj_card_${proj_id.split('_')[2]}`).removeClass('flexer');
+  }
+}
