@@ -713,6 +713,7 @@ function getAllTimesheets() {
 	global $pdo;
 	global $schema;
     global $account;
+    $account->sessionLogin();
 
 	$query = 'SELECT * FROM '.$schema.'.timesheets ORDER BY date ASC';
 	
@@ -917,7 +918,6 @@ function getAllDaysOff() {
     /** @var object $pdo */
     global $pdo;
 	global $schema;
-    global $account;
 
 	$query = 'SELECT * FROM '.$schema.'.daysoff';
 	
