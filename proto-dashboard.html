@@ -290,8 +290,6 @@
         orderedTime[projNum][milestoneNum][phaseNum] = Number(timeSpent[projTime]);
     }
 
-    console.log(orderedTime);
-
       if (amPontat) {
         drawPontajChart(wrkDate);
         $("#prjEditPtnj").html(`<a class="waves-effect waves-light btn" onclick="editareWithDate('${wrkDate}')">Editare pontaj</a>`);
@@ -436,7 +434,6 @@
   } else {
     drawProjectProgressChart(`prjProgress_${prj.id}`, progressCompleted, budgetUsed, "Executie", barColor);
   }
-  console.log(prj.id, prjBudget[prj.id]);
   if (orderedTime[prj.id] !== undefined) {
     orderedTime[prj.id].forEach(ordr => {
       if (orderedTime[prj.id].length==1) return;
