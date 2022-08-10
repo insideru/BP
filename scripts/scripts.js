@@ -96,15 +96,12 @@ function roundUp(num, precision) {
 
 function removeProj(id) {
   $('#project_'+id).remove();
-  let projID = id.split('_')[0];
-  let phaseID = id.split('_')[1];
-  let milestoneID = id.split('_')[2];
+  let projID = Number(id.split('_')[0]);
+  let phaseID = Number(id.split('_')[1]);
+  let milestoneID = Number(id.split('_')[2]);
   //timesheetsObject = arrayRemove(timesheetsObject, id);
   timesheetsObject = timesheetsObject.filter(function(elem){ 
-    if (elem.id != projID && elem.phase != phaseID && elem.milestone != milestoneID)
-    {
-      return elem;
-    }
+    return (Number(elem.id) != projID) || (Number(elem.phase) != phaseID) || (Number(elem.milestone) != milestoneID);
   });
   if (document.getElementById("projTimesheet").children.length == 0) $('#timesheetsRow').addClass('hide');
   updatePB();
@@ -644,7 +641,7 @@ function selectProject(projName) {
         let contor = 1;
         if (projPhases.length > 0) {
           $(`#select${contor}`).html('<select id="addProjPhase" class="browser-default" onchange="'+fnctToCall+'();"><option value="" disabled selected>Alege faza</option></select>');
-          $('#addProjPhase').append(`<option value="0_Fara">General</option>`);
+          $('#addProjPhase').append(`<option value="0_1x2c3v4">General</option>`);
           projPhases.forEach(elem => {
             $('#addProjPhase').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
           });
@@ -652,7 +649,7 @@ function selectProject(projName) {
         }
         if (projMilestones.length > 0) {
           $(`#select${contor}`).html('<select id="addProjMilestone" class="browser-default" onchange="'+fnctToCall+'();"><option value="" disabled selected>Alege milestone</option></select>');
-          $('#addProjMilestone').append(`<option value="0_Fara">General</option>`);
+          $('#addProjMilestone').append(`<option value="1x2c3v4">General</option>`);
           projMilestones.forEach(elem => {
             $('#addProjMilestone').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
           });
@@ -687,9 +684,9 @@ function validateAdd() {
   }
   return {
     projName: projName,
-    phaseName: phaseName,
+    phaseName: phaseName!='1x2c3v4'?phaseName:'',
     phaseId: phaseId,
-    milestoneName: milestoneName,
+    milestoneName: milestoneName!='1x2c3v4'?milestoneName:'',
     milestoneId: milestoneId
   };
 }
@@ -2137,7 +2134,6 @@ function calculateSalaries(date) {
 }
 
 function populateSalaries (salaries, monthlyDate) {
-  console.log(salaries);
   let collabsAdded = [];
   const keys = Object.keys(salaries);
   let h1total = 0;
@@ -2605,23 +2601,20 @@ function renameProjStuff(stuffName, stuffType, stuffNumber) {
     case 0:
       $(`#detailName_${stuffNumber}`).html(response);
       for (let elem of saveTemplateData) {
-        if (elem.name == stuffName) { console.log(elem.name); elem.name = response; }
+        if (elem.name == stuffName) { elem.name = response; }
       }
-      console.log(saveTemplateData);
       break;
     case 1:
       $(`#phaseName_${stuffNumber}`).html(response);
       for (let elem of savePhaseData) {
         if (elem.name == stuffName) { elem.name = response; }
       }
-      console.log(savePhaseData);
       break;
     case 2:
       $(`#milestoneName_${stuffNumber}`).html(response);
       for (let elem of saveMilestoneData) {
         if (elem.name == stuffName) { elem.name = response; }
       }
-      console.log(saveMilestoneData);
       break;
   }
 }
@@ -2795,7 +2788,6 @@ function popupProjInfo(proj_id) {
   $("#viewProjBody").load("proto-viewproj.html", function() {
     /* When load is done */
     $('#projNameBigSpan').html(getDBNameFromId (proj_id, 'project'));
-    console.log(location.search.substring(1,11));
     if (location.search.substring(1,11) == 'page=admin') $('#prjBtn').html(`<a class="right waves-effect waves-green btn" onclick="modProj(${proj_id})">Modifica proiect</a>`);
     for (let project of projectsObject) {
       if (project.id == proj_id) {

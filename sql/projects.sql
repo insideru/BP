@@ -7,7 +7,8 @@ CREATE TABLE `projects` (
   `budget` INT(10) NOT NULL DEFAULT '100',
   `start_date` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
   `deadline` DATE NOT NULL DEFAULT (DATE_ADD(NOW())),
-  `active` tinyint(1) NOT NULL
+  `active` tinyint(1) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'In asteptare'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `projects`
