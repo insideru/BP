@@ -529,7 +529,7 @@ public function sessionLogin(): bool
 			//echo $this->collabID . '<BR>';
 			$this->firstName = explode(" ", $row['name'])[0];
 			$this->lastName = explode(" ", $row['name'])[1];
-			$this->permissions = array('admin' => (int)$row['admin'], 'bonus' => (int)$row['bonus'], 'external' => (int)$row['external'], (int)'holiday' => (int)$row['holiday'], 'timesheet' => (int)$row['timesheet'], 'raport' => (int)$row['raport']);
+			$this->permissions = array('admin' => (int)$row['admin'], 'bonus' => (int)$row['bonus'], 'external' => (int)$row['external'], 'holiday' => (int)$row['holiday'], 'timesheet' => (int)$row['timesheet'], 'raport' => (int)$row['raport']);
 			return TRUE;
 		}
 
