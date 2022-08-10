@@ -542,6 +542,7 @@ function getProjects() {
     global $pdo;
     global $schema;
     global $account;
+    $account->sessionLogin();
 
     $query = 'SELECT * FROM '. $schema . '.projects ORDER BY active DESC, start_date ASC';
 
