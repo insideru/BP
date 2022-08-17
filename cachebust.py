@@ -3,9 +3,10 @@ import hashlib
 import shutil
 
 clean = True
+deployFolder = 'worktracker'
 
 if clean:
-    folder = './deploy/'
+    folder = f'./{deployFolder}/'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -15,16 +16,16 @@ if clean:
                 shutil.rmtree(file_path)
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
-    if not os.path.exists('./deploy/admin-pages'):
-        os.mkdir('./deploy/admin-pages')
-    if not os.path.exists('./deploy/css'):
-        os.mkdir('./deploy/css')
-    if not os.path.exists('./deploy/img'):
-        os.mkdir('./deploy/img')
-    if not os.path.exists('./deploy/include'):
-        os.mkdir('./deploy/include')
-    if not os.path.exists('./deploy/js'):
-        os.mkdir('./deploy/js')
+    if not os.path.exists(f'./{deployFolder}/admin-pages'):
+        os.mkdir(f'./{deployFolder}/admin-pages')
+    if not os.path.exists(rf'./{deployFolder}/css'):
+        os.mkdir(f'./{deployFolder}/css')
+    if not os.path.exists(f'./{deployFolder}/img'):
+        os.mkdir(f'./{deployFolder}/img')
+    if not os.path.exists(f'./{deployFolder}/include'):
+        os.mkdir(f'./{deployFolder}/include')
+    if not os.path.exists(f'./{deployFolder}/js'):
+        os.mkdir(f'./{deployFolder}/js')
 
 hashSize = 9
 
@@ -40,10 +41,10 @@ def hashFile(fldr, file, number):
         fileHash = hasher.hexdigest()[0:number]
     if file[-3:] == '.js':
         ext = '.js'
-        newFldr = r'./deploy/js/'
+        newFldr = rf'./{deployFolder}/js/'
     if file[-4:] == '.css':
         ext = '.css'
-        newFldr = r'./deploy/css/'
+        newFldr = rf'./{deployFolder}/css/'
     newFilenames.append(newFldr[9:] + file[0:-2] + fileHash + ext)
     shutil.copyfile(fldr + file, newFldr + file[0:-2] + fileHash + ext)
 
@@ -74,7 +75,7 @@ for directory in directoriesList:
 
 for file in os.listdir(baseDir):
     if file[0:6] == 'proto-':
-        with open('./' + file, mode='r') as in_file, open('./deploy/' + file, mode='w') as out_file:
+        with open('./' + file, mode='r') as in_file, open(f'./{deployFolder}/' + file, mode='w') as out_file:
             for line in in_file:
                 newLine = str(line)
                 for x in range(len(filenames)):
@@ -83,14 +84,14 @@ for file in os.listdir(baseDir):
                 out_file.write(f'{newLine}')
     if file[-4:] == '.php':
         if file != 'admin.php':
-            shutil.copyfile('./' + file, './deploy/' + file)
+            shutil.copyfile('./' + file, f'./{deployFolder}/' + file)
 
 for file in os.listdir(adminPages):
-    shutil.copyfile(adminPages + file, './deploy/' + adminPages + file)
+    shutil.copyfile(adminPages + file, f'./{deployFolder}/' + adminPages + file)
 
 for file in os.listdir(imgDir):
-    shutil.copyfile(imgDir + file, './deploy/' + imgDir + file)
+    shutil.copyfile(imgDir + file, f'./{deployFolder}/' + imgDir + file)
 
 for file in os.listdir(includeDir):
     if file != 'db.php':
-        shutil.copyfile(includeDir + file, './deploy/' + includeDir + file)
+        shutil.copyfile(includeDir + file, f'./{deployFolder}/' + includeDir + file)

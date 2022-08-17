@@ -4,7 +4,8 @@
 			"path": "."
 		},
 		{
-			"path": "deploy"
+			"name": "worktracker",
+			"path": "worktracker"
 		}
 	],
 	"settings": {}
