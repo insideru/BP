@@ -1,8 +1,7 @@
 .DS_Store
 error_log
-styles/.DS_Store
 include/db.php
 .idea
 .gitignore
-admin.php
-include/elems.php
+./admin.php
+.cachebust.py

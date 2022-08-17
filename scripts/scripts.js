@@ -649,7 +649,7 @@ function selectProject(projName) {
         }
         if (projMilestones.length > 0) {
           $(`#select${contor}`).html('<select id="addProjMilestone" class="browser-default" onchange="'+fnctToCall+'();"><option value="" disabled selected>Alege milestone</option></select>');
-          $('#addProjMilestone').append(`<option value="1x2c3v4">General</option>`);
+          $('#addProjMilestone').append(`<option value="0_1x2c3v4">General</option>`);
           projMilestones.forEach(elem => {
             $('#addProjMilestone').append(`<option value="${elem.id}_${elem.name}">${elem.name}</option>`);
           });
