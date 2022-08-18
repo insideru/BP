@@ -1,4 +1,4 @@
 [submodule "worktracker"]
 	path = worktracker
-	url = https://github.com/insideru/worktracker/
+	url = https://github.com/insideru/worktracker.git
 	branch = main
