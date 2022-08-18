@@ -5,4 +5,3 @@ include/db.php
 .gitignore
 ./admin.php
 .cachebust.py
-worktracker/*
