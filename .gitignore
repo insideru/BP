@@ -3,5 +3,5 @@ error_log
 include/db.php
 .idea
 .gitignore
-./admin.php
-.cachebust.py
+admin.php
+cachebust.py
